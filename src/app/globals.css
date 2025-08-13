@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Falls du eigene globale Styles brauchst, hier ergänzen */
+html,
+body {
+  height: 100%;
+}
+
+body {
+  @apply bg-white text-black antialiased;
+}
+
+/* Beispiel: dunkles Theme via media query */
+@media (prefers-color-scheme: dark) {
+  body {
+    @apply bg-neutral-900 text-white;
+  }
+}
