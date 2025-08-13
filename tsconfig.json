@@ -18,8 +18,9 @@
         "name": "next"
       }
     ],
+    "baseUrl": "src",                //  ✅ neu: Alias-Basis setzen
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["*"]                   //  ✅ neu: Alias relativ zu src
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
