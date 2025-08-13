@@ -1,8 +1,20 @@
 {
   "hero": {
-    "title": "We build your digital presence",
-    "subtitle": "Modern websites for small businesses",
-    "cta": "Get Started"
+    "kicker": "Web development & consulting",
+    "kickerTag": "Freelancer",
+    "titleLine1": "I build digital brands",
+    "titleLine2": "for solo entrepreneurs & small teams",
+    "subtitle": "Websites, shops & automation — clear, fast, measurable.",
+    "ctaPrimary": "Request a quote",
+    "ctaSecondary": "View services",
+    "projectsCount": "30+",
+    "projectsText": "Projects",
+    "years": "8",
+    "yearsText": "Years of experience",
+    "portraitAlt": "Portrait of Markus Lindner",
+    "projectLabel": "Featured",
+    "projectTitle": "SaaS Landing Redesign",
+    "projectSubtitle": "Conversion +30%"
   },
   "Meta": {
     "title": "Web Agency – Modern Websites"
