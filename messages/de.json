@@ -1,16 +1,15 @@
 {
-      "Home": {
-          "title": "Webagentur für schnelle, wunderschöne Websites",
-              "subtitle": "Wir entwickeln ultraschnelle Seiten für US‑Brands.",
-                  "cta": "Angebot anfordern"
-                    },
-                      "Meta": {
-                          "title": "Webagentur – Moderne Websites"
-                            },
-                              "Switcher": {
-                                  "label": "Sprache",
-                                      "en": "English",
-                                          "de": "Deutsch"
-                                            }
-                                            }
+  "Home": {
+    "title": "Webagentur für schnelle, wunderschöne Websites",
+    "subtitle": "Wir entwickeln ultraschnelle Seiten für US-Brands.",
+    "cta": "Angebot anfordern"
+  },
+  "Meta": {
+    "title": "Webagentur – Moderne Websites"
+  },
+  "Switcher": {
+    "label": "Sprache",
+    "en": "English",
+    "de": "Deutsch"
+  }
 }
