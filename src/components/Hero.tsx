@@ -1,13 +1,22 @@
-// src/components/Hero.tsx
 "use client";
 
 import Image from "next/image";
 import Link from "next/link";
 import { motion, Variants } from "framer-motion";
 import { useTranslations } from "next-intl";
+import { useRef, useEffect, useState } from "react";
 
 export default function Hero() {
   const t = useTranslations("hero");
+  const buttonRef = useRef<HTMLAnchorElement>(null);
+  const [buttonSize, setButtonSize] = useState({ width: 0, height: 0 });
+
+  useEffect(() => {
+    if (buttonRef.current) {
+      const rect = buttonRef.current.getBoundingClientRect();
+      setButtonSize({ width: rect.width, height: rect.height });
+    }
+  }, []);
 
   const container: Variants = {
     hidden: {},
@@ -21,19 +30,26 @@ export default function Hero() {
     show: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.6,
-        ease: [0.22, 1, 0.36, 1],
-      },
+      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+    },
+  };
+
+  const orbit: Variants = {
+    animate: {
+      rotate: 360,
+      transition: { repeat: Infinity, duration: 2.5, ease: "linear" },
     },
   };
 
   return (
-    <section aria-label="Hero" className="relative overflow-hidden">
-      {/* decorative blob, uses CSS variables for colors via style attr or CSS var in SVG */}
+    <section
+      aria-label="Hero"
+      className="relative overflow-hidden bg-gradient-to-br from-[var(--color-primary)] via-blue-600 to-[var(--color-secondary)]"
+    >
+      {/* Dynamischer Blob */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <svg
-          className="absolute -left-32 top-[-8rem] w-[42rem] opacity-30 blur-3xl"
+          className="absolute -left-32 top-[-8rem] w-[42rem] opacity-40 blur-3xl"
           viewBox="0 0 600 600"
           xmlns="http://www.w3.org/2000/svg"
           aria-hidden
@@ -64,55 +80,89 @@ export default function Hero() {
             variants={fadeUp}
             className="lg:col-span-7 xl:col-span-6 space-y-6"
           >
-            <div className="inline-flex items-center gap-3 pill-glass px-3 py-1 rounded-full text-sm font-medium text-white/90 w-max">
-              <span className="rounded-full bg-white/20 px-2 py-0.5 text-xs">
+            <div className="inline-flex items-center gap-3 px-3 py-1 rounded-full text-sm font-medium text-white/90 bg-white/10 backdrop-blur-sm">
+              <span className="rounded-full bg-white/30 px-2 py-0.5 text-xs text-white">
                 {t("kicker")}
               </span>
-              {/* optional kickerTag if present */}
-              {/* {t("kickerTag") ? <span className="opacity-90">{t("kickerTag")}</span> : null} */}
             </div>
 
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight tracking-tight text-white font-headline">
-              <span className="block text-hero-gradient">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight tracking-tight text-white">
+              <span className="block bg-clip-text text-transparent bg-gradient-to-r from-white to-[var(--color-secondary)]">
                 {t("titleLine1")}
               </span>
-              <span className="block text-emerald-100/95">
-                {t("titleLine2")}
-              </span>
+              <span className="block text-white/95">{t("titleLine2")}</span>
             </h1>
 
-            <p className="text-lg md:text-xl text-white/85 max-w-2xl">
+            <p className="text-lg md:text-xl text-white/90 max-w-2xl">
               {t("subtitle")}
             </p>
 
-            <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
-              <Link
-                href="#contact"
-                className="inline-flex items-center gap-2 px-5 py-3 bg-white text-blue-700 rounded-lg font-semibold shadow transform-gpu hover:-translate-y-1 transition"
-                aria-label={String(t("ctaPrimary"))}
-              >
-                <span>{t("ctaPrimary")}</span>
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+              {/* CTA mit perfektem Orbit */}
+              <div className="relative">
+                <Link
+                  href="#contact"
+                  ref={buttonRef}
+                  className="relative inline-flex items-center gap-2 px-8 py-4 bg-[var(--color-primary)] text-white rounded-full font-bold shadow-lg hover:bg-[var(--color-primary)]/90 hover:-translate-y-1 transition-transform duration-300 z-10"
+                  aria-label={String(t("ctaPrimary"))}
                 >
-                  <path
-                    d="M5 12h14M13 5l6 7-6 7"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </Link>
+                  <span>{t("ctaPrimary")}</span>
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden
+                  >
+                    <path
+                      d="M5 12h14M13 5l6 7-6 7"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </Link>
+
+                {buttonSize.width > 0 && (
+                  <motion.div
+                    variants={orbit}
+                    animate="animate"
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                    style={{
+                      width: buttonSize.width + 16,
+                      height: buttonSize.height + 16,
+                      transformOrigin: "center",
+                    }}
+                  >
+                    <svg
+                      className="w-full h-full"
+                      viewBox={`0 0 ${buttonSize.width + 16} ${
+                        buttonSize.height + 16
+                      }`}
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <rect
+                        x="0"
+                        y="0"
+                        width={buttonSize.width + 16}
+                        height={buttonSize.height + 16}
+                        rx={(buttonSize.height + 16) / 2}
+                        stroke="#facc15"
+                        strokeWidth="2"
+                        strokeDasharray="8 8"
+                        fill="none"
+                      />
+                    </svg>
+                  </motion.div>
+                )}
+              </div>
 
               <Link
                 href="#services"
-                className="inline-flex items-center justify-center px-4 py-3 border border-white/20 rounded-lg text-white/95 hover:bg-white/5 transition"
+                className="inline-flex items-center justify-center px-8 py-4 border border-white/30 rounded-full text-white/95 hover:bg-white/10 hover:-translate-y-1 transition-transform duration-300"
                 aria-label={String(t("ctaSecondary"))}
               >
                 {t("ctaSecondary")}
@@ -126,9 +176,7 @@ export default function Hero() {
                 </div>
                 <div className="opacity-80">{t("projectsText")}</div>
               </div>
-
               <div className="h-1 w-px bg-white/10 mx-2 hidden sm:block" />
-
               <div className="flex items-baseline gap-3">
                 <div className="text-2xl font-semibold">{t("years")}</div>
                 <div className="opacity-80">{t("yearsText")}</div>
@@ -145,35 +193,17 @@ export default function Hero() {
                 initial={{ rotate: -3, scale: 0.98 }}
                 animate={{ rotate: 0, scale: 1 }}
                 transition={{ type: "spring", stiffness: 70, damping: 14 }}
-                className="relative rounded-2xl overflow-hidden shadow-2xl ring-1 ring-black/10"
+                className="relative rounded-2xl overflow-hidden shadow-2xl ring-1 ring-black/10 hover:scale-105 transition-transform duration-300"
               >
                 <Image
-                  src="/hero-portrait.jpg"
-                  alt={String(t("portraitAlt") ?? "Portrait")}
-                  width={880}
-                  height={880}
-                  className="w-full h-auto object-cover"
+                  src="/window.svg"
+                  alt={String(t("portraitAlt") ?? "Tech Illustration")}
+                  width={400}
+                  height={400}
+                  className="w-full h-auto object-contain bg-white/10 p-4 rounded-2xl"
                   priority
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/25 to-transparent" />
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 18, x: 20 }}
-                animate={{ opacity: 1, y: 0, x: 0 }}
-                transition={{ delay: 0.25, type: "spring", stiffness: 80 }}
-                className="absolute -bottom-6 left-4 bg-white/95 rounded-xl p-3 shadow-lg w-52 border border-white/30"
-                role="note"
-              >
-                <div className="text-xs text-gray-500 mb-1">
-                  {t("projectLabel")}
-                </div>
-                <div className="font-medium text-sm text-gray-900">
-                  {t("projectTitle")}
-                </div>
-                <div className="text-xs text-gray-500 mt-2">
-                  {t("projectSubtitle")}
-                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
               </motion.div>
             </div>
           </motion.div>

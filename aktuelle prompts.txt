@@ -1,7 +1,9 @@
 Guck dir die codesandbox an um für die Zukunft zu wissen wie du das setup dafür machst: https://codesandbox.io/p/github/MarkusLindner123/Lindner-IT-WebsiteShop/draft/charming-pond?workspaceId=ws_JGpb4woRaNFhaR2pQahRS7 
-Hier ist das GitHub repo: https://github.com/MarkusLindner123/Lindner-IT-WebsiteShop
+Hier ist das GitHub repo: https://github.com/MarkusLindner123/Lindner-IT-WebsiteShop/tree/draft/charming-pond
 
-Ich will eine Webseite für eine webagentur bauen die hauptsächlich in den USA verkauft. Da ich deutsch bin, wir die webseite auch auf deutsch sein. Ich will als Techstack next.js, tailwind css und react benutzen. Ich schreibe den code in typescript. Ich benutze codesandbox als Entwicklungsumgebung. Hilf mir die gesamte seite zu bauen. Wo fange ich an? Die Seite muss extrem gut aussehen. Ich brauche ein eigenes theme, einen language switcher und Animationen um alles abzurunden. Hilf mir dabei. Der Grundaufbau mit dem routing für die languages funktioniert schon Mal. Wie geht's weiter? 
+Ich will eine Webseite für eine webagentur bauen die hauptsächlich in den USA verkauft. Da ich deutsch bin, wir die webseite auch auf deutsch sein. Ich will als Techstack next.js, tailwind css und typescript benutzen. Ich schreibe den code in typescript. Ich benutze codesandbox als Entwicklungsumgebung. Hilf mir die gesamte seite zu bauen. 
+Ich will eine Mischung aus: https://www.henning-tillmann.de/en/ und https://growmybusiness.co.nz 
 
+Guck dir die Seiten, das repo und die codesandbox sowie meinen output sehr gut an und entscheide wie es weiter geht. Was wäre der beste Ansatz? 
 !!!!!!!!!!!!!!!!!!!!!
 https://chatgpt.com/c/689a2ae9-a09c-8324-b460-804d4c551a90
