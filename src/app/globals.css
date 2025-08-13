@@ -56,3 +56,45 @@ body {
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
 }
+
+.border-gradient {
+  --p: 15%; /* Randgröße */
+
+  /* Farben für Inhalt & Border */
+  --bg-color: var(--color-bg); /* Hintergrund des Buttons */
+  --text-color: #323232; /* Textfarbe */
+
+  /* Animierter Rand (Gold-Orange-Töne) */
+  --c1: #ffffff;
+  --c2: #ffffff;
+  --c3: #ff8c00; /* Dunkelorange */
+
+  /* Hintergrund + animierter Border */
+  background: linear-gradient(var(--bg-color), var(--bg-color)) padding-box,
+    conic-gradient(
+        from var(--gradient-angle, 0deg),
+        var(--c1),
+        var(--c2),
+        var(--c3),
+        var(--c1)
+      )
+      border-box;
+
+  border: 4px solid transparent; /* sichtbarer Border */
+  border-radius: 3rem;
+  transition: all 0.3s ease;
+
+  color: var(--text-color);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  padding: 1rem 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.border-gradient:hover {
+  transform: translateY(-2px);
+}
