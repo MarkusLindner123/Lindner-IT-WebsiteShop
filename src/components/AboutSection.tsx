@@ -91,10 +91,12 @@ export default function AboutSection() {
 
       if (!ref.current) return;
 
-      const { top, height } = ref.current.getBoundingClientRect();
+      const { top, bottom, height } = ref.current.getBoundingClientRect();
       const windowHeight = window.innerHeight;
+
+      // Progress: 0 when top of section enters viewport, 1 when bottom is near viewport bottom
       const newProgress = Math.min(
-        Math.max(0, (windowHeight - top) / (height + windowHeight / 2)),
+        Math.max(0, (windowHeight - top) / (height + windowHeight * 0.1)),
         1
       );
       setProgress(newProgress);
