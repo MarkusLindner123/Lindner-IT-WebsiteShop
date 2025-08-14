@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import AnimatedButton from "@/components/AnimatedButton";
 
 // List of colors for the brush effect
@@ -17,31 +18,25 @@ const brushColors = [
   "lime",
 ];
 
-// Hardcoded JSON text for testing (mimics de.json)
-const content = {
-  about: {
-    title: "About Us",
-    text: "We build scalable solutions for your business needs.\n" +
-          "Our approach combines thoughtful design with robust architecture.\n" +
-          "Whether you’re a solo entrepreneur or a global enterprise, our team creates user-friendly platforms.\n" +
-          "We specialize in crafting websites and apps that are both beautiful and scalable.\n" +
-          "Our process ensures clear communication, measurable outcomes, and innovative solutions.\n" +
-          "From concept to launch, we focus on performance-driven design that grows with your goals.\n" +
-          "Our expertise spans modern technologies, delivering reliable and efficient results.\n" +
-          "Let’s partner to transform your ideas into digital success.",
-    ctaPrimary: "Request a Quote",
-  },
-};
-
 export default function AboutSection() {
+  const t = useTranslations("about");
   const ref = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
   const [highlightColorMap, setHighlightColorMap] = useState<{
     [key: number]: string;
   }>({});
 
+  // Load content from translations
+  const content = {
+    about: {
+      title: t("title"),
+      text: t("text"),
+      ctaPrimary: t("ctaPrimary"),
+    },
+  };
+
   // Words to highlight (case-insensitive)
-  const highlightWords = ["solutions", "scalable", "design", "results"];
+  const highlightWords = ["solutions", "lösungen", "scalable", "skalierbar", "design", "results", "ergebnisse"];
 
   // Split text into words, preserving newlines and removing unwanted spaces
   const words = content.about.text
@@ -77,7 +72,7 @@ export default function AboutSection() {
       }
     });
     setHighlightColorMap(colorMap);
-  }, []); // Run once on mount
+  }, [content.about.text]); // Re-run if text changes (e.g., language switch)
 
   // Throttled scroll handler to reduce CPU usage
   useEffect(() => {
