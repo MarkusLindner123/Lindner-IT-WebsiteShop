@@ -2,33 +2,33 @@
 @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@400;600&display=swap");
 
 :root {
-  /* Farben - Cyberpunk-Thema */
-  --color-primary: #1c1c3f; /* Etwas helleres Dunkelblau für besseren Kontrast */
-  --color-secondary: #2a2a5c; /* Helleres Blau für Akzente */
-  --color-accent: #00ffcc; /* Neon-Türkis für stärkere Sichtbarkeit */
-  --color-bg: #12122e; /* Hellerer Hintergrund für mehr Kontrast */
-  --color-text: #f0f0fa; /* Hellerer Text für bessere Lesbarkeit */
+  /* Farben - Cyberpunk-Thema (softer, less intense) */
+  --color-primary: #2a2a4a; /* Slightly lighter dark blue for better contrast */
+  --color-secondary: #3b3b6d; /* Softer blue for accents */
+  --color-accent: #4adede; /* Muted teal instead of neon turquoise */
+  --color-bg: #1e1e3a; /* Lighter background to reduce strain */
+  --color-text: #e8e8f5; /* Slightly softer off-white for readability */
 
-  /* Pinsel-Effekt Farben - Lebendigere Neonfarben */
-  --brush-red: #ff4d8c; /* Lebendigeres Neon-Rosa */
-  --brush-blue: #00ccff; /* Helleres Neon-Blau */
-  --brush-green: #00ff66; /* Knalliges Neon-Grün */
-  --brush-purple: #cc33ff; /* Intensiveres Neon-Lila */
-  --brush-orange: #ff9933; /* Lebendigeres Neon-Orange */
-  --brush-teal: #33cccc; /* Neon-Türkis */
-  --brush-magenta: #ff3399; /* Neon-Magenta */
-  --brush-pink: #ff66b2; /* Helleres Neon-Pink */
-  --brush-indigo: #6633cc; /* Kräftigeres Indigo */
-  --brush-lime: #ccff33; /* Neon-Limette */
+  /* Pinsel-Effekt Farben - Softer, less saturated neon tones */
+  --brush-red: #e573a0; /* Softer neon pink */
+  --brush-blue: #4ab8e6; /* Muted neon blue */
+  --brush-green: #4ade80; /* Softer neon green */
+  --brush-purple: #b266f5; /* Muted neon purple */
+  --brush-orange: #e69b5c; /* Softer neon orange */
+  --brush-teal: #4db8b8; /* Muted teal */
+  --brush-magenta: #e666a3; /* Softer magenta */
+  --brush-pink: #e68ab2; /* Softer pink */
+  --brush-indigo: #7a66cc; /* Softer indigo */
+  --brush-lime: #b2e64d; /* Softer lime */
 
   /* Schriftarten */
   --font-sans: "Rajdhani", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
     Roboto, "Helvetica Neue", Arial;
   --font-headline: "Orbitron", Georgia, "Times New Roman", serif;
 
-  /* Farbverlauf für Überschrift */
-  --headline-grad-from: rgba(0, 255, 204, 0.95); /* Neon-Türkis */
-  --headline-grad-to: rgba(255, 51, 153, 0.95); /* Neon-Pink */
+  /* Farbverlauf für Überschrift - Softer gradient */
+  --headline-grad-from: rgba(74, 222, 222, 0.9); /* Muted teal */
+  --headline-grad-to: rgba(230, 102, 163, 0.9); /* Muted pink */
 }
 
 /* Tailwind Basis */
@@ -60,39 +60,39 @@ body {
   margin: -2px -6px;
   padding: 2px 6px;
   display: inline-block;
-  filter: brightness(1.2); /* Leicht erhöhte Helligkeit für Sichtbarkeit */
+  filter: brightness(1.1); /* Reduced brightness for less glare */
 }
 
 /* Pinsel-Farben */
 .brush-effect.brush-red {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=FF4D8C);
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=E573A0);
 }
 .brush-effect.brush-blue {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=00CCFF);
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=4AB8E6);
 }
 .brush-effect.brush-green {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=00FF66);
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=4ADE80);
 }
 .brush-effect.brush-purple {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=CC33FF);
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=B266F5);
 }
 .brush-effect.brush-orange {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=FF9933);
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=E69B5C);
 }
 .brush-effect.brush-teal {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=33CCCC);
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=4DB8B8);
 }
 .brush-effect.brush-magenta {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=FF3399);
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=E666A3);
 }
 .brush-effect.brush-pink {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=FF66B2);
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=E68AB2);
 }
 .brush-effect.brush-indigo {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=6633CC);
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=7A66CC);
 }
 .brush-effect.brush-lime {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=CCFF33);
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=B2E64D);
 }
 
 /* Farbverlauf für Text */
@@ -109,17 +109,12 @@ body {
 
 /* Glas-Pille */
 .pill-glass {
-  background-color: rgba(
-    255,
-    255,
-    255,
-    0.1
-  ); /* Etwas heller für Cyberpunk-Look */
-  backdrop-filter: blur(8px); /* Stärkerer Blur für Glas-Effekt */
-  -webkit-backdrop-filter: blur(8px);
+  background-color: rgba(255, 255, 255, 0.2); /* Increased opacity for better contrast */
+  backdrop-filter: blur(10px); /* Slightly stronger blur for a refined glass effect */
+  -webkit-backdrop-filter: blur(10px);
 }
 
-/* Gradient Border */
+/* Gradient Border (unchanged as requested) */
 .border-gradient {
   --p: 15%;
   --bg-color: #ffffff;
@@ -170,12 +165,7 @@ section.sticky {
 /* About Text */
 .about-text {
   color: var(--color-text);
-  background-color: rgba(
-    44,
-    44,
-    92,
-    0.7
-  ); /* Hellerer, transparenter Hintergrund */
+  background-color: rgba(59, 59, 109, 0.8); /* Adjusted for better contrast with muted secondary color */
   padding: 2rem;
   border-radius: 1rem;
   font-size: 1.125rem;
