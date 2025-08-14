@@ -17,6 +17,22 @@ const brushColors = [
   "lime",
 ];
 
+// Hardcoded JSON text for testing (mimics de.json)
+const content = {
+  about: {
+    title: "About Us",
+    text: "We build scalable solutions for your business needs.\n" +
+          "Our approach combines thoughtful design with robust architecture.\n" +
+          "Whether you’re a solo entrepreneur or a global enterprise, our team creates user-friendly platforms.\n" +
+          "We specialize in crafting websites and apps that are both beautiful and scalable.\n" +
+          "Our process ensures clear communication, measurable outcomes, and innovative solutions.\n" +
+          "From concept to launch, we focus on performance-driven design that grows with your goals.\n" +
+          "Our expertise spans modern technologies, delivering reliable and efficient results.\n" +
+          "Let’s partner to transform your ideas into digital success.",
+    ctaPrimary: "Request a Quote",
+  },
+};
+
 export default function AboutSection() {
   const ref = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
@@ -24,53 +40,30 @@ export default function AboutSection() {
     [key: number]: string;
   }>({});
 
-  // Hardcoded, longer example text with highlighted words and newlines
-  const fullText = [
-    "We build scalable solutions for your business needs.",
-    "Our approach combines thoughtful design with robust architecture to deliver exceptional results.",
-    "Whether you’re a solo entrepreneur or a global enterprise, our team creates user-friendly platforms.",
-    "We specialize in crafting websites and apps that are both beautiful and scalable.",
-    "Our process ensures clear communication, measurable outcomes, and innovative solutions.",
-    "From concept to launch, we focus on performance-driven design that grows with your goals.",
-    "Our expertise spans modern technologies, delivering reliable and efficient results.",
-    "Let’s partner to transform your ideas into digital success."
-  ].join("\n");
+  // Words to highlight (case-insensitive)
+  const highlightWords = ["solutions", "scalable", "design", "results"];
 
   // Split text into words, preserving newlines and removing unwanted spaces
-  const words = fullText
-    .split(/(\n)/) // Split on newlines first
-    .flatMap((segment, segmentIdx) =>
-      segment === "\n"
-        ? [{ word: "\n", index: segmentIdx }]
-        : segment
-            .trim() // Remove leading/trailing spaces in each segment
-            .split(/\s+/) // Split on one or more spaces
-            .map((word, wordIdx) => ({
-              word,
-              index: segmentIdx + wordIdx,
-            }))
-            .reduce<{ word: string; index: number }[]>((acc, { word, index }, idx, arr) => {
-              // Add word
-              acc.push({ word, index });
-              // Add space between words, but not after the last word
-              if (idx < arr.length - 1) {
-                acc.push({ word: " ", index: index + 0.5 }); // Unique index for spaces
-              }
-              return acc;
-            }, [])
-    )
-    .filter(({ word }) => word !== ""); // Remove any empty segments
+  const words = content.about.text
+    .split("\n")
+    .flatMap((line, lineIdx) => {
+      const trimmedLine = line.trim();
+      if (!trimmedLine) return [{ word: "\n", index: lineIdx * 1000 }]; // Handle empty lines
+      const lineWords = trimmedLine.split(/\s+/); // Split on one or more spaces
+      const result: { word: string; index: number }[] = [];
+      lineWords.forEach((word, wordIdx) => {
+        result.push({ word, index: lineIdx * 1000 + wordIdx * 2 }); // Unique index for words
+        if (wordIdx < lineWords.length - 1) {
+          result.push({ word: " ", index: lineIdx * 1000 + wordIdx * 2 + 1 }); // Space between words
+        }
+      });
+      result.push({ word: "\n", index: lineIdx * 1000 + lineWords.length * 2 }); // Newline at end
+      return result;
+    })
+    .filter(({ word }) => word !== ""); // Remove any empty entries
 
-  // Debug: Log the words array and rendered elements
+  // Debug: Log the words array
   console.log("Processed words:", words);
-
-  // Words to highlight (case-insensitive)
-  const highlightWords = [
-    "solutions",
-    "scalable",
-    "design",
-    "results",
-  ];
 
   // Assign colors to highlighted words in sequence
   useEffect(() => {
@@ -84,11 +77,18 @@ export default function AboutSection() {
       }
     });
     setHighlightColorMap(colorMap);
-  }, []); // Run once on mount, since fullText is hardcoded
+  }, []); // Run once on mount
 
-  // Handle scroll for word reveal effect
+  // Throttled scroll handler to reduce CPU usage
   useEffect(() => {
+    let lastScroll = 0;
+    const throttleDelay = 100; // Throttle to 100ms
+
     const handleScroll = () => {
+      const now = Date.now();
+      if (now - lastScroll < throttleDelay) return;
+      lastScroll = now;
+
       if (!ref.current) return;
 
       const { top, height } = ref.current.getBoundingClientRect();
@@ -112,7 +112,7 @@ export default function AboutSection() {
       className="mx-auto max-w-3xl px-6 py-20 md:py-28 lg:px-8 lg:py-32"
     >
       <h2 className="mb-12 text-3xl font-extrabold tracking-tight text-[var(--color-primary)] md:text-4xl">
-        About Us
+        {content.about.title}
       </h2>
 
       <div className="max-w-[600px] space-y-8 text-xl font-[var(--font-sans)] md:text-2xl">
@@ -147,9 +147,7 @@ export default function AboutSection() {
       </div>
 
       <div className="mt-12 flex justify-start">
-        <AnimatedButton href="#contact">
-          Request a Quote
-        </AnimatedButton>
+        <AnimatedButton href="#contact">{content.about.ctaPrimary}</AnimatedButton>
       </div>
     </section>
   );
