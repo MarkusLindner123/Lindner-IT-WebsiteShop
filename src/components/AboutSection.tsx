@@ -110,4 +110,48 @@ export default function AboutSection() {
   return (
     <section
       id="about"
-      className="mx-auto max-w-3xl px-6 py-20 md:py
+      className="mx-auto max-w-3xl px-6 py-20 md:py-28 lg:px-8 lg:py-32"
+    >
+      <h2 className="mb-12 ml-12 text-3xl font-extrabold tracking-tight text-[var(--color-primary)] md:text-4xl lg:ml-24">
+        About Us
+      </h2>
+
+      <div className="ml-12 max-w-[600px] space-y-8 text-xl font-[var(--font-sans)] md:text-2xl lg:ml-24">
+        <div ref={ref} className="leading-loose">
+          {words.map(({ word, index }, idx) => {
+            if (word === "\n") return <br key={index} />;
+            if (word === " ")
+              return (
+                <span key={index} className="inline-block">
+                  &nbsp;
+                </span>
+              );
+
+            const isVisible = idx < Math.floor(words.length * progress);
+            const cleanWord = word.replace(/[.,!?–]/g, "").toLowerCase();
+            const isHighlighted = highlightWords.includes(cleanWord);
+            const brushColor = isHighlighted ? highlightColorMap[index] || "red" : "";
+
+            return (
+              <span
+                key={index}
+                className={`inline-block mr-1 transition-all duration-500 ease-out ${
+                  isHighlighted ? `brush-effect brush-${brushColor}` : ""
+                }`}
+                style={{ opacity: isVisible ? 1 : 0.2 }}
+              >
+                {word}
+              </span>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="mt-12 ml-12 flex justify-start lg:ml-24">
+        <AnimatedButton href="#contact">
+          Request a Quote
+        </AnimatedButton>
+      </div>
+    </section>
+  );
+}
