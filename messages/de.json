@@ -16,6 +16,14 @@
     "projectTitle": "SaaS Landing Redesign",
     "projectSubtitle": "Conversion +30%"
   },
+  "about": {
+    "title": "Wir sind Ihre Web- und Software-Partner",
+    "intro": "Ob Sie Ihre erste Website starten oder komplexe digitale Plattformen für ein großes Unternehmen verwalten, wir bieten maßgeschneiderte Lösungen, die optisch ansprechend, benutzerfreundlich und skalierbar sind.",
+    "approach": "Wir sind ein Team erfahrener Softwareentwickler, die Ideen in robuste, zukunftssichere digitale Lösungen verwandeln. Bevor wir Änderungen implementieren, analysieren wir sorgfältig Prozesse und beziehen alle Beteiligten ein, um praktische und effektive Ergebnisse zu liefern.",
+    "audience": "Von Solo-Selbstständigen bis zu globalen Unternehmen – unser Ansatz kombiniert solide Architektur mit durchdachtem Design. Jede Website, App oder Plattform, die wir entwickeln, soll inspirieren, performen und mit Ihren Anforderungen wachsen.",
+    "cta": "Wenn Sie Ihr Projekt vom Konzept bis zum Live-Betrieb bringen möchten – ohne unnötiges Fachchinesisch, aber mit klarer Kommunikation und verlässlichen Ergebnissen – sind wir hier, um es möglich zu machen.", 
+    "ctaPrimary": "Angebot anfordern"
+  },
   "Meta": {
     "title": "Webagentur – Moderne Websites"
   },
