@@ -1,3 +1,5 @@
+"use client";
+
 import HeroVideo from "@/components/HeroVideo";
 import Hero from "@/components/Hero";
 import AboutSection from "@/components/AboutSection";
@@ -21,9 +23,6 @@ export default function StickySlides() {
           <AboutSection />
         </div>
       </section>
-
-      {/* Spacer to allow scrolling past AboutSection */}
-      <div className="h-screen"></div>
     </div>
   );
 }

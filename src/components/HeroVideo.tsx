@@ -1,30 +1,67 @@
 "use client";
 
+import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 
 export default function HeroVideo() {
-  const t = useTranslations("heroVideo"); // add keys in messages/*
+  const t = useTranslations("heroVideo");
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (!videoRef.current) return;
+    const videoEl = videoRef.current;
+
+    // Endlos-Loop: Video beim Ende neu starten
+    const handleEnded = () => {
+      videoEl.currentTime = 0;
+      videoEl.play().catch(() => {
+        // Autoplay-Restrictions umgehen
+      });
+    };
+
+    // IntersectionObserver: Video nur abspielen, wenn sichtbar
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          videoEl.currentTime = 0;
+          videoEl.play().catch(() => {});
+        } else {
+          videoEl.pause();
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    videoEl.addEventListener("ended", handleEnded);
+    observer.observe(videoEl);
+
+    // Cleanup
+    return () => {
+      videoEl.removeEventListener("ended", handleEnded);
+      observer.disconnect();
+    };
+  }, []);
 
   return (
     <section className="relative h-screen w-full overflow-hidden">
-      {/* Video background */}
       <video
+        ref={videoRef}
         autoPlay
-        loop
         muted
         playsInline
+        loop={false} // Wir benutzen eigene Loop-Logik
         preload="auto"
-        poster="/hero-video-poster.jpg" // optional placeholder
+        poster="/hero-video-poster.jpg"
         className="absolute inset-0 h-full w-full object-cover"
       >
         <source src="/hero-video.mp4" type="video/mp4" />
       </video>
 
-      {/* Dark overlay for contrast */}
-      <div className="absolute inset-0 bg-black/40" />
+      {/* Overlay für besseren Kontrast */}
+      <div className="absolute inset-0 bg-black/40"></div>
 
-      {/* Text overlay */}
+      {/* Animierter Text */}
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
