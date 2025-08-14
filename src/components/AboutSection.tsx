@@ -33,10 +33,21 @@ export default function AboutSection() {
   // Split text into words, preserving newlines and filtering unnecessary whitespace
   const words = fullText
     .split(/(\s+|\n)/)
-    .filter(
-      (word, idx, arr) =>
-        !(word.trim() === "" && (idx === 0 || arr[idx - 1] === "\n"))
-    );
+    .filter((word, idx, arr) => {
+      // Skip leading whitespace at the start of the text
+      if (word.trim() === "" && idx === 0) return false;
+      // Skip leading whitespace after a newline
+      if (word.trim() === "" && idx > 0 && arr[idx - 1] === "\n") return false;
+      // Skip multiple consecutive spaces, keeping only one
+      if (
+        word.trim() === "" &&
+        idx > 0 &&
+        arr[idx - 1].trim() === "" &&
+        arr[idx - 1] !== "\n"
+      )
+        return false;
+      return true;
+    });
 
   // Words to highlight (case-insensitive)
   const highlightWords = [
