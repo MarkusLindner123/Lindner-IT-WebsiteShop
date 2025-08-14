@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { useTranslations } from "next-intl";
 import AnimatedButton from "@/components/AnimatedButton";
 
 // List of colors for the brush effect
@@ -19,21 +18,19 @@ const brushColors = [
 ];
 
 export default function AboutSection() {
-  const t = useTranslations("about");
   const ref = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
   const [highlightColorMap, setHighlightColorMap] = useState<{
     [key: number]: string;
   }>({});
 
-  // Combine sections with newline separator and trim any hidden whitespace
-  const sections = [
-    t("intro").trim(),
-    t("approach").trim(),
-    t("audience").trim(),
-    t("cta").trim(),
-  ];
-  const fullText = sections.join("\n");
+  // Hardcoded example text with highlighted words and newlines
+  const fullText = [
+    "We build scalable solutions for your business.",
+    "Our approach combines thoughtful design with robust architecture.",
+    "From startups to enterprises, we deliver results that grow with you.",
+    "Let’s create something amazing together."
+  ].join("\n");
 
   // Split text into words, preserving newlines and removing unwanted spaces
   const words = fullText
@@ -61,15 +58,15 @@ export default function AboutSection() {
       return [...acc, { word: normalizedWord, index: idx }];
     }, []);
 
+  // Debug: Log the words array to inspect the output
+  console.log("Processed words:", words);
+
   // Words to highlight (case-insensitive)
   const highlightWords = [
     "solutions",
-    "lösungen",
     "scalable",
-    "skalierbar",
     "design",
     "results",
-    "ergebnisse",
   ];
 
   // Assign colors to highlighted words in sequence
@@ -84,7 +81,7 @@ export default function AboutSection() {
       }
     });
     setHighlightColorMap(colorMap);
-  }, [fullText]); // Re-run if fullText changes (e.g., language switch)
+  }, []); // Run once on mount, since fullText is now hardcoded
 
   // Handle scroll for word reveal effect
   useEffect(() => {
@@ -112,7 +109,7 @@ export default function AboutSection() {
       className="mx-auto max-w-3xl px-6 py-20 md:py-28 lg:px-8 lg:py-32"
     >
       <h2 className="mb-12 ml-12 text-3xl font-extrabold tracking-tight text-[var(--color-primary)] md:text-4xl lg:ml-24">
-        {t("title")}
+        About Us
       </h2>
 
       <div className="ml-12 max-w-[600px] space-y-8 text-xl font-[var(--font-sans)] md:text-2xl lg:ml-24">
@@ -148,7 +145,7 @@ export default function AboutSection() {
 
       <div className="mt-12 ml-12 flex justify-start lg:ml-24">
         <AnimatedButton href="#contact">
-          {t("ctaPrimary") || "Contact Us"}
+          Request a Quote
         </AnimatedButton>
       </div>
     </section>
