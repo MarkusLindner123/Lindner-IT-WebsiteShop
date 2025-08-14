@@ -33,21 +33,18 @@ export default function AboutSection() {
   // Split text into words, preserving newlines and filtering unnecessary whitespace
   const words = fullText
     .split(/(\s+|\n)/)
-    .filter((word, idx, arr) => {
+    .reduce<{ word: string; index: number }[]>((acc, word, idx, arr) => {
       // Skip leading whitespace at the start of the text
-      if (word.trim() === "" && idx === 0) return false;
+      if (word.trim() === "" && idx === 0) return acc;
       // Skip leading whitespace after a newline
-      if (word.trim() === "" && idx > 0 && arr[idx - 1] === "\n") return false;
-      // Skip multiple consecutive spaces, keeping only one
-      if (
-        word.trim() === "" &&
-        idx > 0 &&
-        arr[idx - 1].trim() === "" &&
-        arr[idx - 1] !== "\n"
-      )
-        return false;
-      return true;
-    });
+      if (word.trim() === "" && idx > 0 && arr[idx - 1] === "\n") return acc;
+      // Normalize multiple spaces to a single space
+      if (word.trim() === "" && acc.length > 0 && acc[acc.length - 1].word !== "\n") {
+        if (acc[acc.length - 1].word.trim() === "") return acc; // Skip if last was a space
+        return [...acc, { word: " ", index: idx }]; // Single space
+      }
+      return [...acc, { word, index: idx }];
+    }, []);
 
   // Words to highlight (case-insensitive)
   const highlightWords = [
@@ -60,13 +57,15 @@ export default function AboutSection() {
     "ergebnisse",
   ];
 
-  // Assign a random color to each highlighted word on mount
+  // Assign colors to highlighted words in sequence
   useEffect(() => {
     const colorMap: { [key: number]: string } = {};
-    words.forEach((word, idx) => {
+    let colorIndex = 0;
+    words.forEach(({ word, index }) => {
       const cleanWord = word.replace(/[.,!?–]/g, "").toLowerCase();
       if (highlightWords.includes(cleanWord)) {
-        colorMap[idx] = brushColors[Math.floor(Math.random() * brushColors.length)];
+        colorMap[index] = brushColors[colorIndex % brushColors.length];
+        colorIndex++; // Move to next color
       }
     });
     setHighlightColorMap(colorMap);
@@ -103,11 +102,11 @@ export default function AboutSection() {
 
       <div className="ml-12 max-w-[600px] space-y-8 text-xl font-[var(--font-sans)] md:text-2xl lg:ml-24">
         <div ref={ref} className="leading-loose">
-          {words.map((word, idx) => {
-            if (word === "\n") return <br key={idx} />;
-            if (word.trim() === "")
+          {words.map(({ word, index }, idx) => {
+            if (word === "\n") return <br key={index} />;
+            if (word === " ")
               return (
-                <span key={idx} className="inline-block mr-1">
+                <span key={index} className="inline-block mr-1">
                   &nbsp;
                 </span>
               );
@@ -115,11 +114,11 @@ export default function AboutSection() {
             const isVisible = idx < Math.floor(words.length * progress);
             const cleanWord = word.replace(/[.,!?–]/g, "").toLowerCase();
             const isHighlighted = highlightWords.includes(cleanWord);
-            const brushColor = isHighlighted ? highlightColorMap[idx] || "red" : "";
+            const brushColor = isHighlighted ? highlightColorMap[index] || "red" : "";
 
             return (
               <span
-                key={idx}
+                key={index}
                 className={`inline-block mr-1 transition-all duration-500 ease-out ${
                   isHighlighted ? `brush-effect brush-${brushColor}` : ""
                 }`}
