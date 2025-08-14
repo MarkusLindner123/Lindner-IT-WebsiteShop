@@ -43,16 +43,20 @@ export default function AboutSection() {
     .split("\n")
     .flatMap((line, lineIdx) => {
       const trimmedLine = line.trim();
-      if (!trimmedLine) return [{ word: "\n", index: lineIdx * 1000 }]; // Handle empty lines
+      if (!trimmedLine) return []; // Skip empty lines
       const lineWords = trimmedLine.split(/\s+/); // Split on one or more spaces
       const result: { word: string; index: number }[] = [];
       lineWords.forEach((word, wordIdx) => {
-        result.push({ word, index: lineIdx * 1000 + wordIdx * 2 }); // Unique index for words
-        if (wordIdx < lineWords.length - 1) {
-          result.push({ word: " ", index: lineIdx * 1000 + wordIdx * 2 + 1 }); // Space between words
+        if (word) {
+          result.push({ word, index: lineIdx * 1000 + wordIdx * 2 }); // Unique index for words
+          if (wordIdx < lineWords.length - 1) {
+            result.push({ word: " ", index: lineIdx * 1000 + wordIdx * 2 + 1 }); // Space between words
+          }
         }
       });
-      result.push({ word: "\n", index: lineIdx * 1000 + lineWords.length * 2 }); // Newline at end
+      if (lineIdx < content.about.text.split("\n").length - 1) {
+        result.push({ word: "\n", index: lineIdx * 1000 + lineWords.length * 2 }); // Newline at end, except for last line
+      }
       return result;
     })
     .filter(({ word }) => word !== ""); // Remove any empty entries
@@ -77,7 +81,7 @@ export default function AboutSection() {
   // Throttled scroll handler to reduce CPU usage
   useEffect(() => {
     let lastScroll = 0;
-    const throttleDelay = 100; // Throttle to 100ms
+    const throttleDelay = 50; // Reduced to 50ms for smoother feel
 
     const handleScroll = () => {
       const now = Date.now();
@@ -86,12 +90,12 @@ export default function AboutSection() {
 
       if (!ref.current) return;
 
-      const { top, bottom, height } = ref.current.getBoundingClientRect();
+      const { top, height } = ref.current.getBoundingClientRect();
       const windowHeight = window.innerHeight;
 
-      // Progress: 0 when top of section enters viewport, 1 when bottom is near viewport bottom
+      // Slower progress: Stretch reveal over longer scroll distance
       const newProgress = Math.min(
-        Math.max(0, (windowHeight - top) / (height + windowHeight * 0.1)),
+        Math.max(0, (windowHeight - top) / (height + windowHeight * 0.3)),
         1
       );
       setProgress(newProgress);
@@ -123,7 +127,7 @@ export default function AboutSection() {
                 </span>
               );
 
-            const isVisible = idx < Math.floor(words.length * progress);
+            const isVisible = idx <= Math.floor(words.length * progress); // Use <= for last word
             const cleanWord = word.replace(/[.,!?–]/g, "").toLowerCase();
             const isHighlighted = highlightWords.includes(cleanWord);
             const brushColor = isHighlighted ? highlightColorMap[index] || "red" : "";
