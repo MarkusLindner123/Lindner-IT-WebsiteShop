@@ -22,6 +22,9 @@ export default function AboutSection() {
   const t = useTranslations("about");
   const ref = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
+  const [highlightColorMap, setHighlightColorMap] = useState<{
+    [key: number]: string;
+  }>({});
 
   // Combine sections with newline separator
   const sections = [t("intro"), t("approach"), t("audience"), t("cta")];
@@ -46,6 +49,19 @@ export default function AboutSection() {
     "ergebnisse",
   ];
 
+  // Assign a random color to each highlighted word on mount
+  useEffect(() => {
+    const colorMap: { [key: number]: string } = {};
+    words.forEach((word, idx) => {
+      const cleanWord = word.replace(/[.,!?–]/g, "").toLowerCase();
+      if (highlightWords.includes(cleanWord)) {
+        colorMap[idx] = brushColors[Math.floor(Math.random() * brushColors.length)];
+      }
+    });
+    setHighlightColorMap(colorMap);
+  }, [fullText]); // Re-run if fullText changes (e.g., language switch)
+
+  // Handle scroll for word reveal effect
   useEffect(() => {
     const handleScroll = () => {
       if (!ref.current) return;
@@ -64,10 +80,6 @@ export default function AboutSection() {
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  // Select a random color for each render (or per highlight word)
-  const getRandomColor = () =>
-    brushColors[Math.floor(Math.random() * brushColors.length)];
 
   return (
     <section
@@ -92,7 +104,7 @@ export default function AboutSection() {
             const isVisible = idx < Math.floor(words.length * progress);
             const cleanWord = word.replace(/[.,!?–]/g, "").toLowerCase();
             const isHighlighted = highlightWords.includes(cleanWord);
-            const brushColor = isHighlighted ? getRandomColor() : "";
+            const brushColor = isHighlighted ? highlightColorMap[idx] || "red" : "";
 
             return (
               <span
