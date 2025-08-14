@@ -36,7 +36,15 @@ export default function AboutSection() {
   };
 
   // Words to highlight (case-insensitive)
-  const highlightWords = ["solutions", "lösungen", "scalable", "skalierbar", "design", "results", "ergebnisse"];
+  const highlightWords = [
+    "solutions",
+    "lösungen",
+    "scalable",
+    "skalierbar",
+    "design",
+    "results",
+    "ergebnisse",
+  ];
 
   // Split text into words, preserving newlines and removing unwanted spaces
   const words = content.about.text
@@ -55,7 +63,10 @@ export default function AboutSection() {
         }
       });
       if (lineIdx < content.about.text.split("\n").length - 1) {
-        result.push({ word: "\n", index: lineIdx * 1000 + lineWords.length * 2 }); // Newline at end, except for last line
+        result.push({
+          word: "\n",
+          index: lineIdx * 1000 + lineWords.length * 2,
+        }); // Newline at end, except for last line
       }
       return result;
     })
@@ -110,7 +121,7 @@ export default function AboutSection() {
   return (
     <section
       id="about"
-      className="mx-auto max-w-3xl px-6 py-20 md:py-28 lg:px-8 lg:py-32"
+      className="mx-auto max-w-3xl px-6 py-20 md:py-28 lg:px-8 lg:py-32 bg-white"
     >
       <h2 className="mb-12 text-3xl font-extrabold tracking-tight text-[var(--color-primary)] md:text-4xl">
         {content.about.title}
@@ -130,7 +141,9 @@ export default function AboutSection() {
             const isVisible = idx <= Math.floor(words.length * progress); // Use <= for last word
             const cleanWord = word.replace(/[.,!?–]/g, "").toLowerCase();
             const isHighlighted = highlightWords.includes(cleanWord);
-            const brushColor = isHighlighted ? highlightColorMap[index] || "red" : "";
+            const brushColor = isHighlighted
+              ? highlightColorMap[index] || "red"
+              : "";
 
             return (
               <span
@@ -138,7 +151,7 @@ export default function AboutSection() {
                 className={`inline-block mr-1 transition-all duration-500 ease-out ${
                   isHighlighted ? `brush-effect brush-${brushColor}` : ""
                 }`}
-                style={{ opacity: isVisible ? 1 : 0.2 }}
+                style={{ opacity: isVisible ? 1 : 0.15 }}
               >
                 {word}
               </span>
@@ -148,7 +161,9 @@ export default function AboutSection() {
       </div>
 
       <div className="mt-12 flex justify-start">
-        <AnimatedButton href="#contact">{content.about.ctaPrimary}</AnimatedButton>
+        <AnimatedButton href="#contact">
+          {content.about.ctaPrimary}
+        </AnimatedButton>
       </div>
     </section>
   );

@@ -12,16 +12,16 @@
   --color-text: #0f172a;
 
   /* Brush effect colors */
-  --brush-red: #FF3B30;
-  --brush-blue: #007AFF;
-  --brush-green: #34C759;
-  --brush-purple: #AF52DE;
-  --brush-orange: #FF9500;
-  --brush-teal: #40C4FF;
-  --brush-magenta: #FF2D55;
-  --brush-pink: #FF80AB;
-  --brush-indigo: #5C6BC0;
-  --brush-lime: #AEEA00;
+  --brush-red: #ff3b30;
+  --brush-blue: #007aff;
+  --brush-green: #34c759;
+  --brush-purple: #af52de;
+  --brush-orange: #ff9500;
+  --brush-teal: #40c4ff;
+  --brush-magenta: #ff2d55;
+  --brush-pink: #ff80ab;
+  --brush-indigo: #5c6bc0;
+  --brush-lime: #aeea00;
 
   /* Fonts */
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
@@ -144,4 +144,9 @@ body {
 
 .border-gradient:hover {
   transform: translateY(-2px);
+}
+
+/* Ensure sticky sections take full viewport height */
+section.sticky {
+  will-change: transform; /* Optimize for scrolling performance */
 }
