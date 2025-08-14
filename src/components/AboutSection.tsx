@@ -24,12 +24,16 @@ export default function AboutSection() {
     [key: number]: string;
   }>({});
 
-  // Hardcoded example text with highlighted words and newlines
+  // Hardcoded, longer example text with highlighted words and newlines
   const fullText = [
-    "We build scalable solutions for your business.",
-    "Our approach combines thoughtful design with robust architecture.",
-    "From startups to enterprises, we deliver results that grow with you.",
-    "Let’s create something amazing together."
+    "We build scalable solutions for your business needs.",
+    "Our approach combines thoughtful design with robust architecture to deliver exceptional results.",
+    "Whether you’re a solo entrepreneur or a global enterprise, our team creates user-friendly platforms.",
+    "We specialize in crafting websites and apps that are both beautiful and scalable.",
+    "Our process ensures clear communication, measurable outcomes, and innovative solutions.",
+    "From concept to launch, we focus on performance-driven design that grows with your goals.",
+    "Our expertise spans modern technologies, delivering reliable and efficient results.",
+    "Let’s partner to transform your ideas into digital success."
   ].join("\n");
 
   // Split text into words, preserving newlines and removing unwanted spaces
@@ -81,7 +85,7 @@ export default function AboutSection() {
       }
     });
     setHighlightColorMap(colorMap);
-  }, []); // Run once on mount, since fullText is now hardcoded
+  }, []); // Run once on mount, since fullText is hardcoded
 
   // Handle scroll for word reveal effect
   useEffect(() => {
@@ -106,48 +110,4 @@ export default function AboutSection() {
   return (
     <section
       id="about"
-      className="mx-auto max-w-3xl px-6 py-20 md:py-28 lg:px-8 lg:py-32"
-    >
-      <h2 className="mb-12 ml-12 text-3xl font-extrabold tracking-tight text-[var(--color-primary)] md:text-4xl lg:ml-24">
-        About Us
-      </h2>
-
-      <div className="ml-12 max-w-[600px] space-y-8 text-xl font-[var(--font-sans)] md:text-2xl lg:ml-24">
-        <div ref={ref} className="leading-loose">
-          {words.map(({ word, index }, idx) => {
-            if (word === "\n") return <br key={index} />;
-            if (word === " ")
-              return (
-                <span key={index} className="inline-block">
-                  &nbsp;
-                </span>
-              );
-
-            const isVisible = idx < Math.floor(words.length * progress);
-            const cleanWord = word.replace(/[.,!?–]/g, "").toLowerCase();
-            const isHighlighted = highlightWords.includes(cleanWord);
-            const brushColor = isHighlighted ? highlightColorMap[index] || "red" : "";
-
-            return (
-              <span
-                key={index}
-                className={`inline-block mr-1 transition-all duration-500 ease-out ${
-                  isHighlighted ? `brush-effect brush-${brushColor}` : ""
-                }`}
-                style={{ opacity: isVisible ? 1 : 0.2 }}
-              >
-                {word}
-              </span>
-            );
-          })}
-        </div>
-      </div>
-
-      <div className="mt-12 ml-12 flex justify-start lg:ml-24">
-        <AnimatedButton href="#contact">
-          Request a Quote
-        </AnimatedButton>
-      </div>
-    </section>
-  );
-}
+      className="mx-auto max-w-3xl px-6 py-20 md:py
