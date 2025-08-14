@@ -38,31 +38,30 @@ export default function AboutSection() {
 
   // Split text into words, preserving newlines and removing unwanted spaces
   const words = fullText
-    .split(/(\s+|\n)/)
-    .reduce<{ word: string; index: number }[]>((acc, word, idx, arr) => {
-      // Skip empty strings or leading whitespace at the start
-      if (word.trim() === "" && acc.length === 0) return acc;
-      // Skip whitespace immediately after a newline
-      if (
-        word.trim() === "" &&
-        acc.length > 0 &&
-        acc[acc.length - 1].word === "\n"
-      )
-        return acc;
-      // Normalize multiple spaces to a single space, but only between words
-      if (
-        word.trim() === "" &&
-        acc.length > 0 &&
-        acc[acc.length - 1].word !== "\n" &&
-        acc[acc.length - 1].word.trim() === ""
-      )
-        return acc;
-      // Convert single spaces to " " explicitly, preserve newlines and words
-      const normalizedWord = word === "\n" ? "\n" : word.trim() === "" ? " " : word;
-      return [...acc, { word: normalizedWord, index: idx }];
-    }, []);
+    .split(/(\n)/) // Split on newlines first
+    .flatMap((segment, segmentIdx) =>
+      segment === "\n"
+        ? [{ word: "\n", index: segmentIdx }]
+        : segment
+            .trim() // Remove leading/trailing spaces in each segment
+            .split(/\s+/) // Split on one or more spaces
+            .map((word, wordIdx) => ({
+              word,
+              index: segmentIdx + wordIdx,
+            }))
+            .reduce<{ word: string; index: number }[]>((acc, { word, index }, idx, arr) => {
+              // Add word
+              acc.push({ word, index });
+              // Add space between words, but not after the last word
+              if (idx < arr.length - 1) {
+                acc.push({ word: " ", index: index + 0.5 }); // Unique index for spaces
+              }
+              return acc;
+            }, [])
+    )
+    .filter(({ word }) => word !== ""); // Remove any empty segments
 
-  // Debug: Log the words array to inspect the output
+  // Debug: Log the words array and rendered elements
   console.log("Processed words:", words);
 
   // Words to highlight (case-insensitive)
@@ -112,11 +111,11 @@ export default function AboutSection() {
       id="about"
       className="mx-auto max-w-3xl px-6 py-20 md:py-28 lg:px-8 lg:py-32"
     >
-      <h2 className="mb-12 ml-12 text-3xl font-extrabold tracking-tight text-[var(--color-primary)] md:text-4xl lg:ml-24">
+      <h2 className="mb-12 text-3xl font-extrabold tracking-tight text-[var(--color-primary)] md:text-4xl">
         About Us
       </h2>
 
-      <div className="ml-12 max-w-[600px] space-y-8 text-xl font-[var(--font-sans)] md:text-2xl lg:ml-24">
+      <div className="max-w-[600px] space-y-8 text-xl font-[var(--font-sans)] md:text-2xl">
         <div ref={ref} className="leading-loose">
           {words.map(({ word, index }, idx) => {
             if (word === "\n") return <br key={index} />;
@@ -147,7 +146,7 @@ export default function AboutSection() {
         </div>
       </div>
 
-      <div className="mt-12 ml-12 flex justify-start lg:ml-24">
+      <div className="mt-12 flex justify-start">
         <AnimatedButton href="#contact">
           Request a Quote
         </AnimatedButton>
