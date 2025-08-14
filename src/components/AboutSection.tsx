@@ -26,24 +26,39 @@ export default function AboutSection() {
     [key: number]: string;
   }>({});
 
-  // Combine sections with newline separator
-  const sections = [t("intro"), t("approach"), t("audience"), t("cta")];
+  // Combine sections with newline separator and trim any hidden whitespace
+  const sections = [
+    t("intro").trim(),
+    t("approach").trim(),
+    t("audience").trim(),
+    t("cta").trim(),
+  ];
   const fullText = sections.join("\n");
 
-  // Split text into words, preserving newlines and filtering unnecessary whitespace
+  // Split text into words, preserving newlines and removing unwanted spaces
   const words = fullText
     .split(/(\s+|\n)/)
     .reduce<{ word: string; index: number }[]>((acc, word, idx, arr) => {
-      // Skip leading whitespace at the start of the text
-      if (word.trim() === "" && idx === 0) return acc;
-      // Skip leading whitespace after a newline
-      if (word.trim() === "" && idx > 0 && arr[idx - 1] === "\n") return acc;
-      // Normalize multiple spaces to a single space
-      if (word.trim() === "" && acc.length > 0 && acc[acc.length - 1].word !== "\n") {
-        if (acc[acc.length - 1].word.trim() === "") return acc; // Skip if last was a space
-        return [...acc, { word: " ", index: idx }]; // Single space
-      }
-      return [...acc, { word, index: idx }];
+      // Skip empty strings or leading whitespace at the start
+      if (word.trim() === "" && acc.length === 0) return acc;
+      // Skip whitespace immediately after a newline
+      if (
+        word.trim() === "" &&
+        acc.length > 0 &&
+        acc[acc.length - 1].word === "\n"
+      )
+        return acc;
+      // Normalize multiple spaces to a single space, but only between words
+      if (
+        word.trim() === "" &&
+        acc.length > 0 &&
+        acc[acc.length - 1].word !== "\n" &&
+        acc[acc.length - 1].word.trim() === ""
+      )
+        return acc;
+      // Convert single spaces to " " explicitly, preserve newlines and words
+      const normalizedWord = word === "\n" ? "\n" : word.trim() === "" ? " " : word;
+      return [...acc, { word: normalizedWord, index: idx }];
     }, []);
 
   // Words to highlight (case-insensitive)
@@ -65,7 +80,7 @@ export default function AboutSection() {
       const cleanWord = word.replace(/[.,!?–]/g, "").toLowerCase();
       if (highlightWords.includes(cleanWord)) {
         colorMap[index] = brushColors[colorIndex % brushColors.length];
-        colorIndex++; // Move to next color
+        colorIndex++;
       }
     });
     setHighlightColorMap(colorMap);
@@ -106,7 +121,7 @@ export default function AboutSection() {
             if (word === "\n") return <br key={index} />;
             if (word === " ")
               return (
-                <span key={index} className="inline-block mr-1">
+                <span key={index} className="inline-block">
                   &nbsp;
                 </span>
               );
