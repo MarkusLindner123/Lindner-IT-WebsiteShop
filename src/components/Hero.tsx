@@ -45,7 +45,6 @@ export default function Hero() {
       aria-label="Hero"
       className="relative overflow-hidden bg-gradient-to-br from-[var(--color-primary)] via-[var(--color-secondary)] to-[var(--color-accent)]"
     >
-      {/* Scrollbar aktiv auf kleinen Screens */}
       <div className="max-w-7xl mx-auto px-4 lg:px-8 py-12 md:py-16 lg:py-20 overflow-x-hidden overflow-y-auto">
         <motion.div
           variants={container}
@@ -64,7 +63,9 @@ export default function Hero() {
             </div>
 
             <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold leading-tight tracking-tight text-hero-gradient">
-              <span className="block">{t("titleLine1")}</span>
+              <span className="block underline decoration-white decoration-4">
+                {t("titleLine1")}
+              </span>
               <span className="block">{t("titleLine2")}</span>
             </h1>
 

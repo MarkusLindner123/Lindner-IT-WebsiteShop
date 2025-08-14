@@ -69,7 +69,7 @@ export default function HeroVideo() {
         className="relative z-10 flex h-full w-full items-center justify-center px-6 text-center text-white"
       >
         <div>
-          <h1 className="text-4xl md:text-6xl font-bold">{t("title")}</h1>
+          <h1 className="text-4xl md:text-7xl font-bold">{t("title")}</h1>
           <p className="mt-4 text-lg md:text-xl opacity-90">{t("subtitle")}</p>
         </div>
       </motion.div>
