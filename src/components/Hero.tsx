@@ -35,19 +35,18 @@ export default function Hero() {
     "/hero-img.jpg",
   ];
 
-  const getColumnImages = (col: number) =>
-    // doppeln, damit keine Lücken entstehen
-    [
-      ...galleryImages.slice(col * 3, col * 3 + 3),
-      ...galleryImages.slice(col * 3, col * 3 + 3),
-    ];
+  const getColumnImages = (col: number) => [
+    ...galleryImages.slice(col * 3, col * 3 + 3),
+    ...galleryImages.slice(col * 3, col * 3 + 3),
+  ];
 
   return (
     <section
       aria-label="Hero"
       className="relative overflow-hidden bg-gradient-to-br from-[var(--color-primary)] via-[var(--color-secondary)] to-[var(--color-accent)]"
     >
-      <div className="max-w-7xl mx-auto px-4 lg:px-8 py-20 md:py-28 lg:py-32">
+      {/* Scrollbar aktiv auf kleinen Screens */}
+      <div className="max-w-7xl mx-auto px-4 lg:px-8 py-12 md:py-16 lg:py-20 overflow-x-hidden overflow-y-auto">
         <motion.div
           variants={container}
           initial="hidden"
@@ -58,19 +57,18 @@ export default function Hero() {
             variants={fadeUp}
             className="lg:col-span-7 xl:col-span-6 space-y-6"
           >
-            {/* Textbereich */}
             <div className="inline-flex items-center gap-3 px-3 py-1 rounded-full text-sm font-medium text-white/90 pill-glass">
               <span className="rounded-full bg-[var(--color-accent)]/30 px-2 py-0.5 text-xs text-white">
                 {t("kicker")}
               </span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight tracking-tight text-hero-gradient font-[var(--font-headline)]">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold leading-tight tracking-tight text-hero-gradient">
               <span className="block">{t("titleLine1")}</span>
               <span className="block">{t("titleLine2")}</span>
             </h1>
 
-            <p className="text-lg md:text-xl text-white/90 max-w-2xl font-[var(--font-sans)]">
+            <p className="text-xl md:text-2xl text-white/90 max-w-2xl">
               {t("subtitle")}
             </p>
 
@@ -78,7 +76,7 @@ export default function Hero() {
               <AnimatedButton href="#contact">{t("ctaPrimary")}</AnimatedButton>
               <Link
                 href="#services"
-                className="inline-flex items-center justify-center px-6 py-4 border border-white/30 rounded-full text-white/95 hover:bg-white/10 hover:-translate-y-1 transition-transform duration-300 font-[var(--font-sans)]"
+                className="inline-flex items-center justify-center px-6 py-4 border border-white/30 rounded-full text-white/95 hover:bg-white/10 hover:-translate-y-1 transition-transform duration-300"
                 aria-label={String(t("ctaSecondary"))}
               >
                 {t("ctaSecondary")}
@@ -86,7 +84,6 @@ export default function Hero() {
             </div>
           </motion.div>
 
-          {/* Galerie */}
           <motion.div
             variants={fadeUp}
             className="lg:col-span-5 xl:col-span-6 relative flex justify-center lg:justify-end"
@@ -102,7 +99,7 @@ export default function Hero() {
                       }}
                       transition={{
                         repeat: Infinity,
-                        duration: 20, // Geschwindigkeit anpassen
+                        duration: 20,
                         ease: "linear",
                       }}
                       className="flex flex-col gap-2"

@@ -7,3 +7,38 @@ Ich will eine Mischung aus: https://www.henning-tillmann.de/en/ und https://grow
 Guck dir die Seiten, das repo und die codesandbox sowie meinen output sehr gut an und entscheide wie es weiter geht. Was wäre der beste Ansatz? 
 !!!!!!!!!!!!!!!!!!!!!
 https://chatgpt.com/c/689a2ae9-a09c-8324-b460-804d4c551a90
+
+.border-gradient {
+  --p: 15%;
+  --bg-color: var(--color-bg);
+  --text-color: #323232;
+  --c1: #ffffff;
+  --c2: #ffffff;
+  --c3: #ff8c00;
+
+  background: linear-gradient(var(--bg-color), var(--bg-color)) padding-box,
+    conic-gradient(
+        from var(--gradient-angle, 0deg),
+        var(--c1),
+        var(--c2),
+        var(--c3),
+        var(--c1)
+      )
+      border-box;
+  border: 4px solid transparent;
+  border-radius: 3rem;
+  transition: all 0.3s ease;
+  color: var(--text-color);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  padding: 1rem 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.border-gradient:hover {
+  transform: translateY(-2px);
+}

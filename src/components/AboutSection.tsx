@@ -4,7 +4,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import AnimatedButton from "@/components/AnimatedButton";
 
-// List of colors for the brush effect
 const brushColors = [
   "red",
   "blue",
@@ -26,16 +25,10 @@ export default function AboutSection() {
     [key: number]: string;
   }>({});
 
-  // Load content from translations
   const content = {
-    about: {
-      title: t("title"),
-      text: t("text"),
-      ctaPrimary: t("ctaPrimary"),
-    },
+    about: { title: t("title"), text: t("text"), ctaPrimary: t("ctaPrimary") },
   };
 
-  // Words to highlight (case-insensitive)
   const highlightWords = [
     "solutions",
     "lösungen",
@@ -46,112 +39,82 @@ export default function AboutSection() {
     "ergebnisse",
   ];
 
-  // Split text into words, preserving newlines and removing unwanted spaces
   const words = content.about.text
     .split("\n")
     .flatMap((line, lineIdx) => {
-      const trimmedLine = line.trim();
-      if (!trimmedLine) return []; // Skip empty lines
-      const lineWords = trimmedLine.split(/\s+/); // Split on one or more spaces
+      const trimmed = line.trim();
+      if (!trimmed) return [];
+      const parts = trimmed.split(/\s+/);
       const result: { word: string; index: number }[] = [];
-      lineWords.forEach((word, wordIdx) => {
-        if (word) {
-          result.push({ word, index: lineIdx * 1000 + wordIdx * 2 }); // Unique index for words
-          if (wordIdx < lineWords.length - 1) {
-            result.push({ word: " ", index: lineIdx * 1000 + wordIdx * 2 + 1 }); // Space between words
-          }
-        }
+      parts.forEach((w, wIdx) => {
+        result.push({ word: w, index: lineIdx * 1000 + wIdx * 2 });
+        if (wIdx < parts.length - 1)
+          result.push({ word: " ", index: lineIdx * 1000 + wIdx * 2 + 1 });
       });
       if (lineIdx < content.about.text.split("\n").length - 1) {
-        result.push({
-          word: "\n",
-          index: lineIdx * 1000 + lineWords.length * 2,
-        }); // Newline at end, except for last line
+        result.push({ word: "\n", index: lineIdx * 1000 + parts.length * 2 });
       }
       return result;
     })
-    .filter(({ word }) => word !== ""); // Remove any empty entries
+    .filter(({ word }) => word !== "");
 
-  // Debug: Log the words array
-  console.log("Processed words:", words);
-
-  // Assign colors to highlighted words in sequence
   useEffect(() => {
-    const colorMap: { [key: number]: string } = {};
-    let colorIndex = 0;
+    const map: { [key: number]: string } = {};
+    let ci = 0;
     words.forEach(({ word, index }) => {
-      const cleanWord = word.replace(/[.,!?–]/g, "").toLowerCase();
-      if (highlightWords.includes(cleanWord)) {
-        colorMap[index] = brushColors[colorIndex % brushColors.length];
-        colorIndex++;
+      const clean = word.replace(/[.,!?–]/g, "").toLowerCase();
+      if (highlightWords.includes(clean)) {
+        map[index] = brushColors[ci % brushColors.length];
+        ci++;
       }
     });
-    setHighlightColorMap(colorMap);
-  }, [content.about.text]); // Re-run if text changes (e.g., language switch)
+    setHighlightColorMap(map);
+  }, [content.about.text]);
 
-  // Throttled scroll handler to reduce CPU usage
   useEffect(() => {
     let lastScroll = 0;
-    const throttleDelay = 50; // Reduced to 50ms for smoother feel
-
-    const handleScroll = () => {
+    const delay = 50;
+    const handle = () => {
       const now = Date.now();
-      if (now - lastScroll < throttleDelay) return;
+      if (now - lastScroll < delay) return;
       lastScroll = now;
-
       if (!ref.current) return;
-
       const { top, height } = ref.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-
-      // Slower progress: Stretch reveal over longer scroll distance
-      const newProgress = Math.min(
-        Math.max(0, (windowHeight - top) / (height + windowHeight * 0.3)),
-        1
-      );
-      setProgress(newProgress);
+      const wh = window.innerHeight;
+      const np = Math.min(Math.max(0, (wh - top) / (height + wh * 0.3)), 1);
+      setProgress(np);
     };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handle, { passive: true });
+    handle();
+    return () => window.removeEventListener("scroll", handle);
   }, []);
 
   return (
     <section
       id="about"
-      className="mx-auto max-w-3xl px-6 py-20 md:py-28 lg:px-8 lg:py-32 bg-white"
+      className="mx-auto max-w-3xl px-6 py-20 md:py-28 lg:px-8 lg:py-32"
     >
       <h2 className="mb-12 text-3xl font-extrabold tracking-tight text-[var(--color-primary)] md:text-4xl">
         {content.about.title}
       </h2>
-
-      <div className="max-w-[600px] space-y-8 text-xl font-[var(--font-sans)] md:text-2xl">
+      <div className="max-w-[600px] space-y-8 text-xl md:text-2xl text-gray-900">
         <div ref={ref} className="leading-loose">
           {words.map(({ word, index }, idx) => {
             if (word === "\n") return <br key={index} />;
-            if (word === " ")
-              return (
-                <span key={index} className="inline-block">
-                  &nbsp;
-                </span>
-              );
+            if (word === " ") return <span key={index}>&nbsp;</span>;
 
-            const isVisible = idx <= Math.floor(words.length * progress); // Use <= for last word
-            const cleanWord = word.replace(/[.,!?–]/g, "").toLowerCase();
-            const isHighlighted = highlightWords.includes(cleanWord);
-            const brushColor = isHighlighted
-              ? highlightColorMap[index] || "red"
-              : "";
+            const visible = idx <= Math.floor(words.length * progress);
+            const clean = word.replace(/[.,!?–]/g, "").toLowerCase();
+            const highlighted = highlightWords.includes(clean);
+            const color = highlighted ? highlightColorMap[index] || "red" : "";
 
             return (
               <span
                 key={index}
                 className={`inline-block mr-1 transition-all duration-500 ease-out ${
-                  isHighlighted ? `brush-effect brush-${brushColor}` : ""
+                  highlighted ? `brush-effect brush-${color}` : ""
                 }`}
-                style={{ opacity: isVisible ? 1 : 0.15 }}
+                style={{ opacity: visible ? 1 : 0.15 }}
               >
                 {word}
               </span>
@@ -159,8 +122,7 @@ export default function AboutSection() {
           })}
         </div>
       </div>
-
-      <div className="mt-12 flex justify-start">
+      <div className="mt-12">
         <AnimatedButton href="#contact">
           {content.about.ctaPrimary}
         </AnimatedButton>

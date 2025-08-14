@@ -1,44 +1,42 @@
-/* src/app/globals.css */
-
-/* Import fonts */
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@600;700&display=swap");
+/* Importiere Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@400;600&display=swap");
 
 :root {
-  /* Colors */
-  --color-primary: #7c3aed; /* violet */
-  --color-secondary: #06b6d4; /* cyan */
-  --color-accent: #10b981; /* emerald */
-  --color-bg: #ffffff;
-  --color-text: #0f172a;
+  /* Farben - Cyberpunk-Thema */
+  --color-primary: #1c1c3f; /* Etwas helleres Dunkelblau für besseren Kontrast */
+  --color-secondary: #2a2a5c; /* Helleres Blau für Akzente */
+  --color-accent: #00ffcc; /* Neon-Türkis für stärkere Sichtbarkeit */
+  --color-bg: #12122e; /* Hellerer Hintergrund für mehr Kontrast */
+  --color-text: #f0f0fa; /* Hellerer Text für bessere Lesbarkeit */
 
-  /* Brush effect colors */
-  --brush-red: #ff3b30;
-  --brush-blue: #007aff;
-  --brush-green: #34c759;
-  --brush-purple: #af52de;
-  --brush-orange: #ff9500;
-  --brush-teal: #40c4ff;
-  --brush-magenta: #ff2d55;
-  --brush-pink: #ff80ab;
-  --brush-indigo: #5c6bc0;
-  --brush-lime: #aeea00;
+  /* Pinsel-Effekt Farben - Lebendigere Neonfarben */
+  --brush-red: #ff4d8c; /* Lebendigeres Neon-Rosa */
+  --brush-blue: #00ccff; /* Helleres Neon-Blau */
+  --brush-green: #00ff66; /* Knalliges Neon-Grün */
+  --brush-purple: #cc33ff; /* Intensiveres Neon-Lila */
+  --brush-orange: #ff9933; /* Lebendigeres Neon-Orange */
+  --brush-teal: #33cccc; /* Neon-Türkis */
+  --brush-magenta: #ff3399; /* Neon-Magenta */
+  --brush-pink: #ff66b2; /* Helleres Neon-Pink */
+  --brush-indigo: #6633cc; /* Kräftigeres Indigo */
+  --brush-lime: #ccff33; /* Neon-Limette */
 
-  /* Fonts */
-  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+  /* Schriftarten */
+  --font-sans: "Rajdhani", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
     Roboto, "Helvetica Neue", Arial;
-  --font-headline: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-headline: "Orbitron", Georgia, "Times New Roman", serif;
 
-  /* Gradient stops for headline text */
-  --headline-grad-from: rgba(255, 255, 255, 0.95);
-  --headline-grad-to: rgba(229, 231, 235, 0.95);
+  /* Farbverlauf für Überschrift */
+  --headline-grad-from: rgba(0, 255, 204, 0.95); /* Neon-Türkis */
+  --headline-grad-to: rgba(255, 51, 153, 0.95); /* Neon-Pink */
 }
 
-/* Tailwind base */
+/* Tailwind Basis */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Body defaults */
+/* Standardwerte für den Body */
 html,
 body {
   font-family: var(--font-sans);
@@ -50,48 +48,54 @@ body {
   padding: 0;
 }
 
-/* Brush effect */
+/* Benutzerdefinierter Hintergrund */
+.bg-brand-bg {
+  background-color: var(--color-bg);
+}
+
+/* Pinsel-Effekt */
 .brush-effect {
   background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3);
   background-size: 100% 100%;
   margin: -2px -6px;
   padding: 2px 6px;
   display: inline-block;
+  filter: brightness(1.2); /* Leicht erhöhte Helligkeit für Sichtbarkeit */
 }
 
-/* Color variations for brush effect */
+/* Pinsel-Farben */
 .brush-effect.brush-red {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=FF3B30);
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=FF4D8C);
 }
 .brush-effect.brush-blue {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=007AFF);
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=00CCFF);
 }
 .brush-effect.brush-green {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=34C759);
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=00FF66);
 }
 .brush-effect.brush-purple {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=AF52DE);
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=CC33FF);
 }
 .brush-effect.brush-orange {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=FF9500);
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=FF9933);
 }
 .brush-effect.brush-teal {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=40C4FF);
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=33CCCC);
 }
 .brush-effect.brush-magenta {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=FF2D55);
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=FF3399);
 }
 .brush-effect.brush-pink {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=FF80AB);
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=FF66B2);
 }
 .brush-effect.brush-indigo {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=5C6BC0);
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=6633CC);
 }
 .brush-effect.brush-lime {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=AEEA00);
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=CCFF33);
 }
 
-/* Gradient text utility */
+/* Farbverlauf für Text */
 .text-hero-gradient {
   background-image: linear-gradient(
     90deg,
@@ -103,17 +107,22 @@ body {
   color: transparent;
 }
 
-/* Glass pill utility */
+/* Glas-Pille */
 .pill-glass {
-  background-color: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.1
+  ); /* Etwas heller für Cyberpunk-Look */
+  backdrop-filter: blur(8px); /* Stärkerer Blur für Glas-Effekt */
+  -webkit-backdrop-filter: blur(8px);
 }
 
-/* Border gradient button */
+/* Gradient Border */
 .border-gradient {
   --p: 15%;
-  --bg-color: var(--color-bg);
+  --bg-color: #ffffff;
   --text-color: #323232;
   --c1: #ffffff;
   --c2: #ffffff;
@@ -146,7 +155,28 @@ body {
   transform: translateY(-2px);
 }
 
-/* Ensure sticky sections take full viewport height */
+/* Sticky Section */
 section.sticky {
-  will-change: transform; /* Optimize for scrolling performance */
+  will-change: transform;
+}
+
+/* Hero Text */
+.hero-text {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+/* About Text */
+.about-text {
+  color: var(--color-text);
+  background-color: rgba(
+    44,
+    44,
+    92,
+    0.7
+  ); /* Hellerer, transparenter Hintergrund */
+  padding: 2rem;
+  border-radius: 1rem;
+  font-size: 1.125rem;
 }
