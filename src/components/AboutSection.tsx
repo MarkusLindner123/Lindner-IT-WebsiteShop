@@ -213,23 +213,22 @@ export default function AboutSection() {
         {allWords.map((paragraphWords, paraIdx) => (
           <div
             key={paraIdx}
-            className="space-y-6"
+            className="flex flex-col md:flex-row md:space-x-12 space-y-6 md:space-y-0 items-start"
             ref={(el) => {
               itemRefs.current[paraIdx] = el;
             }}
           >
             {/* Image with animated overlay */}
-            <div className="relative w-[350px] h-[250px] rounded-2xl overflow-hidden shadow-lg">
+            <div className="relative w-full h-[250px] md:w-[350px] md:h-[250px] rounded-2xl overflow-hidden shadow-lg flex-shrink-0">
               <Image
                 src={aboutImages[paraIdx]}
                 alt={`Image for about paragraph ${paraIdx + 1}`}
                 width={350}
                 height={250}
-                className="object-cover"
+                className="object-cover w-full h-full"
               />
               <div
                 className="image-overlay absolute inset-0 bg-white/70 backdrop-blur-sm"
-                // No more `transition-transform duration-700` as we control it directly
                 style={{
                   transform: `scaleY(1)`,
                   transformOrigin: "bottom",
@@ -238,10 +237,9 @@ export default function AboutSection() {
             </div>
 
             {/* Title and Text content with scroll animation */}
-            <div className="w-[80%] text-xl md:text-2xl text-gray-900 leading-loose">
+            <div className="w-full md:w-[calc(100%-350px-3rem)] text-xl md:text-2xl text-gray-900 leading-loose">
               <h2
                 className="animated-title text-4xl md:text-5xl font-bold mb-4"
-                // No more `transition-opacity` as we control it directly
                 style={{ opacity: 0.15 }}
               >
                 {titles[paraIdx]}
@@ -261,7 +259,6 @@ export default function AboutSection() {
                     className={`animated-word inline-block ${
                       highlighted ? `brush-effect brush-${color}` : ""
                     }`}
-                    // No more `transition-all` as we control it directly
                     style={{ opacity: 0.15 }}
                   >
                     {word === " " ? <span>&nbsp;</span> : word}
@@ -272,7 +269,7 @@ export default function AboutSection() {
           </div>
         ))}
       </div>
-      <div className="mt-12">
+      <div className="mt-12 flex justify-center">
         <AnimatedButton href="#contact">{sections.ctaPrimary}</AnimatedButton>
       </div>
     </section>
