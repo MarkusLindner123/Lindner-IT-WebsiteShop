@@ -1,29 +1,35 @@
 {
   "heroVideo": {
     "title": "Ihre Zukunft beginnt online",
-    "subtitle": "Wir gestalten digitale Erlebnisse, die begeistern"
+    "subtitle": "Wir gestalten digitale Erlebnisse, die inspirieren"
   },
-
   "hero": {
-    "kicker": "Web-Entwicklung & Beratung",
+    "kicker": "Web- & Softwareentwicklung",
     "kickerTag": "Freelancer",
-    "titleLine1": "Digitale Marken",
-    "titleLine2": "für Solo-Selbständige & kleine Teams",
+    "titleLine1": "Wir",
+    "titleLine2": "Wachsen",
+    "titleLine3": "Ihre Marke",
     "subtitle": "Websites, Shops & Automatisierung — klar, schnell, messbar.",
     "ctaPrimary": "Angebot anfordern",
-    "ctaSecondary": "Leistungen ansehen",
-    "projectsCount": "30+",
-    "projectsText": "Projekte",
-    "years": "8",
-    "yearsText": "Jahre Erfahrung",
-    "portraitAlt": "Portrait Markus Lindner",
-    "projectLabel": "Featured",
-    "projectTitle": "SaaS Landing Redesign",
-    "projectSubtitle": "Conversion +30%"
+    "ctaSecondary": "Leistungen ansehen"
   },
   "about": {
-    "title": "Hi.\n\n\n",
-    "text": "Ob Sie Ihre erste Website starten oder komplexe digitale Plattformen für ein großes Unternehmen verwalten, wir bieten maßgeschneiderte Lösungen, die optisch ansprechend, benutzerfreundlich und skalierbar sind.\nWir sind ein Team erfahrener Softwareentwickler, die Ideen in robuste, zukunftssichere digitale Lösungen verwandeln. Bevor wir Änderungen implementieren, analysieren wir sorgfältig Prozesse und beziehen alle Beteiligten ein, um praktische und effektive Ergebnisse zu liefern.\nVon Solo-Selbstständigen bis zu globalen Unternehmen – unser Ansatz kombiniert solide Architektur mit durchdachtem Design. Jede Website, App oder Plattform, die wir entwickeln, soll inspirieren, performen und mit Ihren Anforderungen wachsen.\nWenn Sie Ihr Projekt vom Konzept bis zum Live-Betrieb bringen möchten – ohne unnötiges Fachchinesisch, aber mit klarer Kommunikation und verlässlichen Ergebnissen – sind wir hier, um es möglich zu machen.",
+    "analyze": {
+      "title": "Analysieren",
+      "text": "Wir beginnen mit einer gründlichen Analyse der individuellen Anforderungen, Herausforderungen und Ziele Ihres Unternehmens. Dazu gehört die detaillierte Untersuchung Ihrer aktuellen Systeme, Arbeitsabläufe und Technologien sowie die frühzeitige Einbindung aller wichtigen Stakeholder. Durch ein umfassendes Verständnis Ihrer betrieblichen Landschaft erkennen wir Verbesserungspotenziale, identifizieren mögliche Risiken, bevor sie zu Problemen werden, und schaffen die Grundlage für Lösungen, die nicht nur praktisch, sondern auch strategisch auf Ihre langfristige Vision ausgerichtet sind."
+    },
+    "plan": {
+      "title": "Planen",
+      "text": "Aufbauend auf den Erkenntnissen aus der Analysephase entwickeln wir einen detaillierten, umsetzbaren Fahrplan, um Ihre Vision Wirklichkeit werden zu lassen. Dazu gehören die Definition der technischen Architektur, die Gestaltung von Nutzererlebnissen, die Festlegung klarer Meilensteine sowie die Bestimmung von Erfolgskriterien. Jeder Schritt ist sorgfältig strukturiert, um die Ausrichtung an Ihren Geschäftszielen zu gewährleisten, flexibel auf Veränderungen reagieren zu können und eine Skalierbarkeit für zukünftiges Wachstum zu ermöglichen, sodass Ihre Investition langfristig Wert schafft."
+    },
+    "build": {
+      "title": "Umsetzen",
+      "text": "Mit einem klaren Plan setzen unsere erfahrenen Entwickler und Designer Konzepte in voll funktionsfähige, hochwertige digitale Produkte um. Von robusten Backend-Systemen bis zu intuitiven, benutzerfreundlichen Oberflächen wird jedes Element mit Präzision und Zielstrebigkeit gestaltet. Ob wir eine responsive Website, eine funktionsreiche App oder eine komplexe digitale Plattform entwickeln – wir sorgen stets für die perfekte Balance aus solider technischer Architektur, ansprechendem Design und optimaler Performance, um Lösungen zu liefern, die inspirieren und Bestand haben."
+    },
+    "support": {
+      "title": "Betreuen",
+      "text": "Unsere Arbeit endet nicht mit dem Launch. Wir bieten proaktive, kontinuierliche Betreuung, um Ihre digitale Lösung sicher, aktuell und leistungsstark zu halten. Dazu gehören regelmäßige Wartung, Funktionsverbesserungen, Sicherheitsüberwachung und Performance-Optimierung. Wenn Ihr Unternehmen wächst und sich Ihre Anforderungen ändern, bleiben wir ein verlässlicher Partner, der sicherstellt, dass Ihre digitale Präsenz sich nahtlos anpasst und langfristig messbare Ergebnisse liefert."
+    },
     "ctaPrimary": "Angebot anfordern"
   },
   "Meta": {
