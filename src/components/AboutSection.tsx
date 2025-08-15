@@ -131,9 +131,9 @@ export default function AboutSection() {
     const handleResize = () => {
       // Set a different speed factor for mobile screens (e.g., less than 768px)
       if (window.innerWidth < 768) {
-        setSpeedFactor(1.13); // Adjust this value to your liking
+        setSpeedFactor(1.14); // Adjust this value to your liking
       } else {
-        setSpeedFactor(1.2);
+        setSpeedFactor(1.22);
       }
     };
 
