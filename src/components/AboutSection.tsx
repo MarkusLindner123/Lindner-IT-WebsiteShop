@@ -27,8 +27,10 @@ const aboutImages = [
 
 export default function AboutSection() {
   const t = useTranslations("about");
-  const sectionRef = useRef(null);
-  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const itemRefs = useRef<Array<HTMLDivElement | null>>([]);
+
+  const [speedFactor, setSpeedFactor] = useState(1.2);
 
   const sections = useMemo(
     () => ({
@@ -126,23 +128,36 @@ export default function AboutSection() {
   }, [allWords]);
 
   useEffect(() => {
+    const handleResize = () => {
+      // Set a different speed factor for mobile screens (e.g., less than 768px)
+      if (window.innerWidth < 768) {
+        setSpeedFactor(1.14); // Adjust this value to your liking
+      } else {
+        setSpeedFactor(1.22);
+      }
+    };
+
+    handleResize(); // Set initial value
+    window.addEventListener("resize", handleResize);
+
     const handleScroll = () => {
       if (!sectionRef.current) return;
 
-      const { top } = sectionRef.current.getBoundingClientRect();
+      const { top, height } = sectionRef.current.getBoundingClientRect();
       const wh = window.innerHeight;
+      const scrollProgress = (wh - top) / (height + wh);
+      const progress = Math.min(Math.max(0, scrollProgress * speedFactor), 1);
 
-      // Calculate progress based on the section's position relative to the viewport
-      const progress = Math.min(Math.max(0, 1 - top / wh), 1);
-
-      const totalPhases = paragraphs.length * 2;
-      const phaseLength = 1 / totalPhases;
+      const totalPhases = allWords.length * 2;
 
       itemRefs.current.forEach((item, paraIdx) => {
         if (!item) return;
 
         const imagePhaseIndex = paraIdx * 2;
         const textPhaseIndex = paraIdx * 2 + 1;
+
+        const phaseLength = 1 / totalPhases;
+
         const imageStartProgress = imagePhaseIndex * phaseLength;
         const textStartProgress = textPhaseIndex * phaseLength;
 
@@ -173,6 +188,7 @@ export default function AboutSection() {
 
         const words = item.querySelectorAll(".animated-word");
         const totalWordsInParagraph = words.length;
+
         words.forEach((wordElement, wordIdx) => {
           const visible =
             wordIdx <= Math.floor(totalWordsInParagraph * textProgress);
@@ -187,8 +203,9 @@ export default function AboutSection() {
     // Clean up
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
     };
-  }, [allWords, paragraphs.length]);
+  }, [speedFactor, allWords]);
 
   const titles = [
     sections.analyze.title,
@@ -198,71 +215,73 @@ export default function AboutSection() {
   ];
 
   return (
-    <div ref={sectionRef} className="about-section bg-brand-bg relative z-20">
-      <div className="container mx-auto px-4 py-16">
+    <section
+      id="about"
+      className="mx-auto max-w-full px-4 lg:px-8 py-20 md:py-28 lg:py-32 bg-brand-bg"
+    >
+      <div ref={sectionRef} className="space-y-12">
         {allWords.map((paragraphWords, paraIdx) => (
           <div
             key={paraIdx}
-            className="flex flex-col md:flex-row items-center justify-between my-24 md:my-32 relative"
+            className="flex flex-col md:flex-row md:space-x-12 space-y-6 md:space-y-0 items-start"
             ref={(el) => {
               itemRefs.current[paraIdx] = el;
             }}
           >
             {/* Image with animated overlay */}
-            <div className="md:w-1/2 w-full relative mb-8 md:mb-0 md:mr-12 rounded-2xl overflow-hidden shadow-lg">
+            <div className="relative w-full h-[250px] md:w-[350px] md:h-[250px] rounded-2xl overflow-hidden shadow-lg flex-shrink-0">
               <Image
-                src={aboutImages[paraIdx % aboutImages.length]}
-                alt={`Image for step ${paraIdx + 1}`}
-                width={700}
-                height={500}
-                className="w-full h-auto object-cover"
+                src={aboutImages[paraIdx]}
+                alt={`Image for about paragraph ${paraIdx + 1}`}
+                width={350}
+                height={250}
+                className="object-cover w-full h-full"
               />
-              <div className="image-overlay absolute inset-0 bg-white/50 origin-bottom scale-y-100 transition-transform duration-200"></div>
+              <div
+                className="image-overlay absolute inset-0 bg-white/70 backdrop-blur-sm"
+                style={{
+                  transform: `scaleY(1)`,
+                  transformOrigin: "bottom",
+                }}
+              />
             </div>
 
             {/* Title and Text content with scroll animation */}
-            <div className="md:w-1/2 w-full">
-              <h2 className="animated-title text-3xl md:text-5xl font-headline font-bold text-hero-gradient mb-6 transition-opacity duration-500">
+            <div className="w-full md:w-[calc(100%-350px-3rem)] text-xl md:text-2xl text-gray-900 leading-loose">
+              <h2
+                className="animated-title text-4xl md:text-5xl font-bold mb-4"
+                style={{ opacity: 0.15 }}
+              >
                 {titles[paraIdx]}
               </h2>
-              <p className="about-text leading-relaxed font-sans text-lg md:text-xl">
-                {paragraphWords.map(({ word, index }, wordIdx) => {
-                  if (word === "\n") return null;
-                  const clean = word.replace(/[.,!?–]/g, "").toLowerCase();
-                  const highlighted = highlightWords.includes(clean);
-                  const color = highlighted
-                    ? highlightColorMap[index] || "red"
-                    : "";
-                  return (
-                    <span
-                      key={index}
-                      className="animated-word transition-opacity duration-300 ease-in-out inline"
-                    >
-                      {word === " " ? (
-                        " "
-                      ) : (
-                        <span
-                          className={`${
-                            highlighted
-                              ? `brush-effect brush-${color}`
-                              : "text-text"
-                          }`}
-                        >
-                          {word}
-                        </span>
-                      )}
-                    </span>
-                  );
-                })}
-              </p>
+              {paragraphWords.map(({ word, index }, wordIdx) => {
+                if (word === "\n") return null;
+
+                const clean = word.replace(/[.,!?–]/g, "").toLowerCase();
+                const highlighted = highlightWords.includes(clean);
+                const color = highlighted
+                  ? highlightColorMap[index] || "red"
+                  : "";
+
+                return (
+                  <span
+                    key={index}
+                    className={`animated-word inline-block ${
+                      highlighted ? `brush-effect brush-${color}` : ""
+                    }`}
+                    style={{ opacity: 0.15 }}
+                  >
+                    {word === " " ? <span>&nbsp;</span> : word}
+                  </span>
+                );
+              })}
             </div>
           </div>
         ))}
       </div>
-
-      <div className="flex justify-center mb-24 mt-12">
-        <AnimatedButton>{sections.ctaPrimary}</AnimatedButton>
+      <div className="mt-12 flex justify-center">
+        <AnimatedButton href="#contact">{sections.ctaPrimary}</AnimatedButton>
       </div>
-    </div>
+    </section>
   );
 }
