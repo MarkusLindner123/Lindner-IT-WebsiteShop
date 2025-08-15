@@ -41,7 +41,7 @@ export default function Hero() {
   ];
 
   return (
-    <section aria-label="Hero" className="relative overflow-hidden bg-white">
+    <section aria-label="Hero" className="relative overflow-hidden">
       {/* Hero gradient background */}
       <div className="absolute inset-0 hero-gradient" />
 

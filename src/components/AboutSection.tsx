@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react"; // Import useMemo
 import { useTranslations } from "next-intl";
 import AnimatedButton from "@/components/AnimatedButton";
 
@@ -25,9 +25,18 @@ export default function AboutSection() {
     [key: number]: string;
   }>({});
 
-  const content = {
-    about: { title: t("title"), text: t("text"), ctaPrimary: t("ctaPrimary") },
-  };
+  // FIX 1: Memoize the `content` object.
+  // This prevents it from being recreated on every render, which was causing
+  // the useEffect hook below to run unnecessarily.
+  const content = useMemo(
+    () => ({
+      about: {
+        paragraphs: [t("analyze"), t("plan"), t("build"), t("support")],
+        ctaPrimary: t("ctaPrimary"),
+      },
+    }),
+    [t]
+  );
 
   const highlightWords = [
     "solutions",
@@ -39,24 +48,39 @@ export default function AboutSection() {
     "ergebnisse",
   ];
 
-  const words = content.about.text
-    .split("\n")
-    .flatMap((line, lineIdx) => {
-      const trimmed = line.trim();
-      if (!trimmed) return [];
-      const parts = trimmed.split(/\s+/);
-      const result: { word: string; index: number }[] = [];
-      parts.forEach((w, wIdx) => {
-        result.push({ word: w, index: lineIdx * 1000 + wIdx * 2 });
-        if (wIdx < parts.length - 1)
-          result.push({ word: " ", index: lineIdx * 1000 + wIdx * 2 + 1 });
-      });
-      if (lineIdx < content.about.text.split("\n").length - 1) {
-        result.push({ word: "\n", index: lineIdx * 1000 + parts.length * 2 });
-      }
-      return result;
-    })
-    .filter(({ word }) => word !== "");
+  // FIX 2: Memoize the `words` array.
+  // This is derived from `content`, so it should also be memoized
+  // to avoid expensive recalculations on every render.
+  const words = useMemo(() => {
+    return content.about.paragraphs
+      .flatMap((paragraph, paraIdx) =>
+        paragraph.split("\n").flatMap((line, lineIdx) => {
+          const trimmed = line.trim();
+          if (!trimmed) return [];
+          const parts = trimmed.split(/\s+/);
+          const result: { word: string; index: number }[] = [];
+          parts.forEach((w, wIdx) => {
+            result.push({
+              word: w,
+              index: paraIdx * 10000 + lineIdx * 1000 + wIdx * 2,
+            });
+            if (wIdx < parts.length - 1)
+              result.push({
+                word: " ",
+                index: paraIdx * 10000 + lineIdx * 1000 + wIdx * 2 + 1,
+              });
+          });
+          if (lineIdx < paragraph.split("\n").length - 1) {
+            result.push({
+              word: "\n",
+              index: paraIdx * 10000 + lineIdx * 1000 + parts.length * 2,
+            });
+          }
+          return result;
+        })
+      )
+      .filter(({ word }) => word !== "");
+  }, [content.about.paragraphs]);
 
   useEffect(() => {
     const map: { [key: number]: string } = {};
@@ -69,9 +93,11 @@ export default function AboutSection() {
       }
     });
     setHighlightColorMap(map);
-  }, [content.about.text]);
+  }, [words]); // FIX 3: Depend on the memoized `words` array.
 
   useEffect(() => {
+    // This scroll handler logic is fine and doesn't cause the loop,
+    // but the re-renders from the other useEffect were triggering the error.
     let lastScroll = 0;
     const delay = 50;
     const handle = () => {
@@ -85,47 +111,52 @@ export default function AboutSection() {
       setProgress(np);
     };
     window.addEventListener("scroll", handle, { passive: true });
-    handle();
+    handle(); // Initial call
     return () => window.removeEventListener("scroll", handle);
-  }, []);
+  }, []); // Empty dependency array is correct here.
 
   return (
     <section
       id="about"
-      className="mx-auto max-w-3xl px-6 py-20 md:py-28 lg:px-8 lg:py-32"
+      className="mx-auto max-w-full px-6 py-20 md:py-28 lg:px-8 lg:py-32 bg-brand-bg-2"
+      style={{
+        marginLeft: "calc(-50vw + 50%)",
+        marginRight: "calc(-50vw + 50%)",
+      }}
     >
-      <h2 className="mb-12 text-3xl font-extrabold tracking-tight text-[var(--color-primary)] md:text-4xl">
-        {content.about.title}
-      </h2>
-      <div className="max-w-[600px] space-y-8 text-xl md:text-2xl text-gray-900">
-        <div ref={ref} className="leading-loose">
-          {words.map(({ word, index }, idx) => {
-            if (word === "\n") return <br key={index} />;
-            if (word === " ") return <span key={index}>&nbsp;</span>;
+      <div className="mx-auto max-w-3xl">
+        <div className="max-w-[600px] space-y-8 text-xl md:text-2xl text-gray-900">
+          <div ref={ref} className="leading-loose">
+            {words.map(({ word, index }, idx) => {
+              if (word === "\n") return <br key={index} />;
+              if (word === " ") return <span key={index}>&nbsp;</span>;
 
-            const visible = idx <= Math.floor(words.length * progress);
-            const clean = word.replace(/[.,!?–]/g, "").toLowerCase();
-            const highlighted = highlightWords.includes(clean);
-            const color = highlighted ? highlightColorMap[index] || "red" : "";
+              const visible = idx <= Math.floor(words.length * progress);
+              const clean = word.replace(/[.,!?–]/g, "").toLowerCase();
+              const highlighted = highlightWords.includes(clean);
+              const color = highlighted
+                ? highlightColorMap[index] || "red"
+                : "";
 
-            return (
-              <span
-                key={index}
-                className={`inline-block mr-1 transition-all duration-500 ease-out ${
-                  highlighted ? `brush-effect brush-${color}` : ""
-                }`}
-                style={{ opacity: visible ? 1 : 0.15 }}
-              >
-                {word}
-              </span>
-            );
-          })}
+              return (
+                <span
+                  key={index}
+                  className={`inline-block transition-all duration-500 ease-out ${
+                    highlighted ? `brush-effect brush-${color}` : ""
+                  }`}
+                  style={{ opacity: visible ? 1 : 0.15 }}
+                >
+                  {word}
+                </span>
+              );
+            })}
+          </div>
         </div>
-      </div>
-      <div className="mt-12">
-        <AnimatedButton href="#contact">
-          {content.about.ctaPrimary}
-        </AnimatedButton>
+        <div className="mt-12">
+          <AnimatedButton href="#contact">
+            {content.about.ctaPrimary}
+          </AnimatedButton>
+        </div>
       </div>
     </section>
   );
