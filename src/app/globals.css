@@ -3,32 +3,32 @@
 
 :root {
   /* Farben - Cyberpunk-Thema (softer, less intense) */
-  --color-primary: #2a2a4a; /* Slightly lighter dark blue for better contrast */
-  --color-secondary: #3b3b6d; /* Softer blue for accents */
-  --color-accent: #4adede; /* Muted teal instead of neon turquoise */
-  --color-bg: #1e1e3a; /* Lighter background to reduce strain */
-  --color-text: #e8e8f5; /* Slightly softer off-white for readability */
+  --color-primary: #2a2a4a;
+  --color-secondary: #3b3b6d;
+  --color-accent: #4adede;
+  --color-bg: #1e1e3a;
+  --color-text: #e8e8f5;
 
-  /* Pinsel-Effekt Farben - Softer, less saturated neon tones */
-  --brush-red: #e573a0; /* Softer neon pink */
-  --brush-blue: #4ab8e6; /* Muted neon blue */
-  --brush-green: #4ade80; /* Softer neon green */
-  --brush-purple: #b266f5; /* Muted neon purple */
-  --brush-orange: #e69b5c; /* Softer neon orange */
-  --brush-teal: #4db8b8; /* Muted teal */
-  --brush-magenta: #e666a3; /* Softer magenta */
-  --brush-pink: #e68ab2; /* Softer pink */
-  --brush-indigo: #7a66cc; /* Softer indigo */
-  --brush-lime: #b2e64d; /* Softer lime */
+  /* Pinsel-Effekt Farben */
+  --brush-red: #e573a0;
+  --brush-blue: #4ab8e6;
+  --brush-green: #4ade80;
+  --brush-purple: #b266f5;
+  --brush-orange: #e69b5c;
+  --brush-teal: #4db8b8;
+  --brush-magenta: #e666a3;
+  --brush-pink: #e68ab2;
+  --brush-indigo: #7a66cc;
+  --brush-lime: #b2e64d;
 
   /* Schriftarten */
   --font-sans: "Rajdhani", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
     Roboto, "Helvetica Neue", Arial;
   --font-headline: "Orbitron", Georgia, "Times New Roman", serif;
 
-  /* Farbverlauf für Überschrift - Softer gradient */
-  --headline-grad-from: rgba(74, 222, 222, 0.9); /* Muted teal */
-  --headline-grad-to: rgba(230, 102, 163, 0.9); /* Muted pink */
+  /* Farbverlauf für Überschrift */
+  --headline-grad-from: rgba(74, 222, 222, 0.9);
+  --headline-grad-to: rgba(230, 102, 163, 0.9);
 }
 
 /* Tailwind Basis */
@@ -53,6 +53,13 @@ body {
   background-color: var(--color-bg);
 }
 
+/* Hero gradient background */
+.hero-gradient {
+  background: linear-gradient(to bottom right, #ffffff, #add8e6);
+  border-bottom-left-radius: 50% 10%;
+  border-bottom-right-radius: 50% 10%;
+}
+
 /* Pinsel-Effekt */
 .brush-effect {
   background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3);
@@ -60,7 +67,7 @@ body {
   margin: -2px -6px;
   padding: 2px 6px;
   display: inline-block;
-  filter: brightness(1.1); /* Reduced brightness for less glare */
+  filter: brightness(1.1);
 }
 
 /* Pinsel-Farben */
@@ -109,12 +116,12 @@ body {
 
 /* Glas-Pille */
 .pill-glass {
-  background-color: rgba(255, 255, 255, 0.2); /* Increased opacity for better contrast */
-  backdrop-filter: blur(10px); /* Slightly stronger blur for a refined glass effect */
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
 
-/* Gradient Border (unchanged as requested) */
+/* Gradient Border */
 .border-gradient {
   --p: 15%;
   --bg-color: #ffffff;
@@ -165,8 +172,33 @@ section.sticky {
 /* About Text */
 .about-text {
   color: var(--color-text);
-  background-color: rgba(59, 59, 109, 0.8); /* Adjusted for better contrast with muted secondary color */
+  background-color: rgba(59, 59, 109, 0.8);
   padding: 2rem;
   border-radius: 1rem;
   font-size: 1.125rem;
+}
+
+/* Hero-specific styles */
+.text-headline {
+  color: #000000;
+}
+
+.decoration-accent {
+  text-decoration-color: var(--color-accent);
+}
+
+.text-text {
+  color: #000000;
+}
+
+.bg-text\/10 {
+  background-color: rgba(0, 0, 0, 0.1); /* Using black with opacity */
+}
+
+.border-text\/30 {
+  border-color: rgba(0, 0, 0, 0.3); /* Using black with opacity */
+}
+
+.font-headline {
+  font-family: var(--font-headline);
 }

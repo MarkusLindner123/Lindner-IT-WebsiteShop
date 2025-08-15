@@ -4,25 +4,21 @@
     "subtitle": "We design digital experiences that inspire"
   },
   "hero": {
-    "kicker": "Web development & consulting",
+    "kicker": "Web - & Softare Development",
     "kickerTag": "Freelancer",
-    "titleLine1": "Digital brands",
-    "titleLine2": "for solo entrepreneurs & small teams",
+    "titleLine1": "We",
+    "titleLine2": "Grow",
+    "titleLine3": "Your Brand",
     "subtitle": "Websites, shops & automation — clear, fast, measurable.",
     "ctaPrimary": "Request a quote",
-    "ctaSecondary": "View services",
-    "projectsCount": "30+",
-    "projectsText": "Projects",
-    "years": "8",
-    "yearsText": "Years of experience",
-    "portraitAlt": "Portrait of Markus Lindner",
-    "projectLabel": "Featured",
-    "projectTitle": "SaaS Landing Redesign",
-    "projectSubtitle": "Conversion +30%"
+    "ctaSecondary": "View services"
+
   },
   "about": {
-    "title": "We are your web and software partners",
-    "text": "Whether you're launching your first website or managing complex digital platforms for a large enterprise, we provide tailored solutions that are visually appealing, user-friendly, and scalable.\nWe are a team of experienced software developers turning ideas into robust, future-proof digital solutions. Before implementing changes, we carefully analyze processes and involve all stakeholders to deliver practical and effective results.\nFrom solo entrepreneurs to global companies – our approach combines solid architecture with thoughtful design. Every website, app, or platform we develop is built to inspire, perform, and grow with your needs.\nIf you want to take your project from concept to live operation – without unnecessary jargon, but with clear communication and reliable results – we’re here to make it happen.",
+    "analyze": "We carefully assess your needs, current systems, and processes. By involving all stakeholders early, we identify opportunities, uncover potential challenges, and set a strong foundation for practical, effective solutions.",
+    "plan": "Based on our analysis, we create a clear roadmap. From defining technical architecture to outlining user experience, we ensure every step is aligned with your goals and scalable for future growth.",
+    "build": "Our experienced developers turn concepts into robust, future-proof digital products. Whether it’s a website, app, or platform, we combine solid architecture with thoughtful design to deliver inspiring and high-performing solutions.",
+    "support": "Once your project is live, we provide ongoing maintenance, updates, and optimizations. Our commitment is to keep your digital presence reliable, secure, and ready to evolve as your needs grow.",
     "ctaPrimary": "Request a quote"
   },
   "Meta": {
