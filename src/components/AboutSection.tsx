@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useEffect, useMemo, useRef, useState } from "react"; // Import useMemo
+import React, { useEffect, useMemo, useRef } from "react";
 import { useTranslations } from "next-intl";
 import AnimatedButton from "@/components/AnimatedButton";
+import Image from "next/image";
 
 const brushColors = [
   "red",
@@ -17,25 +18,51 @@ const brushColors = [
   "lime",
 ];
 
+const aboutImages = [
+  "/about1.jpg",
+  "/about1.jpg",
+  "/about1.jpg",
+  "/about1.jpg",
+];
+
 export default function AboutSection() {
   const t = useTranslations("about");
-  const ref = useRef<HTMLDivElement>(null);
-  const [progress, setProgress] = useState(0);
-  const [highlightColorMap, setHighlightColorMap] = useState<{
-    [key: number]: string;
-  }>({});
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const itemRefs = useRef<Array<HTMLDivElement | null>>([]);
 
-  // FIX 1: Memoize the `content` object.
-  // This prevents it from being recreated on every render, which was causing
-  // the useEffect hook below to run unnecessarily.
-  const content = useMemo(
+  const ANIMATION_SPEED_FACTOR = 1.2;
+
+  const sections = useMemo(
     () => ({
-      about: {
-        paragraphs: [t("analyze"), t("plan"), t("build"), t("support")],
-        ctaPrimary: t("ctaPrimary"),
+      analyze: {
+        title: t("analyze.title"),
+        text: t("analyze.text"),
       },
+      plan: {
+        title: t("plan.title"),
+        text: t("plan.text"),
+      },
+      build: {
+        title: t("build.title"),
+        text: t("build.text"),
+      },
+      support: {
+        title: t("support.title"),
+        text: t("support.text"),
+      },
+      ctaPrimary: t("ctaPrimary"),
     }),
     [t]
+  );
+
+  const paragraphs = useMemo(
+    () => [
+      sections.analyze.text,
+      sections.plan.text,
+      sections.build.text,
+      sections.support.text,
+    ],
+    [sections]
   );
 
   const highlightWords = [
@@ -46,117 +73,207 @@ export default function AboutSection() {
     "design",
     "results",
     "ergebnisse",
+    "reliable",
+    "analysis",
+    "architecture",
+    "performance",
+    "support",
+    "maintenance",
+    "optimization",
+    "vision",
+    "growth",
   ];
 
-  // FIX 2: Memoize the `words` array.
-  // This is derived from `content`, so it should also be memoized
-  // to avoid expensive recalculations on every render.
-  const words = useMemo(() => {
-    return content.about.paragraphs
-      .flatMap((paragraph, paraIdx) =>
-        paragraph.split("\n").flatMap((line, lineIdx) => {
-          const trimmed = line.trim();
-          if (!trimmed) return [];
-          const parts = trimmed.split(/\s+/);
+  const allWords = useMemo(() => {
+    let globalIndex = 0;
+    const wordsPerParagraph = paragraphs.map((paragraph) => {
+      const paragraphWords = paragraph
+        .split(/\s+/)
+        .flatMap((word, wIdx, arr) => {
           const result: { word: string; index: number }[] = [];
-          parts.forEach((w, wIdx) => {
+          if (word) {
             result.push({
-              word: w,
-              index: paraIdx * 10000 + lineIdx * 1000 + wIdx * 2,
+              word: word,
+              index: globalIndex++,
             });
-            if (wIdx < parts.length - 1)
-              result.push({
-                word: " ",
-                index: paraIdx * 10000 + lineIdx * 1000 + wIdx * 2 + 1,
-              });
-          });
-          if (lineIdx < paragraph.split("\n").length - 1) {
+          }
+          if (wIdx < arr.length - 1) {
             result.push({
-              word: "\n",
-              index: paraIdx * 10000 + lineIdx * 1000 + parts.length * 2,
+              word: " ",
+              index: globalIndex++,
             });
           }
           return result;
-        })
-      )
-      .filter(({ word }) => word !== "");
-  }, [content.about.paragraphs]);
+        });
+      paragraphWords.push({
+        word: "\n",
+        index: globalIndex++,
+      });
+      return paragraphWords;
+    });
+    return wordsPerParagraph;
+  }, [paragraphs]);
 
-  useEffect(() => {
+  const highlightColorMap = useMemo(() => {
     const map: { [key: number]: string } = {};
     let ci = 0;
-    words.forEach(({ word, index }) => {
+    allWords.flat().forEach(({ word, index }) => {
       const clean = word.replace(/[.,!?–]/g, "").toLowerCase();
       if (highlightWords.includes(clean)) {
         map[index] = brushColors[ci % brushColors.length];
         ci++;
       }
     });
-    setHighlightColorMap(map);
-  }, [words]); // FIX 3: Depend on the memoized `words` array.
+    return map;
+  }, [allWords]);
 
   useEffect(() => {
-    // This scroll handler logic is fine and doesn't cause the loop,
-    // but the re-renders from the other useEffect were triggering the error.
-    let lastScroll = 0;
-    const delay = 50;
-    const handle = () => {
-      const now = Date.now();
-      if (now - lastScroll < delay) return;
-      lastScroll = now;
-      if (!ref.current) return;
-      const { top, height } = ref.current.getBoundingClientRect();
+    const handleScroll = () => {
+      if (!sectionRef.current) return;
+
+      const { top, height } = sectionRef.current.getBoundingClientRect();
       const wh = window.innerHeight;
-      const np = Math.min(Math.max(0, (wh - top) / (height + wh * 0.3)), 1);
-      setProgress(np);
+      const scrollProgress = (wh - top) / (height + wh);
+      const progress = Math.min(
+        Math.max(0, scrollProgress * ANIMATION_SPEED_FACTOR),
+        1
+      );
+
+      const totalPhases = allWords.length * 2;
+
+      itemRefs.current.forEach((item, paraIdx) => {
+        if (!item) return;
+
+        const imagePhaseIndex = paraIdx * 2;
+        const textPhaseIndex = paraIdx * 2 + 1;
+
+        const phaseLength = 1 / totalPhases;
+
+        const imageStartProgress = imagePhaseIndex * phaseLength;
+        const textStartProgress = textPhaseIndex * phaseLength;
+
+        const imageProgress = Math.min(
+          Math.max(0, progress - imageStartProgress) / phaseLength,
+          1
+        );
+        const textProgress = Math.min(
+          Math.max(0, progress - textStartProgress) / phaseLength,
+          1
+        );
+
+        // Direct DOM manipulation for image overlay
+        const imageOverlay = item.querySelector(
+          ".image-overlay"
+        ) as HTMLElement;
+        if (imageOverlay) {
+          imageOverlay.style.transform = `scaleY(${1 - imageProgress})`;
+        }
+
+        // Direct DOM manipulation for text and title
+        const titleElement = item.querySelector(
+          ".animated-title"
+        ) as HTMLElement;
+        if (titleElement) {
+          titleElement.style.opacity = textProgress > 0 ? "1" : "0.15";
+        }
+
+        const words = item.querySelectorAll(".animated-word");
+        const totalWordsInParagraph = words.length;
+
+        words.forEach((wordElement, wordIdx) => {
+          const visible =
+            wordIdx <= Math.floor(totalWordsInParagraph * textProgress);
+          (wordElement as HTMLElement).style.opacity = visible ? "1" : "0.15";
+        });
+      });
     };
-    window.addEventListener("scroll", handle, { passive: true });
-    handle(); // Initial call
-    return () => window.removeEventListener("scroll", handle);
-  }, []); // Empty dependency array is correct here.
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll(); // Initial call to set positions
+
+    // Clean up
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [ANIMATION_SPEED_FACTOR, allWords]);
+
+  const titles = [
+    sections.analyze.title,
+    sections.plan.title,
+    sections.build.title,
+    sections.support.title,
+  ];
 
   return (
     <section
       id="about"
-      className="mx-auto max-w-full px-6 py-20 md:py-28 lg:px-8 lg:py-32 bg-brand-bg-2"
-      style={{
-        marginLeft: "calc(-50vw + 50%)",
-        marginRight: "calc(-50vw + 50%)",
-      }}
+      className="mx-auto max-w-full px-4 lg:px-8 py-20 md:py-28 lg:py-32 bg-brand-bg"
     >
-      <div className="mx-auto max-w-3xl">
-        <div className="max-w-[600px] space-y-8 text-xl md:text-2xl text-gray-900">
-          <div ref={ref} className="leading-loose">
-            {words.map(({ word, index }, idx) => {
-              if (word === "\n") return <br key={index} />;
-              if (word === " ") return <span key={index}>&nbsp;</span>;
+      <div ref={sectionRef} className="space-y-12">
+        {allWords.map((paragraphWords, paraIdx) => (
+          <div
+            key={paraIdx}
+            className="space-y-6"
+            ref={(el) => {
+              itemRefs.current[paraIdx] = el;
+            }}
+          >
+            {/* Image with animated overlay */}
+            <div className="relative w-[350px] h-[250px] rounded-2xl overflow-hidden shadow-lg">
+              <Image
+                src={aboutImages[paraIdx]}
+                alt={`Image for about paragraph ${paraIdx + 1}`}
+                width={350}
+                height={250}
+                className="object-cover"
+              />
+              <div
+                className="image-overlay absolute inset-0 bg-white/70 backdrop-blur-sm"
+                // No more `transition-transform duration-700` as we control it directly
+                style={{
+                  transform: `scaleY(1)`,
+                  transformOrigin: "bottom",
+                }}
+              />
+            </div>
 
-              const visible = idx <= Math.floor(words.length * progress);
-              const clean = word.replace(/[.,!?–]/g, "").toLowerCase();
-              const highlighted = highlightWords.includes(clean);
-              const color = highlighted
-                ? highlightColorMap[index] || "red"
-                : "";
+            {/* Title and Text content with scroll animation */}
+            <div className="w-[80%] text-xl md:text-2xl text-gray-900 leading-loose">
+              <h2
+                className="animated-title text-4xl md:text-5xl font-bold mb-4"
+                // No more `transition-opacity` as we control it directly
+                style={{ opacity: 0.15 }}
+              >
+                {titles[paraIdx]}
+              </h2>
+              {paragraphWords.map(({ word, index }, wordIdx) => {
+                if (word === "\n") return null;
 
-              return (
-                <span
-                  key={index}
-                  className={`inline-block transition-all duration-500 ease-out ${
-                    highlighted ? `brush-effect brush-${color}` : ""
-                  }`}
-                  style={{ opacity: visible ? 1 : 0.15 }}
-                >
-                  {word}
-                </span>
-              );
-            })}
+                const clean = word.replace(/[.,!?–]/g, "").toLowerCase();
+                const highlighted = highlightWords.includes(clean);
+                const color = highlighted
+                  ? highlightColorMap[index] || "red"
+                  : "";
+
+                return (
+                  <span
+                    key={index}
+                    className={`animated-word inline-block ${
+                      highlighted ? `brush-effect brush-${color}` : ""
+                    }`}
+                    // No more `transition-all` as we control it directly
+                    style={{ opacity: 0.15 }}
+                  >
+                    {word === " " ? <span>&nbsp;</span> : word}
+                  </span>
+                );
+              })}
+            </div>
           </div>
-        </div>
-        <div className="mt-12">
-          <AnimatedButton href="#contact">
-            {content.about.ctaPrimary}
-          </AnimatedButton>
-        </div>
+        ))}
+      </div>
+      <div className="mt-12">
+        <AnimatedButton href="#contact">{sections.ctaPrimary}</AnimatedButton>
       </div>
     </section>
   );

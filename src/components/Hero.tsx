@@ -41,9 +41,12 @@ export default function Hero() {
   ];
 
   return (
-    <section aria-label="Hero" className="relative overflow-hidden">
+    <section
+      aria-label="Hero"
+      className="relative overflow-hidden p-8 rounded-2xl md:p-12"
+    >
       {/* Hero gradient background */}
-      <div className="absolute inset-0 hero-gradient" />
+      <div className="absolute inset-0 hero-gradient rounded-2xl" />
 
       <div className="max-w-7xl mx-auto px-4 lg:px-8 py-12 md:py-16 lg:py-20 overflow-x-hidden overflow-y-auto relative z-10">
         <motion.div
