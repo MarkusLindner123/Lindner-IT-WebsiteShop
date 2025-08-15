@@ -202,10 +202,3 @@ section.sticky {
 .font-headline {
   font-family: var(--font-headline);
 }
-.sticky-section-wrapper {
-  position: sticky;
-  top: 0;
-  /* Add padding to the bottom to extend the scroll duration. Adjust this value as needed. */
-  /* This creates the "dead space" for the scroll effect to happen. */
-  padding-bottom: 100vh;
-}
