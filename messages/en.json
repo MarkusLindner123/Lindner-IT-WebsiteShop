@@ -1,8 +1,25 @@
 {
-  "Home": {
-    "title": "Web Agency for Fast, Beautiful Sites",
-    "subtitle": "We craft blazing-fast websites for US-based brands.",
-    "cta": "Get a quote"
+  "heroVideo": {
+    "title": "Your future starts online",
+    "subtitle": "We design digital experiences that inspire"
+  },
+  "hero": {
+    "kicker": "Web - & Softare Development",
+    "kickerTag": "Freelancer",
+    "titleLine1": "We",
+    "titleLine2": "Grow",
+    "titleLine3": "Your Brand",
+    "subtitle": "Websites, shops & automation — clear, fast, measurable.",
+    "ctaPrimary": "Request a quote",
+    "ctaSecondary": "View services"
+
+  },
+  "about": {
+    "analyze": "We carefully assess your needs, current systems, and processes. By involving all stakeholders early, we identify opportunities, uncover potential challenges, and set a strong foundation for practical, effective solutions.",
+    "plan": "Based on our analysis, we create a clear roadmap. From defining technical architecture to outlining user experience, we ensure every step is aligned with your goals and scalable for future growth.",
+    "build": "Our experienced developers turn concepts into robust, future-proof digital products. Whether it’s a website, app, or platform, we combine solid architecture with thoughtful design to deliver inspiring and high-performing solutions.",
+    "support": "Once your project is live, we provide ongoing maintenance, updates, and optimizations. Our commitment is to keep your digital presence reliable, secure, and ready to evolve as your needs grow.",
+    "ctaPrimary": "Request a quote"
   },
   "Meta": {
     "title": "Web Agency – Modern Websites"

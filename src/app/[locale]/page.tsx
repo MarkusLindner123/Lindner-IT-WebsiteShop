@@ -1,6 +1,8 @@
-import { setRequestLocale, getTranslations } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
+
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import StickySlides from "@/components/StickySlides";
 
 export default async function HomePage({
   params,
@@ -9,36 +11,15 @@ export default async function HomePage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const t = await getTranslations("Home");
 
   return (
-    <main className="min-h-dvh grid place-items-center p-6">
-      <section className="max-w-3xl text-center space-y-4">
-        <h1
-          className="text-4xl md:text-6xl font-semibold tracking-tight"
-          data-testid="hero-title"
-        >
-          {t("title")}
-        </h1>
-        <p className="text-base md:text-lg opacity-80">{t("subtitle")}</p>
-        <div className="pt-4 flex items-center justify-center">
-          <LanguageSwitcher />
-        </div>
-      </section>
+    <main className="min-h-screen bg-brand-bg text-brand-text font-sans">
+      <StickySlides />
+
+      {/* Anything after the stacked slides will come *after* the takeover sequence 
+      <section className="max-w-7xl mx-auto px-6 py-20 flex justify-center">
+        <LanguageSwitcher currentLocale={locale} />
+      </section>*/}
     </main>
   );
-}
-
-// Optional: Lokalisierte Meta‑Daten pro Seite
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: (typeof routing.locales)[number] }>;
-}) {
-  const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "Meta" });
-  return {
-    title: t("title"),
-    // Alternates kannst du global oder hier pro Route setzen.
-  } as const;
 }

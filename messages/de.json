@@ -1,8 +1,30 @@
 {
-  "Home": {
-    "title": "Webagentur für schnelle, wunderschöne Websites",
-    "subtitle": "Wir entwickeln ultraschnelle Seiten für US-Brands.",
-    "cta": "Angebot anfordern"
+  "heroVideo": {
+    "title": "Ihre Zukunft beginnt online",
+    "subtitle": "Wir gestalten digitale Erlebnisse, die begeistern"
+  },
+
+  "hero": {
+    "kicker": "Web-Entwicklung & Beratung",
+    "kickerTag": "Freelancer",
+    "titleLine1": "Digitale Marken",
+    "titleLine2": "für Solo-Selbständige & kleine Teams",
+    "subtitle": "Websites, Shops & Automatisierung — klar, schnell, messbar.",
+    "ctaPrimary": "Angebot anfordern",
+    "ctaSecondary": "Leistungen ansehen",
+    "projectsCount": "30+",
+    "projectsText": "Projekte",
+    "years": "8",
+    "yearsText": "Jahre Erfahrung",
+    "portraitAlt": "Portrait Markus Lindner",
+    "projectLabel": "Featured",
+    "projectTitle": "SaaS Landing Redesign",
+    "projectSubtitle": "Conversion +30%"
+  },
+  "about": {
+    "title": "Hi.\n\n\n",
+    "text": "Ob Sie Ihre erste Website starten oder komplexe digitale Plattformen für ein großes Unternehmen verwalten, wir bieten maßgeschneiderte Lösungen, die optisch ansprechend, benutzerfreundlich und skalierbar sind.\nWir sind ein Team erfahrener Softwareentwickler, die Ideen in robuste, zukunftssichere digitale Lösungen verwandeln. Bevor wir Änderungen implementieren, analysieren wir sorgfältig Prozesse und beziehen alle Beteiligten ein, um praktische und effektive Ergebnisse zu liefern.\nVon Solo-Selbstständigen bis zu globalen Unternehmen – unser Ansatz kombiniert solide Architektur mit durchdachtem Design. Jede Website, App oder Plattform, die wir entwickeln, soll inspirieren, performen und mit Ihren Anforderungen wachsen.\nWenn Sie Ihr Projekt vom Konzept bis zum Live-Betrieb bringen möchten – ohne unnötiges Fachchinesisch, aber mit klarer Kommunikation und verlässlichen Ergebnissen – sind wir hier, um es möglich zu machen.",
+    "ctaPrimary": "Angebot anfordern"
   },
   "Meta": {
     "title": "Webagentur – Moderne Websites"

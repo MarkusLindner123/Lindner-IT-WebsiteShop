@@ -1,20 +1,204 @@
+/* Importiere Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@400;600&display=swap");
+
+:root {
+  /* Farben - Cyberpunk-Thema (softer, less intense) */
+  --color-primary: #2a2a4a;
+  --color-secondary: #3b3b6d;
+  --color-accent: #4adede;
+  --color-bg: #ffffff;
+  --color-text: #2a2a4a;
+
+  /* Pinsel-Effekt Farben */
+  --brush-red: #e573a0;
+  --brush-blue: #4ab8e6;
+  --brush-green: #4ade80;
+  --brush-purple: #b266f5;
+  --brush-orange: #e69b5c;
+  --brush-teal: #4db8b8;
+  --brush-magenta: #e666a3;
+  --brush-pink: #e68ab2;
+  --brush-indigo: #7a66cc;
+  --brush-lime: #b2e64d;
+
+  /* Schriftarten */
+  --font-sans: "Rajdhani", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial;
+  --font-headline: "Orbitron", Georgia, "Times New Roman", serif;
+
+  /* Farbverlauf für Überschrift */
+  --headline-grad-from: rgba(74, 222, 222, 0.9);
+  --headline-grad-to: rgba(230, 102, 163, 0.9);
+}
+
+/* Tailwind Basis */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Falls du eigene globale Styles brauchst, hier ergänzen */
+/* Standardwerte für den Body */
 html,
 body {
-  height: 100%;
+  font-family: var(--font-sans);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
 }
 
-body {
-  @apply bg-white text-black antialiased;
+/* Benutzerdefinierter Hintergrund */
+.bg-brand-bg {
+  background-color: var(--color-bg);
 }
 
-/* Beispiel: dunkles Theme via media query */
-@media (prefers-color-scheme: dark) {
-  body {
-    @apply bg-neutral-900 text-white;
-  }
+/* Hero gradient background */
+.hero-gradient {
+  background: linear-gradient(to bottom right, #ffffff, #add8e6);
+  border-bottom-left-radius: 50% 10%;
+  border-bottom-right-radius: 50% 10%;
+}
+
+/* Pinsel-Effekt */
+.brush-effect {
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3);
+  background-size: 100% 100%;
+  margin: -2px -6px;
+  padding: 2px 6px;
+  display: inline-block;
+  filter: brightness(1.1);
+}
+
+/* Pinsel-Farben */
+.brush-effect.brush-red {
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=E573A0);
+}
+.brush-effect.brush-blue {
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=4AB8E6);
+}
+.brush-effect.brush-green {
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=4ADE80);
+}
+.brush-effect.brush-purple {
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=B266F5);
+}
+.brush-effect.brush-orange {
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=E69B5C);
+}
+.brush-effect.brush-teal {
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=4DB8B8);
+}
+.brush-effect.brush-magenta {
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=E666A3);
+}
+.brush-effect.brush-pink {
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=E68AB2);
+}
+.brush-effect.brush-indigo {
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=7A66CC);
+}
+.brush-effect.brush-lime {
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=B2E64D);
+}
+
+/* Farbverlauf für Text */
+.text-hero-gradient {
+  background-image: linear-gradient(
+    90deg,
+    var(--headline-grad-from),
+    var(--headline-grad-to)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Glas-Pille */
+.pill-glass {
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Gradient Border */
+.border-gradient {
+  --p: 15%;
+  --bg-color: #ffffff;
+  --text-color: #323232;
+  --c1: #ffffff;
+  --c2: #ffffff;
+  --c3: #ff8c00;
+
+  background: linear-gradient(var(--bg-color), var(--bg-color)) padding-box,
+    conic-gradient(
+        from var(--gradient-angle, 0deg),
+        var(--c1),
+        var(--c2),
+        var(--c3),
+        var(--c1)
+      )
+      border-box;
+  border: 4px solid transparent;
+  border-radius: 3rem;
+  transition: all 0.3s ease;
+  color: var(--text-color);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  padding: 1rem 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.border-gradient:hover {
+  transform: translateY(-2px);
+}
+
+/* Sticky Section */
+section.sticky {
+  will-change: transform;
+}
+
+/* Hero Text */
+.hero-text {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+/* About Text */
+.about-text {
+  color: var(--color-text);
+  background-color: rgba(59, 59, 109, 0.8);
+  padding: 2rem;
+  border-radius: 1rem;
+  font-size: 1.125rem;
+}
+
+/* Hero-specific styles */
+.text-headline {
+  color: #000000;
+}
+
+.decoration-accent {
+  text-decoration-color: var(--color-accent);
+}
+
+.text-text {
+  color: #000000;
+}
+
+.bg-text\/10 {
+  background-color: rgba(0, 0, 0, 0.1); /* Using black with opacity */
+}
+
+.border-text\/30 {
+  border-color: rgba(0, 0, 0, 0.3); /* Using black with opacity */
+}
+
+.font-headline {
+  font-family: var(--font-headline);
 }

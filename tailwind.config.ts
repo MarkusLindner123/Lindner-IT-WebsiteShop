@@ -1,18 +1,31 @@
-import type { Config } from "tailwindcss";
+// tailwind.config.ts
+import { type Config } from "tailwindcss";
 
-export default {
+const config: Config = {
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{ts,tsx}",
+    "./src/components/**/*.{ts,tsx}",
+    "./src/pages/**/*.{ts,tsx}",
   ],
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        // These map to CSS variables (defined in globals.css)
+        "brand-primary": "var(--color-primary)",
+        "brand-secondary": "var(--color-secondary)",
+        "brand-accent": "var(--color-accent)",
+        "brand-bg": "var(--color-bg)",
+        "brand-text": "var(--color-text)",
       },
+      fontFamily: {
+        // Use CSS variables for font stacks
+        sans: ["var(--font-sans)"],
+        headline: ["var(--font-headline)"],
+      },
+      // optional fontSizes or other theme extensions...
     },
   },
   plugins: [],
-} satisfies Config;
+};
+
+export default config;
