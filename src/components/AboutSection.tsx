@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import AnimatedButton from "@/components/AnimatedButton";
 import Image from "next/image";
@@ -30,7 +30,7 @@ export default function AboutSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<Array<HTMLDivElement | null>>([]);
 
-  const ANIMATION_SPEED_FACTOR = 1.2;
+  const [speedFactor, setSpeedFactor] = useState(1.2);
 
   const sections = useMemo(
     () => ({
@@ -128,16 +128,25 @@ export default function AboutSection() {
   }, [allWords]);
 
   useEffect(() => {
+    const handleResize = () => {
+      // Set a different speed factor for mobile screens (e.g., less than 768px)
+      if (window.innerWidth < 768) {
+        setSpeedFactor(1.13); // Adjust this value to your liking
+      } else {
+        setSpeedFactor(1.2);
+      }
+    };
+
+    handleResize(); // Set initial value
+    window.addEventListener("resize", handleResize);
+
     const handleScroll = () => {
       if (!sectionRef.current) return;
 
       const { top, height } = sectionRef.current.getBoundingClientRect();
       const wh = window.innerHeight;
       const scrollProgress = (wh - top) / (height + wh);
-      const progress = Math.min(
-        Math.max(0, scrollProgress * ANIMATION_SPEED_FACTOR),
-        1
-      );
+      const progress = Math.min(Math.max(0, scrollProgress * speedFactor), 1);
 
       const totalPhases = allWords.length * 2;
 
@@ -194,8 +203,9 @@ export default function AboutSection() {
     // Clean up
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
     };
-  }, [ANIMATION_SPEED_FACTOR, allWords]);
+  }, [speedFactor, allWords]);
 
   const titles = [
     sections.analyze.title,
