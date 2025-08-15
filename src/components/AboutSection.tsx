@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useRef, useState } from "react"; // Import useMemo
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import AnimatedButton from "@/components/AnimatedButton";
 
@@ -25,9 +25,6 @@ export default function AboutSection() {
     [key: number]: string;
   }>({});
 
-  // FIX 1: Memoize the `content` object.
-  // This prevents it from being recreated on every render, which was causing
-  // the useEffect hook below to run unnecessarily.
   const content = useMemo(
     () => ({
       about: {
@@ -48,9 +45,6 @@ export default function AboutSection() {
     "ergebnisse",
   ];
 
-  // FIX 2: Memoize the `words` array.
-  // This is derived from `content`, so it should also be memoized
-  // to avoid expensive recalculations on every render.
   const words = useMemo(() => {
     return content.about.paragraphs
       .flatMap((paragraph, paraIdx) =>
@@ -93,11 +87,9 @@ export default function AboutSection() {
       }
     });
     setHighlightColorMap(map);
-  }, [words]); // FIX 3: Depend on the memoized `words` array.
+  }, [words]);
 
   useEffect(() => {
-    // This scroll handler logic is fine and doesn't cause the loop,
-    // but the re-renders from the other useEffect were triggering the error.
     let lastScroll = 0;
     const delay = 50;
     const handle = () => {
@@ -113,16 +105,12 @@ export default function AboutSection() {
     window.addEventListener("scroll", handle, { passive: true });
     handle(); // Initial call
     return () => window.removeEventListener("scroll", handle);
-  }, []); // Empty dependency array is correct here.
+  }, []);
 
   return (
     <section
       id="about"
-      className="mx-auto max-w-full px-6 py-20 md:py-28 lg:px-8 lg:py-32 bg-brand-bg-2"
-      style={{
-        marginLeft: "calc(-50vw + 50%)",
-        marginRight: "calc(-50vw + 50%)",
-      }}
+      className="mx-auto max-w-full px-6 py-20 md:py-28 lg:px-8 lg:py-32 bg-brand-bg"
     >
       <div className="mx-auto max-w-3xl">
         <div className="max-w-[600px] space-y-8 text-xl md:text-2xl text-gray-900">

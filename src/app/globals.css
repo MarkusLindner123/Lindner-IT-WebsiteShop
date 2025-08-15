@@ -40,7 +40,9 @@
 html,
 body {
   font-family: var(--font-sans);
-  background-color: var(--color-bg);
+  background-color: var(
+    --color-primary
+  ); /* Changed to a dark background for the sticky card effect */
   color: var(--color-text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -56,8 +58,6 @@ body {
 /* Hero gradient background */
 .hero-gradient {
   background: linear-gradient(to bottom right, #ffffff, #add8e6);
-  border-bottom-left-radius: 50% 10%;
-  border-bottom-right-radius: 50% 10%;
 }
 
 /* Pinsel-Effekt */
