@@ -3,6 +3,7 @@
 import HeroVideo from "@/components/HeroVideo";
 import Hero from "@/components/Hero";
 import AboutSection from "@/components/AboutSection";
+import ServicesSection from "@/components/ServicesSection";
 
 export default function StickySlides() {
   return (
@@ -23,6 +24,13 @@ export default function StickySlides() {
       <section className="sticky top-6 min-h-screen z-20 bg-brand-bg rounded-2xl overflow-hidden shadow-xl">
         <div className="w-full h-full overflow-y-auto">
           <AboutSection />
+        </div>
+      </section>
+      
+      {/* Slide 4: Services */}
+      <section className="sticky top-6 min-h-screen z-20 bg-brand-bg rounded-2xl overflow-hidden shadow-xl">
+        <div className="w-full h-full overflow-y-auto">
+          <ServicesSection />
         </div>
       </section>
     </div>
