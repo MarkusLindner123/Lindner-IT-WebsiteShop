@@ -14,6 +14,14 @@ interface ServiceItem {
   tags: string[];
 }
 
+// Define the shape for the floating tags to resolve the 'any' type error
+interface FloatingTag {
+  tag: string;
+  delay: number;
+  top: number;
+  left: number;
+}
+
 // Variants for the section container
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -56,28 +64,51 @@ export default function ServicesSection() {
   const t = useTranslations("services");
   const sectionRef = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
+  const [staggeredTags, setStaggeredTags] = useState<FloatingTag[]>([]);
 
   useEffect(() => {
+    // Generate the tags and their positions only on the client
+    const floatingTags = [
+      "Next.js",
+      "React",
+      "Tailwind",
+      "TypeScript",
+      "Web Design",
+      "Software Development",
+      "UI/UX",
+      "Frontend",
+      "Backend",
+      "Fullstack",
+      "DevOps",
+      "Framer Motion",
+    ];
+
+    const generatedTags = floatingTags.map((tag, index) => ({
+      tag,
+      delay: index * 0.1,
+      top: Math.random() * 100,
+      left: Math.random() * 100,
+    }));
+
+    setStaggeredTags(generatedTags);
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setInView(true);
-        } else {
-          setInView(false);
-        }
+        setInView(entry.isIntersecting);
       },
       {
         threshold: 0.2,
       }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+    const currentRef = sectionRef.current;
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, []);
@@ -97,28 +128,6 @@ export default function ServicesSection() {
     },
   ];
 
-  const floatingTags = [
-    "Next.js",
-    "React",
-    "Tailwind",
-    "TypeScript",
-    "Web Design",
-    "Software Development",
-    "UI/UX",
-    "Frontend",
-    "Backend",
-    "Fullstack",
-    "DevOps",
-    "Framer Motion",
-  ];
-
-  const staggeredTags = floatingTags.map((tag, index) => ({
-    tag,
-    delay: index * 0.1,
-    x: Math.random() * (Math.random() > 0.5 ? 200 : -200),
-    y: Math.random() * (Math.random() > 0.5 ? 200 : -200),
-  }));
-
   return (
     <section id="services" className="relative p-8 md:p-12 bg-brand-bg">
       <div
@@ -130,14 +139,19 @@ export default function ServicesSection() {
             key={index}
             className="absolute z-0 px-4 py-2 text-sm text-black rounded-full backdrop-blur-sm opacity-5"
             style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
+              top: `${item.top}%`,
+              left: `${item.left}%`,
             }}
             variants={tagVariants}
             initial="initial"
             animate={inView ? "animate" : "initial"}
+            // FIX: Removed the invalid transition prop spread.
+            // The `tagVariants` already has a transition defined,
+            // and `delay` can be set directly.
             transition={{
-              ...tagVariants.animate.transition,
+              duration: 20,
+              ease: "linear",
+              repeat: Infinity,
               delay: item.delay,
             }}
           >
@@ -207,7 +221,7 @@ export default function ServicesSection() {
                   </span>
                 ))}
               </div>
-              <AnimatedButton href="#contact" className="w-full sm:w-auto">
+              <AnimatedButton href="#contact">
                 {t("ctaPrimary")}
               </AnimatedButton>
             </motion.div>
