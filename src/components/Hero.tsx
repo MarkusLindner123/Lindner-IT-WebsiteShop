@@ -1,4 +1,5 @@
 "use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { motion, Variants } from "framer-motion";
@@ -7,10 +8,12 @@ import AnimatedButton from "@/components/AnimatedButton";
 
 export default function Hero() {
   const t = useTranslations("hero");
+
   const container: Variants = {
     hidden: {},
     show: { transition: { staggerChildren: 0.08, delayChildren: 0.12 } },
   };
+
   const fadeUp: Variants = {
     hidden: { opacity: 0, y: 18 },
     show: {
@@ -19,6 +22,7 @@ export default function Hero() {
       transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
     },
   };
+
   const galleryImages = [
     "/hero-img.jpg",
     "/hero-img.jpg",
@@ -30,6 +34,7 @@ export default function Hero() {
     "/hero-img.jpg",
     "/hero-img.jpg",
   ];
+
   const getColumnImages = (col: number) => [
     ...galleryImages.slice(col * 3, col * 3 + 3),
     ...galleryImages.slice(col * 3, col * 3 + 3),
@@ -38,11 +43,12 @@ export default function Hero() {
   return (
     <section
       aria-label="Hero"
-      className="relative overflow-hidden p-8 rounded-2xl md:p-12 h-full" {/* Added h-full */}
+      className="relative overflow-hidden p-8 rounded-2xl md:p-12"
     >
       {/* Hero gradient background */}
       <div className="absolute inset-0 hero-gradient rounded-2xl" />
-      <div className="max-w-7xl mx-auto px-4 lg:px-8 py-12 md:py-16 lg:py-20 overflow-x-hidden overflow-y-auto relative z-10 h-full"> {/* Added h-full */}
+
+      <div className="max-w-7xl mx-auto px-4 lg:px-8 py-12 md:py-16 lg:py-20 overflow-x-hidden overflow-y-auto relative z-10">
         <motion.div
           variants={container}
           initial="hidden"
@@ -57,6 +63,7 @@ export default function Hero() {
             <div className="inline-flex items-center px-4 py-1 rounded-full text-sm font-medium text-black bg-black/10">
               {t("kicker")}
             </div>
+
             <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold leading-tight tracking-tight text-black font-headline">
               <span className="block">{t("titleLine1")}</span>
               <span className="block underline decoration-4 decoration-accent">
@@ -64,9 +71,11 @@ export default function Hero() {
               </span>
               <span className="block">{t("titleLine3")}</span>
             </h1>
+
             <p className="text-xl md:text-2xl text-black max-w-2xl">
               {t("subtitle")}
             </p>
+
             <div className="flex flex-col sm:flex-row sm:items-center gap-4">
               <AnimatedButton href="#contact">{t("ctaPrimary")}</AnimatedButton>
               <Link
@@ -78,6 +87,7 @@ export default function Hero() {
               </Link>
             </div>
           </motion.div>
+
           {/* Gallery */}
           <motion.div
             variants={fadeUp}
