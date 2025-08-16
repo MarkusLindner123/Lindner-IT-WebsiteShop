@@ -131,7 +131,7 @@ export default function AboutSection() {
     const handleResize = () => {
       // Set a different speed factor for mobile screens (e.g., less than 768px)
       if (window.innerWidth < 768) {
-        setSpeedFactor(1.14); // Adjust this value to your liking
+        setSpeedFactor(1.13); // Adjust this value to your liking
       } else {
         setSpeedFactor(1.22);
       }
@@ -254,7 +254,7 @@ export default function AboutSection() {
               >
                 {titles[paraIdx]}
               </h2>
-              {paragraphWords.map(({ word, index }, wordIdx) => {
+              {paragraphWords.map(({ word, index }) => {
                 if (word === "\n") return null;
 
                 const clean = word.replace(/[.,!?–]/g, "").toLowerCase();
