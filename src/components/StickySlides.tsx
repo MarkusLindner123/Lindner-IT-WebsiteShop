@@ -27,12 +27,7 @@ export default function StickySlides() {
         </div>
       </section>
       
-      {/* Slide 4: Services */}
-      <section className="sticky top-6 min-h-screen z-20 bg-brand-bg rounded-2xl overflow-hidden shadow-xl">
-        <div className="w-full h-full overflow-y-auto">
-          <ServicesSection />
-        </div>
-      </section>
+
     </div>
   );
 }
