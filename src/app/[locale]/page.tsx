@@ -4,7 +4,7 @@ import { routing } from "@/i18n/routing";
 import HeroVideo from "@/components/HeroVideo";
 import Hero from "@/components/Hero";
 import AboutSection from "@/components/AboutSection/AboutSection";
-import ServicesSection from "@/components/ServicesSection";
+import ServicesSection from "@/components/ServicesSection"; // Import the new component
 
 export default async function HomePage({
   params,
@@ -25,7 +25,7 @@ export default async function HomePage({
       <section className="top-6 min-h-screen z-20 rounded-2xl overflow-hidden shadow-xl">
         <AboutSection />
       </section>
-      <section className="top-6 min-h-screen z-20 rounded-2xl overflow-hidden shadow-xl">
+      <section className="top-6 z-20 rounded-2xl overflow-hidden shadow-xl">
         <ServicesSection />
       </section>
     </div>

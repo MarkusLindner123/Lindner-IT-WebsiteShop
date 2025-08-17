@@ -1,521 +1,3259 @@
-Guck dir die codesandbox an um für die Zukunft zu wissen wie du das setup dafür machst: https://codesandbox.io/p/github/MarkusLindner123/Lindner-IT-WebsiteShop/draft/charming-pond?workspaceId=ws_JGpb4woRaNFhaR2pQahRS7 
-Hier ist das GitHub repo: https://github.com/MarkusLindner123/Lindner-IT-WebsiteShop/tree/draft/charming-pond
+<!DOCTYPE html>
 
-Ich will eine Webseite für eine webagentur bauen die hauptsächlich in den USA verkauft. Da ich deutsch bin, wir die webseite auch auf deutsch sein. Ich will als Techstack next.js, tailwind css und typescript benutzen. Ich schreibe den code in typescript. Ich benutze codesandbox als Entwicklungsumgebung. Hilf mir die gesamte seite zu bauen. 
-Ich will eine Mischung aus: https://www.henning-tillmann.de/en/ und https://growmybusiness.co.nz 
+<html lang="en">
 
-Guck dir die Seiten, das repo und die codesandbox sowie meinen output sehr gut an und entscheide wie es weiter geht. Was wäre der beste Ansatz? 
-!!!!!!!!!!!!!!!!!!!!!
-https://chatgpt.com/c/689a2ae9-a09c-8324-b460-804d4c551a90
+<head>
 
-.border-gradient {
-  --p: 15%;
-  --bg-color: var(--color-bg);
-  --text-color: #323232;
-  --c1: #ffffff;
-  --c2: #ffffff;
-  --c3: #ff8c00;
+    <meta charset="UTF-8">
 
-  background: linear-gradient(var(--bg-color), var(--bg-color)) padding-box,
-    conic-gradient(
-        from var(--gradient-angle, 0deg),
-        var(--c1),
-        var(--c2),
-        var(--c3),
-        var(--c1)
-      )
-      border-box;
-  border: 4px solid transparent;
-  border-radius: 3rem;
-  transition: all 0.3s ease;
-  color: var(--text-color);
-  font-family: var(--font-sans);
-  font-weight: 600;
-  padding: 1rem 2.5rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  cursor: pointer;
-}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-.border-gradient:hover {
-  transform: translateY(-2px);
-}
+    <title>Floating Background Animation</title>
 
-Thats my stickyslides.tsx: "use client";
+    <!-- Use the Inter font from Google Fonts -->
 
-import HeroVideo from "@/components/HeroVideo";
-import Hero from "@/components/Hero";
-import AboutSection from "@/components/AboutSection";
-import ServicesSection from "@/components/ServicesSection";
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 
-export default function StickySlides() {
-  return (
-    <div className="relative p-6 space-y-6 md:p-12 md:space-y-12">
-      {/* Slide 1: Video Hero */}
-      <section className="sticky top-6 min-h-screen z-0">
-        <div className="w-full h-full rounded-2xl overflow-hidden shadow-xl">
-          <HeroVideo />
-        </div>
-      </section>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-      {/* Slide 2: Hero */}
-      <section className="sticky top-6 min-h-screen z-10 bg-brand-bg rounded-2xl overflow-hidden shadow-xl">
-        <Hero />
-      </section>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 
-      {/* Slide 3: About */}
-      <section className="sticky top-6 min-h-screen z-20 bg-brand-bg rounded-2xl overflow-hidden shadow-xl">
-        <div className="w-full h-full overflow-y-auto">
-          <AboutSection />
-        </div>
-      </section>
-      
-      {/* Slide 4: Services */}
-      <section className="sticky top-6 min-h-screen z-20 bg-brand-bg rounded-2xl overflow-hidden shadow-xl">
-        <div className="w-full h-full overflow-y-auto">
-          <ServicesSection />
-        </div>
-      </section>
-    </div>
-  );
-}
-That's my services section.tsx: "use client";
+    <!-- Load Tailwind CSS for easy styling -->
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    
+
+    <style>
+
+        /* General styling */
+
+        .animation-container {
+
+            position: absolute;
+
+            top: 0;
+
+            left: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            overflow: hidden;
+
+            z-index: -10;
+
+        }
+
+
+
+        .content-container {
+
+            position: relative;
+
+            z-index: 10;
+
+        }
+
+
+
+        /* Basic styling for the floating tags */
+
+        .floating-tag {
+
+            position: absolute;
+
+            will-change: transform;
+
+        }
+
+    </style>
+
+</head>
+
+<body class="bg-gray-900 text-white font-[Inter] min-h-screen flex items-center justify-center">
+
+
+
+    <!-- The main container for the content -->
+
+    <div class="relative w-11/12 max-w-4xl min-h-[500px] p-8 md:p-12 rounded-2xl shadow-2xl bg-gray-800/80 flex flex-col items-center justify-center content-container">
+
+        
+
+        <!-- The background animation container -->
+
+        <div id="animation-bg" class="animation-container"></div>
+
+        
+
+        <!-- Main content of the container -->
+
+        <h1 class="text-4xl md:text-6xl font-bold mb-4 text-center">Floating Background</h1>
+
+        <p class="text-lg md:text-xl text-center text-gray-400 max-w-2xl">
+
+            This is a simple, beautiful background animation created with pure CSS and a little JavaScript. The shapes float gently to create a dynamic visual effect.
+
+        </p>
+
+    </div>
+
+
+
+    <script>
+
+        window.onload = function() {
+
+            // Get the container for the shapes
+
+            const animationContainer = document.getElementById('animation-bg');
+
+
+
+            // Define a simple list of tags to float
+
+            const tags = ['Code', 'Design', 'Frontend', 'UI/UX', 'Animation', 'CSS'];
+
+
+
+            // Define the number of shapes to generate
+
+            const numShapes = 8;
+
+            
+
+            // Array to store our floating objects
+
+            const floatingElements = [];
+
+
+
+            // A simple utility function to get a random number within a range
+
+            const getRandom = (min, max) => Math.random() * (max - min) + min;
+
+
+
+            // Get the container dimensions to ensure elements are placed and bounce correctly within it.
+
+            const containerWidth = animationContainer.offsetWidth;
+
+            const containerHeight = animationContainer.offsetHeight;
+
+
+
+            // Generate and append the shapes to the container
+
+            for (let i = 0; i < numShapes; i++) {
+
+                const shape = document.createElement('div');
+
+                
+
+                // Add classes for the pill shape, semi-transparent background, and floating animation
+
+                shape.classList.add('inline-flex', 'items-center', 'px-4', 'py-1', 'rounded-full', 'text-sm', 'font-medium', 'text-gray-200', 'bg-white/10', 'backdrop-blur-sm', 'floating-tag');
+
+                
+
+                // Create and add the SVG icon
+
+                const svgIcon = `
+
+                    <svg class="h-4 w-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
+
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15.5V16c0-2.21 1.79-4 4-4v-1c-2.21 0-4-1.79-4-4V5.5c0-.83-.67-1.5-1.5-1.5S9 4.67 9 5.5v2.36c-1.3-.23-2.52-.7-3.6-1.3C4.28 6.54 3.19 6 2 6c-.55 0-1 .45-1 1v1c0 .55.45 1 1 1.1c1.16.2 2.3.6 3.4 1.15V13c0 2.21-1.79 4-4 4v1c.55 0 1-.45 1-1zM12 20c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+
+                    </svg>
+
+                `;
+
+                shape.innerHTML = svgIcon;
+
+                
+
+                // Create and add the text span
+
+                const textSpan = document.createElement('span');
+
+                const randomTag = tags[Math.floor(Math.random() * tags.length)];
+
+                textSpan.textContent = randomTag;
+
+                shape.appendChild(textSpan);
+
+                
+
+                // Add the newly created shape to the container
+
+                animationContainer.appendChild(shape);
+
+
+
+                let x, y, isColliding;
+
+                do {
+
+                    isColliding = false;
+
+                    // Initialize x and y position based on container size, not window size
+
+                    x = getRandom(0, containerWidth - shape.offsetWidth);
+
+                    y = getRandom(0, containerHeight - shape.offsetHeight);
+
+                    // Check for initial collisions with other elements
+
+                    for (const existingEl of floatingElements) {
+
+                        if (x < existingEl.x + existingEl.width &&
+
+                            x + shape.offsetWidth > existingEl.x &&
+
+                            y < existingEl.y + existingEl.height &&
+
+                            y + shape.offsetHeight > existingEl.y) {
+
+                            isColliding = true;
+
+                            break;
+
+                        }
+
+                    }
+
+                } while (isColliding);
+
+
+
+                // Store the element with its properties for the JavaScript animation
+
+                floatingElements.push({
+
+                    el: shape,
+
+                    x: x,
+
+                    y: y,
+
+                    vx: getRandom(0.5, 1) * (Math.random() < 0.5 ? 1 : -1), // Random velocity for x
+
+                    vy: getRandom(0.5, 1) * (Math.random() < 0.5 ? 1 : -1), // Random velocity for y
+
+                    width: shape.offsetWidth,
+
+                    height: shape.offsetHeight,
+
+                });
+
+            }
+
+
+
+            // The main animation loop
+
+            function animate() {
+
+                // Dimensions are now correct from initialization, no need to re-fetch
+
+                const containerWidth = animationContainer.offsetWidth;
+
+                const containerHeight = animationContainer.offsetHeight;
+
+
+
+                // Loop through each element and update its position
+
+                for (let i = 0; i < floatingElements.length; i++) {
+
+                    const el = floatingElements[i];
+
+
+
+                    // Update position
+
+                    el.x += el.vx;
+
+                    el.y += el.vy;
+
+                    
+
+                    // Boundary collision detection
+
+                    // Check horizontal boundaries
+
+                    if (el.x + el.width > containerWidth || el.x < 0) {
+
+                        el.vx *= -1; // Reverse velocity
+
+                        // Nudge it back in bounds to prevent it from getting stuck
+
+                        el.x = el.x < 0 ? 0 : containerWidth - el.width;
+
+                    }
+
+                    // Check vertical boundaries
+
+                    if (el.y + el.height > containerHeight || el.y < 0) {
+
+                        el.vy *= -1; // Reverse velocity
+
+                        // Nudge it back in bounds to prevent it from getting stuck
+
+                        el.y = el.y < 0 ? 0 : containerHeight - el.height;
+
+                    }
+
+                    
+
+                    // Element-to-element collision detection
+
+                    for (let j = i + 1; j < floatingElements.length; j++) {
+
+                        const otherEl = floatingElements[j];
+
+                        
+
+                        // Simple collision check (AABB - Axis-Aligned Bounding Box)
+
+                        if (el.x < otherEl.x + otherEl.width &&
+
+                            el.x + el.width > otherEl.x &&
+
+                            el.y < otherEl.y + otherEl.height &&
+
+                            el.y + el.height > otherEl.y) {
+
+                            
+
+                            // Simple bounce logic: swap velocities
+
+                            let tempVx = el.vx;
+
+                            let tempVy = el.vy;
+
+                            el.vx = otherEl.vx;
+
+                            el.vy = otherEl.vy;
+
+                            otherEl.vx = tempVx;
+
+                            otherEl.vy = tempVy;
+
+                        }
+
+                    }
+
+
+
+                    // Apply the new position to the element's style
+
+                    el.el.style.transform = `translate(${el.x}px, ${el.y}px)`;
+
+                }
+
+
+
+                requestAnimationFrame(animate);
+
+            }
+
+            
+
+            // Start the animation loop
+
+            animate();
+
+        };
+
+    </script>
+
+</body>
+
+</html>
+
+Now lets implement that in my node.js project. That's my about.tsx: "use client";
+
+
+
+
+
+
+
+import React, { useEffect, useMemo, useRef, useState } from "react";
+
+
 
 import { useTranslations } from "next-intl";
-import { motion, Variants } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+
+
+
 import AnimatedButton from "@/components/AnimatedButton";
+
+
+
 import Image from "next/image";
 
-// Define the shape for the service items
-interface ServiceItem {
-  title: string;
-  description: string;
-  image: string;
-  tags: string[];
-}
 
-// Define the shape for the floating tags to resolve the 'any' type error
-interface FloatingTag {
-  tag: string;
-  delay: number;
-  top: number;
-  left: number;
-}
 
-// Variants for the section container
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.5,
-      delayChildren: 0.2,
-    },
-  },
-};
+import "./AboutSection.css"; // Import the new CSS file
 
-// Variants for the service cards
-const cardVariants: Variants = {
-  hidden: { opacity: 0, y: 50 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.8,
-      ease: [0.22, 1, 0.36, 1],
-    },
-  },
-};
 
-// Variants for the floating tags
-const tagVariants: Variants = {
-  initial: { y: "100vh" },
-  animate: {
-    y: "-100vh",
-    transition: {
-      duration: 20,
-      ease: "linear",
-      repeat: Infinity,
-    },
-  },
-};
 
-export default function ServicesSection() {
-  const t = useTranslations("services");
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const [inView, setInView] = useState(false);
-  const [staggeredTags, setStaggeredTags] = useState<FloatingTag[]>([]);
 
-  useEffect(() => {
-    // Generate the tags and their positions only on the client
-    const floatingTags = [
-      "Next.js",
-      "React",
-      "Tailwind",
-      "TypeScript",
-      "Web Design",
-      "Software Development",
-      "UI/UX",
-      "Frontend",
-      "Backend",
-      "Fullstack",
-      "DevOps",
-      "Framer Motion",
-    ];
 
-    const generatedTags = floatingTags.map((tag, index) => ({
-      tag,
-      delay: index * 0.1,
-      top: Math.random() * 100,
-      left: Math.random() * 100,
-    }));
 
-    setStaggeredTags(generatedTags);
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setInView(entry.isIntersecting);
-      },
-      {
-        threshold: 0.2,
-      }
-    );
+const brushColors = [
 
-    const currentRef = sectionRef.current;
-    if (currentRef) {
-      observer.observe(currentRef);
-    }
 
-    return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef);
-      }
-    };
-  }, []);
 
-  const serviceItems: ServiceItem[] = [
-    {
-      title: t("webDesign.title"),
-      description: t("webDesign.description"),
-      image: "/webdesign.jpg",
-      tags: ["React", "Next.js", "Vue.js", "Tailwind CSS", "Figma", "GSAP"],
-    },
-    {
-      title: t("softwareDevelopment.title"),
-      description: t("softwareDevelopment.description"),
-      image: "/softwaredev.jpg",
-      tags: ["Node.js", "TypeScript", "Python", "Rust", "Go", "Docker", "AWS"],
-    },
-  ];
+  "red",
 
-  return (
-    <section id="services" className="relative p-8 md:p-12 bg-brand-bg">
-      <div
-        className="absolute inset-0 z-0 overflow-hidden pointer-events-none"
-        aria-hidden="true"
-      >
-        {staggeredTags.map((item, index) => (
-          <motion.div
-            key={index}
-            className="absolute z-0 px-4 py-2 text-sm text-black rounded-full backdrop-blur-sm opacity-5"
-            style={{
-              top: `${item.top}%`,
-              left: `${item.left}%`,
-            }}
-            variants={tagVariants}
-            initial="initial"
-            animate={inView ? "animate" : "initial"}
-            // FIX: Removed the invalid transition prop spread.
-            // The `tagVariants` already has a transition defined,
-            // and `delay` can be set directly.
-            transition={{
-              duration: 20,
-              ease: "linear",
-              repeat: Infinity,
-              delay: item.delay,
-            }}
-          >
-            {item.tag}
-          </motion.div>
-        ))}
-      </div>
 
-      <div
-        ref={sectionRef}
-        className="max-w-7xl mx-auto px-4 lg:px-8 py-12 md:py-16 lg:py-20 relative z-10"
-      >
-        <div className="text-center mb-12">
-          <motion.div
-            variants={cardVariants}
-            initial="hidden"
-            animate={inView ? "show" : "hidden"}
-            className="inline-flex items-center px-4 py-1 rounded-full text-sm font-medium text-black bg-black/10"
-          >
-            {t("kicker")}
-          </motion.div>
-          <motion.h2
-            variants={cardVariants}
-            initial="hidden"
-            animate={inView ? "show" : "hidden"}
-            className="text-5xl sm:text-6xl md:text-7xl font-extrabold leading-tight tracking-tight text-black font-headline mt-4"
-          >
-            {t("title")}
-          </motion.h2>
-        </div>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={inView ? "show" : "hidden"}
-          className="grid grid-cols-1 md:grid-cols-2 gap-8"
-        >
-          {serviceItems.map((service, index) => (
-            <motion.div
-              key={index}
-              variants={cardVariants}
-              className="bg-white rounded-2xl p-8 shadow-lg relative overflow-hidden"
-            >
-              <div className="relative w-full h-[250px] md:h-[300px] mb-6 rounded-xl overflow-hidden shadow-inner">
-                <Image
-                  src={service.image}
-                  alt={service.title}
-                  layout="fill"
-                  objectFit="cover"
-                  className="transition-transform duration-500 hover:scale-105"
-                />
-              </div>
+  "blue",
 
-              <h3 className="text-3xl font-bold mb-4 font-headline text-black">
-                {service.title}
-              </h3>
-              <p className="text-lg text-black/80 mb-6">
-                {service.description}
-              </p>
-              <div className="flex flex-wrap gap-2 mb-6">
-                {service.tags.map((tag, tagIndex) => (
-                  <span
-                    key={tagIndex}
-                    className="inline-block px-3 py-1 text-sm font-medium text-black bg-black/5 rounded-full"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-              <AnimatedButton href="#contact">
-                {t("ctaPrimary")}
-              </AnimatedButton>
-            </motion.div>
-          ))}
-        </motion.div>
-      </div>
-    </section>
-  );
-} -- that's my globals.css: /* Importiere Google Fonts */
+
+
+  "green",
+
+
+
+  "purple",
+
+
+
+  "orange",
+
+
+
+  "teal",
+
+
+
+  "magenta",
+
+
+
+  "pink",
+
+
+
+  "indigo",
+
+
+
+  "lime",
+
+
+
+];
+
+
+
+
+
+
+
+const aboutImages = [
+
+
+
+  "/about1.jpg",
+
+
+
+  "/about1.jpg",
+
+
+
+  "/about1.jpg",
+
+
+
+  "/about1.jpg",
+
+
+
+];
+
+
+
+
+
+
+
+export default function AboutSection() {
+
+
+
+  const t = useTranslations("about");
+
+
+
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+
+
+  const itemRefs = useRef<Array<HTMLDivElement | null>>([]);
+
+
+
+
+
+
+
+  const [speedFactor, setSpeedFactor] = useState(1.2);
+
+
+
+
+
+
+
+  const sections = useMemo(
+
+
+
+    () => ({
+
+
+
+      analyze: {
+
+
+
+        title: t("analyze.title"),
+
+
+
+        text: t("analyze.text"),
+
+
+
+      },
+
+
+
+      plan: {
+
+
+
+        title: t("plan.title"),
+
+
+
+        text: t("plan.text"),
+
+
+
+      },
+
+
+
+      build: {
+
+
+
+        title: t("build.title"),
+
+
+
+        text: t("build.text"),
+
+
+
+      },
+
+
+
+      support: {
+
+
+
+        title: t("support.title"),
+
+
+
+        text: t("support.text"),
+
+
+
+      },
+
+
+
+      ctaPrimary: t("ctaPrimary"),
+
+
+
+    }),
+
+
+
+    [t]
+
+
+
+  );
+
+
+
+
+
+
+
+  const paragraphs = useMemo(
+
+
+
+    () => [
+
+
+
+      sections.analyze.text,
+
+
+
+      sections.plan.text,
+
+
+
+      sections.build.text,
+
+
+
+      sections.support.text,
+
+
+
+    ],
+
+
+
+    [sections]
+
+
+
+  );
+
+
+
+
+
+
+
+  const highlightWords = [
+
+
+
+    "solutions",
+
+
+
+    "lösungen",
+
+
+
+    "scalable",
+
+
+
+    "skalierbar",
+
+
+
+    "design",
+
+
+
+    "results",
+
+
+
+    "ergebnisse",
+
+
+
+    "reliable",
+
+
+
+    "analysis",
+
+
+
+    "architecture",
+
+
+
+    "performance",
+
+
+
+    "support",
+
+
+
+    "maintenance",
+
+
+
+    "optimization",
+
+
+
+    "vision",
+
+
+
+    "growth",
+
+
+
+  ];
+
+
+
+
+
+
+
+  const allWords = useMemo(() => {
+
+
+
+    let globalIndex = 0;
+
+
+
+    const wordsPerParagraph = paragraphs.map((paragraph) => {
+
+
+
+      const paragraphWords = paragraph
+
+
+
+        .split(/\s+/)
+
+
+
+        .flatMap((word, wIdx, arr) => {
+
+
+
+          const result: { word: string; index: number }[] = [];
+
+
+
+          if (word) {
+
+
+
+            result.push({
+
+
+
+              word: word,
+
+
+
+              index: globalIndex++,
+
+
+
+            });
+
+
+
+          }
+
+
+
+          if (wIdx < arr.length - 1) {
+
+
+
+            result.push({
+
+
+
+              word: " ",
+
+
+
+              index: globalIndex++,
+
+
+
+            });
+
+
+
+          }
+
+
+
+          return result;
+
+
+
+        });
+
+
+
+      paragraphWords.push({
+
+
+
+        word: "\n",
+
+
+
+        index: globalIndex++,
+
+
+
+      });
+
+
+
+      return paragraphWords;
+
+
+
+    });
+
+
+
+    return wordsPerParagraph;
+
+
+
+  }, [paragraphs]);
+
+
+
+
+
+
+
+  const highlightColorMap = useMemo(() => {
+
+
+
+    const map: { [key: number]: string } = {};
+
+
+
+    let ci = 0;
+
+
+
+    allWords.flat().forEach(({ word, index }) => {
+
+
+
+      const clean = word.replace(/[.,!?–]/g, "").toLowerCase();
+
+
+
+      if (highlightWords.includes(clean)) {
+
+
+
+        map[index] = brushColors[ci % brushColors.length];
+
+
+
+        ci++;
+
+
+
+      }
+
+
+
+    });
+
+
+
+    return map;
+
+
+
+  }, [allWords]);
+
+
+
+
+
+
+
+  useEffect(() => {
+
+
+
+    const handleResize = () => {
+
+
+
+      // Set a different speed factor for mobile screens (e.g., less than 768px)
+
+
+
+      if (window.innerWidth < 768) {
+
+
+
+        setSpeedFactor(1.13); // Adjust this value to your liking
+
+
+
+      } else {
+
+
+
+        setSpeedFactor(1.22);
+
+
+
+      }
+
+
+
+    };
+
+
+
+
+
+
+
+    handleResize(); // Set initial value
+
+
+
+    window.addEventListener("resize", handleResize);
+
+
+
+
+
+
+
+    const handleScroll = () => {
+
+
+
+      if (!sectionRef.current) return;
+
+
+
+
+
+
+
+      const { top, height } = sectionRef.current.getBoundingClientRect();
+
+
+
+      const wh = window.innerHeight;
+
+
+
+      const scrollProgress = (wh - top) / (height + wh);
+
+
+
+      const progress = Math.min(Math.max(0, scrollProgress * speedFactor), 1);
+
+
+
+
+
+
+
+      const totalPhases = allWords.length * 2;
+
+
+
+
+
+
+
+      itemRefs.current.forEach((item, paraIdx) => {
+
+
+
+        if (!item) return;
+
+
+
+
+
+
+
+        const imagePhaseIndex = paraIdx * 2;
+
+
+
+        const textPhaseIndex = paraIdx * 2 + 1;
+
+
+
+
+
+
+
+        const phaseLength = 1 / totalPhases;
+
+
+
+
+
+
+
+        const imageStartProgress = imagePhaseIndex * phaseLength;
+
+
+
+        const textStartProgress = textPhaseIndex * phaseLength;
+
+
+
+
+
+
+
+        const imageProgress = Math.min(
+
+
+
+          Math.max(0, progress - imageStartProgress) / phaseLength,
+
+
+
+          1
+
+
+
+        );
+
+
+
+        const textProgress = Math.min(
+
+
+
+          Math.max(0, progress - textStartProgress) / phaseLength,
+
+
+
+          1
+
+
+
+        );
+
+
+
+
+
+
+
+        // Direct DOM manipulation for image overlay
+
+
+
+        const imageOverlay = item.querySelector(
+
+
+
+          ".image-overlay"
+
+
+
+        ) as HTMLElement;
+
+
+
+        if (imageOverlay) {
+
+
+
+          imageOverlay.style.transform = `scaleY(${1 - imageProgress})`;
+
+
+
+        }
+
+
+
+
+
+
+
+        // Direct DOM manipulation for text and title
+
+
+
+        const titleElement = item.querySelector(
+
+
+
+          ".animated-title"
+
+
+
+        ) as HTMLElement;
+
+
+
+        if (titleElement) {
+
+
+
+          titleElement.style.opacity = textProgress > 0 ? "1" : "0.15";
+
+
+
+        }
+
+
+
+
+
+
+
+        const words = item.querySelectorAll(".animated-word");
+
+
+
+        const totalWordsInParagraph = words.length;
+
+
+
+        const wordsToReveal = Math.floor(totalWordsInParagraph * textProgress);
+
+
+
+
+
+
+
+        words.forEach((wordElement, wordIdx) => {
+
+
+
+          const visible = wordIdx < wordsToReveal;
+
+
+
+          (wordElement as HTMLElement).style.opacity = visible ? "1" : "0.15";
+
+
+
+        });
+
+
+
+      });
+
+
+
+    };
+
+
+
+
+
+
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+
+
+    handleScroll(); // Initial call to set positions
+
+
+
+
+
+
+
+    // Clean up
+
+
+
+    return () => {
+
+
+
+      window.removeEventListener("scroll", handleScroll);
+
+
+
+      window.removeEventListener("resize", handleResize);
+
+
+
+    };
+
+
+
+  }, [speedFactor, allWords]);
+
+
+
+
+
+
+
+  const titles = [
+
+
+
+    sections.analyze.title,
+
+
+
+    sections.plan.title,
+
+
+
+    sections.build.title,
+
+
+
+    sections.support.title,
+
+
+
+  ];
+
+
+
+
+
+
+
+  return (
+
+
+
+    <section
+
+
+
+      id="about"
+
+
+
+      className="bg-about-bg mx-auto max-w-full px-4 lg:px-8 py-20 md:py-28 lg:py-32"
+
+
+
+    >
+
+
+
+      <div ref={sectionRef} className="space-y-12">
+
+
+
+        {allWords.map((paragraphWords, paraIdx) => (
+
+
+
+          <div
+
+
+
+            key={paraIdx}
+
+
+
+            className="flex flex-col md:flex-row md:space-x-12 space-y-6 md:space-y-0 items-start"
+
+
+
+            ref={(el) => {
+
+
+
+              itemRefs.current[paraIdx] = el;
+
+
+
+            }}
+
+
+
+          >
+
+
+
+            {/* Image with animated overlay */}
+
+
+
+            <div className="relative w-full h-[250px] md:w-[350px] md:h-[250px] rounded-2xl overflow-hidden shadow-lg flex-shrink-0">
+
+
+
+              <Image
+
+
+
+                src={aboutImages[paraIdx]}
+
+
+
+                alt={`Image for about paragraph ${paraIdx + 1}`}
+
+
+
+                width={350}
+
+
+
+                height={250}
+
+
+
+                className="object-cover w-full h-full"
+
+
+
+              />
+
+
+
+              <div
+
+
+
+                className="image-overlay absolute inset-0 bg-white/70 backdrop-blur-sm"
+
+
+
+                style={{
+
+
+
+                  transform: `scaleY(1)`,
+
+
+
+                  transformOrigin: "bottom",
+
+
+
+                }}
+
+
+
+              />
+
+
+
+            </div>
+
+
+
+
+
+
+
+            {/* Title and Text content with scroll animation */}
+
+
+
+            <div className="w-full md:w-[calc(100%-350px-3rem)] text-xl md:text-2xl text-gray-900 leading-loose">
+
+
+
+              <h2
+
+
+
+                className="animated-title text-4xl md:text-5xl font-bold mb-4"
+
+
+
+                style={{ opacity: 0.15 }}
+
+
+
+              >
+
+
+
+                {titles[paraIdx]}
+
+
+
+              </h2>
+
+
+
+              {paragraphWords.map(({ word, index }) => {
+
+
+
+                if (word === "\n") return null;
+
+
+
+
+
+
+
+                const clean = word.replace(/[.,!?–]/g, "").toLowerCase();
+
+
+
+                const highlighted = highlightWords.includes(clean);
+
+
+
+                const color = highlighted
+
+
+
+                  ? highlightColorMap[index] || "red"
+
+
+
+                  : "";
+
+
+
+
+
+
+
+                return (
+
+
+
+                  <span
+
+
+
+                    key={index}
+
+
+
+                    className={`animated-word inline-block ${
+
+
+
+                      highlighted ? `brush-effect brush-${color}` : ""
+
+
+
+                    }`}
+
+
+
+                    style={{ opacity: 0.15 }}
+
+
+
+                  >
+
+
+
+                    {word === " " ? <span>&nbsp;</span> : word}
+
+
+
+                  </span>
+
+
+
+                );
+
+
+
+              })}
+
+
+
+            </div>
+
+
+
+          </div>
+
+
+
+        ))}
+
+
+
+      </div>
+
+
+
+      <div className="mt-12 flex justify-center">
+
+
+
+        <AnimatedButton href="#contact">{sections.ctaPrimary}</AnimatedButton>
+
+
+
+      </div>
+
+
+
+    </section>
+
+
+
+  );
+
+
+
+} That's my hero.tsx: "use client";
+
+
+
+
+
+
+
+import Image from "next/image";
+
+
+
+import Link from "next/link";
+
+
+
+import { motion, Variants } from "framer-motion";
+
+
+
+import { useTranslations } from "next-intl";
+
+
+
+import AnimatedButton from "@/components/AnimatedButton";
+
+
+
+import { useEffect, useState } from "react";
+
+
+
+
+
+
+
+export default function Hero() {
+
+
+
+  const t = useTranslations("hero");
+
+
+
+  const [windowWidth, setWindowWidth] = useState(0);
+
+
+
+
+
+
+
+  // Update window width on resize
+
+
+
+  useEffect(() => {
+
+
+
+    const handleResize = () => {
+
+
+
+      setWindowWidth(window.innerWidth);
+
+
+
+    };
+
+
+
+
+
+
+
+    // Set initial width on component mount
+
+
+
+    if (typeof window !== "undefined") {
+
+
+
+      setWindowWidth(window.innerWidth);
+
+
+
+      window.addEventListener("resize", handleResize);
+
+
+
+    }
+
+
+
+
+
+
+
+    return () => {
+
+
+
+      if (typeof window !== "undefined") {
+
+
+
+        window.removeEventListener("resize", handleResize);
+
+
+
+      }
+
+
+
+    };
+
+
+
+  }, []);
+
+
+
+
+
+
+
+  // Determine animation speed based on window width
+
+
+
+  const getAnimationSpeed = () => {
+
+
+
+    if (windowWidth < 768) {
+
+
+
+      // Mobile speed
+
+
+
+      return 30;
+
+
+
+    } else if (windowWidth >= 768 && windowWidth < 1024) {
+
+
+
+      // Tablet speed
+
+
+
+      return 25;
+
+
+
+    } else {
+
+
+
+      // Desktop speed
+
+
+
+      return 20;
+
+
+
+    }
+
+
+
+  };
+
+
+
+
+
+
+
+  const animationSpeed = getAnimationSpeed();
+
+
+
+
+
+
+
+  // New variables for mobile gallery dimensions
+
+
+
+  const mobileGalleryWidth = "95%";
+
+
+
+  const mobileGalleryHeight = "60vh";
+
+
+
+
+
+
+
+  const container: Variants = {
+
+
+
+    hidden: {},
+
+
+
+    show: { transition: { staggerChildren: 0.08, delayChildren: 0.12 } },
+
+
+
+  };
+
+
+
+
+
+
+
+  const fadeUp: Variants = {
+
+
+
+    hidden: { opacity: 0, y: 18 },
+
+
+
+    show: {
+
+
+
+      opacity: 1,
+
+
+
+      y: 0,
+
+
+
+      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+
+
+
+    },
+
+
+
+  };
+
+
+
+
+
+
+
+  const galleryImages = [
+
+
+
+    "/hero-img.jpg",
+
+
+
+    "/hero-img.jpg",
+
+
+
+    "/hero-img.jpg",
+
+
+
+    "/hero-img.jpg",
+
+
+
+    "/hero-img.jpg",
+
+
+
+    "/hero-img.jpg",
+
+
+
+    "/hero-img.jpg",
+
+
+
+    "/hero-img.jpg",
+
+
+
+    "/hero-img.jpg",
+
+
+
+  ];
+
+
+
+
+
+
+
+  const column1Images = galleryImages.slice(0, 3);
+
+
+
+  const column2Images = galleryImages.slice(3, 6);
+
+
+
+  const column3Images = galleryImages.slice(6, 9);
+
+
+
+  const allColumns = [column1Images, column2Images, column3Images];
+
+
+
+
+
+
+
+  return (
+
+
+
+    <section
+
+
+
+      aria-label="Hero"
+
+
+
+      className="relative overflow-hidden"
+
+
+
+    >
+
+
+
+      {/* Hero gradient background */}
+
+
+
+      <div className="absolute inset-0 hero-gradient rounded-2xl" />
+
+
+
+
+
+
+
+      <div className="max-w-7xl mx-auto px-4 lg:px-8 py-12 md:py-16 lg:py-20 relative z-10 p-8 rounded-2xl md:p-12">
+
+
+
+        <motion.div
+
+
+
+          variants={container}
+
+
+
+          initial="hidden"
+
+
+
+          animate="show"
+
+
+
+          className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
+
+
+
+        >
+
+
+
+          {/* Text Content */}
+
+
+
+          <motion.div
+
+
+
+            variants={fadeUp}
+
+
+
+            className="lg:col-span-7 xl:col-span-6 space-y-6"
+
+
+
+          >
+
+
+
+            <div className="inline-flex items-center px-4 py-1 rounded-full text-sm font-medium text-black bg-black/10">
+
+
+
+              {t("kicker")}
+
+
+
+            </div>
+
+
+
+
+
+
+
+            <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold leading-tight tracking-tight text-black font-headline">
+
+
+
+              <span className="block">{t("titleLine1")}</span>
+
+
+
+              <span className="block underline decoration-4 decoration-accent">
+
+
+
+                {t("titleLine2")}
+
+
+
+              </span>
+
+
+
+              <span className="block">{t("titleLine3")}</span>
+
+
+
+            </h1>
+
+
+
+
+
+
+
+            <p className="text-xl md:text-2xl text-black max-w-2xl">
+
+
+
+              {t("subtitle")}
+
+
+
+            </p>
+
+
+
+
+
+
+
+            {/* Desktop Buttons - Visible only on large screens */}
+
+
+
+            <div className="hidden lg:flex flex-col sm:flex-row sm:items-center gap-4">
+
+
+
+              <AnimatedButton href="#contact">{t("ctaPrimary")}</AnimatedButton>
+
+
+
+              <Link
+
+
+
+                href="#services"
+
+
+
+                className="inline-flex items-center justify-center px-6 py-4 border border-black/30 rounded-full text-black hover:bg-black/10 hover:-translate-y-1 transition-transform duration-300"
+
+
+
+                aria-label={String(t("ctaSecondary"))}
+
+
+
+              >
+
+
+
+                {t("ctaSecondary")}
+
+
+
+              </Link>
+
+
+
+            </div>
+
+
+
+          </motion.div>
+
+
+
+
+
+
+
+          {/* Desktop/Tablet Gallery */}
+
+
+
+          <motion.div
+
+
+
+            variants={fadeUp}
+
+
+
+            className="hidden md:block lg:col-span-5 xl:col-span-6 relative flex justify-center lg:justify-end"
+
+
+
+          >
+
+
+
+            <div
+
+
+
+              className="relative mx-auto lg:w-full"
+
+
+
+              style={{ width: windowWidth < 724 ? mobileGalleryWidth : "100%" }}
+
+
+
+            >
+
+
+
+              <div className="relative w-full h-[60vh] sm:h-auto sm:aspect-[4/3] overflow-hidden rounded-2xl bg-black px-1">
+
+
+
+                <div className="grid grid-cols-3 gap-2 h-full">
+
+
+
+                  {allColumns.map((columnImages, colIndex) => {
+
+
+
+                    const direction = colIndex === 1 ? ["-100%", "0%"] : ["0%", "-100%"];
+
+
+
+                    
+
+
+
+                    return (
+
+
+
+                      <motion.div
+
+
+
+                        key={colIndex}
+
+
+
+                        animate={{ y: direction }}
+
+
+
+                        transition={{
+
+
+
+                          repeat: Infinity,
+
+
+
+                          duration: animationSpeed,
+
+
+
+                          ease: "linear",
+
+
+
+                        }}
+
+
+
+                        className="flex flex-col gap-2"
+
+
+
+                      >
+
+
+
+                        {[...columnImages, ...columnImages].map((src, i) => (
+
+
+
+                          <div key={i} className="flex-shrink-0" style={{ height: "calc(100% / 2)" }}>
+
+
+
+                            <Image
+
+
+
+                              src={src}
+
+
+
+                              alt={`Gallery image ${i + 1}`}
+
+
+
+                              width={300}
+
+
+
+                              height={200}
+
+
+
+                              className="w-full h-full object-cover rounded-lg aspect-[3/2]"
+
+
+
+                            />
+
+
+
+                          </div>
+
+
+
+                        ))}
+
+
+
+                      </motion.div>
+
+
+
+                    );
+
+
+
+                  })}
+
+
+
+                </div>
+
+
+
+              </div>
+
+
+
+            </div>
+
+
+
+          </motion.div>
+
+
+
+          
+
+
+
+          {/* Mobile Gallery */}
+
+
+
+          <motion.div
+
+
+
+            variants={fadeUp}
+
+
+
+            className="block md:hidden lg:col-span-5 xl:col-span-6 relative flex justify-center lg:justify-end"
+
+
+
+          >
+
+
+
+            <div
+
+
+
+              className="relative mx-auto"
+
+
+
+              style={{
+
+
+
+                width: mobileGalleryWidth,
+
+
+
+                height: mobileGalleryHeight,
+
+
+
+              }}
+
+
+
+            >
+
+
+
+              <div className="relative w-full h-full overflow-hidden rounded-2xl bg-black px-1">
+
+
+
+                <div className="grid grid-cols-3 gap-2 h-full">
+
+
+
+                  {allColumns.map((columnImages, colIndex) => {
+
+
+
+                    const direction = colIndex === 1 ? ["-100%", "0%"] : ["0%", "-100%"];
+
+
+
+                    
+
+
+
+                    return (
+
+
+
+                      <motion.div
+
+
+
+                        key={colIndex}
+
+
+
+                        animate={{ y: direction }}
+
+
+
+                        transition={{
+
+
+
+                          repeat: Infinity,
+
+
+
+                          duration: animationSpeed,
+
+
+
+                          ease: "linear",
+
+
+
+                        }}
+
+
+
+                        className="flex flex-col gap-2"
+
+
+
+                      >
+
+
+
+                        {[...columnImages, ...columnImages].map((src, i) => (
+
+
+
+                          <div key={i} className="flex-shrink-0" style={{ height: "calc(100% / 2)" }}>
+
+
+
+                            <Image
+
+
+
+                              src={src}
+
+
+
+                              alt={`Gallery image ${i + 1}`}
+
+
+
+                              width={300}
+
+
+
+                              height={200}
+
+
+
+                              className="w-full h-full object-cover rounded-lg aspect-[3/2]"
+
+
+
+                            />
+
+
+
+                          </div>
+
+
+
+                        ))}
+
+
+
+                      </motion.div>
+
+
+
+                    );
+
+
+
+                  })}
+
+
+
+                </div>
+
+
+
+              </div>
+
+
+
+            </div>
+
+
+
+          </motion.div>
+
+
+
+
+
+
+
+          {/* Mobile Buttons */}
+
+
+
+          <motion.div
+
+
+
+            variants={fadeUp}
+
+
+
+            className="w-full lg:hidden flex flex-col sm:flex-row sm:items-center gap-4 mt-8"
+
+
+
+          >
+
+
+
+            <AnimatedButton href="#contact">{t("ctaPrimary")}</AnimatedButton>
+
+
+
+            <Link
+
+
+
+              href="#services"
+
+
+
+              className="inline-flex items-center justify-center px-6 py-4 border border-black/30 rounded-full text-black hover:bg-black/10 hover:-translate-y-1 transition-transform duration-300"
+
+
+
+              aria-label={String(t("ctaSecondary"))}
+
+
+
+            >
+
+
+
+              {t("ctaSecondary")}
+
+
+
+            </Link>
+
+
+
+          </motion.div>
+
+
+
+        </motion.div>
+
+
+
+      </div>
+
+
+
+    </section>
+
+
+
+  );
+
+
+
+} That's my globals.css: /* globals.css */
+
+
+
+
+
+
+
+/* Importiere Google Fonts */
+
+
+
 @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@400;600&display=swap");
 
+
+
+
+
+
+
 :root {
-  /* Farben - Cyberpunk-Thema (softer, less intense) */
-  --color-primary: #2a2a4a;
-  --color-secondary: #3b3b6d;
-  --color-accent: #4adede;
-  --color-bg: #ffffff;
-  --color-text: #2a2a4a;
 
-  /* Pinsel-Effekt Farben */
-  --brush-red: #e573a0;
-  --brush-blue: #4ab8e6;
-  --brush-green: #4ade80;
-  --brush-purple: #b266f5;
-  --brush-orange: #e69b5c;
-  --brush-teal: #4db8b8;
-  --brush-magenta: #e666a3;
-  --brush-pink: #e68ab2;
-  --brush-indigo: #7a66cc;
-  --brush-lime: #b2e64d;
 
-  /* Schriftarten */
-  --font-sans: "Rajdhani", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
-    Roboto, "Helvetica Neue", Arial;
-  --font-headline: "Orbitron", Georgia, "Times New Roman", serif;
 
-  /* Farbverlauf für Überschrift */
-  --headline-grad-from: rgba(74, 222, 222, 0.9);
-  --headline-grad-to: rgba(230, 102, 163, 0.9);
+  /* Farben - Cyberpunk-Thema (softer, less intense) */
+
+
+
+  --color-primary: #2a2a4a;
+
+
+
+  --color-secondary: #3b3b6d;
+
+
+
+  --color-accent: #4adede;
+
+
+
+  --color-bg: #F1F1F1;
+
+
+
+  --color-text: #2a2a4a;
+
+
+
+  --color-about-bg: #ffffff;
+
+
+
+
+
+
+
+  /* Schriftarten */
+
+
+
+  --font-sans: "Rajdhani", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+
+
+
+    Roboto, "Helvetica Neue", Arial;
+
+
+
+  --font-headline: "Orbitron", Georgia, "Times New Roman", serif;
+
+
+
+
+
+
+
+  /* Farbverlauf für Überschrift */
+
+
+
+  --headline-grad-from: rgba(74, 222, 222, 0.9);
+
+
+
+  --headline-grad-to: rgba(230, 102, 163, 0.9);
+
+
+
 }
+
+
+
+
+
+
 
 /* Tailwind Basis */
+
+
+
 @tailwind base;
+
+
+
 @tailwind components;
+
+
+
 @tailwind utilities;
 
+
+
+
+
+
+
 /* Standardwerte für den Body */
+
+
+
 html,
+
+
+
 body {
-  font-family: var(--font-sans);
-  background-color: var(
-    --color-primary
-  ); /* Changed to a dark background for the sticky card effect */
-  color: var(--color-text);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  margin: 0;
-  padding: 0;
+
+
+
+  font-family: var(--font-sans);
+
+
+
+  background-color: var(
+
+
+
+    --color-primary
+
+
+
+  ); /* Changed to a dark background for the sticky card effect */
+
+
+
+  color: var(--color-text);
+
+
+
+  -webkit-font-smoothing: antialiased;
+
+
+
+  -moz-osx-font-smoothing: grayscale;
+
+
+
+  margin: 0;
+
+
+
+  padding: 0;
+
+
+
 }
+
+
+
+
+
+
 
 /* Benutzerdefinierter Hintergrund */
+
+
+
 .bg-brand-bg {
-  background-color: var(--color-bg);
+
+
+
+  background-color: var(--color-bg);
+
+
+
 }
+
+
+
+
+
+
+
+/* Custom background for the About section */
+
+
+
+.bg-about-bg {
+
+
+
+  background-color: var(--color-about-bg);
+
+
+
+}
+
+
+
+
+
+
 
 /* Hero gradient background */
+
+
+
 .hero-gradient {
-  background: linear-gradient(to bottom right, #ffffff, #add8e6);
+
+
+
+  background: linear-gradient(to bottom right, #ffffff, #add8e6);
+
+
+
 }
 
-/* Pinsel-Effekt */
-.brush-effect {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3);
-  background-size: 100% 100%;
-  margin: -2px -6px;
-  padding: 2px 6px;
-  display: inline-block;
-  filter: brightness(1.1);
-}
 
-/* Pinsel-Farben */
-.brush-effect.brush-red {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=E573A0);
-}
-.brush-effect.brush-blue {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=4AB8E6);
-}
-.brush-effect.brush-green {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=4ADE80);
-}
-.brush-effect.brush-purple {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=B266F5);
-}
-.brush-effect.brush-orange {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=E69B5C);
-}
-.brush-effect.brush-teal {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=4DB8B8);
-}
-.brush-effect.brush-magenta {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=E666A3);
-}
-.brush-effect.brush-pink {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=E68AB2);
-}
-.brush-effect.brush-indigo {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=7A66CC);
-}
-.brush-effect.brush-lime {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=B2E64D);
-}
+
+
+
+
 
 /* Farbverlauf für Text */
+
+
+
 .text-hero-gradient {
-  background-image: linear-gradient(
-    90deg,
-    var(--headline-grad-from),
-    var(--headline-grad-to)
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+
+
+
+  background-image: linear-gradient(
+
+
+
+    90deg,
+
+
+
+    var(--headline-grad-from),
+
+
+
+    var(--headline-grad-to)
+
+
+
+  );
+
+
+
+  -webkit-background-clip: text;
+
+
+
+  background-clip: text;
+
+
+
+  color: transparent;
+
+
+
 }
+
+
+
+
+
+
 
 /* Glas-Pille */
+
+
+
 .pill-glass {
-  background-color: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+
+
+
+  background-color: rgba(255, 255, 255, 0.2);
+
+
+
+  backdrop-filter: blur(10px);
+
+
+
+  -webkit-backdrop-filter: blur(10px);
+
+
+
 }
+
+
+
+
+
+
 
 /* Gradient Border */
-.border-gradient {
-  --p: 15%;
-  --bg-color: #ffffff;
-  --text-color: #323232;
-  --c1: #ffffff;
-  --c2: #ffffff;
-  --c3: #ff8c00;
 
-  background: linear-gradient(var(--bg-color), var(--bg-color)) padding-box,
-    conic-gradient(
-        from var(--gradient-angle, 0deg),
-        var(--c1),
-        var(--c2),
-        var(--c3),
-        var(--c1)
-      )
-      border-box;
-  border: 4px solid transparent;
-  border-radius: 3rem;
-  transition: all 0.3s ease;
-  color: var(--text-color);
-  font-family: var(--font-sans);
-  font-weight: 600;
-  padding: 1rem 2.5rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  cursor: pointer;
+
+
+.border-gradient {
+
+
+
+  --p: 15%;
+
+
+
+  --bg-color: #ffffff;
+
+
+
+  --text-color: #323232;
+
+
+
+  --c1: #ffffff;
+
+
+
+  --c2: #ffffff;
+
+
+
+  --c3: #ff8c00;
+
+
+
+
+
+
+
+  background: linear-gradient(var(--bg-color), var(--bg-color)) padding-box,
+
+
+
+    conic-gradient(
+
+
+
+        from var(--gradient-angle, 0deg),
+
+
+
+        var(--c1),
+
+
+
+        var(--c2),
+
+
+
+        var(--c3),
+
+
+
+        var(--c1)
+
+
+
+      )
+
+
+
+      border-box;
+
+
+
+  border: 4px solid transparent;
+
+
+
+  border-radius: 3rem;
+
+
+
+  transition: all 0.3s ease;
+
+
+
+  color: var(--text-color);
+
+
+
+  font-family: var(--font-sans);
+
+
+
+  font-weight: 600;
+
+
+
+  padding: 1rem 2.5rem;
+
+
+
+  display: inline-flex;
+
+
+
+  align-items: center;
+
+
+
+  justify-content: center;
+
+
+
+  gap: 0.5rem;
+
+
+
+  cursor: pointer;
+
+
+
 }
+
+
+
+
+
+
 
 .border-gradient:hover {
-  transform: translateY(-2px);
+
+
+
+  transform: translateY(-2px);
+
+
+
 }
+
+
+
+
+
+
 
 /* Sticky Section */
+
+
+
 section.sticky {
-  will-change: transform;
+
+
+
+  will-change: transform;
+
+
+
 }
+
+
+
+
+
+
 
 /* Hero Text */
+
+
+
 .hero-text {
-  font-size: 3.5rem;
-  font-weight: 800;
-  line-height: 1.2;
+
+
+
+  font-size: 3.5rem;
+
+
+
+  font-weight: 800;
+
+
+
+  line-height: 1.2;
+
+
+
 }
+
+
+
+
+
+
 
 /* About Text */
+
+
+
 .about-text {
-  color: var(--color-text);
-  background-color: rgba(59, 59, 109, 0.8);
-  padding: 2rem;
-  border-radius: 1rem;
-  font-size: 1.125rem;
+
+
+
+  color: var(--color-text);
+
+
+
+  background-color: rgba(59, 59, 109, 0.8);
+
+
+
+  padding: 2rem;
+
+
+
+  border-radius: 1rem;
+
+
+
+  font-size: 1.125rem;
+
+
+
 }
+
+
+
+
+
+
 
 /* Hero-specific styles */
+
+
+
 .text-headline {
-  color: #000000;
+
+
+
+  color: #000000;
+
+
+
 }
+
+
+
+
+
+
 
 .decoration-accent {
-  text-decoration-color: var(--color-accent);
+
+
+
+  text-decoration-color: var(--color-accent);
+
+
+
 }
+
+
+
+
+
+
 
 .text-text {
-  color: #000000;
+
+
+
+  color: #000000;
+
+
+
 }
+
+
+
+
+
+
 
 .bg-text\/10 {
-  background-color: rgba(0, 0, 0, 0.1); /* Using black with opacity */
+
+
+
+  background-color: rgba(0, 0, 0, 0.1); /* Using black with opacity */
+
+
+
 }
+
+
+
+
+
+
 
 .border-text\/30 {
-  border-color: rgba(0, 0, 0, 0.3); /* Using black with opacity */
+
+
+
+  border-color: rgba(0, 0, 0, 0.3); /* Using black with opacity */
+
+
+
 }
 
+
+
+
+
+
+
 .font-headline {
-  font-family: var(--font-headline);
-}
-1. I'm not finished to read the content of the current slide, if its bigger as the screen and the next slide already appear. I want first read the content of the current slide and then the next slide should appear. The same error happens with the hero.tsx on mobile where the content is bigger as the screen. The stickyslide effect have to stay but the next slide show after I'm at the end of the current section (slide). If you don't understand something, ask me. Fix it so it works 100% or just say me that this cant be solved. Thats my website: https://solid-memory-wrjvrrgg9759hwgx-3000.app.github.dev/en. Here you see the error on scrolling. Again in other words: 
-fix all files so I see first the content of the whole section on my page.tsx, before the next one goes above the current section if the content of the section is bigger than the screen. if the section is bigger as the screen size and then the next slide comes after the current section is finished with reading or it touches the bottom of the screen. Make a function In react or framer motion if needed. Fix all files that are needed and post them here. look on all files. its all in the src folder. think longer if needed. is it possible with my setup to achieve this? i start a webagency and want to flex with my skills but i cant solve that. what is the problem? if the screen is smaller than my section, the next section appears in the stickyslides animation.. its so sad and frustrating. Should I delete the sticky section effect? Solve it to 100%. Maybe with a custom sticky slide section animation effect or just say me that this will not work. You need more files? 
+
+
+
+  font-family: var(--font-headline);
+
+
+
+} Thats my page.tsx: import { setRequestLocale } from "next-intl/server";
+
+
+
+import { routing } from "@/i18n/routing";
+
+
+
+
+
+
+
+import HeroVideo from "@/components/HeroVideo";
+
+
+
+import Hero from "@/components/Hero";
+
+
+
+import AboutSection from "@/components/AboutSection/AboutSection";
+
+
+
+
+
+
+
+export default async function HomePage({
+
+
+
+  params,
+
+
+
+}: {
+
+
+
+  params: Promise<{ locale: (typeof routing.locales)[number] }>;
+
+
+
+}) {
+
+
+
+  const { locale } = await params;
+
+
+
+  setRequestLocale(locale);
+
+
+
+
+
+
+
+  return (
+
+
+
+    <div className="relative p-6 space-y-6 md:p-12 md:space-y-12">
+
+
+
+      <section className="top-6 min-h-screen z-20 rounded-2xl overflow-hidden shadow-xl">
+
+
+
+        <HeroVideo />
+
+
+
+      </section>
+
+
+
+      <section className="top-6 z-20 rounded-2xl shadow-xl">
+
+
+
+        <Hero />
+
+
+
+      </section>
+
+
+
+      <section className="top-6 min-h-screen z-20 rounded-2xl overflow-hidden shadow-xl">
+
+
+
+        <AboutSection />
+
+
+
+      </section>
+
+
+
+
+
+
+
+    </div>
+
+
+
+  );
+
+
+
+}  
+
+
+
+;;;;;;;;;;; Now I Want to implement a Services section with software and web development inside it. But for that I want to use that floating background animation that we just created. Use the lay out that we just implemented. (Floating animation). Post the servicesSection.tsx. adjust my en.json so we have a list inside it.   "services": {
+
+      "kicker": "Our Services",
+
+      "title": "Digital solutions that work for you",
+
+      "webDesign": {
+
+        "title": "Web Design & Development",
+
+        "description": "We craft beautiful, responsive, and high-performing websites tailored to your brand's identity and goals, ensuring a seamless user experience across all devices."
+
+      },
+
+      "softwareDevelopment": {
+
+        "title": "Software Development",
+
+        "description": "From custom applications to complex system integrations, we build robust and scalable software solutions that streamline your operations and drive innovation."
+
+      }
+
+    }

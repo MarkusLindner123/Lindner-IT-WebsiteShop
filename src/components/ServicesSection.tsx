@@ -1,232 +1,164 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
-import { motion, Variants } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
-import AnimatedButton from "@/components/AnimatedButton";
-import Image from "next/image";
 
-// Define the shape for the service items
-interface ServiceItem {
-  title: string;
-  description: string;
-  image: string;
-  tags: string[];
+interface FloatingElement {
+  el: HTMLDivElement;
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  width: number;
+  height: number;
 }
-
-// Define the shape for the floating tags to resolve the 'any' type error
-interface FloatingTag {
-  tag: string;
-  delay: number;
-  top: number;
-  left: number;
-}
-
-// Variants for the section container
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.5,
-      delayChildren: 0.2,
-    },
-  },
-};
-
-// Variants for the service cards
-const cardVariants: Variants = {
-  hidden: { opacity: 0, y: 50 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.8,
-      ease: [0.22, 1, 0.36, 1],
-    },
-  },
-};
-
-// Variants for the floating tags
-const tagVariants: Variants = {
-  initial: { y: "100vh" },
-  animate: {
-    y: "-100vh",
-    transition: {
-      duration: 20,
-      ease: "linear",
-      repeat: Infinity,
-    },
-  },
-};
 
 export default function ServicesSection() {
   const t = useTranslations("services");
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const [inView, setInView] = useState(false);
-  const [staggeredTags, setStaggeredTags] = useState<FloatingTag[]>([]);
+  const animationContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Generate the tags and their positions only on the client
-    const floatingTags = [
-      "Next.js",
-      "React",
-      "Tailwind",
-      "TypeScript",
-      "Web Design",
-      "Software Development",
-      "UI/UX",
-      "Frontend",
-      "Backend",
-      "Fullstack",
-      "DevOps",
-      "Framer Motion",
-    ];
+    const animationContainer = animationContainerRef.current;
+    if (!animationContainer) return;
 
-    const generatedTags = floatingTags.map((tag, index) => ({
-      tag,
-      delay: index * 0.1,
-      top: Math.random() * 100,
-      left: Math.random() * 100,
-    }));
+    const tags = ["Web", "Code", "Design", "Software", "UI/UX", "Cloud"];
+    const numShapes = 8;
+    const floatingElements: FloatingElement[] = [];
 
-    setStaggeredTags(generatedTags);
+    const getRandom = (min: number, max: number) =>
+      Math.random() * (max - min) + min;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setInView(entry.isIntersecting);
-      },
-      {
-        threshold: 0.2,
-      }
-    );
+    const containerWidth = animationContainer!.offsetWidth;
+    const containerHeight = animationContainer!.offsetHeight;
 
-    const currentRef = sectionRef.current;
-    if (currentRef) {
-      observer.observe(currentRef);
+    for (let i = 0; i < numShapes; i++) {
+      const shape = document.createElement("div");
+      shape.classList.add(
+        "inline-flex",
+        "items-center",
+        "px-4",
+        "py-1",
+        "rounded-full",
+        "text-sm",
+        "font-medium",
+        "text-gray-200",
+        "bg-white/10",
+        "backdrop-blur-sm",
+        "floating-tag"
+      );
+
+      const textSpan = document.createElement("span");
+      textSpan.textContent = tags[Math.floor(Math.random() * tags.length)];
+      shape.appendChild(textSpan);
+
+      animationContainer.appendChild(shape);
+
+      let x, y, isColliding;
+      do {
+        isColliding = false;
+        x = getRandom(0, containerWidth - shape.offsetWidth);
+        y = getRandom(0, containerHeight - shape.offsetHeight);
+
+        for (const existingEl of floatingElements) {
+          if (
+            x < existingEl.x + existingEl.width &&
+            x + shape.offsetWidth > existingEl.x &&
+            y < existingEl.y + existingEl.height &&
+            y + shape.offsetHeight > existingEl.y
+          ) {
+            isColliding = true;
+            break;
+          }
+        }
+      } while (isColliding);
+
+      floatingElements.push({
+        el: shape,
+        x,
+        y,
+        vx: getRandom(0.5, 1) * (Math.random() < 0.5 ? 1 : -1),
+        vy: getRandom(0.5, 1) * (Math.random() < 0.5 ? 1 : -1),
+        width: shape.offsetWidth,
+        height: shape.offsetHeight,
+      });
     }
 
-    return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef);
+    function animate() {
+      const containerWidth = animationContainer!.offsetWidth;
+      const containerHeight = animationContainer!.offsetHeight;
+
+      for (let i = 0; i < floatingElements.length; i++) {
+        const el = floatingElements[i];
+        el.x += el.vx;
+        el.y += el.vy;
+
+        if (el.x + el.width > containerWidth || el.x < 0) {
+          el.vx *= -1;
+          el.x = el.x < 0 ? 0 : containerWidth - el.width;
+        }
+        if (el.y + el.height > containerHeight || el.y < 0) {
+          el.vy *= -1;
+          el.y = el.y < 0 ? 0 : containerHeight - el.height;
+        }
+
+        for (let j = i + 1; j < floatingElements.length; j++) {
+          const otherEl = floatingElements[j];
+          if (
+            el.x < otherEl.x + otherEl.width &&
+            el.x + el.width > otherEl.x &&
+            el.y < otherEl.y + otherEl.height &&
+            el.y + el.height > otherEl.y
+          ) {
+            const tempVx = el.vx;
+            const tempVy = el.vy;
+            el.vx = otherEl.vx;
+            el.vy = otherEl.vy;
+            otherEl.vx = tempVx;
+            otherEl.vy = tempVy;
+          }
+        }
+
+        el.el.style.transform = `translate(${el.x}px, ${el.y}px)`;
       }
-    };
+      requestAnimationFrame(animate);
+    }
+
+    animate();
   }, []);
 
-  const serviceItems: ServiceItem[] = [
-    {
-      title: t("webDesign.title"),
-      description: t("webDesign.description"),
-      image: "/webdesign.jpg",
-      tags: ["React", "Next.js", "Vue.js", "Tailwind CSS", "Figma", "GSAP"],
-    },
-    {
-      title: t("softwareDevelopment.title"),
-      description: t("softwareDevelopment.description"),
-      image: "/softwaredev.jpg",
-      tags: ["Node.js", "TypeScript", "Python", "Rust", "Go", "Docker", "AWS"],
-    },
-  ];
-
   return (
-    <section id="services" className="relative p-8 md:p-12 bg-brand-bg">
+    <section
+      id="services"
+      className="relative w-11/12 max-w-6xl mx-auto p-8 md:p-12 rounded-2xl shadow-2xl bg-gray-800/80 text-white min-h-[500px] flex flex-col items-center justify-center overflow-hidden"
+    >
+      {/* Floating Background */}
       <div
-        className="absolute inset-0 z-0 overflow-hidden pointer-events-none"
-        aria-hidden="true"
-      >
-        {staggeredTags.map((item, index) => (
-          <motion.div
-            key={index}
-            className="absolute z-0 px-4 py-2 text-sm text-black rounded-full backdrop-blur-sm opacity-5"
-            style={{
-              top: `${item.top}%`,
-              left: `${item.left}%`,
-            }}
-            variants={tagVariants}
-            initial="initial"
-            animate={inView ? "animate" : "initial"}
-            // FIX: Removed the invalid transition prop spread.
-            // The `tagVariants` already has a transition defined,
-            // and `delay` can be set directly.
-            transition={{
-              duration: 20,
-              ease: "linear",
-              repeat: Infinity,
-              delay: item.delay,
-            }}
-          >
-            {item.tag}
-          </motion.div>
-        ))}
-      </div>
+        ref={animationContainerRef}
+        className="absolute top-0 left-0 w-full h-full overflow-hidden z-0"
+      />
 
-      <div
-        ref={sectionRef}
-        className="max-w-7xl mx-auto px-4 lg:px-8 py-12 md:py-16 lg:py-20 relative z-10"
-      >
-        <div className="text-center mb-12">
-          <motion.div
-            variants={cardVariants}
-            initial="hidden"
-            animate={inView ? "show" : "hidden"}
-            className="inline-flex items-center px-4 py-1 rounded-full text-sm font-medium text-black bg-black/10"
-          >
-            {t("kicker")}
-          </motion.div>
-          <motion.h2
-            variants={cardVariants}
-            initial="hidden"
-            animate={inView ? "show" : "hidden"}
-            className="text-5xl sm:text-6xl md:text-7xl font-extrabold leading-tight tracking-tight text-black font-headline mt-4"
-          >
-            {t("title")}
-          </motion.h2>
+      {/* Content */}
+      <div className="relative z-10 text-center space-y-8">
+
+        <h2 className="text-4xl md:text-5xl font-bold">{t("title")}</h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+          <div className="bg-white/10 backdrop-blur-sm p-6 rounded-xl shadow-lg">
+            <h3 className="text-2xl font-semibold mb-2">
+              {t("webDesign.title")}
+            </h3>
+            <p className="text-gray-300">{t("webDesign.description")}</p>
+          </div>
+
+          <div className="bg-white/10 backdrop-blur-sm p-6 rounded-xl shadow-lg">
+            <h3 className="text-2xl font-semibold mb-2">
+              {t("softwareDevelopment.title")}
+            </h3>
+            <p className="text-gray-300">
+              {t("softwareDevelopment.description")}
+            </p>
+          </div>
         </div>
-
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={inView ? "show" : "hidden"}
-          className="grid grid-cols-1 md:grid-cols-2 gap-8"
-        >
-          {serviceItems.map((service, index) => (
-            <motion.div
-              key={index}
-              variants={cardVariants}
-              className="bg-white rounded-2xl p-8 shadow-lg relative overflow-hidden"
-            >
-              <div className="relative w-full h-[250px] md:h-[300px] mb-6 rounded-xl overflow-hidden shadow-inner">
-                <Image
-                  src={service.image}
-                  alt={service.title}
-                  layout="fill"
-                  objectFit="cover"
-                  className="transition-transform duration-500 hover:scale-105"
-                />
-              </div>
-
-              <h3 className="text-3xl font-bold mb-4 font-headline text-black">
-                {service.title}
-              </h3>
-              <p className="text-lg text-black/80 mb-6">
-                {service.description}
-              </p>
-              <div className="flex flex-wrap gap-2 mb-6">
-                {service.tags.map((tag, tagIndex) => (
-                  <span
-                    key={tagIndex}
-                    className="inline-block px-3 py-1 text-sm font-medium text-black bg-black/5 rounded-full"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-              <AnimatedButton href="#contact">
-                {t("ctaPrimary")}
-              </AnimatedButton>
-            </motion.div>
-          ))}
-        </motion.div>
       </div>
     </section>
   );
