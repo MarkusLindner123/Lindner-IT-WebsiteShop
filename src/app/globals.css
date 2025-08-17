@@ -12,6 +12,11 @@
   --color-text: #2a2a4a;
   --color-about-bg: #ffffff;
 
+  /* NEW: Services section + floating tags */
+  --color-services-bg: rgba(31, 41, 55, 0.8); /* default bg-gray-800/80 */
+  --color-services-tag-bg: rgba(255, 255, 255, 0.1); 
+  --color-services-tag-text: #e5e7eb; /* Tailwind gray-200 */
+
   /* Schriftarten */
   --font-sans: "Rajdhani", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
     Roboto, "Helvetica Neue", Arial;
@@ -31,9 +36,7 @@
 html,
 body {
   font-family: var(--font-sans);
-  background-color: var(
-    --color-primary
-  ); /* Changed to a dark background for the sticky card effect */
+  background-color: var(--color-primary);
   color: var(--color-text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -86,13 +89,13 @@ body {
 
   background: linear-gradient(var(--bg-color), var(--bg-color)) padding-box,
     conic-gradient(
-        from var(--gradient-angle, 0deg),
-        var(--c1),
-        var(--c2),
-        var(--c3),
-        var(--c1)
-      )
-      border-box;
+      from var(--gradient-angle, 0deg),
+      var(--c1),
+      var(--c2),
+      var(--c3),
+      var(--c1)
+    )
+    border-box;
   border: 4px solid transparent;
   border-radius: 3rem;
   transition: all 0.3s ease;
@@ -146,13 +149,24 @@ section.sticky {
 }
 
 .bg-text\/10 {
-  background-color: rgba(0, 0, 0, 0.1); /* Using black with opacity */
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .border-text\/30 {
-  border-color: rgba(0, 0, 0, 0.3); /* Using black with opacity */
+  border-color: rgba(0, 0, 0, 0.3);
 }
 
 .font-headline {
   font-family: var(--font-headline);
+}
+
+/* NEW utilities for services section */
+.bg-services-bg {
+  background-color: var(--color-services-bg);
+}
+.bg-services-tag-bg {
+  background-color: var(--color-services-tag-bg);
+}
+.text-services-tag-text {
+  color: var(--color-services-tag-text);
 }

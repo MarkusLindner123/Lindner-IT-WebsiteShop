@@ -1,7 +1,22 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useLayoutEffect, useState } from "react";
 import { useTranslations } from "next-intl";
+import {
+  Code,
+  Globe,
+  Paintbrush,
+  Cloud,
+  LayoutDashboard,
+  Terminal,
+  Database,
+  Shield,
+  Cpu,
+  Smartphone,
+  Server,
+  Settings,
+} from "lucide-react";
+import ReactDOMServer from "react-dom/server";
 
 interface FloatingElement {
   el: HTMLDivElement;
@@ -16,147 +31,142 @@ interface FloatingElement {
 export default function ServicesSection() {
   const t = useTranslations("services");
   const animationContainerRef = useRef<HTMLDivElement>(null);
+  const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
+
+  // Get container size after render
+  useLayoutEffect(() => {
+    const container = animationContainerRef.current;
+    if (!container) return;
+    const resizeObserver = new ResizeObserver(() => {
+      setContainerSize({
+        width: container.offsetWidth,
+        height: container.offsetHeight,
+      });
+    });
+    resizeObserver.observe(container);
+    return () => resizeObserver.disconnect();
+  }, []);
 
   useEffect(() => {
-    const animationContainer = animationContainerRef.current;
-    if (!animationContainer) return;
+    if (containerSize.width === 0 || containerSize.height === 0) return;
+    const container = animationContainerRef.current;
+    if (!container) return;
 
-    const tags = ["Web", "Code", "Design", "Software", "UI/UX", "Cloud"];
-    const numShapes = 8;
+    const tags = [
+      { text: "Web", icon: Globe },
+      { text: "Code", icon: Code },
+      { text: "Design", icon: Paintbrush },
+      { text: "Software", icon: Terminal },
+      { text: "UI/UX", icon: LayoutDashboard },
+      { text: "Cloud", icon: Cloud },
+      { text: "Database", icon: Database },
+      { text: "Security", icon: Shield },
+      { text: "AI", icon: Cpu },
+      { text: "Mobile", icon: Smartphone },
+      { text: "Server", icon: Server },
+      { text: "Config", icon: Settings },
+    ];
+
+    const numShapes = 12;
     const floatingElements: FloatingElement[] = [];
 
     const getRandom = (min: number, max: number) =>
       Math.random() * (max - min) + min;
 
-    const containerWidth = animationContainer!.offsetWidth;
-    const containerHeight = animationContainer!.offsetHeight;
+    const padding = 20; // avoid clipping
 
+    // Create floating tags
     for (let i = 0; i < numShapes; i++) {
+      const { text, icon: Icon } = tags[i % tags.length];
+
       const shape = document.createElement("div");
       shape.classList.add(
         "inline-flex",
         "items-center",
+        "gap-2",
         "px-4",
         "py-1",
         "rounded-full",
         "text-sm",
         "font-medium",
-        "text-gray-200",
-        "bg-white/10",
+        "text-services-tag-text",
+        "bg-services-tag-bg",
         "backdrop-blur-sm",
-        "floating-tag"
+        "floating-tag",
+        "absolute"
       );
 
+      const iconWrapper = document.createElement("span");
+      iconWrapper.innerHTML = ReactDOMServer.renderToString(<Icon size={16} />);
+      iconWrapper.classList.add("inline-flex", "items-center");
+      shape.appendChild(iconWrapper);
+
       const textSpan = document.createElement("span");
-      textSpan.textContent = tags[Math.floor(Math.random() * tags.length)];
+      textSpan.textContent = text;
       shape.appendChild(textSpan);
 
-      animationContainer.appendChild(shape);
+      container.appendChild(shape);
 
-      let x, y, isColliding;
-      do {
-        isColliding = false;
-        x = getRandom(0, containerWidth - shape.offsetWidth);
-        y = getRandom(0, containerHeight - shape.offsetHeight);
-
-        for (const existingEl of floatingElements) {
-          if (
-            x < existingEl.x + existingEl.width &&
-            x + shape.offsetWidth > existingEl.x &&
-            y < existingEl.y + existingEl.height &&
-            y + shape.offsetHeight > existingEl.y
-          ) {
-            isColliding = true;
-            break;
-          }
-        }
-      } while (isColliding);
+      const width = shape.offsetWidth;
+      const height = shape.offsetHeight;
 
       floatingElements.push({
         el: shape,
-        x,
-        y,
+        x: getRandom(padding, containerSize.width - width - padding),
+        y: getRandom(padding, containerSize.height - height - padding),
         vx: getRandom(0.5, 1) * (Math.random() < 0.5 ? 1 : -1),
         vy: getRandom(0.5, 1) * (Math.random() < 0.5 ? 1 : -1),
-        width: shape.offsetWidth,
-        height: shape.offsetHeight,
+        width,
+        height,
       });
     }
 
+    // Animate
     function animate() {
-      const containerWidth = animationContainer!.offsetWidth;
-      const containerHeight = animationContainer!.offsetHeight;
-
-      for (let i = 0; i < floatingElements.length; i++) {
-        const el = floatingElements[i];
+      for (const el of floatingElements) {
         el.x += el.vx;
         el.y += el.vy;
 
-        if (el.x + el.width > containerWidth || el.x < 0) {
+        if (el.x < 0 || el.x + el.width > containerSize.width) {
           el.vx *= -1;
-          el.x = el.x < 0 ? 0 : containerWidth - el.width;
+          el.x = Math.max(0, Math.min(el.x, containerSize.width - el.width));
         }
-        if (el.y + el.height > containerHeight || el.y < 0) {
+        if (el.y < 0 || el.y + el.height > containerSize.height) {
           el.vy *= -1;
-          el.y = el.y < 0 ? 0 : containerHeight - el.height;
-        }
-
-        for (let j = i + 1; j < floatingElements.length; j++) {
-          const otherEl = floatingElements[j];
-          if (
-            el.x < otherEl.x + otherEl.width &&
-            el.x + el.width > otherEl.x &&
-            el.y < otherEl.y + otherEl.height &&
-            el.y + el.height > otherEl.y
-          ) {
-            const tempVx = el.vx;
-            const tempVy = el.vy;
-            el.vx = otherEl.vx;
-            el.vy = otherEl.vy;
-            otherEl.vx = tempVx;
-            otherEl.vy = tempVy;
-          }
+          el.y = Math.max(0, Math.min(el.y, containerSize.height - el.height));
         }
 
         el.el.style.transform = `translate(${el.x}px, ${el.y}px)`;
       }
       requestAnimationFrame(animate);
     }
-
     animate();
-  }, []);
+  }, [containerSize]);
 
   return (
     <section
       id="services"
-      className="relative w-11/12 max-w-6xl mx-auto p-8 md:p-12 rounded-2xl shadow-2xl bg-gray-800/80 text-white min-h-[500px] flex flex-col items-center justify-center overflow-hidden"
+      className="relative w-full min-h-[500px] rounded-2xl shadow-2xl bg-services-bg text-white flex flex-col items-center justify-center overflow-hidden"
     >
-      {/* Floating Background */}
+      {/* Floating tags container */}
       <div
         ref={animationContainerRef}
         className="absolute top-0 left-0 w-full h-full overflow-hidden z-0"
       />
 
       {/* Content */}
-      <div className="relative z-10 text-center space-y-8">
-
+      <div className="relative z-10 text-center space-y-8 max-w-7xl w-full px-6 md:px-12">
         <h2 className="text-4xl md:text-5xl font-bold">{t("title")}</h2>
-
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
           <div className="bg-white/10 backdrop-blur-sm p-6 rounded-xl shadow-lg">
-            <h3 className="text-2xl font-semibold mb-2">
-              {t("webDesign.title")}
-            </h3>
+            <h3 className="text-2xl font-semibold mb-2">{t("webDesign.title")}</h3>
             <p className="text-gray-300">{t("webDesign.description")}</p>
           </div>
-
           <div className="bg-white/10 backdrop-blur-sm p-6 rounded-xl shadow-lg">
             <h3 className="text-2xl font-semibold mb-2">
               {t("softwareDevelopment.title")}
             </h3>
-            <p className="text-gray-300">
-              {t("softwareDevelopment.description")}
-            </p>
+            <p className="text-gray-300">{t("softwareDevelopment.description")}</p>
           </div>
         </div>
       </div>
