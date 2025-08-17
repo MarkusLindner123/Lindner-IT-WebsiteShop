@@ -42,3 +42,480 @@ https://chatgpt.com/c/689a2ae9-a09c-8324-b460-804d4c551a90
 .border-gradient:hover {
   transform: translateY(-2px);
 }
+
+Thats my stickyslides.tsx: "use client";
+
+import HeroVideo from "@/components/HeroVideo";
+import Hero from "@/components/Hero";
+import AboutSection from "@/components/AboutSection";
+import ServicesSection from "@/components/ServicesSection";
+
+export default function StickySlides() {
+  return (
+    <div className="relative p-6 space-y-6 md:p-12 md:space-y-12">
+      {/* Slide 1: Video Hero */}
+      <section className="sticky top-6 min-h-screen z-0">
+        <div className="w-full h-full rounded-2xl overflow-hidden shadow-xl">
+          <HeroVideo />
+        </div>
+      </section>
+
+      {/* Slide 2: Hero */}
+      <section className="sticky top-6 min-h-screen z-10 bg-brand-bg rounded-2xl overflow-hidden shadow-xl">
+        <Hero />
+      </section>
+
+      {/* Slide 3: About */}
+      <section className="sticky top-6 min-h-screen z-20 bg-brand-bg rounded-2xl overflow-hidden shadow-xl">
+        <div className="w-full h-full overflow-y-auto">
+          <AboutSection />
+        </div>
+      </section>
+      
+      {/* Slide 4: Services */}
+      <section className="sticky top-6 min-h-screen z-20 bg-brand-bg rounded-2xl overflow-hidden shadow-xl">
+        <div className="w-full h-full overflow-y-auto">
+          <ServicesSection />
+        </div>
+      </section>
+    </div>
+  );
+}
+That's my services section.tsx: "use client";
+
+import { useTranslations } from "next-intl";
+import { motion, Variants } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import AnimatedButton from "@/components/AnimatedButton";
+import Image from "next/image";
+
+// Define the shape for the service items
+interface ServiceItem {
+  title: string;
+  description: string;
+  image: string;
+  tags: string[];
+}
+
+// Define the shape for the floating tags to resolve the 'any' type error
+interface FloatingTag {
+  tag: string;
+  delay: number;
+  top: number;
+  left: number;
+}
+
+// Variants for the section container
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.5,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+// Variants for the service cards
+const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 50 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+// Variants for the floating tags
+const tagVariants: Variants = {
+  initial: { y: "100vh" },
+  animate: {
+    y: "-100vh",
+    transition: {
+      duration: 20,
+      ease: "linear",
+      repeat: Infinity,
+    },
+  },
+};
+
+export default function ServicesSection() {
+  const t = useTranslations("services");
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
+  const [staggeredTags, setStaggeredTags] = useState<FloatingTag[]>([]);
+
+  useEffect(() => {
+    // Generate the tags and their positions only on the client
+    const floatingTags = [
+      "Next.js",
+      "React",
+      "Tailwind",
+      "TypeScript",
+      "Web Design",
+      "Software Development",
+      "UI/UX",
+      "Frontend",
+      "Backend",
+      "Fullstack",
+      "DevOps",
+      "Framer Motion",
+    ];
+
+    const generatedTags = floatingTags.map((tag, index) => ({
+      tag,
+      delay: index * 0.1,
+      top: Math.random() * 100,
+      left: Math.random() * 100,
+    }));
+
+    setStaggeredTags(generatedTags);
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setInView(entry.isIntersecting);
+      },
+      {
+        threshold: 0.2,
+      }
+    );
+
+    const currentRef = sectionRef.current;
+    if (currentRef) {
+      observer.observe(currentRef);
+    }
+
+    return () => {
+      if (currentRef) {
+        observer.unobserve(currentRef);
+      }
+    };
+  }, []);
+
+  const serviceItems: ServiceItem[] = [
+    {
+      title: t("webDesign.title"),
+      description: t("webDesign.description"),
+      image: "/webdesign.jpg",
+      tags: ["React", "Next.js", "Vue.js", "Tailwind CSS", "Figma", "GSAP"],
+    },
+    {
+      title: t("softwareDevelopment.title"),
+      description: t("softwareDevelopment.description"),
+      image: "/softwaredev.jpg",
+      tags: ["Node.js", "TypeScript", "Python", "Rust", "Go", "Docker", "AWS"],
+    },
+  ];
+
+  return (
+    <section id="services" className="relative p-8 md:p-12 bg-brand-bg">
+      <div
+        className="absolute inset-0 z-0 overflow-hidden pointer-events-none"
+        aria-hidden="true"
+      >
+        {staggeredTags.map((item, index) => (
+          <motion.div
+            key={index}
+            className="absolute z-0 px-4 py-2 text-sm text-black rounded-full backdrop-blur-sm opacity-5"
+            style={{
+              top: `${item.top}%`,
+              left: `${item.left}%`,
+            }}
+            variants={tagVariants}
+            initial="initial"
+            animate={inView ? "animate" : "initial"}
+            // FIX: Removed the invalid transition prop spread.
+            // The `tagVariants` already has a transition defined,
+            // and `delay` can be set directly.
+            transition={{
+              duration: 20,
+              ease: "linear",
+              repeat: Infinity,
+              delay: item.delay,
+            }}
+          >
+            {item.tag}
+          </motion.div>
+        ))}
+      </div>
+
+      <div
+        ref={sectionRef}
+        className="max-w-7xl mx-auto px-4 lg:px-8 py-12 md:py-16 lg:py-20 relative z-10"
+      >
+        <div className="text-center mb-12">
+          <motion.div
+            variants={cardVariants}
+            initial="hidden"
+            animate={inView ? "show" : "hidden"}
+            className="inline-flex items-center px-4 py-1 rounded-full text-sm font-medium text-black bg-black/10"
+          >
+            {t("kicker")}
+          </motion.div>
+          <motion.h2
+            variants={cardVariants}
+            initial="hidden"
+            animate={inView ? "show" : "hidden"}
+            className="text-5xl sm:text-6xl md:text-7xl font-extrabold leading-tight tracking-tight text-black font-headline mt-4"
+          >
+            {t("title")}
+          </motion.h2>
+        </div>
+
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate={inView ? "show" : "hidden"}
+          className="grid grid-cols-1 md:grid-cols-2 gap-8"
+        >
+          {serviceItems.map((service, index) => (
+            <motion.div
+              key={index}
+              variants={cardVariants}
+              className="bg-white rounded-2xl p-8 shadow-lg relative overflow-hidden"
+            >
+              <div className="relative w-full h-[250px] md:h-[300px] mb-6 rounded-xl overflow-hidden shadow-inner">
+                <Image
+                  src={service.image}
+                  alt={service.title}
+                  layout="fill"
+                  objectFit="cover"
+                  className="transition-transform duration-500 hover:scale-105"
+                />
+              </div>
+
+              <h3 className="text-3xl font-bold mb-4 font-headline text-black">
+                {service.title}
+              </h3>
+              <p className="text-lg text-black/80 mb-6">
+                {service.description}
+              </p>
+              <div className="flex flex-wrap gap-2 mb-6">
+                {service.tags.map((tag, tagIndex) => (
+                  <span
+                    key={tagIndex}
+                    className="inline-block px-3 py-1 text-sm font-medium text-black bg-black/5 rounded-full"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <AnimatedButton href="#contact">
+                {t("ctaPrimary")}
+              </AnimatedButton>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+} -- that's my globals.css: /* Importiere Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@400;600&display=swap");
+
+:root {
+  /* Farben - Cyberpunk-Thema (softer, less intense) */
+  --color-primary: #2a2a4a;
+  --color-secondary: #3b3b6d;
+  --color-accent: #4adede;
+  --color-bg: #ffffff;
+  --color-text: #2a2a4a;
+
+  /* Pinsel-Effekt Farben */
+  --brush-red: #e573a0;
+  --brush-blue: #4ab8e6;
+  --brush-green: #4ade80;
+  --brush-purple: #b266f5;
+  --brush-orange: #e69b5c;
+  --brush-teal: #4db8b8;
+  --brush-magenta: #e666a3;
+  --brush-pink: #e68ab2;
+  --brush-indigo: #7a66cc;
+  --brush-lime: #b2e64d;
+
+  /* Schriftarten */
+  --font-sans: "Rajdhani", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial;
+  --font-headline: "Orbitron", Georgia, "Times New Roman", serif;
+
+  /* Farbverlauf für Überschrift */
+  --headline-grad-from: rgba(74, 222, 222, 0.9);
+  --headline-grad-to: rgba(230, 102, 163, 0.9);
+}
+
+/* Tailwind Basis */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Standardwerte für den Body */
+html,
+body {
+  font-family: var(--font-sans);
+  background-color: var(
+    --color-primary
+  ); /* Changed to a dark background for the sticky card effect */
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+}
+
+/* Benutzerdefinierter Hintergrund */
+.bg-brand-bg {
+  background-color: var(--color-bg);
+}
+
+/* Hero gradient background */
+.hero-gradient {
+  background: linear-gradient(to bottom right, #ffffff, #add8e6);
+}
+
+/* Pinsel-Effekt */
+.brush-effect {
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3);
+  background-size: 100% 100%;
+  margin: -2px -6px;
+  padding: 2px 6px;
+  display: inline-block;
+  filter: brightness(1.1);
+}
+
+/* Pinsel-Farben */
+.brush-effect.brush-red {
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=E573A0);
+}
+.brush-effect.brush-blue {
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=4AB8E6);
+}
+.brush-effect.brush-green {
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=4ADE80);
+}
+.brush-effect.brush-purple {
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=B266F5);
+}
+.brush-effect.brush-orange {
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=E69B5C);
+}
+.brush-effect.brush-teal {
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=4DB8B8);
+}
+.brush-effect.brush-magenta {
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=E666A3);
+}
+.brush-effect.brush-pink {
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=E68AB2);
+}
+.brush-effect.brush-indigo {
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=7A66CC);
+}
+.brush-effect.brush-lime {
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=B2E64D);
+}
+
+/* Farbverlauf für Text */
+.text-hero-gradient {
+  background-image: linear-gradient(
+    90deg,
+    var(--headline-grad-from),
+    var(--headline-grad-to)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Glas-Pille */
+.pill-glass {
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Gradient Border */
+.border-gradient {
+  --p: 15%;
+  --bg-color: #ffffff;
+  --text-color: #323232;
+  --c1: #ffffff;
+  --c2: #ffffff;
+  --c3: #ff8c00;
+
+  background: linear-gradient(var(--bg-color), var(--bg-color)) padding-box,
+    conic-gradient(
+        from var(--gradient-angle, 0deg),
+        var(--c1),
+        var(--c2),
+        var(--c3),
+        var(--c1)
+      )
+      border-box;
+  border: 4px solid transparent;
+  border-radius: 3rem;
+  transition: all 0.3s ease;
+  color: var(--text-color);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  padding: 1rem 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.border-gradient:hover {
+  transform: translateY(-2px);
+}
+
+/* Sticky Section */
+section.sticky {
+  will-change: transform;
+}
+
+/* Hero Text */
+.hero-text {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+/* About Text */
+.about-text {
+  color: var(--color-text);
+  background-color: rgba(59, 59, 109, 0.8);
+  padding: 2rem;
+  border-radius: 1rem;
+  font-size: 1.125rem;
+}
+
+/* Hero-specific styles */
+.text-headline {
+  color: #000000;
+}
+
+.decoration-accent {
+  text-decoration-color: var(--color-accent);
+}
+
+.text-text {
+  color: #000000;
+}
+
+.bg-text\/10 {
+  background-color: rgba(0, 0, 0, 0.1); /* Using black with opacity */
+}
+
+.border-text\/30 {
+  border-color: rgba(0, 0, 0, 0.3); /* Using black with opacity */
+}
+
+.font-headline {
+  font-family: var(--font-headline);
+}
+1. I'm not finished to read the content of the current slide, if its bigger as the screen and the next slide already appear. I want first read the content of the current slide and then the next slide should appear. The same error happens with the hero.tsx on mobile where the content is bigger as the screen. The stickyslide effect have to stay but the next slide show after I'm at the end of the current section (slide). If you don't understand something, ask me. Fix it so it works 100% or just say me that this cant be solved. Thats my website: https://solid-memory-wrjvrrgg9759hwgx-3000.app.github.dev/en. Here you see the error on scrolling. Again in other words: 
+fix all files so I see first the content of the whole section on my page.tsx, before the next one goes above the current section if the content of the section is bigger than the screen. if the section is bigger as the screen size and then the next slide comes after the current section is finished with reading or it touches the bottom of the screen. Make a function In react or framer motion if needed. Fix all files that are needed and post them here. look on all files. its all in the src folder. think longer if needed. is it possible with my setup to achieve this? i start a webagency and want to flex with my skills but i cant solve that. what is the problem? if the screen is smaller than my section, the next section appears in the stickyslides animation.. its so sad and frustrating. Should I delete the sticky section effect? Solve it to 100%. Maybe with a custom sticky slide section animation effect or just say me that this will not work. You need more files? 
