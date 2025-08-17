@@ -4,7 +4,7 @@
     "subtitle": "We design digital experiences that inspire"
   },
   "hero": {
-    "kicker": "Web - & Softare Development",
+    "kicker": "Web & Software Development",
     "kickerTag": "Freelancer",
     "titleLine1": "We",
     "titleLine2": "Grow",
@@ -12,7 +12,6 @@
     "subtitle": "Websites, shops & automation — clear, fast, measurable.",
     "ctaPrimary": "Request a quote",
     "ctaSecondary": "View services"
-
   },
   "about": {
     "analyze": {
@@ -33,18 +32,34 @@
     },
     "ctaPrimary": "Request a quote"
   },
+  
   "services": {
-      "kicker": "Our Services",
-      "title": "Digital solutions that work for you",
-      "webDesign": {
-        "title": "Web Design & Development",
-        "description": "We craft beautiful, responsive, and high-performing websites tailored to your brand's identity and goals, ensuring a seamless user experience across all devices."
-      },
-      "softwareDevelopment": {
-        "title": "Software Development",
-        "description": "From custom applications to complex system integrations, we build robust and scalable software solutions that streamline your operations and drive innovation."
-      }
+    "kicker": "Our Services",
+    "title": "Digital solutions that work for you",
+    "webDesign": {
+      "title": "Web Design & Development",
+      "description": "We craft beautiful, responsive, and high-performing websites tailored to your brand's identity and goals, ensuring a seamless user experience across all devices.",
+      "features": [
+        "Responsive design for all devices",
+        "Custom UI/UX tailored to your brand",
+        "SEO-optimized websites",
+        "Integration with modern tools & APIs",
+        "Performance-focused development"
+      ]
     },
+    "softwareDevelopment": {
+      "title": "Software Development",
+      "description": "From custom applications to complex system integrations, we build robust and scalable software solutions that streamline your operations and drive innovation.",
+      "features": [
+        "Custom business applications",
+        "Secure and scalable architecture",
+        "System integration and automation",
+        "Cross-platform solutions",
+        "Maintenance and continuous support"
+      ]
+    }
+  },
+
   "Meta": {
     "title": "Web Agency – Modern Websites"
   },

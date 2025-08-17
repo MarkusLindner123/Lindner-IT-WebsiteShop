@@ -1,91 +1,91 @@
 /* globals.css */
 
-/* Importiere Google Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@400;600&display=swap");
+/* Import Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Poppins:wght@600;800&display=swap");
 
 :root {
-  /* Farben - Cyberpunk-Thema (softer, less intense) */
-  --color-primary: #2a2a4a;
-  --color-secondary: #3b3b6d;
-  --color-accent: #4adede;
-  --color-bg: #F1F1F1;
-  --color-text: #2a2a4a;
-  --color-about-bg: #ffffff;
+  /* Vibrant, modern color theme */
+  --color-primary-dark: #1e1e2d; /* A deep, rich blue-black for backgrounds */
+  --color-primary-light: #f0f8ff; /* A soft, off-white for contrast */
+  --color-accent-one: #ff6b6b; /* A vibrant coral for highlights */
+  --color-accent-two: #48c9b0; /* A clean, modern turquoise */
+  --color-text: #2c3e50; /* A dark gray for body text */
 
-  /* NEW: Services section + floating tags */
-  --color-services-bg: rgba(31, 41, 55, 0.8); /* default bg-gray-800/80 */
-  --color-services-tag-bg: rgba(255, 255, 255, 0.1); 
-  --color-services-tag-text: #e5e7eb; /* Tailwind gray-200 */
+  /* Services section (keeping a dark theme for contrast) */
+  --color-services-bg: rgba(26, 42, 60, 0.9);
+  --color-services-tag-bg: rgba(255, 255, 255, 0.1);
+  --color-services-tag-text: #e0f7fa;
 
-  /* Schriftarten */
-  --font-sans: "Rajdhani", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
-    Roboto, "Helvetica Neue", Arial;
-  --font-headline: "Orbitron", Georgia, "Times New Roman", serif;
-
-  /* Farbverlauf für Überschrift */
-  --headline-grad-from: rgba(74, 222, 222, 0.9);
-  --headline-grad-to: rgba(230, 102, 163, 0.9);
+  /* Fonts */
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-headline: "Poppins", sans-serif;
 }
 
-/* Tailwind Basis */
+/* Tailwind base */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Standardwerte für den Body */
-html,
-body {
+html, body {
   font-family: var(--font-sans);
-  background-color: var(--color-primary);
+  background-color: var(--color-primary-dark);
   color: var(--color-text);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   margin: 0;
   padding: 0;
 }
 
-/* Benutzerdefinierter Hintergrund */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-headline);
+  color: var(--color-accent-one);
+}
+
+a {
+  color: var(--color-accent-two);
+  text-decoration: none;
+}
+
+/* Custom backgrounds */
 .bg-brand-bg {
-  background-color: var(--color-bg);
+  background-color: var(--color-primary-dark);
 }
 
-/* Custom background for the About section */
 .bg-about-bg {
-  background-color: var(--color-about-bg);
+  background-color: var(--color-primary-light);
 }
 
-/* Hero gradient background */
-.hero-gradient {
-  background: linear-gradient(to bottom right, #ffffff, #add8e6);
-}
+/* Services section */
+.bg-services-bg { background-color: var(--color-services-bg); }
+.bg-services-tag-bg { background-color: var(--color-services-tag-bg); }
+.text-services-tag-text { color: var(--color-services-tag-text); }
 
-/* Farbverlauf für Text */
-.text-hero-gradient {
-  background-image: linear-gradient(
-    90deg,
-    var(--headline-grad-from),
-    var(--headline-grad-to)
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
+/* Bullet color */
+ul.list-disc li::marker { color: var(--color-accent-two); }
 
-/* Glas-Pille */
-.pill-glass {
-  background-color: rgba(255, 255, 255, 0.2);
+.backdrop-blur-sm {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
 
-/* Gradient Border */
+.text-accent { color: var(--color-accent-one); }
+
+/* Hero and About */
+.hero-text { font-size: 3.5rem; font-weight: 800; line-height: 1.2; color: var(--color-primary-light); }
+.about-text {
+  color: var(--color-text);
+  background-color: var(--color-primary-light);
+  padding: 2rem;
+  border-radius: 1rem;
+  font-size: 1.125rem;
+}
+
+/* Buttons and gradient border */
 .border-gradient {
   --p: 15%;
-  --bg-color: #ffffff;
-  --text-color: #323232;
-  --c1: #ffffff;
-  --c2: #ffffff;
-  --c3: #ff8c00;
+  --bg-color: var(--color-primary-light);
+  --text-color: var(--color-text);
+  --c1: var(--color-accent-one);
+  --c2: var(--color-accent-two);
+  --c3: var(--color-accent-one);
 
   background: linear-gradient(var(--bg-color), var(--bg-color)) padding-box,
     conic-gradient(
@@ -110,63 +110,9 @@ body {
   cursor: pointer;
 }
 
-.border-gradient:hover {
-  transform: translateY(-2px);
-}
+.border-gradient:hover { transform: translateY(-2px); }
 
-/* Sticky Section */
-section.sticky {
+/* Floating tags */
+.floating-tag {
   will-change: transform;
-}
-
-/* Hero Text */
-.hero-text {
-  font-size: 3.5rem;
-  font-weight: 800;
-  line-height: 1.2;
-}
-
-/* About Text */
-.about-text {
-  color: var(--color-text);
-  background-color: rgba(59, 59, 109, 0.8);
-  padding: 2rem;
-  border-radius: 1rem;
-  font-size: 1.125rem;
-}
-
-/* Hero-specific styles */
-.text-headline {
-  color: #000000;
-}
-
-.decoration-accent {
-  text-decoration-color: var(--color-accent);
-}
-
-.text-text {
-  color: #000000;
-}
-
-.bg-text\/10 {
-  background-color: rgba(0, 0, 0, 0.1);
-}
-
-.border-text\/30 {
-  border-color: rgba(0, 0, 0, 0.3);
-}
-
-.font-headline {
-  font-family: var(--font-headline);
-}
-
-/* NEW utilities for services section */
-.bg-services-bg {
-  background-color: var(--color-services-bg);
-}
-.bg-services-tag-bg {
-  background-color: var(--color-services-tag-bg);
-}
-.text-services-tag-text {
-  color: var(--color-services-tag-text);
 }

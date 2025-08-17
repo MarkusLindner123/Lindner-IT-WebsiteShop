@@ -86,8 +86,8 @@ export default function Hero() {
       aria-label="Hero"
       className="relative overflow-hidden"
     >
-      {/* Hero gradient background */}
-      <div className="absolute inset-0 hero-gradient rounded-2xl" />
+      {/* Change this div's background to ensure the card is visible */}
+      <div className="absolute inset-0 bg-about-bg rounded-2xl" />
 
       <div className="max-w-7xl mx-auto px-4 lg:px-8 py-12 md:py-16 lg:py-20 relative z-10 p-8 rounded-2xl md:p-12">
         <motion.div

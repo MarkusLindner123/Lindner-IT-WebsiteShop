@@ -33,7 +33,6 @@ export default function ServicesSection() {
   const animationContainerRef = useRef<HTMLDivElement>(null);
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
 
-  // Get container size after render
   useLayoutEffect(() => {
     const container = animationContainerRef.current;
     if (!container) return;
@@ -69,16 +68,11 @@ export default function ServicesSection() {
 
     const numShapes = 12;
     const floatingElements: FloatingElement[] = [];
+    const getRandom = (min: number, max: number) => Math.random() * (max - min) + min;
+    const padding = 20;
 
-    const getRandom = (min: number, max: number) =>
-      Math.random() * (max - min) + min;
-
-    const padding = 20; // avoid clipping
-
-    // Create floating tags
     for (let i = 0; i < numShapes; i++) {
       const { text, icon: Icon } = tags[i % tags.length];
-
       const shape = document.createElement("div");
       shape.classList.add(
         "inline-flex",
@@ -121,12 +115,10 @@ export default function ServicesSection() {
       });
     }
 
-    // Animate
     function animate() {
       for (const el of floatingElements) {
         el.x += el.vx;
         el.y += el.vy;
-
         if (el.x < 0 || el.x + el.width > containerSize.width) {
           el.vx *= -1;
           el.x = Math.max(0, Math.min(el.x, containerSize.width - el.width));
@@ -135,11 +127,11 @@ export default function ServicesSection() {
           el.vy *= -1;
           el.y = Math.max(0, Math.min(el.y, containerSize.height - el.height));
         }
-
         el.el.style.transform = `translate(${el.x}px, ${el.y}px)`;
       }
       requestAnimationFrame(animate);
     }
+
     animate();
   }, [containerSize]);
 
@@ -148,26 +140,33 @@ export default function ServicesSection() {
       id="services"
       className="relative w-full min-h-[500px] rounded-2xl shadow-2xl bg-services-bg text-white flex flex-col items-center justify-center overflow-hidden"
     >
-      {/* Floating tags container */}
       <div
         ref={animationContainerRef}
         className="absolute top-0 left-0 w-full h-full overflow-hidden z-0"
       />
 
-      {/* Content */}
       <div className="relative z-10 text-center space-y-8 max-w-7xl w-full px-6 md:px-12">
         <h2 className="text-4xl md:text-5xl font-bold">{t("title")}</h2>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
-          <div className="bg-white/10 backdrop-blur-sm p-6 rounded-xl shadow-lg">
-            <h3 className="text-2xl font-semibold mb-2">{t("webDesign.title")}</h3>
-            <p className="text-gray-300">{t("webDesign.description")}</p>
-          </div>
-          <div className="bg-white/10 backdrop-blur-sm p-6 rounded-xl shadow-lg">
-            <h3 className="text-2xl font-semibold mb-2">
-              {t("softwareDevelopment.title")}
-            </h3>
-            <p className="text-gray-300">{t("softwareDevelopment.description")}</p>
-          </div>
+          {(["webDesign", "softwareDevelopment"] as const).map((key) => {
+            const list = t(`${key}.features`, { returnObjects: true }) as unknown as string[];
+            return (
+              <div key={key} className="bg-white/10 backdrop-blur-sm p-6 rounded-xl shadow-lg">
+                <h3 className="text-2xl font-semibold mb-2">{t(`${key}.title`)}</h3>
+                <p className="text-gray-200 mb-4">{t(`${key}.description`)}</p>
+                <ul className="space-y-2">
+                  {Array.isArray(list) &&
+                    list.map((item, idx) => (
+                      <li key={idx} className="flex items-center gap-2 text-gray-300">
+                        <span className="w-2 h-2 bg-white rounded-full flex-shrink-0" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                </ul>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
