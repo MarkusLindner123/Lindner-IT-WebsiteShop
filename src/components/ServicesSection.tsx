@@ -150,19 +150,23 @@ export default function ServicesSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
           {(["webDesign", "softwareDevelopment"] as const).map((key) => {
-            const list = t(`${key}.features`, { returnObjects: true }) as unknown as string[];
+            const features: string[] = [];
+            for (let i = 1; i <= 5; i++) {
+              const feature = t(`${key}.feature${i}`);
+              if (feature) features.push(feature);
+            }
+
             return (
               <div key={key} className="bg-white/10 backdrop-blur-sm p-6 rounded-xl shadow-lg">
                 <h3 className="text-2xl font-semibold mb-2">{t(`${key}.title`)}</h3>
                 <p className="text-gray-200 mb-4">{t(`${key}.description`)}</p>
                 <ul className="space-y-2">
-                  {Array.isArray(list) &&
-                    list.map((item, idx) => (
-                      <li key={idx} className="flex items-center gap-2 text-gray-300">
-                        <span className="w-2 h-2 bg-white rounded-full flex-shrink-0" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
+                  {features.map((item, idx) => (
+                    <li key={idx} className="flex items-center gap-2 text-gray-300">
+                      <span className="w-2 h-2 bg-white rounded-full flex-shrink-0" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
                 </ul>
               </div>
             );

@@ -39,24 +39,20 @@
     "webDesign": {
       "title": "Web Design & Development",
       "description": "We craft beautiful, responsive, and high-performing websites tailored to your brand's identity and goals, ensuring a seamless user experience across all devices.",
-      "features": [
-        "Responsive design for all devices",
-        "Custom UI/UX tailored to your brand",
-        "SEO-optimized websites",
-        "Integration with modern tools & APIs",
-        "Performance-focused development"
-      ]
+      "feature1": "Responsive design for all devices",
+      "feature2": "Custom UI/UX tailored to your brand",
+      "feature3": "SEO-optimized websites",
+      "feature4": "Integration with modern tools & APIs",
+      "feature5": "Performance-focused development"
     },
     "softwareDevelopment": {
       "title": "Software Development",
       "description": "From custom applications to complex system integrations, we build robust and scalable software solutions that streamline your operations and drive innovation.",
-      "features": [
-        "Custom business applications",
-        "Secure and scalable architecture",
-        "System integration and automation",
-        "Cross-platform solutions",
-        "Maintenance and continuous support"
-      ]
+      "feature1": "Custom business applications",
+      "feature2": "Secure and scalable architecture",
+      "feature3": "System integration and automation",
+      "feature4": "Cross-platform solutions",
+      "feature5": "Maintenance and continuous support"
     }
   },
 
