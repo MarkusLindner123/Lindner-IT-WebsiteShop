@@ -1,7 +1,9 @@
+// ServicesSection.tsx
 "use client";
 
 import { useEffect, useRef, useLayoutEffect, useState } from "react";
 import { useTranslations } from "next-intl";
+import { motion, Variants } from "framer-motion";
 import {
   Code,
   Globe,
@@ -12,9 +14,7 @@ import {
   Database,
   Shield,
   Cpu,
-  Smartphone,
-  Server,
-  Settings,
+
 } from "lucide-react";
 import ReactDOMServer from "react-dom/server";
 
@@ -32,6 +32,20 @@ export default function ServicesSection() {
   const t = useTranslations("services");
   const animationContainerRef = useRef<HTMLDivElement>(null);
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
+
+  const containerVariants: Variants = {
+    hidden: {},
+    show: { transition: { staggerChildren: 0.08, delayChildren: 0.12 } },
+  };
+
+  const fadeUp: Variants = {
+    hidden: { opacity: 0, y: 18 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+    },
+  };
 
   useLayoutEffect(() => {
     const container = animationContainerRef.current;
@@ -61,9 +75,7 @@ export default function ServicesSection() {
       { text: "Database", icon: Database },
       { text: "Security", icon: Shield },
       { text: "AI", icon: Cpu },
-      { text: "Mobile", icon: Smartphone },
-      { text: "Server", icon: Server },
-      { text: "Config", icon: Settings },
+
     ];
 
     const numShapes = 12;
@@ -136,42 +148,61 @@ export default function ServicesSection() {
   }, [containerSize]);
 
   return (
-    <section
-      id="services"
-      className="relative w-full min-h-[500px] rounded-2xl shadow-2xl bg-services-bg text-white flex flex-col items-center justify-center overflow-hidden"
-    >
-      <div
-        ref={animationContainerRef}
-        className="absolute top-0 left-0 w-full h-full overflow-hidden z-0"
-      />
+    <section aria-label="Services" className="relative overflow-hidden">
+      {/* Background container */}
+      <div className="absolute inset-0 bg-services-bg rounded-2xl" />
 
-      <div className="relative z-10 text-center space-y-8 max-w-7xl w-full px-6 md:px-12">
-        <h2 className="text-4xl md:text-5xl font-bold">{t("title")}</h2>
+      <div className="max-w-7xl mx-auto px-4 lg:px-8 py-12 md:py-16 lg:py-20 relative z-10 p-8 rounded-2xl md:p-12">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="show"
+          className="relative"
+        >
+          {/* Floating tags animation container */}
+          <div
+            ref={animationContainerRef}
+            className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 rounded-2xl"
+          />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
-          {(["webDesign", "softwareDevelopment"] as const).map((key) => {
-            const features: string[] = [];
-            for (let i = 1; i <= 5; i++) {
-              const feature = t(`${key}.feature${i}`);
-              if (feature) features.push(feature);
-            }
+          {/* Content */}
+          <motion.div variants={fadeUp} className="relative z-10">
 
-            return (
-              <div key={key} className="bg-white/10 backdrop-blur-sm p-6 rounded-xl shadow-lg">
-                <h3 className="text-2xl font-semibold mb-2">{t(`${key}.title`)}</h3>
-                <p className="text-gray-200 mb-4">{t(`${key}.description`)}</p>
-                <ul className="space-y-2">
-                  {features.map((item, idx) => (
-                    <li key={idx} className="flex items-center gap-2 text-gray-300">
-                      <span className="w-2 h-2 bg-white rounded-full flex-shrink-0" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            );
-          })}
-        </div>
+
+            <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold leading-tight tracking-tight text-black font-headline mb-8">
+              <span className="block">{t("title")}</span>
+            </h1>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+              {(["webDesign", "softwareDevelopment"] as const).map((key) => {
+                const features: string[] = [];
+                for (let i = 1; i <= 5; i++) {
+                  const feature = t(`${key}.feature${i}`);
+                  if (feature) features.push(feature);
+                }
+
+                return (
+                  <motion.div 
+                    key={key} 
+                    variants={fadeUp}
+                    className="bg-services-card p-6 rounded-xl shadow-lg"
+                  >
+                    <h2 className="text-2xl font-semibold mb-2 text-white">{t(`${key}.title`)}</h2>
+                    <p className="text-services-card mb-4">{t(`${key}.description`)}</p>
+                    <ul className="space-y-2">
+                      {features.map((item, idx) => (
+                        <li key={idx} className="flex items-center gap-2">
+                          <span className="w-2 h-2 rounded-full services-bullet flex-shrink-0" />
+                          <span className="text-services-card">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

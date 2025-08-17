@@ -1,3 +1,4 @@
+// page.tsx
 import { setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 
@@ -25,7 +26,7 @@ export default async function HomePage({
       <section className="top-6 min-h-screen rounded-2xl overflow-hidden shadow-xl">
         <AboutSection />
       </section>
-      <section className="top-6 rounded-2xl overflow-hidden shadow-xl">
+      <section className="top-6 min-h-screen rounded-2xl overflow-hidden shadow-xl">
         <ServicesSection />
       </section>
     </div>
