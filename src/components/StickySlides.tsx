@@ -2,7 +2,7 @@
 
 import HeroVideo from "@/components/HeroVideo";
 import Hero from "@/components/Hero";
-import AboutSection from "@/components/AboutSection";
+import AboutSection from "@/components/AboutSection/AboutSection";
 import ServicesSection from "@/components/ServicesSection";
 
 export default function StickySlides() {

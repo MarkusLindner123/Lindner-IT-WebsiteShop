@@ -4,6 +4,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import AnimatedButton from "@/components/AnimatedButton";
 import Image from "next/image";
+import "./AboutSection.css"; // Import the new CSS file
 
 const brushColors = [
   "red",
@@ -188,10 +189,10 @@ export default function AboutSection() {
 
         const words = item.querySelectorAll(".animated-word");
         const totalWordsInParagraph = words.length;
+        const wordsToReveal = Math.floor(totalWordsInParagraph * textProgress);
 
         words.forEach((wordElement, wordIdx) => {
-          const visible =
-            wordIdx <= Math.floor(totalWordsInParagraph * textProgress);
+          const visible = wordIdx < wordsToReveal;
           (wordElement as HTMLElement).style.opacity = visible ? "1" : "0.15";
         });
       });
@@ -217,7 +218,7 @@ export default function AboutSection() {
   return (
     <section
       id="about"
-      className="mx-auto max-w-full px-4 lg:px-8 py-20 md:py-28 lg:py-32 bg-brand-bg"
+      className="bg-about-bg mx-auto max-w-full px-4 lg:px-8 py-20 md:py-28 lg:py-32"
     >
       <div ref={sectionRef} className="space-y-12">
         {allWords.map((paragraphWords, paraIdx) => (

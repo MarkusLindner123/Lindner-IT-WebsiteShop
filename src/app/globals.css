@@ -1,3 +1,5 @@
+/* globals.css */
+
 /* Importiere Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@400;600&display=swap");
 
@@ -6,20 +8,9 @@
   --color-primary: #2a2a4a;
   --color-secondary: #3b3b6d;
   --color-accent: #4adede;
-  --color-bg: #ffffff;
+  --color-bg: #F1F1F1;
   --color-text: #2a2a4a;
-
-  /* Pinsel-Effekt Farben */
-  --brush-red: #e573a0;
-  --brush-blue: #4ab8e6;
-  --brush-green: #4ade80;
-  --brush-purple: #b266f5;
-  --brush-orange: #e69b5c;
-  --brush-teal: #4db8b8;
-  --brush-magenta: #e666a3;
-  --brush-pink: #e68ab2;
-  --brush-indigo: #7a66cc;
-  --brush-lime: #b2e64d;
+  --color-about-bg: #ffffff;
 
   /* Schriftarten */
   --font-sans: "Rajdhani", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
@@ -55,51 +46,14 @@ body {
   background-color: var(--color-bg);
 }
 
+/* Custom background for the About section */
+.bg-about-bg {
+  background-color: var(--color-about-bg);
+}
+
 /* Hero gradient background */
 .hero-gradient {
   background: linear-gradient(to bottom right, #ffffff, #add8e6);
-}
-
-/* Pinsel-Effekt */
-.brush-effect {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3);
-  background-size: 100% 100%;
-  margin: -2px -6px;
-  padding: 2px 6px;
-  display: inline-block;
-  filter: brightness(1.1);
-}
-
-/* Pinsel-Farben */
-.brush-effect.brush-red {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=E573A0);
-}
-.brush-effect.brush-blue {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=4AB8E6);
-}
-.brush-effect.brush-green {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=4ADE80);
-}
-.brush-effect.brush-purple {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=B266F5);
-}
-.brush-effect.brush-orange {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=E69B5C);
-}
-.brush-effect.brush-teal {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=4DB8B8);
-}
-.brush-effect.brush-magenta {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=E666A3);
-}
-.brush-effect.brush-pink {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=E68AB2);
-}
-.brush-effect.brush-indigo {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=7A66CC);
-}
-.brush-effect.brush-lime {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=B2E64D);
 }
 
 /* Farbverlauf für Text */
