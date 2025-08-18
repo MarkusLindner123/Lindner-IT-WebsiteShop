@@ -1,231 +1,206 @@
+// ServicesSection.tsx
 "use client";
 
+import { useEffect, useRef, useLayoutEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { motion, Variants } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
-import AnimatedButton from "@/components/AnimatedButton";
-import Image from "next/image";
+import {
+  Code,
+  Globe,
+  Paintbrush,
+  Cloud,
+  LayoutDashboard,
+  Terminal,
+  Database,
+  Shield,
+  Cpu,
 
-// Define the shape for the service items
-interface ServiceItem {
-  title: string;
-  description: string;
-  image: string;
-  tags: string[];
+} from "lucide-react";
+import ReactDOMServer from "react-dom/server";
+
+interface FloatingElement {
+  el: HTMLDivElement;
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  width: number;
+  height: number;
 }
-
-// Define the shape for the floating tags to resolve the 'any' type error
-interface FloatingTag {
-  tag: string;
-  delay: number;
-  top: number;
-  left: number;
-}
-
-// Variants for the section container
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.5,
-      delayChildren: 0.2,
-    },
-  },
-};
-
-// Variants for the service cards
-const cardVariants: Variants = {
-  hidden: { opacity: 0, y: 50 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.8,
-      ease: [0.22, 1, 0.36, 1],
-    },
-  },
-};
-
-// Variants for the floating tags
-const tagVariants: Variants = {
-  initial: { y: "100vh" },
-  animate: {
-    y: "-100vh",
-    transition: {
-      duration: 20,
-      ease: "linear",
-      repeat: Infinity,
-    },
-  },
-};
 
 export default function ServicesSection() {
   const t = useTranslations("services");
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const [inView, setInView] = useState(false);
-  const [staggeredTags, setStaggeredTags] = useState<FloatingTag[]>([]);
+  const animationContainerRef = useRef<HTMLDivElement>(null);
+  const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
 
-  useEffect(() => {
-    // Generate the tags and their positions only on the client
-    const floatingTags = [
-      "Next.js",
-      "React",
-      "Tailwind",
-      "TypeScript",
-      "Web Design",
-      "Software Development",
-      "UI/UX",
-      "Frontend",
-      "Backend",
-      "Fullstack",
-      "DevOps",
-      "Framer Motion",
-    ];
+  const containerVariants: Variants = {
+    hidden: {},
+    show: { transition: { staggerChildren: 0.08, delayChildren: 0.12 } },
+  };
 
-    const generatedTags = floatingTags.map((tag, index) => ({
-      tag,
-      delay: index * 0.1,
-      top: Math.random() * 100,
-      left: Math.random() * 100,
-    }));
+  const fadeUp: Variants = {
+    hidden: { opacity: 0, y: 18 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+    },
+  };
 
-    setStaggeredTags(generatedTags);
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setInView(entry.isIntersecting);
-      },
-      {
-        threshold: 0.2,
-      }
-    );
-
-    const currentRef = sectionRef.current;
-    if (currentRef) {
-      observer.observe(currentRef);
-    }
-
-    return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef);
-      }
-    };
+  useLayoutEffect(() => {
+    const container = animationContainerRef.current;
+    if (!container) return;
+    const resizeObserver = new ResizeObserver(() => {
+      setContainerSize({
+        width: container.offsetWidth,
+        height: container.offsetHeight,
+      });
+    });
+    resizeObserver.observe(container);
+    return () => resizeObserver.disconnect();
   }, []);
 
-  const serviceItems: ServiceItem[] = [
-    {
-      title: t("webDesign.title"),
-      description: t("webDesign.description"),
-      image: "/webdesign.jpg",
-      tags: ["React", "Next.js", "Vue.js", "Tailwind CSS", "Figma", "GSAP"],
-    },
-    {
-      title: t("softwareDevelopment.title"),
-      description: t("softwareDevelopment.description"),
-      image: "/softwaredev.jpg",
-      tags: ["Node.js", "TypeScript", "Python", "Rust", "Go", "Docker", "AWS"],
-    },
-  ];
+  useEffect(() => {
+    if (containerSize.width === 0 || containerSize.height === 0) return;
+    const container = animationContainerRef.current;
+    if (!container) return;
+
+    const tags = [
+      { text: "Web", icon: Globe },
+      { text: "Code", icon: Code },
+      { text: "Design", icon: Paintbrush },
+      { text: "Software", icon: Terminal },
+      { text: "UI/UX", icon: LayoutDashboard },
+      { text: "Cloud", icon: Cloud },
+      { text: "Database", icon: Database },
+      { text: "Security", icon: Shield },
+      { text: "AI", icon: Cpu },
+
+    ];
+
+    const numShapes = 12;
+    const floatingElements: FloatingElement[] = [];
+    const getRandom = (min: number, max: number) => Math.random() * (max - min) + min;
+    const padding = 20;
+
+    for (let i = 0; i < numShapes; i++) {
+      const { text, icon: Icon } = tags[i % tags.length];
+      const shape = document.createElement("div");
+      shape.classList.add(
+        "inline-flex",
+        "items-center",
+        "gap-2",
+        "px-4",
+        "py-1",
+        "rounded-full",
+        "text-sm",
+        "font-medium",
+        "floating-tag",
+        "absolute"
+      );
+
+      const iconWrapper = document.createElement("span");
+      iconWrapper.innerHTML = ReactDOMServer.renderToString(<Icon size={16} />);
+      iconWrapper.classList.add("inline-flex", "items-center");
+      shape.appendChild(iconWrapper);
+
+      const textSpan = document.createElement("span");
+      textSpan.textContent = text;
+      shape.appendChild(textSpan);
+
+      container.appendChild(shape);
+
+      const width = shape.offsetWidth;
+      const height = shape.offsetHeight;
+
+      floatingElements.push({
+        el: shape,
+        x: getRandom(padding, containerSize.width - width - padding),
+        y: getRandom(padding, containerSize.height - height - padding),
+        vx: getRandom(0.5, 1) * (Math.random() < 0.5 ? 1 : -1),
+        vy: getRandom(0.5, 1) * (Math.random() < 0.5 ? 1 : -1),
+        width,
+        height,
+      });
+    }
+
+    function animate() {
+      for (const el of floatingElements) {
+        el.x += el.vx;
+        el.y += el.vy;
+        if (el.x < 0 || el.x + el.width > containerSize.width) {
+          el.vx *= -1;
+          el.x = Math.max(0, Math.min(el.x, containerSize.width - el.width));
+        }
+        if (el.y < 0 || el.y + el.height > containerSize.height) {
+          el.vy *= -1;
+          el.y = Math.max(0, Math.min(el.y, containerSize.height - el.height));
+        }
+        el.el.style.transform = `translate(${el.x}px, ${el.y}px)`;
+      }
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  }, [containerSize]);
 
   return (
-    <section id="services" className="relative p-8 md:p-12 bg-brand-bg">
-      <div
-        className="absolute inset-0 z-0 overflow-hidden pointer-events-none"
-        aria-hidden="true"
-      >
-        {staggeredTags.map((item, index) => (
-          <motion.div
-            key={index}
-            className="absolute z-0 px-4 py-2 text-sm text-black rounded-full backdrop-blur-sm opacity-5"
-            style={{
-              top: `${item.top}%`,
-              left: `${item.left}%`,
-            }}
-            variants={tagVariants}
-            initial="initial"
-            animate={inView ? "animate" : "initial"}
-            // FIX: Removed the invalid transition prop spread.
-            // The `tagVariants` already has a transition defined,
-            // and `delay` can be set directly.
-            transition={{
-              duration: 20,
-              ease: "linear",
-              repeat: Infinity,
-              delay: item.delay,
-            }}
-          >
-            {item.tag}
-          </motion.div>
-        ))}
-      </div>
+    <section aria-label="Services" className="relative overflow-hidden">
+      
+      {/* Background container - Change this to use bg-services-section-bg */}
+      <div className="absolute inset-0 bg-services-section-bg rounded-2xl" />
 
-      <div
-        ref={sectionRef}
-        className="max-w-7xl mx-auto px-4 lg:px-8 py-12 md:py-16 lg:py-20 relative z-10"
-      >
-        <div className="text-center mb-12">
-          <motion.div
-            variants={cardVariants}
-            initial="hidden"
-            animate={inView ? "show" : "hidden"}
-            className="inline-flex items-center px-4 py-1 rounded-full text-sm font-medium text-black bg-black/10"
-          >
-            {t("kicker")}
-          </motion.div>
-          <motion.h2
-            variants={cardVariants}
-            initial="hidden"
-            animate={inView ? "show" : "hidden"}
-            className="text-5xl sm:text-6xl md:text-7xl font-extrabold leading-tight tracking-tight text-black font-headline mt-4"
-          >
-            {t("title")}
-          </motion.h2>
-        </div>
 
+      <div className="max-w-7xl mx-auto px-4 lg:px-8 py-12 md:py-16 lg:py-20 relative z-10 p-8 rounded-2xl md:p-12">
         <motion.div
           variants={containerVariants}
           initial="hidden"
-          animate={inView ? "show" : "hidden"}
-          className="grid grid-cols-1 md:grid-cols-2 gap-8"
+          animate="show"
+          className="relative"
         >
-          {serviceItems.map((service, index) => (
-            <motion.div
-              key={index}
-              variants={cardVariants}
-              className="bg-white rounded-2xl p-8 shadow-lg relative overflow-hidden"
-            >
-              <div className="relative w-full h-[250px] md:h-[300px] mb-6 rounded-xl overflow-hidden shadow-inner">
-                <Image
-                  src={service.image}
-                  alt={service.title}
-                  layout="fill"
-                  objectFit="cover"
-                  className="transition-transform duration-500 hover:scale-105"
-                />
-              </div>
+          {/* Floating tags animation container */}
+          <div
+            ref={animationContainerRef}
+            className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 rounded-2xl"
+          />
 
-              <h3 className="text-3xl font-bold mb-4 font-headline text-black">
-                {service.title}
-              </h3>
-              <p className="text-lg text-black/80 mb-6">
-                {service.description}
-              </p>
-              <div className="flex flex-wrap gap-2 mb-6">
-                {service.tags.map((tag, tagIndex) => (
-                  <span
-                    key={tagIndex}
-                    className="inline-block px-3 py-1 text-sm font-medium text-black bg-black/5 rounded-full"
+          {/* Content */}
+          <motion.div variants={fadeUp} className="relative z-20">
+
+
+            <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold leading-tight tracking-tight text-black font-headline mb-8">
+              <span className="block">{t("title")}</span>
+            </h1>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+              {(["webDesign", "softwareDevelopment"] as const).map((key) => {
+                const features: string[] = [];
+                for (let i = 1; i <= 5; i++) {
+                  const feature = t(`${key}.feature${i}`);
+                  if (feature) features.push(feature);
+                }
+
+                return (
+                  <motion.div 
+                    key={key} 
+                    variants={fadeUp}
+                    className="bg-services-card p-6 rounded-xl shadow-lg relative z-20"
                   >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-              <AnimatedButton href="#contact">
-                {t("ctaPrimary")}
-              </AnimatedButton>
-            </motion.div>
-          ))}
+                    <h2 className="text-2xl font-semibold mb-2 text-services-card-title">{t(`${key}.title`)}</h2>
+                    <p className="text-services-card-description mb-4">{t(`${key}.description`)}</p>
+                    <ul className="space-y-2">
+                      {features.map((item, idx) => (
+                        <li key={idx} className="flex items-center gap-2">
+                          <span className="w-2 h-2 rounded-full services-bullet flex-shrink-0" />
+                          <span className="text-services-card-description">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>

@@ -1,144 +1,184 @@
-/* Importiere Google Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@400;600&display=swap");
+/* globals.css */
+
+/* Import Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700&display=swap");
 
 :root {
-  /* Farben - Cyberpunk-Thema (softer, less intense) */
-  --color-primary: #2a2a4a;
-  --color-secondary: #3b3b6d;
-  --color-accent: #4adede;
-  --color-bg: #ffffff;
-  --color-text: #2a2a4a;
+  /* Professional, trustworthy color theme */
+  --color-primary-dark: #0a1128; /* Deep navy blue */
+  --color-primary-light: #f8f9fa; /* Clean white background */
+  --color-accent-one: #2563eb; /* Confident blue */
+  --color-accent-two: #14b8a6; /* Sophisticated teal */
+  --color-neutral: #4b5563; /* Neutral gray for text */
+  --color-success: #10b981; /* Positive indicators */
+  
+  /* Services section */
+  --color-services-bg: #ffffff;
+  --color-services-tag-bg: rgba(75, 85, 99, 0.4); /* halbtransparenter Hintergrund */
+  --color-services-tag-text: #ffffff;
+  --color-services-card-bg: rgba(230, 230, 230, 0.7); /* transparenter weißer Hintergrund */
+  --color-services-card-text: #1f2937; /* dunkler Text in Cards */
+  --color-services-card-title: #1f2937; /* Titel Farbe */
+  --color-services-card-description: #374151; /* Beschreibungstext Farbe */
+  --color-services-bullet: #1f2937; /* sichtbare Bullet Points */
 
-  /* Pinsel-Effekt Farben */
-  --brush-red: #e573a0;
-  --brush-blue: #4ab8e6;
-  --brush-green: #4ade80;
-  --brush-purple: #b266f5;
-  --brush-orange: #e69b5c;
-  --brush-teal: #4db8b8;
-  --brush-magenta: #e666a3;
-  --brush-pink: #e68ab2;
-  --brush-indigo: #7a66cc;
-  --brush-lime: #b2e64d;
+  /* Contact section */
+  --color-contact-bg: #ffffff;
+  --color-contact-subtitle: #4b5563;
+  --color-contact-label: #4b5563;
+  --color-contact-border: #d1d5db;
 
-  /* Schriftarten */
-  --font-sans: "Rajdhani", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
-    Roboto, "Helvetica Neue", Arial;
-  --font-headline: "Orbitron", Georgia, "Times New Roman", serif;
 
-  /* Farbverlauf für Überschrift */
-  --headline-grad-from: rgba(74, 222, 222, 0.9);
-  --headline-grad-to: rgba(230, 102, 163, 0.9);
+  /* Section backgrounds - New variables added here */
+  --color-heroVideo-bg: #0a1128;
+  --color-hero-bg: #daebd4;
+  --color-about-bg: #daebd4;
+  --color-services-section-bg: #daebd4; /* Renamed to avoid conflict */
+  
+  /* Fonts */
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-headline: "Plus Jakarta Sans", sans-serif;
 }
 
-/* Tailwind Basis */
+/* Tailwind base */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Standardwerte für den Body */
-html,
-body {
+html, body {
   font-family: var(--font-sans);
-  background-color: var(
-    --color-primary
-  ); /* Changed to a dark background for the sticky card effect */
-  color: var(--color-text);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--color-primary-light);
+  color: var(--color-neutral);
   margin: 0;
   padding: 0;
+  line-height: 1.6;
 }
 
-/* Benutzerdefinierter Hintergrund */
-.bg-brand-bg {
-  background-color: var(--color-bg);
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-headline);
+  color: var(--color-primary-dark);
+  font-weight: 700;
+  line-height: 1.3;
 }
 
-/* Hero gradient background */
-.hero-gradient {
-  background: linear-gradient(to bottom right, #ffffff, #add8e6);
+a {
+  color: var(--color-accent-one);
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
 
-/* Pinsel-Effekt */
-.brush-effect {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3);
-  background-size: 100% 100%;
-  margin: -2px -6px;
-  padding: 2px 6px;
-  display: inline-block;
-  filter: brightness(1.1);
+a:hover {
+  color: var(--color-accent-two);
 }
 
-/* Pinsel-Farben */
-.brush-effect.brush-red {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=E573A0);
+/* Custom backgrounds - New classes added here */
+.bg-brand-bg { background-color: var(--color-primary-dark); }
+.bg-hero-bg { background-color: var(--color-hero-bg); }
+.bg-about-bg { background-color: var(--color-about-bg); }
+.bg-services-section-bg { background-color: var(--color-services-section-bg); }
+.bg-contact-bg { background-color: var(--color-contact-bg); }
+
+
+/* Services section */
+.bg-services-bg { background-color: var(--color-services-bg); }
+.bg-services-tag-bg { background-color: var(--color-services-tag-bg); }
+.text-services-tag-text { color: var(--color-services-tag-text); }
+
+/* Services cards */
+.bg-services-card { 
+  background-color: var(--color-services-card-bg); 
 }
-.brush-effect.brush-blue {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=4AB8E6);
+.text-services-card-title {
+  color: var(--color-services-card-title);
 }
-.brush-effect.brush-green {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=4ADE80);
+.text-services-card-description { 
+  color: var(--color-services-card-description); 
 }
-.brush-effect.brush-purple {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=B266F5);
-}
-.brush-effect.brush-orange {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=E69B5C);
-}
-.brush-effect.brush-teal {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=4DB8B8);
-}
-.brush-effect.brush-magenta {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=E666A3);
-}
-.brush-effect.brush-pink {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=E68AB2);
-}
-.brush-effect.brush-indigo {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=7A66CC);
-}
-.brush-effect.brush-lime {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=B2E64D);
+.services-bullet { 
+  background-color: var(--color-services-bullet); 
 }
 
-/* Farbverlauf für Text */
-.text-hero-gradient {
-  background-image: linear-gradient(
-    90deg,
-    var(--headline-grad-from),
-    var(--headline-grad-to)
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
+/* Contact section */
+.text-contact-subtitle { color: var(--color-contact-subtitle); }
+.text-contact-label { color: var(--color-contact-label); }
+.border-contact-border { border-color: var(--color-contact-border); }
 
-/* Glas-Pille */
-.pill-glass {
-  background-color: rgba(255, 255, 255, 0.2);
+/* Bullet color */
+ul.list-disc li::marker { color: var(--color-accent-two); }
+
+.backdrop-blur-sm {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
 
-/* Gradient Border */
+.text-accent { color: var(--color-accent-one); }
+
+/* Hero and About */
+.hero-text { 
+  font-size: 3.5rem; 
+  font-weight: 700; 
+  line-height: 1.2; 
+  color: white; 
+  letter-spacing: -0.05em;
+}
+
+.hero-video h2 { color: var(--color-accent-two); }
+
+.about-text {
+  color: var(--color-neutral);
+  background-color: white;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  font-size: 1.125rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: var(--color-accent-one);
+  color: white;
+  border-radius: 0.375rem;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+.btn-primary:hover {
+  background-color: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background-color: white;
+  color: var(--color-accent-one);
+  border: 2px solid var(--color-accent-one);
+  border-radius: 0.375rem;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+.btn-secondary:hover {
+  background-color: #f0f7ff;
+  transform: translateY(-1px);
+}
+
+/* Gradient Border Button */
 .border-gradient {
   --p: 15%;
-  --bg-color: #ffffff;
-  --text-color: #323232;
+  --bg-color: var(--color-primary-light);
+  --text-color: var(--color-neutral);
   --c1: #ffffff;
   --c2: #ffffff;
-  --c3: #ff8c00;
+  --c3: var(--color-accent-one);
 
   background: linear-gradient(var(--bg-color), var(--bg-color)) padding-box,
     conic-gradient(
-        from var(--gradient-angle, 0deg),
-        var(--c1),
-        var(--c2),
-        var(--c3),
-        var(--c1)
-      )
-      border-box;
+      from var(--gradient-angle, 0deg),
+      var(--c1),
+      var(--c2),
+      var(--c3),
+      #ffffff
+    )
+    border-box;
   border: 4px solid transparent;
   border-radius: 3rem;
   transition: all 0.3s ease;
@@ -152,53 +192,20 @@ body {
   gap: 0.5rem;
   cursor: pointer;
 }
-
-.border-gradient:hover {
-  transform: translateY(-2px);
+.border-gradient:hover { 
+  transform: translateY(-2px); 
+  --c3: var(--color-accent-two); 
 }
 
-/* Sticky Section */
-section.sticky {
+/* Floating tags */
+.floating-tag {
   will-change: transform;
-}
-
-/* Hero Text */
-.hero-text {
-  font-size: 3.5rem;
-  font-weight: 800;
-  line-height: 1.2;
-}
-
-/* About Text */
-.about-text {
-  color: var(--color-text);
-  background-color: rgba(59, 59, 109, 0.8);
-  padding: 2rem;
-  border-radius: 1rem;
-  font-size: 1.125rem;
-}
-
-/* Hero-specific styles */
-.text-headline {
-  color: #000000;
-}
-
-.decoration-accent {
-  text-decoration-color: var(--color-accent);
-}
-
-.text-text {
-  color: #000000;
-}
-
-.bg-text\/10 {
-  background-color: rgba(0, 0, 0, 0.1); /* Using black with opacity */
-}
-
-.border-text\/30 {
-  border-color: rgba(0, 0, 0, 0.3); /* Using black with opacity */
-}
-
-.font-headline {
-  font-family: var(--font-headline);
+  background-color: var(--color-services-tag-bg);
+  color: var(--color-services-tag-text);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
 }

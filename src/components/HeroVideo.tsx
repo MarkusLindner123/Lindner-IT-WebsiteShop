@@ -44,13 +44,13 @@ export default function HeroVideo() {
   }, []);
 
   return (
-    <section className="relative h-screen w-full overflow-hidden">
+    <section className="relative h-screen w-full overflow-hidden hero-video">
       <video
         ref={videoRef}
         autoPlay
         muted
         playsInline
-        loop={false} // Wir benutzen eigene Loop-Logik
+        loop={false}
         preload="auto"
         poster="/hero-video-poster.jpg"
         className="absolute inset-0 h-full w-full object-cover"
@@ -69,7 +69,7 @@ export default function HeroVideo() {
         className="relative z-10 flex h-full w-full items-center justify-center px-6 text-center text-white"
       >
         <div>
-          <h1 className="text-4xl md:text-7xl font-bold">{t("title")}</h1>
+          <h2 className="text-4xl md:text-7xl font-bold">{t("title")}</h2>
           <p className="mt-4 text-lg md:text-xl opacity-90">{t("subtitle")}</p>
         </div>
       </motion.div>

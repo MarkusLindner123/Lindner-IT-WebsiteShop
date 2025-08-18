@@ -4,6 +4,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import AnimatedButton from "@/components/AnimatedButton";
 import Image from "next/image";
+import "./AboutSection.css"; // Import the new CSS file
 
 const brushColors = [
   "red",
@@ -65,24 +66,31 @@ export default function AboutSection() {
     [sections]
   );
 
-  const highlightWords = [
-    "solutions",
-    "lösungen",
-    "scalable",
-    "skalierbar",
-    "design",
-    "results",
-    "ergebnisse",
-    "reliable",
-    "analysis",
-    "architecture",
-    "performance",
-    "support",
-    "maintenance",
-    "optimization",
-    "vision",
-    "growth",
-  ];
+ const highlightWords = [
+  "solutions",
+  "lösungen",
+  "scalable",
+  "skalierbar",
+  "design",
+  "results",
+  "ergebnisse",
+  "reliable",
+  "verlässlich",
+  "analysis",
+  "analyse",
+  "architecture",
+  "architektur",
+  "performance",
+  "support",
+  "maintenance",
+  "wartung",
+  "optimization",
+  "optimierung",
+  "vision",
+  "growth",
+  "wachstum"
+]
+
 
   const allWords = useMemo(() => {
     let globalIndex = 0;
@@ -129,15 +137,14 @@ export default function AboutSection() {
 
   useEffect(() => {
     const handleResize = () => {
-      // Set a different speed factor for mobile screens (e.g., less than 768px)
       if (window.innerWidth < 768) {
-        setSpeedFactor(1.13); // Adjust this value to your liking
+        setSpeedFactor(1.13);
       } else {
         setSpeedFactor(1.22);
       }
     };
 
-    handleResize(); // Set initial value
+    handleResize();
     window.addEventListener("resize", handleResize);
 
     const handleScroll = () => {
@@ -170,7 +177,6 @@ export default function AboutSection() {
           1
         );
 
-        // Direct DOM manipulation for image overlay
         const imageOverlay = item.querySelector(
           ".image-overlay"
         ) as HTMLElement;
@@ -178,7 +184,6 @@ export default function AboutSection() {
           imageOverlay.style.transform = `scaleY(${1 - imageProgress})`;
         }
 
-        // Direct DOM manipulation for text and title
         const titleElement = item.querySelector(
           ".animated-title"
         ) as HTMLElement;
@@ -188,19 +193,18 @@ export default function AboutSection() {
 
         const words = item.querySelectorAll(".animated-word");
         const totalWordsInParagraph = words.length;
+        const wordsToReveal = Math.floor(totalWordsInParagraph * textProgress);
 
         words.forEach((wordElement, wordIdx) => {
-          const visible =
-            wordIdx <= Math.floor(totalWordsInParagraph * textProgress);
+          const visible = wordIdx < wordsToReveal;
           (wordElement as HTMLElement).style.opacity = visible ? "1" : "0.15";
         });
       });
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll(); // Initial call to set positions
+    handleScroll();
 
-    // Clean up
     return () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleResize);
@@ -217,8 +221,18 @@ export default function AboutSection() {
   return (
     <section
       id="about"
-      className="mx-auto max-w-full px-4 lg:px-8 py-20 md:py-28 lg:py-32 bg-brand-bg"
+      className="bg-about-bg mx-auto max-w-full px-4 lg:px-8 py-20 md:py-28 lg:py-32"
     >
+      <div className="mb-6">
+        <div className="inline-flex items-left px-4 py-1 rounded-full text-sm font-medium text-black bg-black/10">
+          {t("kicker")}
+        </div>
+      </div>
+
+      <h1 className="mb-16 text-5xl sm:text-6xl md:text-7xl font-extrabold leading-tight tracking-tight text-black font-headline">
+        <span className="block">{t("title")}</span>
+      </h1>
+
       <div ref={sectionRef} className="space-y-12">
         {allWords.map((paragraphWords, paraIdx) => (
           <div
