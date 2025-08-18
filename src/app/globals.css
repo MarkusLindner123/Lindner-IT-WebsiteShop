@@ -22,6 +22,13 @@
   --color-services-card-description: #374151; /* Beschreibungstext Farbe */
   --color-services-bullet: #1f2937; /* sichtbare Bullet Points */
 
+  /* Contact section */
+  --color-contact-bg: #ffffff;
+  --color-contact-subtitle: #4b5563;
+  --color-contact-label: #4b5563;
+  --color-contact-border: #d1d5db;
+
+
   /* Section backgrounds - New variables added here */
   --color-heroVideo-bg: #0a1128;
   --color-hero-bg: #daebd4;
@@ -69,6 +76,7 @@ a:hover {
 .bg-hero-bg { background-color: var(--color-hero-bg); }
 .bg-about-bg { background-color: var(--color-about-bg); }
 .bg-services-section-bg { background-color: var(--color-services-section-bg); }
+.bg-contact-bg { background-color: var(--color-contact-bg); }
 
 
 /* Services section */
@@ -89,6 +97,11 @@ a:hover {
 .services-bullet { 
   background-color: var(--color-services-bullet); 
 }
+
+/* Contact section */
+.text-contact-subtitle { color: var(--color-contact-subtitle); }
+.text-contact-label { color: var(--color-contact-label); }
+.border-contact-border { border-color: var(--color-contact-border); }
 
 /* Bullet color */
 ul.list-disc li::marker { color: var(--color-accent-two); }

@@ -14,6 +14,8 @@
     "ctaSecondary": "View services"
   },
   "about": {
+    "kicker": "We build that shit for you",
+    "title": "How we build",
     "analyze": {
       "title": "Analyze",
       "text": "We begin by taking a deep dive into your organization’s unique needs, challenges, and objectives. This involves examining your current systems, workflows, and technologies in detail, as well as engaging with all key stakeholders early in the process. By gaining a comprehensive understanding of your operational landscape, we uncover opportunities for improvement, identify potential risks before they become issues, and lay the groundwork for solutions that are not only practical but also strategically aligned with your long-term vision."
@@ -32,8 +34,8 @@
     },
     "ctaPrimary": "Request a quote"
   },
-  
   "services": {
+    "kicker": "We build that shit for you",
     "title": "Digital solutions that work for you",
     "webDesign": {
       "title": "Web Design & Development",
@@ -54,7 +56,25 @@
       "feature5": "Maintenance and continuous support"
     }
   },
-
+  "contact": {
+    "kicker": "We build that shit for you",
+    "title": "Get in Touch",
+    "subtitle": "We’d love to hear from you! Fill out the form and we’ll get back to you soon.",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "message": "Message",
+      "reason": "Reason for Contact",
+      "reasonPlaceholder": "Please select",
+      "options": {
+        "quote": "Request a Quote",
+        "support": "Support",
+        "general": "General Inquiry"
+      },
+      "submit": "Send Message"
+    }
+  },
   "Meta": {
     "title": "Web Agency – Modern Websites"
   },

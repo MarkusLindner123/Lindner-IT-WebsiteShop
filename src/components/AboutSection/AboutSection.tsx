@@ -130,15 +130,14 @@ export default function AboutSection() {
 
   useEffect(() => {
     const handleResize = () => {
-      // Set a different speed factor for mobile screens (e.g., less than 768px)
       if (window.innerWidth < 768) {
-        setSpeedFactor(1.13); // Adjust this value to your liking
+        setSpeedFactor(1.13);
       } else {
         setSpeedFactor(1.22);
       }
     };
 
-    handleResize(); // Set initial value
+    handleResize();
     window.addEventListener("resize", handleResize);
 
     const handleScroll = () => {
@@ -171,7 +170,6 @@ export default function AboutSection() {
           1
         );
 
-        // Direct DOM manipulation for image overlay
         const imageOverlay = item.querySelector(
           ".image-overlay"
         ) as HTMLElement;
@@ -179,7 +177,6 @@ export default function AboutSection() {
           imageOverlay.style.transform = `scaleY(${1 - imageProgress})`;
         }
 
-        // Direct DOM manipulation for text and title
         const titleElement = item.querySelector(
           ".animated-title"
         ) as HTMLElement;
@@ -199,9 +196,8 @@ export default function AboutSection() {
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll(); // Initial call to set positions
+    handleScroll();
 
-    // Clean up
     return () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleResize);
@@ -220,6 +216,16 @@ export default function AboutSection() {
       id="about"
       className="bg-about-bg mx-auto max-w-full px-4 lg:px-8 py-20 md:py-28 lg:py-32"
     >
+      <div className="mb-6">
+        <div className="inline-flex items-left px-4 py-1 rounded-full text-sm font-medium text-black bg-black/10">
+          {t("kicker")}
+        </div>
+      </div>
+
+      <h1 className="mb-16 text-5xl sm:text-6xl md:text-7xl font-extrabold leading-tight tracking-tight text-black font-headline">
+        <span className="block">{t("title")}</span>
+      </h1>
+
       <div ref={sectionRef} className="space-y-12">
         {allWords.map((paragraphWords, paraIdx) => (
           <div

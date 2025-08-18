@@ -1,4 +1,3 @@
-// page.tsx
 import { setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 
@@ -6,6 +5,7 @@ import HeroVideo from "@/components/HeroVideo";
 import Hero from "@/components/Hero";
 import AboutSection from "@/components/AboutSection/AboutSection";
 import ServicesSection from "@/components/ServicesSection";
+import ContactSection from "@/components/ContactSection";
 
 export default async function HomePage({
   params,
@@ -28,6 +28,9 @@ export default async function HomePage({
       </section>
       <section className="bg-services-section-bg  rounded-2xl overflow-hidden shadow-xl">
         <ServicesSection />
+      </section>
+      <section className="bg-services-section-bg  rounded-2xl overflow-hidden shadow-xl">
+        <ContactSection />
       </section>
     </div>
   );
