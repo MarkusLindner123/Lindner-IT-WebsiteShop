@@ -95,9 +95,6 @@ export default function ServicesSection() {
         "rounded-full",
         "text-sm",
         "font-medium",
-        "text-services-tag-text",
-        "bg-services-tag-bg",
-        "backdrop-blur-sm",
         "floating-tag",
         "absolute"
       );
@@ -152,21 +149,23 @@ export default function ServicesSection() {
       {/* Background container */}
       <div className="absolute inset-0 bg-services-bg rounded-2xl" />
 
-      <div className="max-w-7xl mx-auto px-4 lg:px-8 py-12 md:py-16 lg:py-20 relative p-8 rounded-2xl md:p-12">
+      <div className="max-w-7xl mx-auto px-4 lg:px-8 py-12 md:py-16 lg:py-20 relative z-10 p-8 rounded-2xl md:p-12">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="show"
           className="relative"
         >
-          {/* Floating tags animation container - lower z-index */}
+          {/* Floating tags animation container */}
           <div
             ref={animationContainerRef}
             className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 rounded-2xl"
           />
 
-          {/* Content with higher z-index */}
+          {/* Content */}
           <motion.div variants={fadeUp} className="relative z-20">
+
+
             <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold leading-tight tracking-tight text-black font-headline mb-8">
               <span className="block">{t("title")}</span>
             </h1>
@@ -183,15 +182,15 @@ export default function ServicesSection() {
                   <motion.div 
                     key={key} 
                     variants={fadeUp}
-                    className="bg-services-card p-6 rounded-xl shadow-lg backdrop-blur-md relative z-20"
+                    className="bg-services-card p-6 rounded-xl shadow-lg relative z-20"
                   >
                     <h2 className="text-2xl font-semibold mb-2 text-services-card-title">{t(`${key}.title`)}</h2>
-                    <p className="text-services-card mb-4">{t(`${key}.description`)}</p>
+                    <p className="text-services-card-description mb-4">{t(`${key}.description`)}</p>
                     <ul className="space-y-2">
                       {features.map((item, idx) => (
                         <li key={idx} className="flex items-center gap-2">
                           <span className="w-2 h-2 rounded-full services-bullet flex-shrink-0" />
-                          <span className="text-services-card">{item}</span>
+                          <span className="text-services-card-description">{item}</span>
                         </li>
                       ))}
                     </ul>
