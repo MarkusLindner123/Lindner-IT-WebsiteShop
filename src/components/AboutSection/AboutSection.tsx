@@ -66,6 +66,7 @@ export default function AboutSection() {
     [sections]
   );
 
+ // eslint-disable-next-line react-hooks/exhaustive-deps
  const highlightWords = [
   "solutions",
   "lösungen",
@@ -133,7 +134,7 @@ export default function AboutSection() {
       }
     });
     return map;
-  }, [allWords]);
+  }, [allWords, highlightWords]);
 
   useEffect(() => {
     const handleResize = () => {
