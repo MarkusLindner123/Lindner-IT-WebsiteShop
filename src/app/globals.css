@@ -16,11 +16,17 @@
   --color-services-bg: #ffffff;
   --color-services-tag-bg: rgba(75, 85, 99, 0.4); /* halbtransparenter Hintergrund */
   --color-services-tag-text: #ffffff;
-  --color-services-card-bg: rgba(230, 230, 230, 0.6); /* transparenter weißer Hintergrund */
+  --color-services-card-bg: rgba(230, 230, 230, 0.7); /* transparenter weißer Hintergrund */
   --color-services-card-text: #1f2937; /* dunkler Text in Cards */
   --color-services-card-title: #1f2937; /* Titel Farbe */
   --color-services-card-description: #374151; /* Beschreibungstext Farbe */
   --color-services-bullet: #1f2937; /* sichtbare Bullet Points */
+
+  /* Section backgrounds - New variables added here */
+  --color-heroVideo-bg: #0a1128;
+  --color-hero-bg: #daebd4;
+  --color-about-bg: #daebd4;
+  --color-services-section-bg: #daebd4; /* Renamed to avoid conflict */
   
   /* Fonts */
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
@@ -58,9 +64,12 @@ a:hover {
   color: var(--color-accent-two);
 }
 
-/* Custom backgrounds */
+/* Custom backgrounds - New classes added here */
 .bg-brand-bg { background-color: var(--color-primary-dark); }
-.bg-about-bg { background-color: var(--color-primary-light); }
+.bg-hero-bg { background-color: var(--color-hero-bg); }
+.bg-about-bg { background-color: var(--color-about-bg); }
+.bg-services-section-bg { background-color: var(--color-services-section-bg); }
+
 
 /* Services section */
 .bg-services-bg { background-color: var(--color-services-bg); }

@@ -146,8 +146,8 @@ export default function ServicesSection() {
 
   return (
     <section aria-label="Services" className="relative overflow-hidden">
-      {/* Background container */}
-      <div className="absolute inset-0 bg-services-bg rounded-2xl" />
+      {/* Background container - Change this to use bg-services-section-bg */}
+      <div className="absolute inset-0 bg-services-section-bg rounded-2xl" />
 
       <div className="max-w-7xl mx-auto px-4 lg:px-8 py-12 md:py-16 lg:py-20 relative z-10 p-8 rounded-2xl md:p-12">
         <motion.div

@@ -86,9 +86,6 @@ export default function Hero() {
       aria-label="Hero"
       className="relative overflow-hidden"
     >
-      {/* Change this div's background to ensure the card is visible */}
-      <div className="absolute inset-0 bg-about-bg rounded-2xl" />
-
       <div className="max-w-7xl mx-auto px-4 lg:px-8 py-12 md:py-16 lg:py-20 relative z-10 p-8 rounded-2xl md:p-12">
         <motion.div
           variants={container}
@@ -133,7 +130,7 @@ export default function Hero() {
           {/* Desktop/Tablet Gallery */}
           <motion.div
             variants={fadeUp}
-            className="hidden md:block lg:col-span-5 xl:col-span-6 relative flex justify-center lg:justify-end"
+            className="hidden md:flex lg:col-span-5 xl:col-span-6 relative justify-center lg:justify-end"
           >
             <div
               className="relative mx-auto lg:w-full"
@@ -177,7 +174,7 @@ export default function Hero() {
           {/* Mobile Gallery */}
           <motion.div
             variants={fadeUp}
-            className="block md:hidden lg:col-span-5 xl:col-span-6 relative flex justify-center lg:justify-end"
+            className="flex md:hidden lg:col-span-5 xl:col-span-6 relative justify-center lg:justify-end"
           >
             <div
               className="relative mx-auto"

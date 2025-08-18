@@ -17,16 +17,16 @@ export default async function HomePage({
 
   return (
     <div className="relative p-6 space-y-6 md:p-12 md:space-y-12">
-      <section className="top-6 min-h-screen rounded-2xl overflow-hidden shadow-xl">
+      <section className="bg-heroVideo-bg  rounded-2xl overflow-hidden shadow-xl">
         <HeroVideo />
       </section>
-      <section className="top-6 min-h-screen rounded-2xl overflow-hidden shadow-xl">
+      <section className="bg-hero-bg rounded-2xl overflow-hidden shadow-xl">
         <Hero />
       </section>
-      <section className="top-6 min-h-screen rounded-2xl overflow-hidden shadow-xl">
+      <section className="bg-about-bg  rounded-2xl overflow-hidden shadow-xl">
         <AboutSection />
       </section>
-      <section className="top-6 min-h-screen rounded-2xl overflow-hidden shadow-xl">
+      <section className="bg-services-section-bg  rounded-2xl overflow-hidden shadow-xl">
         <ServicesSection />
       </section>
     </div>
