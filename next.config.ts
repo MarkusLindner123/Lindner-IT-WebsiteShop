@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
   // Bei Bedarf weitere Optionen setzen
   reactStrictMode: true,
   output: "export", // ✅ enables static HTML export
+  images: { unoptimized: true }
 };
 
 const withNextIntl = createNextIntlPlugin();
