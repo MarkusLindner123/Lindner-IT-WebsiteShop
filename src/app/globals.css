@@ -14,12 +14,13 @@
   
   /* Services section */
   --color-services-bg: #ffffff;
-  --color-services-tag-bg: #4b5563;
+  --color-services-tag-bg: rgba(75, 85, 99, 0.4); /* halbtransparenter Hintergrund */
   --color-services-tag-text: #ffffff;
-  --color-services-card-bg: rgba(255, 255, 255, 0.85); /* Halbtransparenter weißer Hintergrund */
+  --color-services-card-bg: rgba(255, 255, 255, 0.4); /* transparenter weißer Hintergrund */
   --color-services-card-text: #1f2937; /* dunkler Text in Cards */
-  --color-services-card-title: #0f172a; /* Noch dunklerer Text für Titel */
-  --color-services-bullet: #2563eb; /* Blaue Bullet Points für besseren Kontrast */
+  --color-services-card-title: #1f2937; /* Titel Farbe */
+  --color-services-card-description: #374151; /* Beschreibungstext Farbe */
+  --color-services-bullet: #1f2937; /* sichtbare Bullet Points */
   
   /* Fonts */
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
@@ -66,22 +67,16 @@ a:hover {
 .bg-services-tag-bg { background-color: var(--color-services-tag-bg); }
 .text-services-tag-text { color: var(--color-services-tag-text); }
 
-/* Services cards - mit verbessertem Kontrast und z-index */
+/* Services cards */
 .bg-services-card { 
-  background-color: var(--color-services-card-bg);
-  border: 1px solid rgba(0, 0, 0, 0.08); /* Subtiler Rahmen für bessere Abgrenzung */
-  position: relative; 
-  z-index: 20; /* Höhere z-index als die floating tags */
+  background-color: var(--color-services-card-bg); 
 }
-
-.text-services-card { 
-  color: var(--color-services-card-text); 
-}
-
 .text-services-card-title {
   color: var(--color-services-card-title);
 }
-
+.text-services-card-description { 
+  color: var(--color-services-card-description); 
+}
 .services-bullet { 
   background-color: var(--color-services-bullet); 
 }
@@ -92,11 +87,6 @@ ul.list-disc li::marker { color: var(--color-accent-two); }
 .backdrop-blur-sm {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-}
-
-.backdrop-blur-md {
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
 }
 
 .text-accent { color: var(--color-accent-one); }
@@ -185,20 +175,15 @@ ul.list-disc li::marker { color: var(--color-accent-two); }
   --c3: var(--color-accent-two); 
 }
 
-/* Floating tags - mit niedrigerer z-index und reduzierter Opazität */
+/* Floating tags */
 .floating-tag {
   will-change: transform;
-  background-color: var(--color-accent-two);
-  color: white;
+  background-color: var(--color-services-tag-bg);
+  color: var(--color-services-tag-text);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   padding: 0.25rem 0.75rem;
   border-radius: 9999px;
   font-size: 0.875rem;
   font-weight: 500;
-  opacity: 0.6; /* Reduzierte Opazität damit sie nicht zu stark ablenken */
-  z-index: 1; /* Niedrige z-index damit sie hinter den Cards bleiben */
-}
-
-/* Wenn floating tags über Cards schweben, werden sie noch transparenter */
-.floating-tag:hover {
-  opacity: 0.3;
 }
