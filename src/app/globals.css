@@ -16,7 +16,7 @@
   --color-services-bg: #ffffff;
   --color-services-tag-bg: rgba(75, 85, 99, 0.4); /* halbtransparenter Hintergrund */
   --color-services-tag-text: #ffffff;
-  --color-services-card-bg: rgba(255, 255, 255, 0.4); /* transparenter weißer Hintergrund */
+  --color-services-card-bg: rgba(230, 230, 230, 0.6); /* transparenter weißer Hintergrund */
   --color-services-card-text: #1f2937; /* dunkler Text in Cards */
   --color-services-card-title: #1f2937; /* Titel Farbe */
   --color-services-card-description: #374151; /* Beschreibungstext Farbe */
