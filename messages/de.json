@@ -1,39 +1,82 @@
 {
   "heroVideo": {
     "title": "Ihre Zukunft beginnt online",
-    "subtitle": "Wir gestalten digitale Erlebnisse, die inspirieren"
+    "subtitle": "Wir gestalten digitale Erlebnisse, die inspirieren und performen"
   },
   "hero": {
     "kicker": "Web- & Softwareentwicklung",
     "kickerTag": "Freelancer",
     "titleLine1": "Wir",
-    "titleLine2": "Wachsen",
+    "titleLine2": "Stärken",
     "titleLine3": "Ihre Marke",
-    "subtitle": "Websites, Shops & Automatisierung — klar, schnell, messbar.",
+    "subtitle": "Websites, E-Commerce & Automatisierung — klar, schnell und messbar.",
     "ctaPrimary": "Angebot anfordern",
     "ctaSecondary": "Leistungen ansehen"
   },
   "about": {
+    "kicker": "Maßgeschneiderte digitale Lösungen",
+    "title": "So arbeiten wir",
     "analyze": {
       "title": "Analysieren",
-      "text": "Wir beginnen mit einer gründlichen Analyse der individuellen Anforderungen, Herausforderungen und Ziele Ihres Unternehmens. Dazu gehört die detaillierte Untersuchung Ihrer aktuellen Systeme, Arbeitsabläufe und Technologien sowie die frühzeitige Einbindung aller wichtigen Stakeholder. Durch ein umfassendes Verständnis Ihrer betrieblichen Landschaft erkennen wir Verbesserungspotenziale, identifizieren mögliche Risiken, bevor sie zu Problemen werden, und schaffen die Grundlage für Lösungen, die nicht nur praktisch, sondern auch strategisch auf Ihre langfristige Vision ausgerichtet sind."
+      "text": "Wir beginnen mit einer umfassenden Analyse der individuellen Anforderungen, Herausforderungen und Ziele Ihres Unternehmens. Dazu gehört die detaillierte Untersuchung Ihrer bestehenden Systeme, Arbeitsabläufe und Technologien sowie die frühzeitige Einbindung aller relevanten Stakeholder. Durch ein tiefes Verständnis Ihrer Unternehmenslandschaft erkennen wir Chancen für Innovation, identifizieren mögliche Risiken, bevor sie entstehen, und schaffen die Grundlage für Lösungen, die sowohl praktisch als auch strategisch auf Ihre langfristige Vision ausgerichtet sind."
     },
     "plan": {
       "title": "Planen",
-      "text": "Aufbauend auf den Erkenntnissen aus der Analysephase entwickeln wir einen detaillierten, umsetzbaren Fahrplan, um Ihre Vision Wirklichkeit werden zu lassen. Dazu gehören die Definition der technischen Architektur, die Gestaltung von Nutzererlebnissen, die Festlegung klarer Meilensteine sowie die Bestimmung von Erfolgskriterien. Jeder Schritt ist sorgfältig strukturiert, um die Ausrichtung an Ihren Geschäftszielen zu gewährleisten, flexibel auf Veränderungen reagieren zu können und eine Skalierbarkeit für zukünftiges Wachstum zu ermöglichen, sodass Ihre Investition langfristig Wert schafft."
+      "text": "Auf Basis der Erkenntnisse aus der Analysephase entwickeln wir einen strukturierten, umsetzbaren Fahrplan, um Ihre digitale Vision Wirklichkeit werden zu lassen. Dazu gehören die Definition der technischen Architektur, die Gestaltung von Nutzererlebnissen, die Festlegung klarer Meilensteine sowie die Bestimmung messbarer Erfolgskriterien. Jeder Schritt ist so konzipiert, dass er die Ausrichtung an Ihren Geschäftszielen gewährleistet, flexibel auf neue Anforderungen reagieren kann und skalierbar für zukünftiges Wachstum bleibt — damit Ihre Investition langfristig Mehrwert schafft."
     },
     "build": {
       "title": "Umsetzen",
-      "text": "Mit einem klaren Plan setzen unsere erfahrenen Entwickler und Designer Konzepte in voll funktionsfähige, hochwertige digitale Produkte um. Von robusten Backend-Systemen bis zu intuitiven, benutzerfreundlichen Oberflächen wird jedes Element mit Präzision und Zielstrebigkeit gestaltet. Ob wir eine responsive Website, eine funktionsreiche App oder eine komplexe digitale Plattform entwickeln – wir sorgen stets für die perfekte Balance aus solider technischer Architektur, ansprechendem Design und optimaler Performance, um Lösungen zu liefern, die inspirieren und Bestand haben."
+      "text": "Mit einem klaren Plan setzen unsere erfahrenen Entwickler und Designer Konzepte in hochwertige, voll funktionsfähige digitale Produkte um. Von zuverlässigen Backend-Systemen bis zu intuitiven, benutzerfreundlichen Oberflächen wird jedes Element mit Präzision und Zielstrebigkeit entwickelt. Ob wir eine responsive Website, eine funktionsreiche App oder eine komplexe digitale Plattform realisieren – wir sorgen stets für die perfekte Balance aus solider technischer Architektur, modernem Design und optimierter Performance, um digitale Lösungen zu liefern, die inspirieren und Bestand haben."
     },
     "support": {
       "title": "Betreuen",
-      "text": "Unsere Arbeit endet nicht mit dem Launch. Wir bieten proaktive, kontinuierliche Betreuung, um Ihre digitale Lösung sicher, aktuell und leistungsstark zu halten. Dazu gehören regelmäßige Wartung, Funktionsverbesserungen, Sicherheitsüberwachung und Performance-Optimierung. Wenn Ihr Unternehmen wächst und sich Ihre Anforderungen ändern, bleiben wir ein verlässlicher Partner, der sicherstellt, dass Ihre digitale Präsenz sich nahtlos anpasst und langfristig messbare Ergebnisse liefert."
+      "text": "Unsere Verantwortung endet nicht mit dem Launch. Wir bieten proaktive, kontinuierliche Betreuung, damit Ihre digitalen Lösungen sicher, aktuell und leistungsstark bleiben. Dazu gehören regelmäßige Wartung, Funktionsverbesserungen, Sicherheitsüberwachung und Performance-Optimierung. Wenn Ihr Unternehmen wächst und sich Ihre Anforderungen weiterentwickeln, bleiben wir ein verlässlicher Partner, der sicherstellt, dass Ihre digitale Präsenz sich nahtlos anpasst und langfristig messbare Ergebnisse liefert."
     },
     "ctaPrimary": "Angebot anfordern"
   },
+  "services": {
+    "kicker": "Professionelle digitale Services",
+    "title": "Digitale Lösungen, die Ergebnisse liefern",
+    "webDesign": {
+      "title": "Webdesign & Entwicklung",
+      "description": "Wir entwickeln responsive, visuell ansprechende und leistungsorientierte Websites, die auf die Identität Ihrer Marke und Ihre Geschäftsziele zugeschnitten sind und ein nahtloses Nutzererlebnis auf allen Geräten gewährleisten.",
+      "feature1": "Responsive Design für alle Geräte",
+      "feature2": "Individuelle UI/UX für Ihre Marke",
+      "feature3": "SEO-optimierte Strukturen",
+      "feature4": "Integration moderner Tools & APIs",
+      "feature5": "Performance-orientierte Entwicklung"
+    },
+    "softwareDevelopment": {
+      "title": "Softwareentwicklung",
+      "description": "Von maßgeschneiderten Anwendungen bis zu komplexen Integrationen entwickeln wir robuste und skalierbare Softwarelösungen, die Prozesse optimieren und Innovation vorantreiben.",
+      "feature1": "Individuelle Business-Anwendungen",
+      "feature2": "Sichere und skalierbare Architekturen",
+      "feature3": "Systemintegration und Automatisierung",
+      "feature4": "Plattformübergreifende Lösungen",
+      "feature5": "Wartung und kontinuierliche Betreuung"
+    }
+  },
+  "contact": {
+    "kicker": "Lassen Sie uns gemeinsam starten",
+    "title": "Kontakt aufnehmen",
+    "subtitle": "Wir freuen uns auf Ihre Nachricht! Füllen Sie das Formular aus und wir melden uns zeitnah bei Ihnen.",
+    "form": {
+      "name": "Name",
+      "email": "E-Mail",
+      "phone": "Telefon",
+      "message": "Nachricht",
+      "reason": "Grund der Kontaktaufnahme",
+      "reasonPlaceholder": "Bitte auswählen",
+      "options": {
+        "quote": "Angebot anfordern",
+        "support": "Support",
+        "general": "Allgemeine Anfrage"
+      },
+      "submit": "Nachricht senden"
+    }
+  },
   "Meta": {
-    "title": "Webagentur – Moderne Websites"
+    "title": "Webagentur – Moderne Websites & Skalierbare Lösungen"
   },
   "Switcher": {
     "label": "Sprache",

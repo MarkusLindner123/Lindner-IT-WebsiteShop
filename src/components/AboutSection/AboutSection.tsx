@@ -66,24 +66,31 @@ export default function AboutSection() {
     [sections]
   );
 
-  const highlightWords = [
-    "solutions",
-    "lösungen",
-    "scalable",
-    "skalierbar",
-    "design",
-    "results",
-    "ergebnisse",
-    "reliable",
-    "analysis",
-    "architecture",
-    "performance",
-    "support",
-    "maintenance",
-    "optimization",
-    "vision",
-    "growth",
-  ];
+ const highlightWords = [
+  "solutions",
+  "lösungen",
+  "scalable",
+  "skalierbar",
+  "design",
+  "results",
+  "ergebnisse",
+  "reliable",
+  "verlässlich",
+  "analysis",
+  "analyse",
+  "architecture",
+  "architektur",
+  "performance",
+  "support",
+  "maintenance",
+  "wartung",
+  "optimization",
+  "optimierung",
+  "vision",
+  "growth",
+  "wachstum"
+]
+
 
   const allWords = useMemo(() => {
     let globalIndex = 0;
