@@ -1,3 +1,5 @@
+// app/[locale]/page.tsx
+
 import { setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 
@@ -16,22 +18,32 @@ export default async function HomePage({
   setRequestLocale(locale);
 
   return (
-    <div className="relative p-6 space-y-6 md:p-12 md:space-y-12">
-      <section className="bg-heroVideo-bg  rounded-2xl overflow-hidden shadow-xl">
-        <HeroVideo />
-      </section>
-      <section className="bg-hero-bg rounded-2xl overflow-hidden shadow-xl">
-        <Hero />
-      </section>
-      <section className="bg-about-bg  rounded-2xl overflow-hidden shadow-xl">
+    // Use a <main> tag for the main content
+    <main className="relative p-6 space-y-6 md:p-12 md:space-y-12">
+      {/* ID for the "Home" link */}
+      <div id="home" className="space-y-6 md:space-y-12">
+        <section className="bg-heroVideo-bg rounded-2xl overflow-hidden shadow-xl">
+          <HeroVideo />
+        </section>
+        <section className="bg-hero-bg rounded-2xl overflow-hidden shadow-xl">
+          <Hero />
+        </section>
+      </div>
+      
+      {/* ID for the "About" link */}
+      <section id="about" className="bg-about-bg rounded-2xl overflow-hidden shadow-xl">
         <AboutSection />
       </section>
-      <section className="bg-services-section-bg  rounded-2xl overflow-hidden shadow-xl">
+      
+      {/* ID for the "Services" link */}
+      <section id="services" className="bg-services-section-bg rounded-2xl overflow-hidden shadow-xl">
         <ServicesSection />
       </section>
-      <section className="bg-services-section-bg  rounded-2xl overflow-hidden shadow-xl">
+      
+      {/* ID for the "Contact" link */}
+      <section id="contact" className="bg-contact-bg rounded-2xl overflow-hidden shadow-xl">
         <ContactSection />
       </section>
-    </div>
+    </main>
   );
 }
