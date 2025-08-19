@@ -1,9 +1,12 @@
-// components/Header.tsx
+// src/components/Header.tsx
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useLayoutEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import clsx from "clsx";
+import gsap from "gsap";
+import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 import {
   Home,
   User,
@@ -14,16 +17,17 @@ import {
   PenTool,
   BarChart,
   Film,
+  type LucideIcon,
 } from "lucide-react";
-import clsx from "clsx";
-import gsap from "gsap";
-import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 
-// Register the GSAP plugin
+// GSAP plugin
 gsap.registerPlugin(MotionPathPlugin);
 
-// Define navigation items with icons and links
-const navItems = [
+// ----------------- NAV ITEMS -----------------
+type SubItem = { name: string; href: string; icon: LucideIcon };
+type NavItem = { name: string; href: string; icon: LucideIcon; subItems?: SubItem[] };
+
+const navItems: NavItem[] = [
   { name: "Hero Video", href: "#home", icon: Film },
   { name: "Home", href: "#home-main", icon: Home },
   { name: "About", href: "#about", icon: User },
@@ -40,83 +44,141 @@ const navItems = [
   { name: "Contact", href: "#contact", icon: Mail },
 ];
 
-// --- Static positions to match the original demo's aesthetic ---
-const ICON_WIDTH = 70;
-const ICON_MARGIN = 30;
-const ICON_TOTAL_WIDTH = ICON_WIDTH + ICON_MARGIN;
-const SVG_WIDTH = (navItems.length * ICON_TOTAL_WIDTH) - ICON_MARGIN + 20; // Dynamic width
-const SVG_HEIGHT = 150;
-const JUMPER_SIZE = 80;
+const SERVICES_INDEX = navItems.findIndex((n) => n.subItems);
 
-const iconPositions = navItems.map((_, i) => 10 + (i * ICON_TOTAL_WIDTH) + (JUMPER_SIZE / 2));
+// ---- Layout constants (10% smaller) ----
+const ICON_WIDTH = 63; // was 70
+const ICON_MARGIN = 27; // was 30
+const ICON_TOTAL_WIDTH = ICON_WIDTH + ICON_MARGIN;
+const SVG_WIDTH = navItems.length * ICON_TOTAL_WIDTH - ICON_MARGIN + 20;
+const SVG_HEIGHT = 90; // was 100
+const JUMPER_SIZE = 72; // was 80
+
+const iconCentersX = navItems.map((_, i) => 10 + i * ICON_TOTAL_WIDTH + JUMPER_SIZE / 2);
 const yCenter = SVG_HEIGHT / 2;
-// -------------------------------------------------------------
+
+// ---------------------------------------------------------------
 
 export default function Header() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isDropdownVisible, setDropdownVisible] = useState(false);
+  const [dropdownPos, setDropdownPos] = useState<{ top: number; left: number }>({ top: 0, left: 0 });
+
   const svgRef = useRef<SVGSVGElement>(null);
   const servicesIconRef = useRef<SVGGElement>(null);
   const animRef = useRef<gsap.core.Timeline | null>(null);
+  const introPlayedRef = useRef(false);
 
-  const handleIconClick = (targetIndex: number) => {
-    // If clicking the services icon, just toggle the dropdown
-    if (navItems[targetIndex].subItems) {
-      setDropdownVisible(!isDropdownVisible);
-    } else {
-      setDropdownVisible(false);
-    }
-    
-    if (targetIndex === activeIndex || (animRef.current && animRef.current.isActive())) {
-       document.querySelector(navItems[targetIndex].href)?.scrollIntoView({ behavior: 'smooth' });
-       return;
-    }
-
-    const oldX = iconPositions[activeIndex];
-    const newX = iconPositions[targetIndex];
-
-    const travel = Math.abs(oldX - newX);
+  // ---------- Helpers ----------
+  const buildPath = (fromX: number, toX: number) => {
+    const travel = Math.abs(fromX - toX);
     const mapper = gsap.utils.mapRange(ICON_TOTAL_WIDTH, SVG_WIDTH, 0.5, 1);
     const factor = mapper(travel);
     const dur = 1 * factor;
-    const newArc = yCenter - 100 * factor;
-
-    const newPath = `M${oldX},${yCenter} Q${travel / 2 + Math.min(oldX, newX)},${newArc} ${newX},${yCenter}`;
-    gsap.set("#main-path", { attr: { d: newPath } });
-
-    animRef.current = gsap.timeline()
-      .to(".jumper", {
-        motionPath: { path: "#main-path", align: "#main-path", alignOrigin: [0.5, 0.5] },
-        duration: dur,
-        ease: "sine.inOut",
-      })
-      .to(".jumper", { duration: dur / 2, attr: { rx: 40, ry: 40 }, yoyo: true, repeat: 1 }, 0);
-
-    setActiveIndex(targetIndex);
-    document.querySelector(navItems[targetIndex].href)?.scrollIntoView({ behavior: 'smooth' });
+    const arc = yCenter - 100 * factor;
+    const d = `M${fromX},${yCenter} Q${travel / 2 + Math.min(fromX, toX)},${arc} ${toX},${yCenter}`;
+    return { d, dur };
   };
 
-  useEffect(() => {
-    gsap.set('.jumper', {
-      x: iconPositions[0] - JUMPER_SIZE / 2,
+  const positionJumpersAt = (x: number) => {
+    gsap.set(".jumper", {
+      x: x - JUMPER_SIZE / 2,
       y: yCenter - JUMPER_SIZE / 2,
+      willChange: "transform",
     });
-  }, []);
+  };
 
-  // Calculate dropdown position
-  const getDropdownPosition = () => {
+  const computeDropdownPosition = () => {
     if (!svgRef.current || !servicesIconRef.current) return { top: 0, left: 0 };
     const svgRect = svgRef.current.getBoundingClientRect();
     const iconRect = servicesIconRef.current.getBoundingClientRect();
+
+    const arrowOffset = ICON_WIDTH / 2 + 18; // same as arrow x
+    const arrowLeft = iconRect.left + arrowOffset;
+
     return {
-      top: svgRect.top + yCenter + JUMPER_SIZE / 2,
-      left: iconRect.left + iconRect.width / 2,
+      top: svgRect.top + yCenter + JUMPER_SIZE / 2 + 8,
+      left: arrowLeft,
     };
+  };
+
+  // ---------- Intro animation ----------
+  useLayoutEffect(() => {
+    positionJumpersAt(iconCentersX[0]);
+
+    if (introPlayedRef.current) return;
+    introPlayedRef.current = true;
+
+    // small bounce on first icon
+    gsap.to(".jumper", {
+      duration: 0.6,
+      y: yCenter - JUMPER_SIZE / 2 - 18,
+      yoyo: true,
+      repeat: 1,
+      ease: "sine.inOut",
+    });
+  }, []);
+
+  // ---------- Click: animate jumpers + toggle dropdown + scroll ----------
+  const handleIconClick = (targetIndex: number) => {
+    if (navItems[targetIndex].subItems) {
+      const pos = computeDropdownPosition();
+      setDropdownVisible((v) => !v);
+      setDropdownPos(pos);
+    } else {
+      setDropdownVisible(false);
+    }
+
+    if (targetIndex === activeIndex) {
+      document.querySelector(navItems[targetIndex].href)?.scrollIntoView({ behavior: "smooth" });
+      return;
+    }
+
+    if (animRef.current && animRef.current.isActive()) {
+      animRef.current.progress(1);
+    }
+
+    const fromX = iconCentersX[activeIndex];
+    const toX = iconCentersX[targetIndex];
+    const { d, dur } = buildPath(fromX, toX);
+
+    gsap.set("#main-path", { attr: { d } });
+
+    const tl = gsap
+      .timeline()
+      .to(".jumper", {
+        motionPath: {
+          path: d,
+          align: "#main-path",
+          alignOrigin: [0.5, 0.5],
+        },
+        duration: dur,
+        stagger: 0.14,
+        ease: "sine.inOut",
+      })
+      .to(
+        ".jumper",
+        {
+          duration: dur / 2,
+          attr: { rx: 36, ry: 36 }, // slightly smaller jumpers
+          yoyo: true,
+          repeat: 1,
+        },
+        0
+      );
+
+    animRef.current = tl;
+    setActiveIndex(targetIndex);
+
+    document.querySelector(navItems[targetIndex].href)?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <>
-      <header className="fixed top-4 left-1/2 -translate-x-1/2 z-50 flex justify-center">
+      <header
+        className="fixed top-4 left-1/2 -translate-x-1/2 z-50 flex justify-center px-2.5 py-1.25 rounded-xl shadow-md border header-glass"
+        style={{ backgroundColor: "var(--header-bg)" }}
+      >
         <svg
           ref={svgRef}
           xmlns="http://www.w3.org/2000/svg"
@@ -127,39 +189,66 @@ export default function Header() {
         >
           <defs>
             <filter id="gooey-filter">
-              <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-              <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -8" result="goo" />
+              <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur" />
+              <feColorMatrix
+                in="blur"
+                mode="matrix"
+                values="1 0 0 0 0  
+                        0 1 0 0 0  
+                        0 0 1 0 0  
+                        0 0 0 16 -7"
+                result="goo"
+              />
               <feBlend in="SourceGraphic" in2="goo" operator="atop" />
             </filter>
           </defs>
 
-          {/* Gooey Jumper Elements */}
+          {/* Jumpers (exactly 2) */}
           <g filter="url(#gooey-filter)">
             <rect className="jumper" width={JUMPER_SIZE} height={JUMPER_SIZE} rx="26" ry="26" />
             <rect className="jumper" width={JUMPER_SIZE} height={JUMPER_SIZE} rx="26" ry="26" />
           </g>
 
-          {/* Clickable Icons */}
+          {/* Icons */}
           <g id="icons">
             {navItems.map((item, index) => (
               <g
                 key={item.name}
-                ref={index === 3 ? servicesIconRef : null} // Ref only for the services icon
+                ref={index === SERVICES_INDEX ? servicesIconRef : null}
                 className="cursor-pointer"
                 onClick={() => handleIconClick(index)}
-                transform={`translate(${iconPositions[index] - ICON_WIDTH/2}, ${yCenter - ICON_WIDTH/2})`}
+                transform={`translate(${iconCentersX[index] - ICON_WIDTH / 2}, ${
+                  yCenter - ICON_WIDTH / 2
+                })`}
               >
-                {/* Invisible click area */}
                 <rect width={ICON_WIDTH} height={ICON_WIDTH} fill="transparent" />
-                {/* Centered Icon */}
+
                 <item.icon
-                  className={clsx("text-white transition-transform duration-300", activeIndex === index ? "scale-110" : "scale-100")}
-                  x={ICON_WIDTH/2 - 16} // Center 32x32 icon
-                  y={ICON_WIDTH/2 - 16}
+                  className={clsx(
+                    "transition-transform duration-300 will-change-transform",
+                    "nav-icon",
+                    activeIndex === index ? "scale-110" : "scale-100"
+                  )}
+                  x={ICON_WIDTH / 2 - 16}
+                  y={ICON_WIDTH / 2 - 16}
                   width={32}
                   height={32}
                   strokeWidth={1.5}
                 />
+
+                {item.subItems && (
+                  <ChevronDown
+                    className={clsx(
+                      "nav-icon subtle-rotate",
+                      isDropdownVisible && index === SERVICES_INDEX ? "rotate-180" : "rotate-0"
+                    )}
+                    x={ICON_WIDTH / 2 + 18}
+                    y={ICON_WIDTH / 2 - 6}
+                    width={16}
+                    height={16}
+                    strokeWidth={2}
+                  />
+                )}
               </g>
             ))}
           </g>
@@ -168,30 +257,29 @@ export default function Header() {
         </svg>
       </header>
 
-      {/* Dropdown Menu (Positioned absolutely in the viewport) */}
       <AnimatePresence>
-        {isDropdownVisible && (
+        {isDropdownVisible && SERVICES_INDEX >= 0 && (
           <motion.div
-            initial={{ opacity: 0, y: 15, scale: 0.95 }}
+            initial={{ opacity: 0, y: 10, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 15, scale: 0.95 }}
+            exit={{ opacity: 0, y: 10, scale: 0.98 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="fixed z-50 w-56 bg-white rounded-xl shadow-xl p-2"
+            className="fixed z-[60] w-56 dropdown-panel"
             style={{
-              top: getDropdownPosition().top,
-              left: getDropdownPosition().left,
-              transform: 'translateX(-50%)', // Center align
+              top: dropdownPos.top,
+              left: dropdownPos.left,
+              transform: "translateX(-50%)",
             }}
           >
-            {navItems[3].subItems?.map((subItem) => (
+            {navItems[SERVICES_INDEX].subItems!.map((sub) => (
               <Link
-                key={subItem.name}
-                href={subItem.href}
-                className="flex items-center gap-3 px-3 py-2 text-sm text-neutral-700 rounded-lg hover:bg-gray-100"
+                key={sub.name}
+                href={sub.href}
+                className="dropdown-item"
                 onClick={() => setDropdownVisible(false)}
               >
-                <subItem.icon size={16} />
-                {subItem.name}
+                <sub.icon className="dropdown-item-icon" size={16} />
+                {sub.name}
               </Link>
             ))}
           </motion.div>
