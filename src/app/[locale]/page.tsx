@@ -21,11 +21,11 @@ export default async function HomePage({
     // Use a <main> tag for the main content
     <main className="relative p-6 space-y-6 md:p-12 md:space-y-12">
       {/* ID for the "Home" link */}
-      <div id="home" className="space-y-6 md:space-y-12">
+      <div className="space-y-6 md:space-y-12">
         <section className="bg-heroVideo-bg rounded-2xl overflow-hidden shadow-xl">
           <HeroVideo />
         </section>
-        <section className="bg-hero-bg rounded-2xl overflow-hidden shadow-xl">
+        <section id="home" className="bg-hero-bg rounded-2xl overflow-hidden shadow-xl">
           <Hero />
         </section>
       </div>
