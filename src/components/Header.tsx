@@ -117,7 +117,7 @@ export default function Header() {
           scale: 0.8,
           opacity: 1,
           pointerEvents: "auto",
-          duration: 0.4,
+          duration: 0.2,
           ease: "power2.inOut",
         });
       } else {
@@ -126,7 +126,7 @@ export default function Header() {
           scale: 0.8, // Behält die skalierte Größe bei
           opacity: 0,
           pointerEvents: "none",
-          duration: 0.4,
+          duration: 0.5,
           ease: "power2.inOut",
         });
       }
