@@ -131,11 +131,8 @@ ul.list-disc li::marker { color: var(--color-accent-two); }
   border-color: var(--header-border);
   transition: transform 0.3s ease, top 0.3s ease;
   will-change: transform, opacity;
-  opacity: 1; /* Standard sichtbar */
+  /* Removed opacity: 1; to allow JavaScript control */
 }
-
-
-/* Die alte Media-Query wurde entfernt, da die Logik nun in der Komponente liegt. */
 
 .nav-icon { color: var(--nav-icon-color); }
 .nav-icon:hover { color: var(--nav-icon-hover); }

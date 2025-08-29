@@ -61,6 +61,7 @@ export default function Header() {
     gsap.set(".jumper", { x: x - JUMPER_SIZE / 2, y: yCenter - JUMPER_SIZE / 2, willChange: "transform" });
   };
 
+  // Initial jumper animation
   useLayoutEffect(() => {
     positionJumpersAt(iconCentersX[0]);
     if (introPlayedRef.current) return;
@@ -99,7 +100,7 @@ export default function Header() {
     if (!isMobile) setIsMobileMenuOpen(false);
   }, [isMobile]);
 
-  // Hamburger Animation
+  // Hamburger icon rotation
   useEffect(() => {
     if (!menuButtonRef.current) return;
     const icon = menuButtonRef.current.querySelector("svg");
@@ -107,37 +108,58 @@ export default function Header() {
     gsap.to(icon, { rotate: isMobileMenuOpen ? 90 : 0, duration: 0.4, ease: "power2.inOut" });
   }, [isMobileMenuOpen]);
 
-  // Header Ein-/Ausblenden Animation mit xPercent
-  useEffect(() => {
+  // Initial header setup
+  useLayoutEffect(() => {
     if (!headerRef.current) return;
+
+    const topPosition = isMobile ? "7%" : "5%";
+
     if (isMobile) {
-      if (isMobileMenuOpen) {
-        gsap.to(headerRef.current, {
-          xPercent: -50,
-          scale: 0.8,
-          opacity: 1,
-          pointerEvents: "auto",
-          duration: 0.2,
-          ease: "power2.inOut",
-        });
-      } else {
-        gsap.to(headerRef.current, {
-          xPercent: 150,
-          scale: 0.8, // Behält die skalierte Größe bei
-          opacity: 0,
-          pointerEvents: "none",
-          duration: 0.5,
-          ease: "power2.inOut",
-        });
-      }
+      gsap.set(headerRef.current, {
+        xPercent: 150,
+        scale: 0.8,
+        opacity: 0,
+        pointerEvents: "none",
+        top: topPosition,
+        left: "50%",
+      });
     } else {
-      gsap.to(headerRef.current, {
+      gsap.set(headerRef.current, {
         xPercent: -50,
         scale: 1,
         opacity: 1,
         pointerEvents: "auto",
-        duration: 1,
-        ease: "power2.inOut",
+        top: topPosition,
+        left: "50%",
+      });
+    }
+  }, [isMobile]);
+
+  // Animate header when menu opens/closes
+  useEffect(() => {
+    if (!headerRef.current || !isMobile) return;
+
+    const topPosition = "7%";
+
+    if (isMobileMenuOpen) {
+      gsap.to(headerRef.current, {
+        xPercent: -50,
+        scale: 0.8,
+        opacity: 1,
+        pointerEvents: "auto",
+        duration: 0.55,
+        ease: "power3.out", // smoother bouncy feel
+        top: topPosition,
+      });
+    } else {
+      gsap.to(headerRef.current, {
+        xPercent: 150,
+        scale: 0.8,
+        opacity: 0,
+        pointerEvents: "none",
+        duration: 0.55,
+        ease: "power3.in",
+        top: topPosition,
       });
     }
   }, [isMobileMenuOpen, isMobile]);
@@ -159,15 +181,7 @@ export default function Header() {
       <div
         ref={headerRef}
         className="fixed z-50 flex justify-center px-2.5 py-1.25 rounded-xl shadow-md border header-glass"
-        style={{
-          top: "7%",
-          left: "50%",
-          transform: isMobile ? "translateX(150%)" : "translateX(-50%)",
-          backgroundColor: "var(--header-bg)",
-          opacity: isMobile ? 0 : 1,
-          pointerEvents: isMobile ? "none" : "auto",
-          scale: isMobile ? 0.8 : 1, // Skalierung für Mobilgeräte festlegen
-        }}
+        style={{ backgroundColor: "rgba(10,17,40,0.75)" }}
       >
         <svg
           ref={svgRef}
