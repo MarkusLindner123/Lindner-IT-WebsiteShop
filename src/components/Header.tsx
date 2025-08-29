@@ -29,9 +29,7 @@ const useMediaQuery = (query: string) => {
   const [matches, setMatches] = useState(false);
   useEffect(() => {
     const media = window.matchMedia(query);
-    if (media.matches !== matches) {
-      setMatches(media.matches);
-    }
+    if (media.matches !== matches) setMatches(media.matches);
     const listener = () => setMatches(media.matches);
     window.addEventListener("resize", listener);
     return () => window.removeEventListener("resize", listener);
@@ -45,7 +43,9 @@ export default function Header() {
   const svgRef = useRef<SVGSVGElement>(null);
   const animRef = useRef<gsap.core.Timeline | null>(null);
   const introPlayedRef = useRef(false);
-  
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   const buildPath = (fromX: number, toX: number) => {
@@ -65,7 +65,15 @@ export default function Header() {
     positionJumpersAt(iconCentersX[0]);
     if (introPlayedRef.current) return;
     introPlayedRef.current = true;
-    gsap.to(".jumper", { duration: 0.5, y: yCenter - JUMPER_SIZE / 2 - 18, yoyo: true, repeat: 1, ease: "sine.inOut", stagger: 0.05, willChange: "transform" });
+    gsap.to(".jumper", {
+      duration: 0.5,
+      y: yCenter - JUMPER_SIZE / 2 - 18,
+      yoyo: true,
+      repeat: 1,
+      ease: "sine.inOut",
+      stagger: 0.05,
+      willChange: "transform",
+    });
   }, []);
 
   const handleIconClick = (targetIndex: number) => {
@@ -74,55 +82,101 @@ export default function Header() {
     const toX = iconCentersX[targetIndex];
     const { d, dur } = buildPath(fromX, toX);
     gsap.set("#main-path", { attr: { d } });
-    animRef.current = gsap.timeline().to(".jumper", { motionPath: { path: d, align: "#main-path", alignOrigin: [0.5, 0.5] }, duration: dur, stagger: 0.1, ease: "sine.inOut", willChange: "transform" });
+    animRef.current = gsap
+      .timeline()
+      .to(".jumper", {
+        motionPath: { path: d, align: "#main-path", alignOrigin: [0.5, 0.5] },
+        duration: dur,
+        stagger: 0.1,
+        ease: "sine.inOut",
+        willChange: "transform",
+      });
     setActiveIndex(targetIndex);
     document.querySelector(navItems[targetIndex].href)?.scrollIntoView({ behavior: "smooth" });
-
-    // ### ÄNDERUNG ###
-    // Das Menü wird auf mobil NICHT mehr automatisch geschlossen.
-    // if (isMobile) {
-    //   setIsMobileMenuOpen(false);
-    // }
   };
-  
+
   useEffect(() => {
-    if (!isMobile) {
-      setIsMobileMenuOpen(false);
-    }
+    if (!isMobile) setIsMobileMenuOpen(false);
   }, [isMobile]);
+
+  // Hamburger Animation
+  useEffect(() => {
+    if (!menuButtonRef.current) return;
+    const icon = menuButtonRef.current.querySelector("svg");
+    if (!icon) return;
+    gsap.to(icon, { rotate: isMobileMenuOpen ? 90 : 0, duration: 0.4, ease: "power2.inOut" });
+  }, [isMobileMenuOpen]);
+
+  // Header Ein-/Ausblenden Animation mit xPercent
+  useEffect(() => {
+    if (!headerRef.current) return;
+    if (isMobile) {
+      if (isMobileMenuOpen) {
+        gsap.to(headerRef.current, {
+          xPercent: -50,
+          scale: 0.8,
+          opacity: 1,
+          pointerEvents: "auto",
+          duration: 0.4,
+          ease: "power2.inOut",
+        });
+      } else {
+        gsap.to(headerRef.current, {
+          xPercent: 150,
+          scale: 0.8, // Behält die skalierte Größe bei
+          opacity: 0,
+          pointerEvents: "none",
+          duration: 0.4,
+          ease: "power2.inOut",
+        });
+      }
+    } else {
+      gsap.to(headerRef.current, {
+        xPercent: -50,
+        scale: 1,
+        opacity: 1,
+        pointerEvents: "auto",
+        duration: 1,
+        ease: "power2.inOut",
+      });
+    }
+  }, [isMobileMenuOpen, isMobile]);
 
   return (
     <>
+      {/* Hamburger Button */}
       <button
+        ref={menuButtonRef}
         className="fixed top-[2.5%] right-[2.5%] z-[60] md:hidden p-2 rounded-full backdrop-blur-sm"
         style={{ backgroundColor: "rgba(10, 17, 40, 0.6)" }}
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         aria-label="Toggle menu"
       >
-        {isMobileMenuOpen ? (
-          <X className="text-white h-8 w-8" />
-        ) : (
-          <Menu className="text-white h-8 w-8" />
-        )}
+        {isMobileMenuOpen ? <X className="text-white h-8 w-8" /> : <Menu className="text-white h-8 w-8" />}
       </button>
 
-      <header
-        className={clsx(
-          // ### ÄNDERUNG ###: Animationsdauer auf 600ms erhöht (langsamer)
-          "fixed z-50 flex justify-center px-2.5 py-1.25 rounded-xl shadow-md border header-glass transition-transform duration-[600ms] ease-in-out",
-          // ### ÄNDERUNG ###: Desktop-Position auf top-[5%] geändert
-          "md:top-[5%] md:left-1/2 md:-translate-x-1/2",
-          // ### ÄNDERUNG ###: Mobile-Position auf top-[3%] geändert und Skalierung hinzugefügt
-          "top-[3%] left-1/2",
-          {
-            "transform translate-x-0": !isMobile,
-            "transform translate-x-[150%] scale-80": isMobile && !isMobileMenuOpen,
-            "transform -translate-x-1/2 scale-80": isMobile && isMobileMenuOpen,
-          }
-        )}
-        style={{ backgroundColor: "var(--header-bg)" }}
+      {/* Header */}
+      <div
+        ref={headerRef}
+        className="fixed z-50 flex justify-center px-2.5 py-1.25 rounded-xl shadow-md border header-glass"
+        style={{
+          top: "7%",
+          left: "50%",
+          transform: isMobile ? "translateX(150%)" : "translateX(-50%)",
+          backgroundColor: "var(--header-bg)",
+          opacity: isMobile ? 0 : 1,
+          pointerEvents: isMobile ? "none" : "auto",
+          scale: isMobile ? 0.8 : 1, // Skalierung für Mobilgeräte festlegen
+        }}
       >
-        <svg ref={svgRef} xmlns="http://www.w3.org/2000/svg" width={SVG_WIDTH} height={SVG_HEIGHT} viewBox={`0 0 ${SVG_WIDTH} ${SVG_HEIGHT}`} className="overflow-visible">
+        <svg
+          ref={svgRef}
+          xmlns="http://www.w3.org/2000/svg"
+          width={SVG_WIDTH}
+          height={SVG_HEIGHT}
+          viewBox={`0 0 ${SVG_WIDTH} ${SVG_HEIGHT}`}
+          className="overflow-visible"
+        >
           <defs>
             <filter id="gooey-filter">
               <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur" />
@@ -136,15 +190,31 @@ export default function Header() {
           </g>
           <g id="icons">
             {navItems.map((item, index) => (
-              <g key={item.name} className="cursor-pointer" onClick={() => handleIconClick(index)} transform={`translate(${iconCentersX[index] - ICON_WIDTH / 2}, ${yCenter - ICON_WIDTH / 2})`}>
+              <g
+                key={item.name}
+                className="cursor-pointer"
+                onClick={() => handleIconClick(index)}
+                transform={`translate(${iconCentersX[index] - ICON_WIDTH / 2}, ${yCenter - ICON_WIDTH / 2})`}
+              >
                 <rect width={ICON_WIDTH} height={ICON_WIDTH} fill="transparent" />
-                <item.icon className={clsx("transition-transform duration-300 will-change-transform", "nav-icon", activeIndex === index ? "scale-110" : "scale-100")} x={ICON_WIDTH / 2 - 16} y={ICON_WIDTH / 2 - 16} width={32} height={32} strokeWidth={1.5} />
+                <item.icon
+                  className={clsx(
+                    "transition-transform duration-300 will-change-transform",
+                    "nav-icon",
+                    activeIndex === index ? "scale-110" : "scale-100"
+                  )}
+                  x={ICON_WIDTH / 2 - 16}
+                  y={ICON_WIDTH / 2 - 16}
+                  width={32}
+                  height={32}
+                  strokeWidth={1.5}
+                />
               </g>
             ))}
           </g>
           <path id="main-path" d="" fill="none" />
         </svg>
-      </header>
+      </div>
     </>
   );
 }
