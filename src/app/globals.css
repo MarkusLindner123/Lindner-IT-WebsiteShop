@@ -7,61 +7,45 @@
    CSS Variables
 ========================== */
 :root {
-  /* Professional, trustworthy color theme */
-  --color-primary-dark: #0a1128; /* Deep navy blue */
-  --color-primary-light: #f8f9fa; /* Clean white background */
-  --color-accent-one: #2563eb; /* Confident blue */
-  --color-accent-two: #14b8a6; /* Sophisticated teal */
-  --color-neutral: #4b5563; /* Neutral gray for text */
-  --color-success: #10b981; /* Positive indicators */
+  --color-primary-dark: #0a1128;
+  --color-primary-light: #f8f9fa;
+  --color-accent-one: #2563eb;
+  --color-accent-two: #14b8a6;
+  --color-neutral: #4b5563;
+  --color-success: #10b981;
 
-  /* Services section */
   --color-services-bg: #ffffff;
-  --color-services-tag-bg: rgba(75, 85, 99, 0.4); /* halbtransparenter Hintergrund */
+  --color-services-tag-bg: rgba(75, 85, 99, 0.4);
   --color-services-tag-text: #ffffff;
-  --color-services-card-bg: rgba(230, 230, 230, 0.7); /* transparenter weißer Hintergrund */
-  --color-services-card-text: #1f2937; /* dunkler Text in Cards */
-  --color-services-card-title: #1f2937; /* Titel Farbe */
-  --color-services-card-description: #374151; /* Beschreibungstext Farbe */
-  --color-services-bullet: #1f2937; /* sichtbare Bullet Points */
+  --color-services-card-bg: rgba(230, 230, 230, 0.7);
+  --color-services-card-text: #1f2937;
+  --color-services-card-title: #1f2937;
+  --color-services-card-description: #374151;
+  --color-services-bullet: #1f2937;
 
-  /* Contact section */
   --color-contact-bg: #ffffff;
   --color-contact-subtitle: #4b5563;
   --color-contact-label: #4b5563;
   --color-contact-border: #d1d5db;
 
-  /* Section backgrounds */
   --color-heroVideo-bg: #0a1128;
   --color-hero-bg: #daebd4;
   --color-about-bg: #daebd4;
-  --color-services-section-bg: #daebd4; /* Renamed to avoid conflict */
+  --color-services-section-bg: #daebd4;
 
-  /* HEADER */
-  --header-bg: rgba(10, 17, 40, 0.6); /* half-transparent navy */
+  --header-bg: rgba(10, 17, 40, 0.6);
   --header-border: rgba(255, 255, 255, 0.12);
   --nav-icon-color: #ffffff;
   --nav-icon-hover: #e5f0ff;
 
-  /* Dropdown */
-  --dropdown-bg: rgba(255, 255, 255, 0.92);
-  --dropdown-text: #1f2937;
-  --dropdown-hover-bg: rgba(17, 24, 39, 0.06);
-  --dropdown-border: rgba(0, 0, 0, 0.06);
-  --dropdown-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
-
-  /* Jumpers (gooey blobs) */
   --jumper-1: var(--color-accent-one);
   --jumper-2: var(--color-accent-two);
 
-  /* Fonts */
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   --font-headline: "Plus Jakarta Sans", sans-serif;
 }
 
-/* ==========================
-   Tailwind Directives
-========================== */
+/* Tailwind Directives */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -69,8 +53,7 @@
 /* ==========================
    Global Styles
 ========================== */
-html,
-body {
+html, body {
   font-family: var(--font-sans);
   background-color: var(--color-primary-light);
   color: var(--color-neutral);
@@ -79,38 +62,27 @@ body {
   line-height: 1.6;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,h2,h3,h4,h5,h6 {
   font-family: var(--font-headline);
   color: var(--color-primary-dark);
   font-weight: 700;
   line-height: 1.3;
 }
 
-a {
-  color: var(--color-accent-one);
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
+a { color: var(--color-accent-one); text-decoration: none; transition: color 0.2s ease; }
+a:hover { color: var(--color-accent-two); }
 
-a:hover {
-  color: var(--color-accent-two);
-}
-
-/* ==========================
-   Background Utilities
-========================== */
+/* Background Utilities */
 .bg-brand-bg { background-color: var(--color-primary-dark); }
 .bg-hero-bg { background-color: var(--color-hero-bg); }
 .bg-about-bg { background-color: var(--color-about-bg); }
 .bg-services-section-bg { background-color: var(--color-services-section-bg); }
 .bg-contact-bg { background-color: var(--color-contact-bg); }
 
-/* Services Section */
+/* Services */
 .bg-services-bg { background-color: var(--color-services-bg); }
 .bg-services-tag-bg { background-color: var(--color-services-tag-bg); }
 .text-services-tag-text { color: var(--color-services-tag-text); }
-
-/* Services Cards */
 .bg-services-card { background-color: var(--color-services-card-bg); }
 .text-services-card-title { color: var(--color-services-card-title); }
 .text-services-card-description { color: var(--color-services-card-description); }
@@ -125,67 +97,13 @@ a:hover {
 ul.list-disc li::marker { color: var(--color-accent-two); }
 
 /* Backdrop Blur */
-.backdrop-blur-sm {
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
+.backdrop-blur-sm { backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
 
-/* Accent Text */
-.text-accent { color: var(--color-accent-one); }
-
-/* ==========================
-   Hero and About
-========================== */
-.hero-text {
-  font-size: 3.5rem;
-  font-weight: 700;
-  line-height: 1.2;
-  color: white;
-  letter-spacing: -0.05em;
-}
-
-.hero-video h2 { color: var(--color-accent-two); }
-
-.about-text {
-  color: var(--color-neutral);
-  background-color: white;
-  padding: 2rem;
-  border-radius: 0.5rem;
-  font-size: 1.125rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-}
-
-/* ==========================
-   Buttons
-========================== */
-.btn-primary {
-  background-color: var(--color-accent-one);
-  color: white;
-  border-radius: 0.375rem;
-  padding: 0.75rem 1.5rem;
-  font-weight: 600;
-  transition: all 0.2s ease;
-}
-
-.btn-primary:hover {
-  background-color: #1d4ed8;
-  transform: translateY(-1px);
-}
-
-.btn-secondary {
-  background-color: white;
-  color: var(--color-accent-one);
-  border: 2px solid var(--color-accent-one);
-  border-radius: 0.375rem;
-  padding: 0.75rem 1.5rem;
-  font-weight: 600;
-  transition: all 0.2s ease;
-}
-
-.btn-secondary:hover {
-  background-color: #f0f7ff;
-  transform: translateY(-1px);
-}
+/* Buttons */
+.btn-primary { background-color: var(--color-accent-one); color: white; border-radius: 0.375rem; padding: 0.75rem 1.5rem; font-weight: 600; transition: all 0.2s ease; }
+.btn-primary:hover { background-color: #1d4ed8; transform: translateY(-1px); }
+.btn-secondary { background-color: white; color: var(--color-accent-one); border: 2px solid var(--color-accent-one); border-radius: 0.375rem; padding: 0.75rem 1.5rem; font-weight: 600; transition: all 0.2s ease; }
+.btn-secondary:hover { background-color: #f0f7ff; transform: translateY(-1px); }
 
 /* Gradient Border Button */
 .border-gradient {
@@ -210,105 +128,22 @@ ul.list-disc li::marker { color: var(--color-accent-two); }
   gap: 0.5rem;
   cursor: pointer;
 }
+.border-gradient:hover { transform: translateY(-2px); --c3: var(--color-accent-two); }
 
-.border-gradient:hover {
-  transform: translateY(-2px);
-  --c3: var(--color-accent-two);
+/* Floating Tags */
+.floating-tag { will-change: transform; background-color: var(--color-services-tag-bg); color: var(--color-services-tag-text); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.875rem; font-weight: 500; }
+
+/* Header */
+.header-glass { border-color: var(--header-border); transition: transform 0.3s ease, top 0.3s ease; will-change: transform, opacity; }
+@media (max-width: 768px) {
+  .header-glass { top: 3%; left: 50%; transform: translateX(-50%) scale(0.8); transform-origin: top center; }
 }
-
-/* ==========================
-   Floating Tags
-========================== */
-.floating-tag {
-  will-change: transform;
-  background-color: var(--color-services-tag-bg);
-  color: var(--color-services-tag-text);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  padding: 0.25rem 0.75rem;
-  border-radius: 9999px;
-  font-size: 0.875rem;
-  font-weight: 500;
-}
-
-/* ==========================
-   Tailwind Layer Base
-========================== */
-@layer base {
-  html { @apply scroll-smooth; }
-}
-
-/* ==========================
-   Header Styling
-========================== */
-.header-glass { border-color: var(--header-border); }
 
 .nav-icon { color: var(--nav-icon-color); }
 .nav-icon:hover { color: var(--nav-icon-hover); }
-
 .subtle-rotate { transition: transform 0.25s ease; }
 
-/* Dropdown Panel + Arrow */
-.dropdown-panel {
-  background-color: var(--dropdown-bg);
-  color: var(--dropdown-text);
-  border: 1px solid var(--dropdown-border);
-  box-shadow: var(--dropdown-shadow);
-  border-radius: 0.75rem;
-  padding: 0.5rem;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  position: fixed;
-}
-
-.dropdown-panel::after {
-  content: "";
-  position: absolute;
-  top: -6px;
-  left: 50%;
-  transform: translateX(-50%) rotate(45deg);
-  width: 12px;
-  height: 12px;
-  background: var(--dropdown-bg);
-  border-left: 1px solid var(--dropdown-border);
-  border-top: 1px solid var(--dropdown-border);
-  box-shadow: -2px -2px 3px rgba(0, 0, 0, 0.02);
-}
-
-.dropdown-item {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 0.5rem 0.75rem;
-  border-radius: 0.5rem;
-  color: var(--dropdown-text);
-  text-decoration: none;
-  transition: background-color 0.15s ease;
-}
-
-.dropdown-item:hover { background-color: var(--dropdown-hover-bg); }
-
-.dropdown-item-icon { flex: 0 0 auto; }
-
-/* ==========================
-   Jumpers (SVG elements)
-========================== */
+/* Jumpers */
 .jumper:nth-of-type(1) { fill: var(--jumper-1); }
 .jumper:nth-of-type(2) { fill: var(--jumper-2); }
-
-/* Header & Jumpers Performance Optimierung */
-.header-glass {
-  border-color: var(--header-border);
-  will-change: transform, opacity;
-}
-
-.jumper {
-  will-change: transform;
-}
-
-.nav-icon {
-  color: var(--nav-icon-color);
-}
-.nav-icon:hover {
-  color: var(--nav-icon-hover);
-}
+.jumper { will-change: transform; }
