@@ -147,7 +147,7 @@ export default function Header() {
         scale: 0.8,
         opacity: 1,
         pointerEvents: "auto",
-        duration: 0.55,
+        duration: 0.3,
         ease: "power3.out", // smoother bouncy feel
         top: topPosition,
       });
@@ -157,7 +157,7 @@ export default function Header() {
         scale: 0.8,
         opacity: 0,
         pointerEvents: "none",
-        duration: 0.55,
+        duration: 0.4,
         ease: "power3.in",
         top: topPosition,
       });
