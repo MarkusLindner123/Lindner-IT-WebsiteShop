@@ -142,3 +142,9 @@ ul.list-disc li::marker { color: var(--color-accent-two); }
 .jumper:nth-of-type(1) { fill: var(--jumper-1); }
 .jumper:nth-of-type(2) { fill: var(--jumper-2); }
 .jumper { will-change: transform; }
+
+/* ==========================
+   Language Switcher
+========================== */
+.bg-primary-dark { background-color: rgba(10,17,40,0.85); }
+.bg-accent-one { background-color: var(--color-accent-two); }
