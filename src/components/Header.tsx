@@ -1,4 +1,3 @@
-// src/components/Header.tsx
 "use client";
 
 import { useState, useRef, useLayoutEffect } from "react";
@@ -20,10 +19,8 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-// GSAP plugin
 gsap.registerPlugin(MotionPathPlugin);
 
-// ----------------- NAV ITEMS -----------------
 type SubItem = { name: string; href: string; icon: LucideIcon };
 type NavItem = { name: string; href: string; icon: LucideIcon; subItems?: SubItem[] };
 
@@ -45,19 +42,15 @@ const navItems: NavItem[] = [
 ];
 
 const SERVICES_INDEX = navItems.findIndex((n) => n.subItems);
-
-// ---- Layout constants (10% smaller) ----
-const ICON_WIDTH = 63; // was 70
-const ICON_MARGIN = 27; // was 30
+const ICON_WIDTH = 63;
+const ICON_MARGIN = 27;
 const ICON_TOTAL_WIDTH = ICON_WIDTH + ICON_MARGIN;
 const SVG_WIDTH = navItems.length * ICON_TOTAL_WIDTH - ICON_MARGIN + 20;
-const SVG_HEIGHT = 90; // was 100
-const JUMPER_SIZE = 72; // was 80
+const SVG_HEIGHT = 90;
+const JUMPER_SIZE = 72;
 
 const iconCentersX = navItems.map((_, i) => 10 + i * ICON_TOTAL_WIDTH + JUMPER_SIZE / 2);
 const yCenter = SVG_HEIGHT / 2;
-
-// ---------------------------------------------------------------
 
 export default function Header() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -69,11 +62,9 @@ export default function Header() {
   const animRef = useRef<gsap.core.Timeline | null>(null);
   const introPlayedRef = useRef(false);
 
-  // ---------- Helpers ----------
   const buildPath = (fromX: number, toX: number) => {
     const travel = Math.abs(fromX - toX);
-    const mapper = gsap.utils.mapRange(ICON_TOTAL_WIDTH, SVG_WIDTH, 0.5, 1);
-    const factor = mapper(travel);
+    const factor = gsap.utils.mapRange(ICON_TOTAL_WIDTH, SVG_WIDTH, 0.5, 1)(travel);
     const dur = 1 * factor;
     const arc = yCenter - 100 * factor;
     const d = `M${fromX},${yCenter} Q${travel / 2 + Math.min(fromX, toX)},${arc} ${toX},${yCenter}`;
@@ -92,24 +83,20 @@ export default function Header() {
     if (!svgRef.current || !servicesIconRef.current) return { top: 0, left: 0 };
     const svgRect = svgRef.current.getBoundingClientRect();
     const iconRect = servicesIconRef.current.getBoundingClientRect();
-
-    const arrowOffset = ICON_WIDTH / 2 + 18; // same as arrow x
+    const arrowOffset = ICON_WIDTH / 2 + 18;
     const arrowLeft = iconRect.left + arrowOffset;
-
     return {
       top: svgRect.top + yCenter + JUMPER_SIZE / 2 + 8,
       left: arrowLeft,
     };
   };
 
-  // ---------- Intro animation ----------
   useLayoutEffect(() => {
     positionJumpersAt(iconCentersX[0]);
 
     if (introPlayedRef.current) return;
     introPlayedRef.current = true;
 
-    // small bounce on first icon
     gsap.to(".jumper", {
       duration: 0.6,
       y: yCenter - JUMPER_SIZE / 2 - 18,
@@ -119,12 +106,10 @@ export default function Header() {
     });
   }, []);
 
-  // ---------- Click: animate jumpers + toggle dropdown + scroll ----------
   const handleIconClick = (targetIndex: number) => {
     if (navItems[targetIndex].subItems) {
-      const pos = computeDropdownPosition();
+      setDropdownPos(computeDropdownPosition());
       setDropdownVisible((v) => !v);
-      setDropdownPos(pos);
     } else {
       setDropdownVisible(false);
     }
@@ -134,9 +119,7 @@ export default function Header() {
       return;
     }
 
-    if (animRef.current && animRef.current.isActive()) {
-      animRef.current.progress(1);
-    }
+    if (animRef.current && animRef.current.isActive()) animRef.current.progress(1);
 
     const fromX = iconCentersX[activeIndex];
     const toX = iconCentersX[targetIndex];
@@ -144,32 +127,19 @@ export default function Header() {
 
     gsap.set("#main-path", { attr: { d } });
 
-    const tl = gsap
-      .timeline()
-      .to(".jumper", {
-        motionPath: {
-          path: d,
-          align: "#main-path",
-          alignOrigin: [0.5, 0.5],
-        },
-        duration: dur,
-        stagger: 0.14,
-        ease: "sine.inOut",
-      })
-      .to(
-        ".jumper",
-        {
-          duration: dur / 2,
-          attr: { rx: 36, ry: 36 }, // slightly smaller jumpers
-          yoyo: true,
-          repeat: 1,
-        },
-        0
-      );
+    animRef.current = gsap.timeline().to(".jumper", {
+      motionPath: {
+        path: d,
+        align: "#main-path",
+        alignOrigin: [0.5, 0.5],
+      },
+      duration: dur,
+      stagger: 0.14,
+      ease: "sine.inOut",
+      willChange: "transform",
+    });
 
-    animRef.current = tl;
     setActiveIndex(targetIndex);
-
     document.querySelector(navItems[targetIndex].href)?.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -189,27 +159,22 @@ export default function Header() {
         >
           <defs>
             <filter id="gooey-filter">
-              <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur" />
+              <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur" />
               <feColorMatrix
                 in="blur"
                 mode="matrix"
-                values="1 0 0 0 0  
-                        0 1 0 0 0  
-                        0 0 1 0 0  
-                        0 0 0 16 -7"
+                values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 16 -7"
                 result="goo"
               />
               <feBlend in="SourceGraphic" in2="goo" operator="atop" />
             </filter>
           </defs>
 
-          {/* Jumpers (exactly 2) */}
           <g filter="url(#gooey-filter)">
             <rect className="jumper" width={JUMPER_SIZE} height={JUMPER_SIZE} rx="26" ry="26" />
             <rect className="jumper" width={JUMPER_SIZE} height={JUMPER_SIZE} rx="26" ry="26" />
           </g>
 
-          {/* Icons */}
           <g id="icons">
             {navItems.map((item, index) => (
               <g
@@ -222,7 +187,6 @@ export default function Header() {
                 })`}
               >
                 <rect width={ICON_WIDTH} height={ICON_WIDTH} fill="transparent" />
-
                 <item.icon
                   className={clsx(
                     "transition-transform duration-300 will-change-transform",
@@ -235,7 +199,6 @@ export default function Header() {
                   height={32}
                   strokeWidth={1.5}
                 />
-
                 {item.subItems && (
                   <ChevronDown
                     className={clsx(

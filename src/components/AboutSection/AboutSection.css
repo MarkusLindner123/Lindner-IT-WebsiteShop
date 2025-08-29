@@ -1,4 +1,32 @@
-/* Pinsel-Effekt */
+/* AboutSection.css */
+
+/* Performance-Hints für flüssige Animationen */
+.animated-word,
+.animated-title,
+.image-overlay {
+  will-change: transform, opacity;
+  transition: opacity 0.25s linear, transform 0.25s linear;
+}
+
+/* Standardzustand */
+.animated-word {
+  opacity: 0.15;
+  display: inline-block;
+}
+
+.animated-title {
+  opacity: 0.15;
+}
+
+/* Overlay Animation */
+.image-overlay {
+  transform: scaleY(1);
+  transform-origin: bottom;
+  pointer-events: none;
+  backface-visibility: hidden;
+}
+
+/* --- Pinsel-Effekt (original) --- */
 .brush-effect {
   background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3);
   background-size: 100% 100%;

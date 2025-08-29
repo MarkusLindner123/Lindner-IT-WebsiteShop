@@ -295,3 +295,20 @@ ul.list-disc li::marker { color: var(--color-accent-two); }
 ========================== */
 .jumper:nth-of-type(1) { fill: var(--jumper-1); }
 .jumper:nth-of-type(2) { fill: var(--jumper-2); }
+
+/* Header & Jumpers Performance Optimierung */
+.header-glass {
+  border-color: var(--header-border);
+  will-change: transform, opacity;
+}
+
+.jumper {
+  will-change: transform;
+}
+
+.nav-icon {
+  color: var(--nav-icon-color);
+}
+.nav-icon:hover {
+  color: var(--nav-icon-hover);
+}
