@@ -12,12 +12,10 @@ export default function Hero() {
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
-
     if (typeof window !== "undefined") {
       setWindowWidth(window.innerWidth);
       window.addEventListener("resize", handleResize);
     }
-
     return () => {
       if (typeof window !== "undefined") {
         window.removeEventListener("resize", handleResize);
@@ -30,7 +28,6 @@ export default function Hero() {
     if (windowWidth < 1024) return 25;
     return 20;
   };
-
   const animationSpeed = getAnimationSpeed();
 
   const container: Variants = {
@@ -43,7 +40,7 @@ export default function Hero() {
     show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
   };
 
-  const galleryImages = Array(9).fill("/hero-img.jpg");
+  const galleryImages = Array(9).fill("/hero-img.jpg"); // Hier später echte Service-Bilder einsetzen
   const column1Images = galleryImages.slice(0, 3);
   const column2Images = galleryImages.slice(3, 6);
   const column3Images = galleryImages.slice(6, 9);
@@ -58,7 +55,7 @@ export default function Hero() {
     <section aria-label="Hero" className="relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 lg:px-8 py-12 md:py-16 lg:py-20 relative z-10 p-8 rounded-2xl md:p-12">
         <motion.div variants={container} initial="hidden" animate="show" className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          {/* Text Content + Desktop Buttons */}
+          {/* Text Content */}
           <motion.div variants={fadeUp} className="lg:col-span-7 xl:col-span-6 space-y-6">
             <div className="inline-flex items-center px-4 py-1 rounded-full text-sm font-medium text-black bg-black/10">
               {t("kicker")}
@@ -74,17 +71,13 @@ export default function Hero() {
 
             {/* Desktop Buttons */}
             <div className="hidden lg:flex flex-col sm:flex-row sm:items-center gap-4 mt-6">
-              {/* AnimatedButton scrollt zu Contact */}
               <AnimatedButton>{t("ctaPrimary")}</AnimatedButton>
-              {/* CTA Secondary Button scrollt zu Services */}
               <button
                 onClick={scrollToServices}
                 className="inline-flex items-center justify-center px-6 py-4 border border-black/30 rounded-full text-black hover:bg-black/10 hover:-translate-y-1 transition-transform duration-300"
               >
                 {t("ctaSecondary")}
               </button>
-
-
             </div>
           </motion.div>
 
@@ -104,7 +97,14 @@ export default function Hero() {
                       >
                         {[...columnImages, ...columnImages].map((src, i) => (
                           <div key={i} className="flex-shrink-0" style={{ height: "calc(100% / 2)" }}>
-                            <Image src={src} alt={`Gallery image ${i + 1}`} width={300} height={200} className="w-full h-full object-cover rounded-lg aspect-[3/2]" />
+                            <Image
+                              src={src}
+                              alt={`Visual representing our service ${i + 1}`} // SEO-relevanter Alt-Text
+                              width={300}
+                              height={200}
+                              className="w-full h-full object-cover rounded-lg aspect-[3/2]"
+                              loading="lazy"
+                            />
                           </div>
                         ))}
                       </motion.div>
@@ -130,7 +130,14 @@ export default function Hero() {
                     >
                       {[...columnImages, ...columnImages].map((src, i) => (
                         <div key={i} className="flex-shrink-0" style={{ height: "calc(100% / 2)" }}>
-                          <Image src={src} alt={`Gallery image ${i + 1}`} width={300} height={200} className="w-full h-full object-cover rounded-lg aspect-[3/2]" />
+                          <Image
+                            src={src}
+                            alt={`Visual representing our service ${i + 1}`}
+                            width={300}
+                            height={200}
+                            className="w-full h-full object-cover rounded-lg aspect-[3/2]"
+                            loading="lazy"
+                          />
                         </div>
                       ))}
                     </motion.div>
@@ -149,8 +156,6 @@ export default function Hero() {
             >
               {t("ctaSecondary")}
             </button>
-
-           
           </motion.div>
         </motion.div>
       </div>

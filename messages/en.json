@@ -1,97 +1,181 @@
 {
   "heroVideo": {
-    "title": "Your future starts online",
-    "subtitle": "We design digital experiences that inspire"
+    "title": "I secure & grow your business IT",
+    "subtitle": "Professional IT support, websites, network setup & cybersecurity for SMEs"
   },
   "hero": {
-    "kicker": "Web & Software Development",
-    "kickerTag": "Freelancer",
-    "titleLine1": "We",
+    "kicker": "Digital Solutions for SMEs",
+    "kickerTag": "Your IT Partner",
+    "titleLine1": "I Secure &",
     "titleLine2": "Grow",
-    "titleLine3": "Your Brand",
-    "subtitle": "Websites, shops & automation — clear, fast, measurable.",
-    "ctaPrimary": "Request a quote",
-    "ctaSecondary": "View services"
+    "titleLine3": "Your Business IT",
+    "subtitle": "I provide professional IT support, network setup, cybersecurity, and websites tailored for small and medium businesses.",
+    "ctaPrimary": "Request a Quote",
+    "ctaSecondary": "View Services"
   },
-  "about": { "kicker": "We build that shit for you", "title": "How we build", "analyze": { "title": "Analyze", "text": "We begin by taking a deep dive into your organization’s unique needs, challenges, and objectives. This involves examining your current systems, workflows, and technologies in detail, as well as engaging with all key stakeholders early in the process. By gaining a comprehensive understanding of your operational landscape, we uncover opportunities for improvement, identify potential risks before they become issues, and lay the groundwork for solutions that are not only practical but also strategically aligned with your long-term vision." }, "plan": { "title": "Plan", "text": "Building on the insights gathered during the analysis phase, we develop a detailed, actionable roadmap designed to bring your vision to life. This includes defining the technical architecture, mapping out user experiences, setting clear milestones, and establishing success criteria. Every step is carefully structured to ensure alignment with your business goals, adaptability to changing needs, and scalability for future expansion, so your investment continues to deliver value over time." }, "build": { "title": "Build", "text": "With a clear plan in place, our team of experienced developers and designers transform concepts into fully functional, high-quality digital products. From robust backend systems to intuitive, user-friendly interfaces, every element is crafted with precision and purpose. Whether we’re building a responsive website, a feature-rich mobile app, or a complex digital platform, we ensure a perfect balance of solid technical architecture, engaging design, and optimal performance to deliver solutions that inspire and endure." }, "support": { "title": "Support", "text": "Our work doesn’t end at launch. We provide proactive, ongoing support to keep your digital solution secure, up-to-date, and performing at its best. This includes regular maintenance, feature enhancements, security monitoring, and performance optimization. As your business grows and your needs evolve, we remain a trusted partner, ensuring your digital presence adapts seamlessly and continues to deliver measurable results over the long term." }, "ctaPrimary": "Request a quote" },
+  "about": {
+    "kicker": "I build IT for you",
+    "title": "How I Work",
+    "analyze": {
+      "title": "Assess",
+      "text": "I start by understanding your company's current IT environment, identifying weaknesses, bottlenecks, and potential security risks. This allows me to propose practical solutions aligned with your business objectives."
+    },
+    "plan": {
+      "title": "Plan",
+      "text": "Based on the assessment, I create a clear IT roadmap. This includes network design, hardware and software selection, cybersecurity strategy, and step-by-step implementation planning to ensure reliability and scalability."
+    },
+    "build": {
+      "title": "Implement",
+      "text": "I bring your IT infrastructure to life, setting up secure networks, servers, workstations, and websites. Every component is configured for optimal performance, security, and future growth."
+    },
+    "support": {
+      "title": "Support",
+      "text": "After deployment, I provide ongoing IT support, monitoring, and maintenance. This ensures your systems remain secure, updated, and fully operational, letting you focus on your business."
+    },
+    "ctaPrimary": "Request a quote"
+  },
   "services": {
-    "ctaPrimary": "Contact Us",
-    "kicker": "We build that shit for you",
-    "title": "Digital solutions that work for you",
+    "ctaPrimary": "Contact Me",
+    "kicker": "My services",
+    "title": "IT solutions that keep your business running",
     "webDesign": {
-      "title": "Web Design & Development",
-      "description": "We craft beautiful, responsive, and high-performing websites tailored to your brand.",
+      "title": "Website Design & Hosting",
+      "description": "I create responsive, secure, and high-performing websites for your business that reflect your brand and attract customers.",
       "feature1": "Responsive design for all devices",
-      "feature2": "Custom UI/UX tailored to your brand",
-      "feature3": "SEO-optimized websites",
-      "feature4": "Integration with modern tools & APIs",
-      "feature5": "Performance-focused development",
+      "feature2": "SEO-optimized pages",
+      "feature3": "Secure hosting & SSL",
+      "feature4": "CMS for easy content updates",
+      "feature5": "Integration with business tools",
       "faq1": {
         "question": "How long does it take to build a website?",
-        "answer": "Depending on complexity, most websites are ready within 4–8 weeks."
+        "answer": "Most business websites are completed within 4–6 weeks depending on complexity."
       },
       "faq2": {
         "question": "Do you offer website maintenance?",
-        "answer": "Yes, we provide ongoing support and updates to keep your site running smoothly."
-      }
-      
-    },
-    "softwareDevelopment": {
-      "title": "Software Development",
-      "description": "From custom applications to complex system integrations, we build robust and scalable software.",
-      "feature1": "Custom business applications",
-      "feature2": "Secure and scalable architecture",
-      "feature3": "System integration and automation",
-      "feature4": "Cross-platform solutions",
-      "feature5": "Maintenance and continuous support",
-      "faq1": {
-        "question": "Do you build mobile apps too?",
-        "answer": "Yes, we develop cross-platform mobile applications alongside web solutions."
+        "answer": "Yes, I provide ongoing updates, backups, and security monitoring."
       },
-      "faq2": {
-        "question": "Can you integrate with our existing systems?",
-        "answer": "Absolutely. We specialize in seamless integrations with CRMs, ERPs, and third-party APIs."
+      "faq3": {
+        "question": "Can you redesign an existing website?",
+        "answer": "Absolutely. I update designs, improve security, and optimize performance."
+      },
+      "faq4": {
+        "question": "Do you provide e-commerce solutions?",
+        "answer": "Yes, I can integrate online shops and payment gateways."
+      },
+      "faq5": {
+        "question": "Will my website be mobile-friendly?",
+        "answer": "Yes, all websites are fully responsive and optimized for mobile devices."
+      },
+      "faq6": {
+        "question": "Can you help with website SEO?",
+        "answer": "Yes, I provide on-page SEO optimization and performance improvements."
       }
     },
-    "cloudSolutions": {
-      "title": "Cloud Solutions",
-      "description": "We design, deploy, and manage cloud infrastructures that scale with your business.",
-      "feature1": "Cloud migration and deployment",
-      "feature2": "Serverless architecture",
-      "feature3": "Cost optimization strategies",
-      "feature4": "High availability and disaster recovery",
-      "feature5": "Continuous monitoring & support",
+    "itSupport": {
+      "title": "IT Support for SMEs",
+      "description": "Reliable IT support for your company, including troubleshooting, hardware & software management, and user assistance.",
+      "feature1": "Remote and on-site support",
+      "feature2": "Software installation & updates",
+      "feature3": "Hardware setup and repair",
+      "feature4": "Proactive monitoring",
+      "feature5": "Helpdesk for employees",
       "faq1": {
-        "question": "Which cloud platforms do you support?",
-        "answer": "We work with AWS, Azure, and Google Cloud depending on your project needs."
+        "question": "Do you provide on-site support?",
+        "answer": "Yes, I offer both on-site and remote IT support depending on your needs."
       },
       "faq2": {
-        "question": "Is cloud migration secure?",
-        "answer": "Yes. We use industry best practices to ensure data integrity and security during migration."
+        "question": "Can you manage our office computers?",
+        "answer": "Yes, I handle all workstations, software installations, and updates."
+      },
+      "faq3": {
+        "question": "Do you offer emergency support?",
+        "answer": "Absolutely. I provide rapid response for urgent IT issues."
+      },
+      "faq4": {
+        "question": "Do you provide IT training for employees?",
+        "answer": "Yes, I can provide training to improve digital skills and security awareness."
+      },
+      "faq5": {
+        "question": "Do you manage software licenses?",
+        "answer": "Yes, I manage licenses, updates, and compliance for your business software."
+      },
+      "faq6": {
+        "question": "Can you monitor our IT systems 24/7?",
+        "answer": "Yes, I offer continuous monitoring and alerts for critical systems."
       }
     },
-    "aiAutomation": {
-      "title": "AI & Automation",
-      "description": "Boost efficiency with smart AI-driven solutions and business process automation.",
-      "feature1": "Chatbots and virtual assistants",
-      "feature2": "Workflow automation",
-      "feature3": "Data analysis and machine learning",
-      "feature4": "AI-driven customer support",
-      "feature5": "Custom AI models tailored to your needs",
+    "networkSetup": {
+      "title": "Network & Infrastructure",
+      "description": "I design and implement secure and scalable networks, including wired and wireless setups, VPNs, and server architecture.",
+      "feature1": "Network planning & deployment",
+      "feature2": "Secure Wi-Fi & LAN setup",
+      "feature3": "VPN & remote access solutions",
+      "feature4": "Server and storage configuration",
+      "feature5": "Monitoring & performance optimization",
       "faq1": {
-        "question": "Can AI help my small business?",
-        "answer": "Definitely! AI can save time and improve customer experience, even for smaller companies."
+        "question": "Do you set up office networks from scratch?",
+        "answer": "Yes, I design and implement new networks tailored to your business size and needs."
       },
       "faq2": {
-        "question": "Do you train custom AI models?",
-        "answer": "Yes, we build and fine-tune AI models tailored to your data and goals."
+        "question": "Can you optimize an existing network?",
+        "answer": "Absolutely. I can improve performance, security, and reliability."
+      },
+      "faq3": {
+        "question": "Do you manage network security?",
+        "answer": "Yes, I implement firewalls, access controls, and monitoring tools to keep your network safe."
+      },
+      "faq4": {
+        "question": "Can you configure VPN access for remote employees?",
+        "answer": "Yes, I provide secure VPN setups for remote work."
+      },
+      "faq5": {
+        "question": "Do you provide network monitoring?",
+        "answer": "Yes, I monitor network performance, uptime, and troubleshoot issues proactively."
+      },
+      "faq6": {
+        "question": "Can you recommend hardware for our network?",
+        "answer": "Yes, I provide advice and installation for routers, switches, and servers."
+      }
+    },
+    "cyberSecurity": {
+      "title": "Cybersecurity",
+      "description": "Protect your business with comprehensive cybersecurity services including risk assessment, threat prevention, and compliance.",
+      "feature1": "Security audits & risk assessment",
+      "feature2": "Firewall and antivirus setup",
+      "feature3": "Employee training on cyber threats",
+      "feature4": "Backup and disaster recovery",
+      "feature5": "Continuous monitoring & alerts",
+      "faq1": {
+        "question": "How do you protect against cyber attacks?",
+        "answer": "I implement firewalls, antivirus, regular updates, and monitoring to reduce risk."
+      },
+      "faq2": {
+        "question": "Do you provide employee training?",
+        "answer": "Yes, I offer cybersecurity awareness training to prevent human error."
+      },
+      "faq3": {
+        "question": "Can you secure our cloud services?",
+        "answer": "Absolutely. I secure cloud platforms and ensure compliance with best practices."
+      },
+      "faq4": {
+        "question": "Do you provide penetration testing?",
+        "answer": "Yes, I perform ethical hacking tests to identify vulnerabilities."
+      },
+      "faq5": {
+        "question": "Can you help with GDPR compliance?",
+        "answer": "Yes, I ensure your IT setup aligns with data protection regulations."
+      },
+      "faq6": {
+        "question": "Do you offer continuous monitoring?",
+        "answer": "Yes, I provide 24/7 monitoring for potential cyber threats."
       }
     }
-  },
+  }
+,
   "contact": {
-    "kicker": "We build that shit for you",
+    "kicker": "Let's secure your IT",
     "title": "Get in Touch",
-    "subtitle": "We’d love to hear from you! Fill out the form and we’ll get back to you soon.",
+    "subtitle": "Contact me today to discuss your IT needs and get a customized solution.",
     "form": {
       "name": "Name",
       "email": "Email",
@@ -101,29 +185,27 @@
       "reasonPlaceholder": "Please select",
       "options": {
         "quote": "Request a Quote",
-        "support": "Support",
+        "support": "IT Support",
         "general": "General Inquiry"
       },
       "submit": "Send Message"
     }
   },
-  
-"testimonials": {
-  "title": "What our clients say",
-  "kicker": "What people think about us",
-  "googleProfile": "https://www.google.com/maps/place/YOUR_BUSINESS",
-  "googleButtonText": "google business profile",
-  "reviews": [
-    { "name": "John Doe", "rating": 5, "text": "Great service!" },
-    { "name": "Jane Smith", "rating": 4, "text": "Very professional." },
-    { "name": "Alice Brown", "rating": 5, "text": "Highly recommended!" },
-    { "name": "Bob Johnson", "rating": 5, "text": "Excellent work." },
-    { "name": "Eva Green", "rating": 4, "text": "Really satisfied." }
-  ]
-}
-,
+  "testimonials": {
+    "title": "What my clients say",
+    "kicker": "Trusted by SMEs",
+    "googleProfile": "https://www.google.com/maps/place/YOUR_BUSINESS",
+    "googleButtonText": "Google Business Profile",
+    "reviews": [
+      { "name": "John Doe", "rating": 5, "text": "Fast and reliable IT support." },
+      { "name": "Jane Smith", "rating": 4, "text": "Our network and website work flawlessly." },
+      { "name": "Alice Brown", "rating": 5, "text": "Professional and secure IT solutions." },
+      { "name": "Bob Johnson", "rating": 5, "text": "Excellent service for small businesses." },
+      { "name": "Eva Green", "rating": 4, "text": "Highly recommend for cybersecurity and IT setup." }
+    ]
+  },
   "Meta": {
-    "title": "Web Agency – Modern Websites"
+    "title": "IT Support & Web Solutions for SMEs"
   },
   "Switcher": {
     "label": "Language",
