@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, Variants } from "framer-motion";
 import { useTranslations } from "next-intl";
-import AnimatedButton from "@/components/AnimatedButton";
+import { AnimatedButton } from "@/components/AnimatedButton";
 import { useEffect, useState } from "react";
 
 export default function Hero() {

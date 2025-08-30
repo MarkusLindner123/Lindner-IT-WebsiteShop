@@ -1,4 +1,3 @@
-// src/components/AnimatedBorderButton.tsx
 "use client";
 
 import React, { useEffect, useRef } from "react";
@@ -9,7 +8,7 @@ interface AnimatedButtonProps {
   children: React.ReactNode;
 }
 
-const AnimatedButton: React.FC<AnimatedButtonProps> = ({ href, children }) => {
+export function AnimatedButton({ href, children }: AnimatedButtonProps) {
   const buttonRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
@@ -26,11 +25,10 @@ const AnimatedButton: React.FC<AnimatedButtonProps> = ({ href, children }) => {
     rotateGradient();
   }, []);
 
+  // Direkter Return der JSX
   return (
     <Link href={href} ref={buttonRef} className="border-gradient">
       {children}
     </Link>
   );
-};
-
-export default AnimatedButton;
+}
