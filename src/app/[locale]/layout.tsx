@@ -7,7 +7,7 @@ import { routing } from "@/i18n/routing";
 import "@/app/globals.css";
 import Header from "@/components/Header";
 import LanguageSwitcher from "@/components/LanguageSwitcher"; // <-- neu
-
+import Phone from "@/components/PhoneButton"
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
@@ -32,7 +32,8 @@ export default async function LocaleLayout({
         <NextIntlClientProvider locale={locale} messages={messages}>
           <Header />
           {children}
-          <LanguageSwitcher /> {/* <-- hier eingebunden */}
+          <Phone/> 
+          <LanguageSwitcher />
         </NextIntlClientProvider>
       </body>
     </html>

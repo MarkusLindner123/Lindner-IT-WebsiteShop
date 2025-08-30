@@ -142,3 +142,13 @@ ul.list-disc li::marker { color: var(--color-accent-two); }
 /* Accordion */
 .faq-question { cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
 .faq-answer { margin-top: 0.5rem; color: var(--color-services-card-description); }
+
+/* Scrollbar komplett ausblenden */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE und Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}

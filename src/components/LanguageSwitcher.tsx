@@ -70,7 +70,7 @@ export default function LanguageSwitcher() {
       {/* Language Menu */}
       <div
         ref={menuRef}
-        className="fixed bottom-20 right-[2.5%] flex flex-col gap-3 bg-[rgba(10,17,40,0.6)] backdrop-blur-md p-3 rounded-2xl shadow-lg z-40 pointer-events-none opacity-0 translate-y-12"
+        className="fixed bottom-20 right-[2.5%] flex flex-col gap-3 bg-[rgba(10,17,40,0.6)] backdrop-blur-md p-3 rounded-2xl shadow-lg z-[70] pointer-events-none opacity-0 translate-y-12"
       >
         {languages.map((lang) => {
           const isActive = currentLang === (lang.code === "gb" ? "en" : lang.code);
