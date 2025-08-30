@@ -6,8 +6,10 @@ import { setRequestLocale, getMessages } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import "@/app/globals.css";
 import Header from "@/components/Header";
-import LanguageSwitcher from "@/components/LanguageSwitcher"; // <-- neu
-import Phone from "@/components/PhoneButton"
+import LanguageSwitcher from "@/components/LanguageSwitcher";
+import Phone from "@/components/PhoneButton";
+import PageLoader from "@/components/PageLoader"; // <-- neu
+
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
@@ -30,10 +32,12 @@ export default async function LocaleLayout({
     <html lang={locale} className="antialiased">
       <body className="min-h-screen text-brand-text font-sans">
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <Header />
-          {children}
-          <Phone/> 
-          <LanguageSwitcher />
+          <PageLoader>
+            <Header />
+            {children}
+            <Phone />
+            <LanguageSwitcher />
+          </PageLoader>
         </NextIntlClientProvider>
       </body>
     </html>
