@@ -107,6 +107,21 @@
       "submit": "Send Message"
     }
   },
+  
+"testimonials": {
+  "title": "What our clients say",
+  "kicker": "What people think about us",
+  "googleProfile": "https://www.google.com/maps/place/YOUR_BUSINESS",
+  "googleButtonText": "View on Google",
+  "reviews": [
+    { "name": "John Doe", "rating": 5, "text": "Great service!" },
+    { "name": "Jane Smith", "rating": 4, "text": "Very professional." },
+    { "name": "Alice Brown", "rating": 5, "text": "Highly recommended!" },
+    { "name": "Bob Johnson", "rating": 5, "text": "Excellent work." },
+    { "name": "Eva Green", "rating": 4, "text": "Really satisfied." }
+  ]
+}
+,
   "Meta": {
     "title": "Web Agency – Modern Websites"
   },
