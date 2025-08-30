@@ -22,19 +22,13 @@ export default function TestimonialsSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [scrollIndex, setScrollIndex] = useState(0);
 
-  // Auto-scroll every 8 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       if (!containerRef.current) return;
       const nextIndex = (scrollIndex + 1) % reviews.length;
-
-      // Determine the scroll amount based on one review card's width
       const card = containerRef.current.querySelector("div.flex-none");
       if (card) {
-        containerRef.current.scrollBy({
-          left: card.clientWidth + 24, // Card width + gap (24px)
-          behavior: "smooth",
-        });
+        containerRef.current.scrollBy({ left: card.clientWidth + 24, behavior: "smooth" });
       }
       setScrollIndex(nextIndex);
     }, 8000);
@@ -44,23 +38,10 @@ export default function TestimonialsSection() {
 
   const scroll = (direction: "left" | "right") => {
     if (!containerRef.current) return;
-
     const card = containerRef.current.querySelector("div.flex-none");
     if (!card) return;
-
-    const scrollAmount = card.clientWidth + 24; // Card width + gap (24px)
-
-    if (direction === "left") {
-      containerRef.current.scrollBy({
-        left: -scrollAmount,
-        behavior: "smooth",
-      });
-    } else {
-      containerRef.current.scrollBy({
-        left: scrollAmount,
-        behavior: "smooth",
-      });
-    }
+    const scrollAmount = card.clientWidth + 24;
+    containerRef.current.scrollBy({ left: direction === "left" ? -scrollAmount : scrollAmount, behavior: "smooth" });
   };
 
   const containerVariants: Variants = {
@@ -68,48 +49,26 @@ export default function TestimonialsSection() {
     show: { transition: { staggerChildren: 0.1 } },
   };
 
-  const fadeUp: Variants = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-  };
+  const fadeUp: Variants = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { duration: 0.6 } } };
 
   return (
-    <section
-      aria-label="Testimonials Section"
-      className="relative bg-services-section-bg py-16"
-    >
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true }}
-        className="max-w-7xl mx-auto px-4 md:px-8"
-      >
+    <section aria-label="Testimonials Section" className="relative bg-services-section-bg py-16">
+      <motion.div variants={containerVariants} initial="hidden" whileInView="show" viewport={{ once: true }} className="max-w-7xl mx-auto px-4 md:px-8">
         {/* Kicker */}
         <motion.div variants={fadeUp} className="mb-6">
-          <div className="inline-flex items-center px-4 py-1 rounded-full text-sm font-medium text-black bg-black/10">
-            {kicker}
-          </div>
+          <div className="inline-flex items-center px-4 py-1 rounded-full text-sm font-medium text-black bg-black/10">{kicker}</div>
         </motion.div>
 
         {/* Title */}
         <motion.div variants={fadeUp} className="mb-8">
-          <h2 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-primary-dark font-headline">
-            {t("title") || "What our clients say"}
-          </h2>
+          <h2 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-primary-dark font-headline">{t("title") || "What our clients say"}</h2>
         </motion.div>
 
         {/* Reviews Carousel */}
         <div className="relative">
-          <div
-            ref={containerRef}
-            className="flex overflow-x-auto scroll-smooth snap-x snap-mandatory gap-6 no-scrollbar"
-          >
+          <div ref={containerRef} className="flex overflow-x-auto scroll-smooth snap-x snap-mandatory gap-6 no-scrollbar">
             {reviews.map((review, idx) => (
-              <div
-                key={idx}
-                className="flex-none w-full md:w-[calc(50%-12px)] snap-center bg-white rounded-2xl p-6 shadow-lg"
-              >
+              <div key={idx} className="flex-none w-full md:w-[calc(50%-12px)] snap-center bg-white rounded-2xl p-6 shadow-lg">
                 <p className="text-neutral mb-4">&quot;{review.text}&quot;</p>
                 <div className="flex items-center justify-between text-sm text-gray-500">
                   <span>{review.name}</span>
@@ -122,16 +81,10 @@ export default function TestimonialsSection() {
 
         {/* Left/Right Buttons */}
         <div className="flex justify-center gap-4 mt-8">
-          <button
-            onClick={() => scroll("left")}
-            className="bg-white rounded-full p-2 shadow-md"
-          >
+          <button onClick={() => scroll("left")} className="bg-white rounded-full p-2 shadow-md">
             <ChevronLeftIcon className="w-5 h-5" />
           </button>
-          <button
-            onClick={() => scroll("right")}
-            className="bg-white rounded-full p-2 shadow-md"
-          >
+          <button onClick={() => scroll("right")} className="bg-white rounded-full p-2 shadow-md">
             <ChevronRightIcon className="w-5 h-5" />
           </button>
         </div>
@@ -142,9 +95,9 @@ export default function TestimonialsSection() {
             href={googleProfileUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block bg-primary-dark text-white px-6 py-3 rounded-xl shadow-lg hover:bg-primary hover:shadow-xl transition"
+            className="inline-flex items-center justify-center px-6 py-4 border border-black/30 rounded-full text-black hover:bg-black/10 hover:-translate-y-1 transition-transform duration-300"
           >
-            {googleButtonText}
+            { googleButtonText }
           </a>
         </div>
       </motion.div>
