@@ -1,18 +1,15 @@
 "use client";
-import { useState, useRef, useLayoutEffect, useEffect } from "react";
+import { useState, useRef, useLayoutEffect, useEffect, useCallback } from "react";
 import clsx from "clsx";
 import gsap from "gsap";
-import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 import { Home, User, Briefcase, Mail, Film, Menu, X, type LucideIcon } from "lucide-react";
-
-gsap.registerPlugin(MotionPathPlugin);
 
 type NavItem = { name: string; href: string; icon: LucideIcon };
 const navItems: NavItem[] = [
   { name: "Hero Video", href: "#home", icon: Film },
   { name: "Home", href: "#home-main", icon: Home },
-  { name: "About", href: "#about", icon: User },
   { name: "Services", href: "#services", icon: Briefcase },
+  { name: "About", href: "#about", icon: User },
   { name: "Contact", href: "#contact", icon: Mail },
 ];
 
@@ -40,31 +37,45 @@ const useMediaQuery = (query: string) => {
 export default function Header() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const svgRef = useRef<SVGSVGElement>(null);
   const animRef = useRef<gsap.core.Timeline | null>(null);
-  const introPlayedRef = useRef(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
 
   const isMobile = useMediaQuery("(max-width: 768px)");
 
-  const buildPath = (fromX: number, toX: number) => {
-    const travel = Math.abs(fromX - toX);
-    const factor = gsap.utils.mapRange(ICON_TOTAL_WIDTH, SVG_WIDTH, 0.5, 1)(travel);
-    const dur = 0.7 * factor;
-    const arc = yCenter - 100 * factor;
-    const d = `M${fromX},${yCenter} Q${travel / 2 + Math.min(fromX, toX)},${arc} ${toX},${yCenter}`;
-    return { d, dur };
-  };
+  // ---- Jumper Animation ----
+  const animateJumperTo = useCallback((targetIndex: number) => {
+    if (animRef.current) animRef.current.kill();
+    const toX = iconCentersX[targetIndex] - JUMPER_SIZE / 2;
 
-  const positionJumpersAt = (x: number) => {
+    animRef.current = gsap.timeline({ defaults: { duration: 0.7, ease: "power2.inOut", willChange: "transform" } })
+      .to(".jumper", {
+        x: toX,
+        y: yCenter - JUMPER_SIZE / 2 - 30,
+        stagger: 0.05,
+      })
+      .to(".jumper", {
+        y: yCenter - JUMPER_SIZE / 2,
+        stagger: 0.05,
+      }, "<");
+  }, []);
+
+  const positionJumpersAt = useCallback((x: number) => {
     gsap.set(".jumper", { x: x - JUMPER_SIZE / 2, y: yCenter - JUMPER_SIZE / 2, willChange: "transform" });
+  }, []);
+
+  const handleIconClick = (targetIndex: number) => {
+    if (targetIndex === activeIndex) return;
+    animateJumperTo(targetIndex);
+    setActiveIndex(targetIndex);
+
+    const el = document.querySelector(navItems[targetIndex].href);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
+  // ---- Initial Setup ----
   useLayoutEffect(() => {
     positionJumpersAt(iconCentersX[0]);
-    if (introPlayedRef.current) return;
-    introPlayedRef.current = true;
     gsap.to(".jumper", {
       duration: 0.5,
       y: yCenter - JUMPER_SIZE / 2 - 18,
@@ -74,31 +85,9 @@ export default function Header() {
       stagger: 0.05,
       willChange: "transform",
     });
-  }, []);
+  }, [positionJumpersAt]);
 
-  const handleIconClick = (targetIndex: number) => {
-    if (animRef.current && animRef.current.isActive()) animRef.current.progress(1);
-    const fromX = iconCentersX[activeIndex];
-    const toX = iconCentersX[targetIndex];
-    const { d, dur } = buildPath(fromX, toX);
-    gsap.set("#main-path", { attr: { d } });
-    animRef.current = gsap
-      .timeline()
-      .to(".jumper", {
-        motionPath: { path: d, align: "#main-path", alignOrigin: [0.5, 0.5] },
-        duration: dur,
-        stagger: 0.1,
-        ease: "sine.inOut",
-        willChange: "transform",
-      });
-    setActiveIndex(targetIndex);
-    document.querySelector(navItems[targetIndex].href)?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  useEffect(() => {
-    if (!isMobile) setIsMobileMenuOpen(false);
-  }, [isMobile]);
-
+  // ---- Mobile Menu Rotation ----
   useEffect(() => {
     if (!menuButtonRef.current) return;
     const icon = menuButtonRef.current.querySelector("svg");
@@ -106,97 +95,63 @@ export default function Header() {
     gsap.to(icon, { rotate: isMobileMenuOpen ? 90 : 0, duration: 0.4, ease: "power2.inOut" });
   }, [isMobileMenuOpen]);
 
+  // ---- Header Positioning ----
   useLayoutEffect(() => {
     if (!headerRef.current) return;
-
-    const topPosition = isMobile ? "7%" : "5%";
-
-    if (isMobile) {
-      gsap.set(headerRef.current, {
-        xPercent: 150,
-        scale: 0.8,
-        opacity: 0,
-        pointerEvents: "none",
-        top: topPosition,
-        left: "50%",
-      });
-    } else {
-      gsap.set(headerRef.current, {
-        xPercent: -50,
-        scale: 1,
-        opacity: 1,
-        pointerEvents: "auto",
-        top: topPosition,
-        left: "50%",
-      });
-    }
+    const topPosition = isMobile ? 70 : 50; // px
+    gsap.set(headerRef.current, {
+      xPercent: isMobile ? 150 : -50,
+      scale: isMobile ? 0.8 : 1,
+      opacity: isMobile ? 0 : 1,
+      pointerEvents: isMobile ? "none" : "auto",
+      top: `${topPosition}px`,
+      left: "50%",
+    });
   }, [isMobile]);
 
   useEffect(() => {
     if (!headerRef.current || !isMobile) return;
-
-    const topPosition = "7%";
-
-    if (isMobileMenuOpen) {
-      gsap.to(headerRef.current, {
-        xPercent: -50,
-        scale: 0.8,
-        opacity: 1,
-        pointerEvents: "auto",
-        duration: 0.3,
-        ease: "power3.out",
-        top: topPosition,
-      });
-    } else {
-      gsap.to(headerRef.current, {
-        xPercent: 150,
-        scale: 0.8,
-        opacity: 0,
-        pointerEvents: "none",
-        duration: 0.4,
-        ease: "power3.in",
-        top: topPosition,
-      });
-    }
+    const topPosition = 70;
+    gsap.to(headerRef.current, {
+      xPercent: isMobileMenuOpen ? -50 : 150,
+      scale: 0.8,
+      opacity: isMobileMenuOpen ? 1 : 0,
+      pointerEvents: isMobileMenuOpen ? "auto" : "none",
+      duration: 0.4,
+      ease: "power3.inOut",
+      top: `${topPosition}px`,
+    });
   }, [isMobileMenuOpen, isMobile]);
 
-  // Scroll Listener für Section-Tracking
+  // ---- Scroll Listener: Jumper automatisch animieren ----
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPos = window.scrollY + window.innerHeight / 2;
+      const scrollY = window.scrollY;
+      const viewportHeight = window.innerHeight;
       let newIndex = activeIndex;
 
       navItems.forEach((item, index) => {
         const el = document.querySelector(item.href);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          const top = window.scrollY + rect.top;
-          const bottom = top + rect.height;
-          if (scrollPos >= top && scrollPos < bottom) newIndex = index;
+        if (!el) return;
+        const rect = el.getBoundingClientRect();
+        const top = scrollY + rect.top;
+        const bottom = top + rect.height;
+
+        if (scrollY + viewportHeight / 2 >= top && scrollY + viewportHeight / 2 < bottom) {
+          newIndex = index;
         }
       });
 
       if (newIndex !== activeIndex) {
-        const fromX = iconCentersX[activeIndex];
-        const toX = iconCentersX[newIndex];
-        const { d, dur } = buildPath(fromX, toX);
-        gsap.set("#main-path", { attr: { d } });
-        if (animRef.current && animRef.current.isActive()) animRef.current.progress(1);
-        animRef.current = gsap.timeline().to(".jumper", {
-          motionPath: { path: d, align: "#main-path", alignOrigin: [0.5, 0.5] },
-          duration: dur,
-          stagger: 0.1,
-          ease: "sine.inOut",
-          willChange: "transform",
-        });
+        animateJumperTo(newIndex);
         setActiveIndex(newIndex);
       }
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll(); // initial check
+    handleScroll(); // initial
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [activeIndex]);
+  }, [activeIndex, animateJumperTo]);
 
   return (
     <>
@@ -218,7 +173,6 @@ export default function Header() {
         style={{ backgroundColor: "rgba(10,17,40,0.75)" }}
       >
         <svg
-          ref={svgRef}
           xmlns="http://www.w3.org/2000/svg"
           width={SVG_WIDTH}
           height={SVG_HEIGHT}
@@ -260,7 +214,6 @@ export default function Header() {
               </g>
             ))}
           </g>
-          <path id="main-path" d="" fill="none" />
         </svg>
       </div>
     </>
