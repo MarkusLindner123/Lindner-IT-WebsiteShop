@@ -217,5 +217,10 @@
     "label": "Language",
     "en": "English",
     "de": "Deutsch"
+  },
+    "footer": {
+    "privacy": "Privacy Policy",
+    "imprint": "Imprint",
+    "company": "Freelancer"
   }
 }

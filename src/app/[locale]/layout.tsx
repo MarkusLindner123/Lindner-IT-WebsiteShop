@@ -9,6 +9,7 @@ import Header from "@/components/Header";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import Phone from "@/components/PhoneButton";
 import PageLoader from "@/components/PageLoader"; // <-- neu
+import Footer from "@/components/Footer";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -37,7 +38,9 @@ export default async function LocaleLayout({
             {children}
             <Phone />
             <LanguageSwitcher />
+            <Footer/>
           </PageLoader>
+          
         </NextIntlClientProvider>
       </body>
     </html>
