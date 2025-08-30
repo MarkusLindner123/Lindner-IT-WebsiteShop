@@ -6,8 +6,8 @@ import { Home, User, Briefcase, Mail, Film, Menu, X, type LucideIcon } from "luc
 
 type NavItem = { name: string; href: string; icon: LucideIcon };
 const navItems: NavItem[] = [
-  { name: "Hero Video", href: "#home", icon: Film },
-  { name: "Home", href: "#home-main", icon: Home },
+  { name: "Hero Video", href: "#tja", icon: Film },
+  { name: "Home", href: "#home", icon: Home },
   { name: "Services", href: "#services", icon: Briefcase },
   { name: "About", href: "#about", icon: User },
   { name: "Contact", href: "#contact", icon: Mail },

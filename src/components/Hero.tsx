@@ -40,7 +40,19 @@ export default function Hero() {
     show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
   };
 
-  const galleryImages = Array(9).fill("/hero-img.jpg"); // Hier später echte Service-Bilder einsetzen
+  // Neue Gallery-Bilder aus public/hero-images
+  const galleryImages = [
+    "/hero-images/hero-img.jpg",
+    "/hero-images/hero-img1.jpg",
+    "/hero-images/hero-img2.jpg",
+    "/hero-images/hero-img3.jpg",
+    "/hero-images/hero-img4.jpg",
+    "/hero-images/hero-img5.jpg",
+    "/hero-images/hero-img6.jpg",
+    "/hero-images/hero-img7.jpg",
+    "/hero-images/hero-img8.jpg",
+  ];
+
   const column1Images = galleryImages.slice(0, 3);
   const column2Images = galleryImages.slice(3, 6);
   const column3Images = galleryImages.slice(6, 9);
@@ -99,7 +111,7 @@ export default function Hero() {
                           <div key={i} className="flex-shrink-0" style={{ height: "calc(100% / 2)" }}>
                             <Image
                               src={src}
-                              alt={`Visual representing our service ${i + 1}`} // SEO-relevanter Alt-Text
+                              alt={`Hero image ${i + 1} showcasing our services`} 
                               width={300}
                               height={200}
                               className="w-full h-full object-cover rounded-lg aspect-[3/2]"
@@ -132,7 +144,7 @@ export default function Hero() {
                         <div key={i} className="flex-shrink-0" style={{ height: "calc(100% / 2)" }}>
                           <Image
                             src={src}
-                            alt={`Visual representing our service ${i + 1}`}
+                            alt={`Hero image ${i + 1} showcasing our services`}
                             width={300}
                             height={200}
                             className="w-full h-full object-cover rounded-lg aspect-[3/2]"
