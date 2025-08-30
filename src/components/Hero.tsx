@@ -116,7 +116,7 @@ export default function Hero() {
 
             {/* Desktop Buttons - Visible only on large screens */}
             <div className="hidden lg:flex flex-col sm:flex-row sm:items-center gap-4">
-              <AnimatedButton href="#contact">{t("ctaPrimary")}</AnimatedButton>
+              <AnimatedButton>{t("ctaPrimary")}</AnimatedButton>
               <Link
                 href="#services"
                 className="inline-flex items-center justify-center px-6 py-4 border border-black/30 rounded-full text-black hover:bg-black/10 hover:-translate-y-1 transition-transform duration-300"
@@ -223,7 +223,7 @@ export default function Hero() {
             variants={fadeUp}
             className="w-full lg:hidden flex flex-col sm:flex-row sm:items-center gap-4 mt-8"
           >
-            <AnimatedButton href="#contact">{t("ctaPrimary")}</AnimatedButton>
+            <AnimatedButton >{t("ctaPrimary")}</AnimatedButton>
             <Link
               href="#services"
               className="inline-flex items-center justify-center px-6 py-4 border border-black/30 rounded-full text-black hover:bg-black/10 hover:-translate-y-1 transition-transform duration-300"

@@ -1,15 +1,13 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import Link from "next/link";
 
 interface AnimatedButtonProps {
-  href: string;
   children: React.ReactNode;
 }
 
-export function AnimatedButton({ href, children }: AnimatedButtonProps) {
-  const buttonRef = useRef<HTMLAnchorElement>(null);
+export function AnimatedButton({ children }: AnimatedButtonProps) {
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const element = buttonRef.current;
@@ -17,7 +15,7 @@ export function AnimatedButton({ href, children }: AnimatedButtonProps) {
 
     let angle = 0;
     const rotateGradient = () => {
-      angle = (angle + 2) % 360; // schneller drehen
+      angle = (angle + 2) % 360;
       element.style.setProperty("--gradient-angle", `${angle}deg`);
       requestAnimationFrame(rotateGradient);
     };
@@ -25,10 +23,21 @@ export function AnimatedButton({ href, children }: AnimatedButtonProps) {
     rotateGradient();
   }, []);
 
-  // Direkter Return der JSX
+  const handleClick = () => {
+    const contactSection = document.querySelector("#contact");
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
-    <Link href={href} ref={buttonRef} className="border-gradient">
+    <button
+      ref={buttonRef}
+      onClick={handleClick}
+      className="border-gradient"
+      type="button"
+    >
       {children}
-    </Link>
+    </button>
   );
 }

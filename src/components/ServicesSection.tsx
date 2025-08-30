@@ -289,7 +289,7 @@ export default function ServicesSection() {
             {/* CTA Button */}
             <div ref={buttonRef} className="mt-12 flex justify-center">
               <motion.div animate={buttonControls}>
-                <AnimatedButton href="#contact">{t("ctaPrimary")}</AnimatedButton>
+                <AnimatedButton>{t("ctaPrimary")}</AnimatedButton>
               </motion.div>
             </div>
           </motion.div>
