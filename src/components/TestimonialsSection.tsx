@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { useRef, useEffect, useState } from "react";
-import { motion, Variants } from "framer-motion";
+import { motion, Variants, useInView } from "framer-motion";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 
 interface Review {
@@ -20,28 +20,49 @@ export default function TestimonialsSection() {
   const kicker = t("kicker") || "Trusted by our clients";
 
   const containerRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(sectionRef, { once: false, margin: "-100px" });
   const [scrollIndex, setScrollIndex] = useState(0);
 
+  // Automatisches Scrollen nur, wenn im Viewport
   useEffect(() => {
+    if (!isInView) return;
     const interval = setInterval(() => {
       if (!containerRef.current) return;
-      const nextIndex = (scrollIndex + 1) % reviews.length;
+
       const card = containerRef.current.querySelector("div.flex-none");
-      if (card) {
-        containerRef.current.scrollBy({ left: card.clientWidth + 24, behavior: "smooth" });
-      }
+      if (!card) return;
+
+      const nextIndex = (scrollIndex + 1) % reviews.length;
+      containerRef.current.scrollTo({
+        left: nextIndex * (card.clientWidth + 24),
+        behavior: "smooth",
+      });
+
       setScrollIndex(nextIndex);
     }, 8000);
 
     return () => clearInterval(interval);
-  }, [scrollIndex, reviews.length]);
+  }, [isInView, scrollIndex, reviews.length]);
 
   const scroll = (direction: "left" | "right") => {
     if (!containerRef.current) return;
     const card = containerRef.current.querySelector("div.flex-none");
     if (!card) return;
-    const scrollAmount = card.clientWidth + 24;
-    containerRef.current.scrollBy({ left: direction === "left" ? -scrollAmount : scrollAmount, behavior: "smooth" });
+
+    let nextIndex = scrollIndex;
+    if (direction === "right") {
+      nextIndex = (scrollIndex + 1) % reviews.length;
+    } else {
+      nextIndex = (scrollIndex - 1 + reviews.length) % reviews.length;
+    }
+
+    containerRef.current.scrollTo({
+      left: nextIndex * (card.clientWidth + 24),
+      behavior: "smooth",
+    });
+
+    setScrollIndex(nextIndex);
   };
 
   const containerVariants: Variants = {
@@ -49,11 +70,20 @@ export default function TestimonialsSection() {
     show: { transition: { staggerChildren: 0.1 } },
   };
 
-  const fadeUp: Variants = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { duration: 0.6 } } };
+  const fadeUp: Variants = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  };
 
   return (
-    <section aria-label="Testimonials Section" className="relative bg-services-section-bg py-16">
-      <motion.div variants={containerVariants} initial="hidden" whileInView="show" viewport={{ once: true }} className="max-w-7xl mx-auto px-4 md:px-8">
+    <section ref={sectionRef} aria-label="Testimonials Section" className="relative bg-services-section-bg py-16">
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        className="max-w-7xl mx-auto px-4 md:px-8"
+      >
         {/* Kicker */}
         <motion.div variants={fadeUp} className="mb-6">
           <div className="inline-flex items-center px-4 py-1 rounded-full text-sm font-medium text-black bg-black/10">{kicker}</div>

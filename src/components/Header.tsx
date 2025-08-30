@@ -61,7 +61,6 @@ export default function Header() {
     gsap.set(".jumper", { x: x - JUMPER_SIZE / 2, y: yCenter - JUMPER_SIZE / 2, willChange: "transform" });
   };
 
-  // Initial jumper animation
   useLayoutEffect(() => {
     positionJumpersAt(iconCentersX[0]);
     if (introPlayedRef.current) return;
@@ -100,7 +99,6 @@ export default function Header() {
     if (!isMobile) setIsMobileMenuOpen(false);
   }, [isMobile]);
 
-  // Hamburger icon rotation
   useEffect(() => {
     if (!menuButtonRef.current) return;
     const icon = menuButtonRef.current.querySelector("svg");
@@ -108,7 +106,6 @@ export default function Header() {
     gsap.to(icon, { rotate: isMobileMenuOpen ? 90 : 0, duration: 0.4, ease: "power2.inOut" });
   }, [isMobileMenuOpen]);
 
-  // Initial header setup
   useLayoutEffect(() => {
     if (!headerRef.current) return;
 
@@ -135,7 +132,6 @@ export default function Header() {
     }
   }, [isMobile]);
 
-  // Animate header when menu opens/closes
   useEffect(() => {
     if (!headerRef.current || !isMobile) return;
 
@@ -148,7 +144,7 @@ export default function Header() {
         opacity: 1,
         pointerEvents: "auto",
         duration: 0.3,
-        ease: "power3.out", // smoother bouncy feel
+        ease: "power3.out",
         top: topPosition,
       });
     } else {
@@ -163,6 +159,44 @@ export default function Header() {
       });
     }
   }, [isMobileMenuOpen, isMobile]);
+
+  // Scroll Listener für Section-Tracking
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPos = window.scrollY + window.innerHeight / 2;
+      let newIndex = activeIndex;
+
+      navItems.forEach((item, index) => {
+        const el = document.querySelector(item.href);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          const top = window.scrollY + rect.top;
+          const bottom = top + rect.height;
+          if (scrollPos >= top && scrollPos < bottom) newIndex = index;
+        }
+      });
+
+      if (newIndex !== activeIndex) {
+        const fromX = iconCentersX[activeIndex];
+        const toX = iconCentersX[newIndex];
+        const { d, dur } = buildPath(fromX, toX);
+        gsap.set("#main-path", { attr: { d } });
+        if (animRef.current && animRef.current.isActive()) animRef.current.progress(1);
+        animRef.current = gsap.timeline().to(".jumper", {
+          motionPath: { path: d, align: "#main-path", alignOrigin: [0.5, 0.5] },
+          duration: dur,
+          stagger: 0.1,
+          ease: "sine.inOut",
+          willChange: "transform",
+        });
+        setActiveIndex(newIndex);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll(); // initial check
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [activeIndex]);
 
   return (
     <>

@@ -40,14 +40,13 @@ export default async function HomePage({
       </section>
 
  
+     <section id="contact" className="bg-contact-bg rounded-2xl overflow-hidden shadow-xl">
+        <ContactSection />
+      </section>
 
       {/* Testimonials Section ganz unten */}
       <section id="testimonials" className="bg-location-bg rounded-2xl overflow-hidden shadow-xl">
         <TestimonialsSection />
-      </section>
-
-     <section id="contact" className="bg-contact-bg rounded-2xl overflow-hidden shadow-xl">
-        <ContactSection />
       </section>
 
     </main>
