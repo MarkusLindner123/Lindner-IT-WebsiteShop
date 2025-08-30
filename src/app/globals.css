@@ -57,7 +57,7 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 a { color: var(--color-accent-one); text-decoration: none; transition: color 0.2s ease; }
-a:hover { color: var(--color-accent-two); }
+/*a:hover { color: var(--color-accent-two); } */
 
 /* Background Utilities */
 .bg-brand-bg { background-color: var(--color-primary-dark); }

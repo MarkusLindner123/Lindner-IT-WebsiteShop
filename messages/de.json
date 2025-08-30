@@ -1,39 +1,215 @@
 {
   "heroVideo": {
-    "title": "Ihre Zukunft beginnt online",
-    "subtitle": "Wir gestalten digitale Erlebnisse, die inspirieren"
+    "title": "Zuverlässige IT-Lösungen für KMU",
+    "subtitle": "Professioneller IT-Support, Netzwerkinstallation, Cybersicherheit und Websites speziell für kleine und mittlere Unternehmen"
   },
   "hero": {
-    "kicker": "Web- & Softwareentwicklung",
-    "kickerTag": "Freelancer",
-    "titleLine1": "Wir",
-    "titleLine2": "Wachsen",
-    "titleLine3": "Ihre Marke",
-    "subtitle": "Websites, Shops & Automatisierung — klar, schnell, messbar.",
+    "kicker": "IT-Lösungen, denen Sie vertrauen können",
+    "kickerTag": "Ihr IT-Partner für KMU",
+    "titleLine1": "Zuverlässige",
+    "titleLine2": "IT-Lösungen",
+    "titleLine3": "für Ihr Unternehmen",
+    "subtitle": "Ich biete professionellen IT-Support, sichere Netzwerkinstallation, Cybersicherheit und hochwertige Websites für kleine und mittlere Unternehmen.",
     "ctaPrimary": "Angebot anfordern",
-    "ctaSecondary": "Leistungen ansehen"
+    "ctaSecondary": "IT-Leistungen ansehen"
   },
   "about": {
-    "analyze": {
-      "title": "Analysieren",
-      "text": "Wir beginnen mit einer gründlichen Analyse der individuellen Anforderungen, Herausforderungen und Ziele Ihres Unternehmens. Dazu gehört die detaillierte Untersuchung Ihrer aktuellen Systeme, Arbeitsabläufe und Technologien sowie die frühzeitige Einbindung aller wichtigen Stakeholder. Durch ein umfassendes Verständnis Ihrer betrieblichen Landschaft erkennen wir Verbesserungspotenziale, identifizieren mögliche Risiken, bevor sie zu Problemen werden, und schaffen die Grundlage für Lösungen, die nicht nur praktisch, sondern auch strategisch auf Ihre langfristige Vision ausgerichtet sind."
+    "kicker": "Lernen Sie mich kennen",
+    "title": "Über Markus Lindner",
+    "background": {
+      "title": "Mein Hintergrund",
+      "text": "Ich bin Markus Lindner, 27 Jahre alt, IT-Freelancer mit Sitz in Berlin. Derzeit studiere ich B.Sc. Engineering Embedded Systems an der BHT Berlin mit Schwerpunkt technische Informatik. Ich bin zweisprachig in Deutsch und Polnisch und verfüge über sehr gute Englischkenntnisse."
     },
-    "plan": {
-      "title": "Planen",
-      "text": "Aufbauend auf den Erkenntnissen aus der Analysephase entwickeln wir einen detaillierten, umsetzbaren Fahrplan, um Ihre Vision Wirklichkeit werden zu lassen. Dazu gehören die Definition der technischen Architektur, die Gestaltung von Nutzererlebnissen, die Festlegung klarer Meilensteine sowie die Bestimmung von Erfolgskriterien. Jeder Schritt ist sorgfältig strukturiert, um die Ausrichtung an Ihren Geschäftszielen zu gewährleisten, flexibel auf Veränderungen reagieren zu können und eine Skalierbarkeit für zukünftiges Wachstum zu ermöglichen, sodass Ihre Investition langfristig Wert schafft."
+    "experience": {
+      "title": "Meine Erfahrung",
+      "text": "Von Mai 2019 bis März 2024 arbeitete ich als studentischer Mitarbeiter bei Siemens AG und sammelte praktische Erfahrungen in IT-Infrastruktur, Cybersicherheit und Softwareentwicklung. Seit 2020 arbeite ich freiberuflich, entwickle moderne Websites mit WordPress, TypeScript und React, biete IT-Coaching und betreue Cybersecurity-Vorfälle. Ich habe IT-Infrastrukturen für Kanzleien und Immobilienmakler eingerichtet, Cloud-Systeme, Datenrettung und Netzwerkinstallationen für KMU wie Bullet Shop Berlin umgesetzt."
     },
-    "build": {
-      "title": "Umsetzen",
-      "text": "Mit einem klaren Plan setzen unsere erfahrenen Entwickler und Designer Konzepte in voll funktionsfähige, hochwertige digitale Produkte um. Von robusten Backend-Systemen bis zu intuitiven, benutzerfreundlichen Oberflächen wird jedes Element mit Präzision und Zielstrebigkeit gestaltet. Ob wir eine responsive Website, eine funktionsreiche App oder eine komplexe digitale Plattform entwickeln – wir sorgen stets für die perfekte Balance aus solider technischer Architektur, ansprechendem Design und optimaler Performance, um Lösungen zu liefern, die inspirieren und Bestand haben."
+    "approach": {
+      "title": "Mein Ansatz",
+      "text": "Ich beginne mit der Analyse Ihrer IT-Bedürfnisse, um Risiken und Chancen zu identifizieren, und entwickle dann skalierbare Lösungen wie sichere Netzwerke, Websites und Sicherheitsmaßnahmen. Ich implementiere diese effizient mit Fokus auf Zuverlässigkeit und biete kontinuierliche Unterstützung und Optimierung. Meine Kombination aus Erfahrung bei Siemens und Freelance-Projekten stellt sicher, dass Ihre IT-Systeme professionell und praxisnah sind."
     },
-    "support": {
-      "title": "Betreuen",
-      "text": "Unsere Arbeit endet nicht mit dem Launch. Wir bieten proaktive, kontinuierliche Betreuung, um Ihre digitale Lösung sicher, aktuell und leistungsstark zu halten. Dazu gehören regelmäßige Wartung, Funktionsverbesserungen, Sicherheitsüberwachung und Performance-Optimierung. Wenn Ihr Unternehmen wächst und sich Ihre Anforderungen ändern, bleiben wir ein verlässlicher Partner, der sicherstellt, dass Ihre digitale Präsenz sich nahtlos anpasst und langfristig messbare Ergebnisse liefert."
+    "whyMe": {
+      "title": "Warum ich",
+      "text": "Ich verfolge einen praxisnahen Ansatz bei jedem Projekt. Mit Zertifikaten in Cybersicherheit, Datenschutz und IT-Management biete ich sichere und wachstumsorientierte IT-Lösungen speziell für KMU. Ich verbinde technisches Fachwissen mit Kundenorientierung, damit Ihre Unternehmens-IT reibungslos und sicher läuft."
     },
     "ctaPrimary": "Angebot anfordern"
   },
+  "services": {
+    "ctaPrimary": "Kontaktieren Sie mich",
+    "kicker": "Meine Leistungen",
+    "title": "IT-Lösungen, die Ihr Unternehmen am Laufen halten",
+    "webDesign": {
+      "title": "Webdesign & Hosting",
+      "description": "Ich erstelle responsive, sichere und leistungsstarke Websites, die Ihre Marke widerspiegeln und Kunden anziehen.",
+      "feature1": "Responsive Design für alle Geräte",
+      "feature2": "SEO-optimierte Seiten",
+      "feature3": "Sicheres Hosting & SSL",
+      "feature4": "CMS für einfache Inhaltsaktualisierung",
+      "feature5": "Integration mit Geschäftstools",
+      "faq1": {
+        "question": "Wie lange dauert es, eine Website zu erstellen?",
+        "answer": "Die meisten Business-Websites werden innerhalb von 4–6 Wochen fertiggestellt, abhängig von der Komplexität."
+      },
+      "faq2": {
+        "question": "Bieten Sie Website-Wartung an?",
+        "answer": "Ja, ich biete laufende Updates, Backups und Sicherheitsüberwachung."
+      },
+      "faq3": {
+        "question": "Können Sie eine bestehende Website überarbeiten?",
+        "answer": "Ja, ich aktualisiere Designs, verbessere die Sicherheit und optimiere die Performance."
+      },
+      "faq4": {
+        "question": "Bieten Sie E-Commerce-Lösungen an?",
+        "answer": "Ja, ich integriere Online-Shops und Zahlungssysteme."
+      },
+      "faq5": {
+        "question": "Ist meine Website mobilfreundlich?",
+        "answer": "Ja, alle Websites sind vollständig responsiv und mobiloptimiert."
+      },
+      "faq6": {
+        "question": "Können Sie bei der SEO helfen?",
+        "answer": "Ja, ich optimiere On-Page-SEO und die Performance Ihrer Website."
+      }
+    },
+    "itSupport": {
+      "title": "IT-Support für KMU",
+      "description": "Zuverlässiger IT-Support für Ihr Unternehmen, inklusive Fehlerbehebung, Hardware- & Softwareverwaltung und Anwenderunterstützung.",
+      "feature1": "Remote- und Vor-Ort-Support",
+      "feature2": "Softwareinstallation & Updates",
+      "feature3": "Hardwareeinrichtung und -reparatur",
+      "feature4": "Proaktive Überwachung",
+      "feature5": "Helpdesk für Mitarbeiter",
+      "faq1": {
+        "question": "Bieten Sie Vor-Ort-Support an?",
+        "answer": "Ja, ich biete sowohl Vor-Ort- als auch Remote-Support an."
+      },
+      "faq2": {
+        "question": "Können Sie unsere Bürocomputer verwalten?",
+        "answer": "Ja, ich betreue alle Arbeitsstationen, Softwareinstallationen und Updates."
+      },
+      "faq3": {
+        "question": "Gibt es Notfall-Support?",
+        "answer": "Ja, ich reagiere schnell auf dringende IT-Probleme."
+      },
+      "faq4": {
+        "question": "Bieten Sie Schulungen für Mitarbeiter an?",
+        "answer": "Ja, ich schule Mitarbeiter in digitalen Fähigkeiten und Sicherheit."
+      },
+      "faq5": {
+        "question": "Verwalten Sie Softwarelizenzen?",
+        "answer": "Ja, ich verwalte Lizenzen, Updates und Compliance."
+      },
+      "faq6": {
+        "question": "Überwachen Sie IT-Systeme 24/7?",
+        "answer": "Ja, ich biete kontinuierliches Monitoring und Benachrichtigungen."
+      }
+    },
+    "networkSetup": {
+      "title": "Netzwerk & Infrastruktur",
+      "description": "Ich plane und implementiere sichere und skalierbare Netzwerke, einschließlich kabelgebundener und drahtloser Installationen, VPNs und Serverarchitekturen.",
+      "feature1": "Netzwerkplanung & Implementierung",
+      "feature2": "Sichere Wi-Fi & LAN Einrichtung",
+      "feature3": "VPN & Remote Access Lösungen",
+      "feature4": "Server- und Speicher-Konfiguration",
+      "feature5": "Monitoring & Performance-Optimierung",
+      "faq1": {
+        "question": "Richten Sie Netzwerke von Grund auf ein?",
+        "answer": "Ja, ich entwickle und implementiere neue Netzwerke, angepasst an Ihr Unternehmen."
+      },
+      "faq2": {
+        "question": "Können Sie bestehende Netzwerke optimieren?",
+        "answer": "Ja, Performance, Sicherheit und Zuverlässigkeit werden verbessert."
+      },
+      "faq3": {
+        "question": "Verwalten Sie Netzwerksicherheit?",
+        "answer": "Ja, Firewalls, Zugriffskontrollen und Monitoring werden implementiert."
+      },
+      "faq4": {
+        "question": "Können Sie VPN für Remote-Mitarbeiter einrichten?",
+        "answer": "Ja, ich erstelle sichere VPN-Verbindungen."
+      },
+      "faq5": {
+        "question": "Bieten Sie Netzwerk-Monitoring an?",
+        "answer": "Ja, Performance, Verfügbarkeit und Fehlerbehebung werden überwacht."
+      },
+      "faq6": {
+        "question": "Geben Sie Hardware-Empfehlungen?",
+        "answer": "Ja, ich berate und installiere Router, Switches und Server."
+      }
+    },
+    "cyberSecurity": {
+      "title": "Cybersicherheit",
+      "description": "Schützen Sie Ihr Unternehmen mit umfassenden Sicherheitsmaßnahmen, Risikoanalysen, Prävention und Compliance.",
+      "feature1": "Sicherheitsaudits & Risikoanalyse",
+      "feature2": "Firewall- & Antivirus-Konfiguration",
+      "feature3": "Schulungen für Mitarbeiter",
+      "feature4": "Backup & Disaster Recovery",
+      "feature5": "Kontinuierliches Monitoring",
+      "faq1": {
+        "question": "Wie schützen Sie vor Cyberangriffen?",
+        "answer": "Firewalls, Antivirus, regelmäßige Updates und Monitoring reduzieren Risiken."
+      },
+      "faq2": {
+        "question": "Bieten Sie Mitarbeiterschulungen an?",
+        "answer": "Ja, Awareness-Schulungen zur Vermeidung menschlicher Fehler."
+      },
+      "faq3": {
+        "question": "Können Sie Cloud-Dienste absichern?",
+        "answer": "Ja, ich sichere Cloud-Plattformen und sorge für Compliance."
+      },
+      "faq4": {
+        "question": "Führen Sie Penetrationstests durch?",
+        "answer": "Ja, ethisches Hacken zur Identifikation von Schwachstellen."
+      },
+      "faq5": {
+        "question": "Unterstützen Sie GDPR/DSGVO Compliance?",
+        "answer": "Ja, Ihre IT entspricht den Datenschutzrichtlinien."
+      },
+      "faq6": {
+        "question": "Bieten Sie kontinuierliches Monitoring?",
+        "answer": "Ja, 24/7 Überwachung potenzieller Cyberbedrohungen."
+      }
+    }
+  },
+  "contact": {
+    "kicker": "Sichere und effiziente IT",
+    "title": "Kontakt aufnehmen",
+    "subtitle": "Kontaktieren Sie mich, um Ihre IT-Bedürfnisse zu besprechen, ein Angebot anzufordern oder Support für Ihr Unternehmen zu vereinbaren.",
+    "form": {
+      "name": "Name",
+      "email": "E-Mail",
+      "phone": "Telefon",
+      "message": "Nachricht",
+      "reason": "Grund der Kontaktaufnahme",
+      "reasonPlaceholder": "Bitte auswählen",
+      "options": {
+        "quote": "Angebot anfordern",
+        "support": "IT-Support",
+        "general": "Allgemeine Anfrage"
+      },
+      "submit": "Nachricht senden"
+    }
+  },
+  "testimonials": {
+    "title": "Das sagen meine Kunden",
+    "kicker": "Vertrauen von KMU",
+    "googleProfile": "https://maps.app.goo.gl/qW5Ns8LAGoEUs3yn8",
+    "googleButtonText": "Google Business Profil",
+    "reviews": [
+      { "name": "Amin Karim", "rating": 5, "text": "Ich habe eine Website erstellen lassen, inklusive Hardware, Software und kompletter Installation in meinem Büro. Alles lief reibungslos und ich bin absolut zufrieden. Sehr empfehlenswert 👍" },
+      { "name": "Clyde Blei", "rating": 5, "text": "Sehr zufrieden! Das Ergebnis war perfekt, und er nahm sich Zeit für mich. Alles sehr professionell. Probieren Sie es aus – Sie haben nichts zu verlieren! Freue mich auf das nächste Mal!" },
+      { "name": "Siako Kaify Saber", "rating": 5, "text": "Herr Lindner ist ein exzellenter IT-Spezialist, der sein Handwerk versteht. Dank seiner Hilfe und Tipps konnte ich meine IT-Prüfung bestehen." },
+      { "name": "Daniel Korff", "rating": 5, "text": "Herr Lindner hat einen Computer genau nach meinen Vorgaben gebaut und eingerichtet, ich bin extrem zufrieden." },
+      { "name": "David Westendorf", "rating": 5, "text": "Mein Computer funktionierte nicht richtig. Hier wurde er schnell und zuverlässig repariert. Top-Leistung zu fairen Preisen." },
+      { "name": "Vivien Szmid", "rating": 5, "text": "Super! Ich bekam sofort Hilfe. Sehr freundlich und kompetent." },
+      { "name": "Ben Schmidt", "rating": 5, "text": "Sehr professionelles Vorgehen und schnelle Umsetzung." },
+      { "name": "Luis Meyer", "rating": 5, "text": "Ein sehr professioneller IT-Experte! Ich kann ihn nur empfehlen!" },
+      { "name": "Hassan", "rating": 5, "text": "Der Service ist einzigartig und herausragend. Selten habe ich so kundenfreundliche Unterstützung erlebt. Total begeistert! Sehr empfehlenswert!" },
+      { "name": "Rolf Kühner", "rating": 5, "text": "Wer einen PC-Spezialisten sucht, sollte nicht lange online suchen – einfach Herrn Lindner von Lindner IT anrufen. Ich habe ihn zufällig gefunden und er hat meine zwei defekten Computer repariert." }
+    ]
+  },
   "Meta": {
-    "title": "Webagentur – Moderne Websites"
+    "title": "IT-Support & Weblösungen für KMU"
   },
   "Switcher": {
     "label": "Sprache",

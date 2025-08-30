@@ -2,7 +2,6 @@
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-//import { AnimatedButton } from "@/components/AnimatedButton";
 import Image from "next/image";
 import "./AboutSection.css"; // CSS für Brush-Effekt
 
@@ -53,31 +52,40 @@ export default function AboutSection() {
   );
 
   const highlightWords = [
-  // Background
-  "background",
-  "bilingual",
-  "engineering",
+    // Background
+    "background", "hintergrund",
+    "bilingual", "zweisprachig",
+    "engineering", "technische Informatik",
 
-  // Experience
-  "corporateexperience",
-  "freelance",
-  "lawyers",
-  "realestate",
-  "Siemens AG",
+    // Experience
+    "corporateexperience",
+    "freelance", "freiberuflich",
+    "lawyers", "Kanzleien",
+    "realestate", "Immobilien",
+    "Siemens", "Siemens",
 
-  // Approach
-  "infrastructure",
-  "websites",
-  "networks",
-  "cybersecurity",
+    // Approach
+    "infrastructure", "IT-Infrastruktur",
+    "websites", "Websites",
+    "networks", "Netzwerke",
+    "cybersecurity", "Cybersicherheit",
 
-  // Why Me
-  "reliable",
-  "secure",
-  "customized",
-  "growth",
-  "ITsolutions",
-];
+    // Why Me
+    "reliable", "zuverlässig",
+    "secure", "sicher",
+    "customized", "maßgeschneidert",
+    "growth", "wachstumsorientiert",
+    "ITsolutions", "IT-Lösungen"
+  ];
+
+  // Highlight-Wörter als Set in lowercase, Mehrwort-Phrasen aufsplitten
+  const highlightWordsSet = useMemo(() => {
+    return new Set(
+      highlightWords
+        .flatMap((w) => w.split(/\s+/))
+        .map((w) => w.toLowerCase())
+    );
+  }, [highlightWords]);
 
   // Paragraph in Wörter splitten
   const allWords = useMemo(() => {
@@ -102,15 +110,17 @@ export default function AboutSection() {
   const highlightColorMap = useMemo(() => {
     const map: { [key: number]: string } = {};
     let ci = 0;
+
     allWords.flat().forEach(({ word, index }) => {
       const clean = word.replace(/[.,!?–]/g, "").toLowerCase();
-      if (highlightWords.includes(clean)) {
+      if (highlightWordsSet.has(clean)) {
         map[index] = brushColors[ci % brushColors.length];
         ci++;
       }
     });
+
     return map;
-  }, [allWords, highlightWords]);
+  }, [allWords, highlightWordsSet]);
 
   // Scroll Animation
   useEffect(() => {
@@ -244,7 +254,7 @@ export default function AboutSection() {
                 if (word === "\n") return null;
 
                 const clean = word.replace(/[.,!?–]/g, "").toLowerCase();
-                const highlighted = highlightWords.includes(clean);
+                const highlighted = highlightWordsSet.has(clean);
                 const color = highlighted
                   ? highlightColorMap[index] || "red"
                   : "";
@@ -265,12 +275,6 @@ export default function AboutSection() {
           </div>
         ))}
       </div>
-
-      {/* CTA
-      <div className="mt-12 flex justify-center">
-        <AnimatedButton href="#contact">{sections.ctaPrimary}</AnimatedButton>
-      </div>  */}
     </section>
-    
   );
 }
