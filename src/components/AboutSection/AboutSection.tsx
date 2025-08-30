@@ -20,7 +20,12 @@ const brushColors = [
 ];
 
 // Bilder für die Abschnitte
-const aboutImages = ["/about1.jpg", "/about1.jpg", "/about1.jpg", "/about1.jpg"];
+const aboutImages = 
+["/about-images/about1.jpg", 
+  "/about-images/about2.jpg", 
+  "/about-images/about3.jpg", 
+  "/about-images/about4.jpg"
+];
 
 export default function AboutSection() {
   const t = useTranslations("about");
