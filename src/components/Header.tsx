@@ -51,13 +51,9 @@ export default function Header() {
     animRef.current = gsap.timeline({ defaults: { duration: 0.7, ease: "power2.inOut", willChange: "transform" } })
       .to(".jumper", {
         x: toX,
-        y: yCenter - JUMPER_SIZE / 2 - 30,
-        stagger: 0.05,
-      })
-      .to(".jumper", {
         y: yCenter - JUMPER_SIZE / 2,
         stagger: 0.05,
-      }, "<");
+      });
   }, []);
 
   const positionJumpersAt = useCallback((x: number) => {
@@ -75,16 +71,8 @@ export default function Header() {
 
   // ---- Initial Setup ----
   useLayoutEffect(() => {
+    // Set Jumper direkt auf das erste Icon, kein Jojo
     positionJumpersAt(iconCentersX[0]);
-    gsap.to(".jumper", {
-      duration: 0.5,
-      y: yCenter - JUMPER_SIZE / 2 - 18,
-      yoyo: true,
-      repeat: 1,
-      ease: "sine.inOut",
-      stagger: 0.05,
-      willChange: "transform",
-    });
   }, [positionJumpersAt]);
 
   // ---- Mobile Menu Rotation ----
@@ -98,7 +86,7 @@ export default function Header() {
   // ---- Header Positioning ----
   useLayoutEffect(() => {
     if (!headerRef.current) return;
-    const topPosition = isMobile ? 70 : 50; // px
+    const topPosition = isMobile ? 35 : 10; // mobile Header ca. 0,5cm tiefer
     gsap.set(headerRef.current, {
       xPercent: isMobile ? 150 : -50,
       scale: isMobile ? 0.8 : 1,
@@ -111,7 +99,7 @@ export default function Header() {
 
   useEffect(() => {
     if (!headerRef.current || !isMobile) return;
-    const topPosition = 70;
+    const topPosition = 35; // mobile Header ca. 0,5cm tiefer
     gsap.to(headerRef.current, {
       xPercent: isMobileMenuOpen ? -50 : 150,
       scale: 0.8,

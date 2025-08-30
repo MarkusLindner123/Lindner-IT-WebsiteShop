@@ -191,18 +191,24 @@
     }
   },
   "testimonials": {
-    "title": "What my clients say",
-    "kicker": "Trusted by SMEs",
-    "googleProfile": "https://www.google.com/maps/place/YOUR_BUSINESS",
-    "googleButtonText": "Google Business Profile",
-    "reviews": [
-      { "name": "John Doe", "rating": 5, "text": "Fast and reliable IT support." },
-      { "name": "Jane Smith", "rating": 4, "text": "Our network and website work flawlessly." },
-      { "name": "Alice Brown", "rating": 5, "text": "Professional and secure IT solutions." },
-      { "name": "Bob Johnson", "rating": 5, "text": "Excellent service for small businesses." },
-      { "name": "Eva Green", "rating": 4, "text": "Highly recommend for cybersecurity and IT setup." }
-    ]
-  },
+  "title": "What my clients say",
+  "kicker": "Trusted by SMEs",
+  "googleProfile": "https://maps.app.goo.gl/qW5Ns8LAGoEUs3yn8",
+  "googleButtonText": "Google Business Profile",
+  "reviews": [
+    { "name": "Amin Karim", "rating": 5, "text": "I had a website created by him including hardware, software, and full installation in my office. Everything went smoothly and I am absolutely satisfied. Highly recommended 👍" },
+    { "name": "Clyde Blei", "rating": 5, "text": "Very satisfied! The result was perfect, and he took time for me. Everything was very professional. Try it out—you have nothing to lose! Looking forward to next time!" },
+    { "name": "Siako Kaify Saber", "rating": 5, "text": "Mr. Lindner is an excellent IT specialist who clearly knows his craft. Thanks to his help and tips, I was able to pass my IT exam." },
+    { "name": "Daniel Korff", "rating": 5, "text": "Mr. Lindner built and set up a computer exactly to my specifications, and I am extremely satisfied." },
+    { "name": "David Westendorf", "rating": 5, "text": "My computer stopped working properly. It was repaired quickly and reliably here. Top performance at great prices." },
+    { "name": "Vivien Szmid", "rating": 5, "text": "Super! I got immediate help. Very friendly and competent." },
+    { "name": "Ben Schmidt", "rating": 5, "text": "Very professional approach and fast service." },
+    { "name": "Luis Meyer", "rating": 5, "text": "A very professional IT expert! I can only recommend him!" },
+    { "name": "Hassan", "rating": 5, "text": "The service is unique and outstanding. Rarely have I experienced such customer-friendly support. Totally impressed! Highly recommended!" },
+    { "name": "Rolf Kühner", "rating": 5, "text": "If someone is looking for a PC specialist, don’t search long online—just call Mr. Lindner from Lindner IT. I found him by chance and he fixed my two computers that weren’t working properly." }
+  ]
+}
+,
   "Meta": {
     "title": "IT Support & Web Solutions for SMEs"
   },
