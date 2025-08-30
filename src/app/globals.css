@@ -2,9 +2,6 @@
 /* Import Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700&display=swap");
 
-/* ==========================
-   CSS Variables
-========================== */
 :root {
   --color-primary-dark: #0a1128;
   --color-primary-light: #f8f9fa;
@@ -38,14 +35,10 @@
   --font-headline: "Plus Jakarta Sans", sans-serif;
 }
 
-/* Tailwind Directives */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ==========================
-   Global Styles
-========================== */
 html, body {
   font-family: var(--font-sans);
   background-color: var(--color-primary-light);
@@ -86,7 +79,6 @@ a:hover { color: var(--color-accent-two); }
 .text-contact-label { color: var(--color-contact-label); }
 .border-contact-border { border-color: var(--color-contact-border); }
 
-/* Bullet Color */
 ul.list-disc li::marker { color: var(--color-accent-two); }
 
 /* Backdrop Blur */
@@ -131,7 +123,6 @@ ul.list-disc li::marker { color: var(--color-accent-two); }
   border-color: var(--header-border);
   transition: transform 0.3s ease, top 0.3s ease;
   will-change: transform, opacity;
-  /* Removed opacity: 1; to allow JavaScript control */
 }
 
 .nav-icon { color: var(--nav-icon-color); }
@@ -143,8 +134,10 @@ ul.list-disc li::marker { color: var(--color-accent-two); }
 .jumper:nth-of-type(2) { fill: var(--jumper-2); }
 .jumper { will-change: transform; }
 
-/* ==========================
-   Language Switcher
-========================== */
+/* Language Switcher */
 .bg-primary-dark { background-color: rgba(10,17,40,0.85); }
 .bg-accent-one { background-color: var(--color-accent-two); }
+
+/* Accordion */
+.faq-question { cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+.faq-answer { margin-top: 0.5rem; color: var(--color-services-card-description); }

@@ -13,47 +13,77 @@
     "ctaPrimary": "Request a quote",
     "ctaSecondary": "View services"
   },
-  "about": {
-    "kicker": "We build that shit for you",
-    "title": "How we build",
-    "analyze": {
-      "title": "Analyze",
-      "text": "We begin by taking a deep dive into your organization’s unique needs, challenges, and objectives. This involves examining your current systems, workflows, and technologies in detail, as well as engaging with all key stakeholders early in the process. By gaining a comprehensive understanding of your operational landscape, we uncover opportunities for improvement, identify potential risks before they become issues, and lay the groundwork for solutions that are not only practical but also strategically aligned with your long-term vision."
-    },
-    "plan": {
-      "title": "Plan",
-      "text": "Building on the insights gathered during the analysis phase, we develop a detailed, actionable roadmap designed to bring your vision to life. This includes defining the technical architecture, mapping out user experiences, setting clear milestones, and establishing success criteria. Every step is carefully structured to ensure alignment with your business goals, adaptability to changing needs, and scalability for future expansion, so your investment continues to deliver value over time."
-    },
-    "build": {
-      "title": "Build",
-      "text": "With a clear plan in place, our team of experienced developers and designers transform concepts into fully functional, high-quality digital products. From robust backend systems to intuitive, user-friendly interfaces, every element is crafted with precision and purpose. Whether we’re building a responsive website, a feature-rich mobile app, or a complex digital platform, we ensure a perfect balance of solid technical architecture, engaging design, and optimal performance to deliver solutions that inspire and endure."
-    },
-    "support": {
-      "title": "Support",
-      "text": "Our work doesn’t end at launch. We provide proactive, ongoing support to keep your digital solution secure, up-to-date, and performing at its best. This includes regular maintenance, feature enhancements, security monitoring, and performance optimization. As your business grows and your needs evolve, we remain a trusted partner, ensuring your digital presence adapts seamlessly and continues to deliver measurable results over the long term."
-    },
-    "ctaPrimary": "Request a quote"
-  },
+  "about": { "kicker": "We build that shit for you", "title": "How we build", "analyze": { "title": "Analyze", "text": "We begin by taking a deep dive into your organization’s unique needs, challenges, and objectives. This involves examining your current systems, workflows, and technologies in detail, as well as engaging with all key stakeholders early in the process. By gaining a comprehensive understanding of your operational landscape, we uncover opportunities for improvement, identify potential risks before they become issues, and lay the groundwork for solutions that are not only practical but also strategically aligned with your long-term vision." }, "plan": { "title": "Plan", "text": "Building on the insights gathered during the analysis phase, we develop a detailed, actionable roadmap designed to bring your vision to life. This includes defining the technical architecture, mapping out user experiences, setting clear milestones, and establishing success criteria. Every step is carefully structured to ensure alignment with your business goals, adaptability to changing needs, and scalability for future expansion, so your investment continues to deliver value over time." }, "build": { "title": "Build", "text": "With a clear plan in place, our team of experienced developers and designers transform concepts into fully functional, high-quality digital products. From robust backend systems to intuitive, user-friendly interfaces, every element is crafted with precision and purpose. Whether we’re building a responsive website, a feature-rich mobile app, or a complex digital platform, we ensure a perfect balance of solid technical architecture, engaging design, and optimal performance to deliver solutions that inspire and endure." }, "support": { "title": "Support", "text": "Our work doesn’t end at launch. We provide proactive, ongoing support to keep your digital solution secure, up-to-date, and performing at its best. This includes regular maintenance, feature enhancements, security monitoring, and performance optimization. As your business grows and your needs evolve, we remain a trusted partner, ensuring your digital presence adapts seamlessly and continues to deliver measurable results over the long term." }, "ctaPrimary": "Request a quote" },
   "services": {
     "kicker": "We build that shit for you",
     "title": "Digital solutions that work for you",
     "webDesign": {
       "title": "Web Design & Development",
-      "description": "We craft beautiful, responsive, and high-performing websites tailored to your brand's identity and goals, ensuring a seamless user experience across all devices.",
+      "description": "We craft beautiful, responsive, and high-performing websites tailored to your brand.",
       "feature1": "Responsive design for all devices",
       "feature2": "Custom UI/UX tailored to your brand",
       "feature3": "SEO-optimized websites",
       "feature4": "Integration with modern tools & APIs",
-      "feature5": "Performance-focused development"
+      "feature5": "Performance-focused development",
+      "faq1": {
+        "question": "How long does it take to build a website?",
+        "answer": "Depending on complexity, most websites are ready within 4–8 weeks."
+      },
+      "faq2": {
+        "question": "Do you offer website maintenance?",
+        "answer": "Yes, we provide ongoing support and updates to keep your site running smoothly."
+      }
     },
     "softwareDevelopment": {
       "title": "Software Development",
-      "description": "From custom applications to complex system integrations, we build robust and scalable software solutions that streamline your operations and drive innovation.",
+      "description": "From custom applications to complex system integrations, we build robust and scalable software.",
       "feature1": "Custom business applications",
       "feature2": "Secure and scalable architecture",
       "feature3": "System integration and automation",
       "feature4": "Cross-platform solutions",
-      "feature5": "Maintenance and continuous support"
+      "feature5": "Maintenance and continuous support",
+      "faq1": {
+        "question": "Do you build mobile apps too?",
+        "answer": "Yes, we develop cross-platform mobile applications alongside web solutions."
+      },
+      "faq2": {
+        "question": "Can you integrate with our existing systems?",
+        "answer": "Absolutely. We specialize in seamless integrations with CRMs, ERPs, and third-party APIs."
+      }
+    },
+    "cloudSolutions": {
+      "title": "Cloud Solutions",
+      "description": "We design, deploy, and manage cloud infrastructures that scale with your business.",
+      "feature1": "Cloud migration and deployment",
+      "feature2": "Serverless architecture",
+      "feature3": "Cost optimization strategies",
+      "feature4": "High availability and disaster recovery",
+      "feature5": "Continuous monitoring & support",
+      "faq1": {
+        "question": "Which cloud platforms do you support?",
+        "answer": "We work with AWS, Azure, and Google Cloud depending on your project needs."
+      },
+      "faq2": {
+        "question": "Is cloud migration secure?",
+        "answer": "Yes. We use industry best practices to ensure data integrity and security during migration."
+      }
+    },
+    "aiAutomation": {
+      "title": "AI & Automation",
+      "description": "Boost efficiency with smart AI-driven solutions and business process automation.",
+      "feature1": "Chatbots and virtual assistants",
+      "feature2": "Workflow automation",
+      "feature3": "Data analysis and machine learning",
+      "feature4": "AI-driven customer support",
+      "feature5": "Custom AI models tailored to your needs",
+      "faq1": {
+        "question": "Can AI help my small business?",
+        "answer": "Definitely! AI can save time and improve customer experience, even for smaller companies."
+      },
+      "faq2": {
+        "question": "Do you train custom AI models?",
+        "answer": "Yes, we build and fine-tune AI models tailored to your data and goals."
+      }
     }
   },
   "contact": {
