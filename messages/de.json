@@ -221,5 +221,41 @@
     "privacy": "Privatsphäre",
     "imprint": "Impressum",
     "company": "Freelancer"
+  },
+  "impressum": {
+    "title": "Impressum",
+    "company": "Angaben gemäß § 5 TMG",
+    "name": "Markus Lindner",
+    "address": "Frankfurter Allee 216",
+    "city": "10365 Berlin, Deutschland",
+    "contact": "Kontakt",
+    "phone": "Telefon",
+    "email": "E-Mail",
+    "legal": "Rechtliche Angaben",
+    "legalForm": "Einzelunternehmer",
+    "taxNumber": "Steuernummer: wird noch hinzugefügt",
+    "disclaimer": "Haftungsausschluss",
+    "disclaimerText": "Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich. Alle Angaben auf dieser Website erfolgen ohne Gewähr."
+  },
+  
+  "datenschutz": {
+    "title": "Datenschutz",
+    "company": "Firma",
+    "contact": "Kontakt",
+    "phone": "Telefon",
+    "email": "E-Mail",
+    "dataCollection": "Erhebung von Daten",
+    "dataCollectionText": "Hier beschreiben Sie, welche Daten auf Ihrer Website gesammelt werden, z.B. durch Formulare, Analytics oder Cookies.",
+    "purpose": "Zweck der Verarbeitung",
+    "purposeText": "Erklärung, zu welchen Zwecken die Daten verarbeitet werden, z.B. zur Bearbeitung von Anfragen oder zur Verbesserung der Website.",
+    "rights": "Ihre Rechte",
+    "rightAccess": "Recht auf Auskunft über die verarbeiteten personenbezogenen Daten",
+    "rightCorrection": "Recht auf Berichtigung unrichtiger Daten",
+    "rightDeletion": "Recht auf Löschung personenbezogener Daten",
+    "rightRestriction": "Recht auf Einschränkung der Verarbeitung",
+    "rightDataPortability": "Recht auf Datenübertragbarkeit",
+    "rightObjection": "Recht auf Widerspruch gegen die Verarbeitung"
   }
+
+
 }

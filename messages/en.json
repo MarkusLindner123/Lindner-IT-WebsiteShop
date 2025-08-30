@@ -222,5 +222,41 @@
     "privacy": "Privacy Policy",
     "imprint": "Imprint",
     "company": "Freelancer"
+  },
+  "impressum": {
+    "title": "Imprint",
+    "company": "Company Information",
+    "name": "Markus Lindner",
+    "address": "Frankfurter Allee 216",
+    "city": "10365 Berlin, Germany",
+    "contact": "Contact",
+    "phone": "Phone",
+    "email": "Email",
+    "legal": "Legal Information",
+    "legalForm": "Sole Proprietor (Einzelunternehmer)",
+    "taxNumber": "Tax ID: to be added later",
+    "disclaimer": "Disclaimer",
+    "disclaimerText": "Despite careful content control, we assume no liability for the content of external links. The operators of linked pages are solely responsible for their content. All information on this website is provided without guarantee."
+  },
+  
+  "datenschutz": {
+    "title": "Privacy Policy",
+    "company": "Company",
+    "contact": "Contact",
+    "phone": "Phone",
+    "email": "Email",
+    "dataCollection": "Data Collection",
+    "dataCollectionText": "Here you describe which data is collected on your website, e.g., via forms, analytics, or cookies.",
+    "purpose": "Purpose of Processing",
+    "purposeText": "Explanation of the purposes for which the data is processed, e.g., to handle inquiries or improve the website.",
+    "rights": "Your Rights",
+    "rightAccess": "Right to access the personal data being processed",
+    "rightCorrection": "Right to correct inaccurate data",
+    "rightDeletion": "Right to request deletion of personal data",
+    "rightRestriction": "Right to restrict processing",
+    "rightDataPortability": "Right to data portability",
+    "rightObjection": "Right to object to processing"
   }
+
+
 }

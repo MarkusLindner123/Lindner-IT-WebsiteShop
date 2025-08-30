@@ -27,16 +27,16 @@ export default function Footer() {
             className="flex items-center gap-2 hover:text-white transition-colors"
           >
             <Mail className="w-5 h-5" />
-            <span>markuslindner1998@gmail.come</span>
+            <span>markuslindner1998@gmail.com</span>
           </a>
         </div>
 
         {/* Footer Navigation */}
         <nav className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 text-sm">
-          <Link href="/datenschutz" className="hover:text-white transition-colors">
+          <Link href="/privacy" className="hover:text-white transition-colors">
             {t("privacy")}
           </Link>
-          <Link href="/impressum" className="hover:text-white transition-colors">
+          <Link href="/imprint" className="hover:text-white transition-colors">
             {t("imprint")}
           </Link>
         </nav>

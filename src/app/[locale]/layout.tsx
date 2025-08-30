@@ -5,11 +5,11 @@ import { notFound } from "next/navigation";
 import { setRequestLocale, getMessages } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import "@/app/globals.css";
-import Header from "@/components/Header";
+import Header from "@/components/Layout/Header";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import Phone from "@/components/PhoneButton";
 import PageLoader from "@/components/PageLoader"; // <-- neu
-import Footer from "@/components/Footer";
+import Footer from "@/components/Layout/Footer";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
