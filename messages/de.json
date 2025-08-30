@@ -14,26 +14,27 @@
     "ctaSecondary": "IT-Leistungen ansehen"
   },
   "about": {
-    "kicker": "Lernen Sie mich kennen",
-    "title": "Über Markus Lindner",
-    "background": {
-      "title": "Mein Hintergrund",
-      "text": "Ich bin Markus Lindner, 27 Jahre alt, IT-Freelancer mit Sitz in Berlin. Derzeit studiere ich B.Sc. Engineering Embedded Systems an der BHT Berlin mit Schwerpunkt technische Informatik. Ich bin zweisprachig in Deutsch und Polnisch und verfüge über sehr gute Englischkenntnisse."
-    },
-    "experience": {
-      "title": "Meine Erfahrung",
-      "text": "Von Mai 2019 bis März 2024 arbeitete ich als studentischer Mitarbeiter bei Siemens AG und sammelte praktische Erfahrungen in IT-Infrastruktur, Cybersicherheit und Softwareentwicklung. Seit 2020 arbeite ich freiberuflich, entwickle moderne Websites mit WordPress, TypeScript und React, biete IT-Coaching und betreue Cybersecurity-Vorfälle. Ich habe IT-Infrastrukturen für Kanzleien und Immobilienmakler eingerichtet, Cloud-Systeme, Datenrettung und Netzwerkinstallationen für KMU wie Bullet Shop Berlin umgesetzt."
-    },
-    "approach": {
-      "title": "Mein Ansatz",
-      "text": "Ich beginne mit der Analyse Ihrer IT-Bedürfnisse, um Risiken und Chancen zu identifizieren, und entwickle dann skalierbare Lösungen wie sichere Netzwerke, Websites und Sicherheitsmaßnahmen. Ich implementiere diese effizient mit Fokus auf Zuverlässigkeit und biete kontinuierliche Unterstützung und Optimierung. Meine Kombination aus Erfahrung bei Siemens und Freelance-Projekten stellt sicher, dass Ihre IT-Systeme professionell und praxisnah sind."
-    },
-    "whyMe": {
-      "title": "Warum ich",
-      "text": "Ich verfolge einen praxisnahen Ansatz bei jedem Projekt. Mit Zertifikaten in Cybersicherheit, Datenschutz und IT-Management biete ich sichere und wachstumsorientierte IT-Lösungen speziell für KMU. Ich verbinde technisches Fachwissen mit Kundenorientierung, damit Ihre Unternehmens-IT reibungslos und sicher läuft."
-    },
-    "ctaPrimary": "Angebot anfordern"
+  "kicker": "Lernen Sie mich kennen",
+  "title": "Über Markus Lindner",
+  "background": {
+    "title": "Mein Hintergrund",
+    "text": "Ich bin Markus Lindner, 27 Jahre alt, ein engagierter IT-Freelancer mit Sitz in Berlin. Zurzeit studiere ich B.Sc. Engineering Embedded Systems an der BHT Berlin mit Schwerpunkt technische Informatik und praxisnaher Softwareentwicklung. Ich bin zweisprachig in Deutsch und Polnisch aufgewachsen, verfüge über sehr gute Englischkenntnisse und arbeite täglich in einem internationalen Umfeld mit verschiedenen Kunden."
   },
+  "experience": {
+    "title": "Meine Erfahrung",
+    "text": "Von Mai 2019 bis März 2024 war ich als studentischer Mitarbeiter bei Siemens AG tätig und sammelte dort wertvolle praktische Erfahrungen in IT-Infrastruktur, Cybersicherheit sowie Softwareentwicklung. Seit 2020 arbeite ich zusätzlich freiberuflich, entwickle moderne und benutzerfreundliche Websites mit WordPress, TypeScript und React, biete individuelles IT-Coaching und betreue sicherheitsrelevante Vorfälle. Darüber hinaus habe ich IT-Infrastrukturen für Kanzleien und Immobilienmakler eingerichtet, Cloud-Systeme implementiert, Datenrettungen durchgeführt und Netzwerkinstallationen für KMU wie Bullet Shop Berlin zuverlässig umgesetzt."
+  },
+  "approach": {
+    "title": "Mein Ansatz",
+    "text": "Ich beginne jedes Projekt mit einer gründlichen Analyse Ihrer IT-Bedürfnisse, um Risiken und Chancen systematisch zu identifizieren, und entwickle darauf basierend skalierbare Lösungen wie sichere Netzwerke, professionelle Websites und moderne Sicherheitsmaßnahmen. Anschließend implementiere ich diese effizient und mit Fokus auf Zuverlässigkeit, während ich kontinuierliche Unterstützung, Beratung und Optimierung biete. Die Kombination meiner Erfahrungen bei Siemens und zahlreichen Freelance-Projekten stellt sicher, dass Ihre IT-Systeme sowohl professionell als auch praxisnah und langfristig stabil sind."
+  },
+  "whyMe": {
+    "title": "Warum ich",
+    "text": "Ich verfolge bei jedem Projekt einen praxisnahen und lösungsorientierten Ansatz. Mit anerkannten Zertifikaten in Cybersicherheit, Datenschutz und IT-Management biete ich sichere, zuverlässige und wachstumsorientierte IT-Lösungen, die speziell auf die Anforderungen kleiner und mittlerer Unternehmen zugeschnitten sind. Dabei verbinde ich fundiertes technisches Fachwissen mit einer klaren Kundenorientierung, sodass Ihre Unternehmens-IT nicht nur reibungslos, sondern auch nachhaltig, sicher und effizient funktioniert."
+  },
+  "ctaPrimary": "Angebot anfordern"
+}
+,
   "services": {
     "ctaPrimary": "Kontaktieren Sie mich",
     "kicker": "Meine Leistungen",

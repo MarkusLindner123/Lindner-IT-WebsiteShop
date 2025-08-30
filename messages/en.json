@@ -14,26 +14,27 @@
     "ctaSecondary": "See IT Services"
   },
   "about": {
-    "kicker": "Get to Know Me",
-    "title": "About Markus Lindner",
-    "background": {
-      "title": "My Background",
-      "text": "I'm Markus Lindner, a 27-year-old IT freelancer based in Berlin. I am currently pursuing a B.Sc. in Engineering Embedded Systems at BHT Berlin with a focus on technical informatics. I am bilingual in German and Polish, and I have strong English skills."
-    },
-    "experience": {
-      "title": "My Experience",
-      "text": "From May 2019 to March 2024, I worked as a student employee at Siemens AG, gaining hands-on experience in IT infrastructure, cybersecurity, and software development. Since 2020, I have been freelancing, building modern websites with Wordpress or TypeScript and React, providing IT coaching, and handling cybersecurity incidents. I have set up office IT infrastructure for clients including lawyers and real estate agents, worked on cloud systems, data recovery, and network rebuilds for SMEs such as Bullet Shop Berlin."
-    },
-    "approach": {
-      "title": "My Approach",
-      "text": "I start by assessing your IT needs to identify risks and opportunities, then design scalable solutions including secure networks, websites, and cybersecurity measures. I implement solutions efficiently with a focus on reliability and provide ongoing support and optimization. My combination of corporate experience at Siemens and freelance projects ensures that your IT systems are both professional and practical."
-    },
-    "whyMe": {
-      "title": "Why Choose Me",
-      "text": "I bring a hands-on, practical approach to every project. With certifications in cybersecurity, data privacy, and IT management, I provide secure and growth-oriented IT solutions tailored to SMEs. I combine technical expertise with a focus on client needs to make sure your business IT runs smoothly and securely."
-    },
-    "ctaPrimary": "Request a quote"
+  "kicker": "Get to Know Me",
+  "title": "About Markus Lindner",
+  "background": {
+    "title": "My Background",
+    "text": "I’m Markus Lindner, a 27-year-old and dedicated IT freelancer based in Berlin. I am currently pursuing a B.Sc. in Engineering Embedded Systems at BHT Berlin with a strong focus on technical informatics and applied software engineering. I grew up bilingual in German and Polish, have excellent English skills, and work with international clients on a daily basis in different business contexts."
   },
+  "experience": {
+    "title": "My Experience",
+    "text": "From May 2019 to March 2024 I worked as a student employee at Siemens AG, where I gained valuable hands-on experience in IT infrastructure, cybersecurity, and software development. Since 2020 I have also been freelancing, building modern, user-friendly websites with WordPress, TypeScript, and React, offering personalized IT coaching, and handling sensitive cybersecurity incidents. In addition, I have set up IT infrastructures for lawyers and real estate agencies, implemented cloud systems, performed data recovery, and carried out reliable network installations for SMEs such as Bullet Shop Berlin."
+  },
+  "approach": {
+    "title": "My Approach",
+    "text": "I start every project with a thorough assessment of your IT needs in order to identify risks and opportunities in detail, and then design scalable solutions such as secure networks, professional websites, and effective cybersecurity measures. I implement these solutions efficiently with a clear focus on reliability and long-term stability, while also offering continuous support, optimization, and personal consultation. The combination of my Siemens background and diverse freelance projects ensures that your IT systems are not only professional but also practical and well aligned with your business goals."
+  },
+  "whyMe": {
+    "title": "Why Choose Me",
+    "text": "For every project I bring a practical, solution-oriented mindset. With industry-recognized certifications in cybersecurity, data privacy, and IT management, I deliver secure, reliable, and growth-driven IT solutions tailored to the needs of SMEs. I combine deep technical expertise with strong client orientation, ensuring that your business IT runs not only smoothly but also securely, sustainably, and efficiently over the long term."
+  },
+  "ctaPrimary": "Request a Quote"
+}
+,
   "services": {
     "ctaPrimary": "Contact Me",
     "kicker": "My services",
