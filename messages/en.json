@@ -1,36 +1,36 @@
 {
   "heroVideo": {
-    "title": "I secure & grow your business IT",
-    "subtitle": "Professional IT support, websites, network setup & cybersecurity for SMEs"
+    "title": "Reliable IT Solutions for SMEs",
+    "subtitle": "Professional IT support, network setup, cybersecurity, and websites tailored for small and medium businesses"
   },
   "hero": {
-    "kicker": "Digital Solutions for SMEs",
-    "kickerTag": "Your IT Partner",
-    "titleLine1": "I Secure &",
-    "titleLine2": "Grow",
-    "titleLine3": "Your Business IT",
-    "subtitle": "I provide professional IT support, network setup, cybersecurity, and websites tailored for small and medium businesses.",
+    "kicker": "IT Solutions You Can Trust",
+    "kickerTag": "Your SME IT Partner",
+    "titleLine1": "Reliable",
+    "titleLine2": "IT Solutions",
+    "titleLine3": "for Your Business",
+    "subtitle": "I provide professional IT support, secure network setup, cybersecurity, and high-quality websites for small and medium businesses.",
     "ctaPrimary": "Request a Quote",
-    "ctaSecondary": "View Services"
+    "ctaSecondary": "See IT Services"
   },
   "about": {
-    "kicker": "I build IT for you",
-    "title": "How I Work",
-    "analyze": {
-      "title": "Assess",
-      "text": "I start by understanding your company's current IT environment, identifying weaknesses, bottlenecks, and potential security risks. This allows me to propose practical solutions aligned with your business objectives."
+    "kicker": "Get to Know Me",
+    "title": "About Markus Lindner",
+    "background": {
+      "title": "My Background",
+      "text": "I'm Markus Lindner, a 27-year-old IT freelancer based in Berlin. I am currently pursuing a B.Sc. in Engineering Embedded Systems at BHT Berlin with a focus on technical informatics. I am bilingual in German and Polish, and I have strong English skills."
     },
-    "plan": {
-      "title": "Plan",
-      "text": "Based on the assessment, I create a clear IT roadmap. This includes network design, hardware and software selection, cybersecurity strategy, and step-by-step implementation planning to ensure reliability and scalability."
+    "experience": {
+      "title": "My Experience",
+      "text": "From May 2019 to March 2024, I worked as a student employee at Siemens AG, gaining hands-on experience in IT infrastructure, cybersecurity, and software development. Since 2020, I have been freelancing, building modern websites with Wordpress or TypeScript and React, providing IT coaching, and handling cybersecurity incidents. I have set up office IT infrastructure for clients including lawyers and real estate agents, worked on cloud systems, data recovery, and network rebuilds for SMEs such as Bullet Shop Berlin."
     },
-    "build": {
-      "title": "Implement",
-      "text": "I bring your IT infrastructure to life, setting up secure networks, servers, workstations, and websites. Every component is configured for optimal performance, security, and future growth."
+    "approach": {
+      "title": "My Approach",
+      "text": "I start by assessing your IT needs to identify risks and opportunities, then design scalable solutions including secure networks, websites, and cybersecurity measures. I implement solutions efficiently with a focus on reliability and provide ongoing support and optimization. My combination of corporate experience at Siemens and freelance projects ensures that your IT systems are both professional and practical."
     },
-    "support": {
-      "title": "Support",
-      "text": "After deployment, I provide ongoing IT support, monitoring, and maintenance. This ensures your systems remain secure, updated, and fully operational, letting you focus on your business."
+    "whyMe": {
+      "title": "Why Choose Me",
+      "text": "I bring a hands-on, practical approach to every project. With certifications in cybersecurity, data privacy, and IT management, I provide secure and growth-oriented IT solutions tailored to SMEs. I combine technical expertise with a focus on client needs to make sure your business IT runs smoothly and securely."
     },
     "ctaPrimary": "Request a quote"
   },
@@ -170,12 +170,11 @@
         "answer": "Yes, I provide 24/7 monitoring for potential cyber threats."
       }
     }
-  }
-,
+  },
   "contact": {
-    "kicker": "Let's secure your IT",
+    "kicker": "Secure and Efficient IT",
     "title": "Get in Touch",
-    "subtitle": "Contact me today to discuss your IT needs and get a customized solution.",
+    "subtitle": "Reach out today to discuss your IT needs, request a quote, or arrange support tailored for your business.",
     "form": {
       "name": "Name",
       "email": "Email",

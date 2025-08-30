@@ -33,10 +33,10 @@ export default function AboutSection() {
   // Texte aus Übersetzungen
   const sections = useMemo(
     () => ({
-      analyze: { title: t("analyze.title"), text: t("analyze.text") },
-      plan: { title: t("plan.title"), text: t("plan.text") },
-      build: { title: t("build.title"), text: t("build.text") },
-      support: { title: t("support.title"), text: t("support.text") },
+      background: { title: t("background.title"), text: t("background.text") },
+      experience: { title: t("experience.title"), text: t("experience.text") },
+      approach: { title: t("approach.title"), text: t("approach.text") },
+      whyMe: { title: t("whyMe.title"), text: t("whyMe.text") },
       ctaPrimary: t("ctaPrimary"),
     }),
     [t]
@@ -44,33 +44,40 @@ export default function AboutSection() {
 
   const paragraphs = useMemo(
     () => [
-      sections.analyze.text,
-      sections.plan.text,
-      sections.build.text,
-      sections.support.text,
+      sections.background.text,
+      sections.experience.text,
+      sections.approach.text,
+      sections.whyMe.text,
     ],
     [sections]
   );
 
-  // Wörter, die hervorgehoben werden sollen
   const highlightWords = [
-    "solutions",
-    "lösungen",
-    "scalable",
-    "skalierbar",
-    "design",
-    "results",
-    "ergebnisse",
-    "reliable",
-    "analysis",
-    "architecture",
-    "performance",
-    "support",
-    "maintenance",
-    "optimization",
-    "vision",
-    "growth",
-  ];
+  // Background
+  "background",
+  "bilingual",
+  "engineering",
+
+  // Experience
+  "corporateexperience",
+  "freelance",
+  "lawyers",
+  "realestate",
+  "Siemens AG",
+
+  // Approach
+  "infrastructure",
+  "websites",
+  "networks",
+  "cybersecurity",
+
+  // Why Me
+  "reliable",
+  "secure",
+  "customized",
+  "growth",
+  "ITsolutions",
+];
 
   // Paragraph in Wörter splitten
   const allWords = useMemo(() => {
@@ -177,16 +184,16 @@ export default function AboutSection() {
   }, [speedFactor, allWords]);
 
   const titles = [
-    sections.analyze.title,
-    sections.plan.title,
-    sections.build.title,
-    sections.support.title,
+    sections.background.title,
+    sections.experience.title,
+    sections.approach.title,
+    sections.whyMe.title,
   ];
 
   return (
     <section
       id="about"
-      className="bg-about-bg mx-auto max-w-full px-4 lg:px-8 py-20 md:py-28 lg:py-32"
+      className="bg-about-bg mx-auto max-w-full px-4 lg:px-8 py-12 md:py-16 lg:py-20"
     >
       {/* Kicker */}
       <div className="mb-6">
