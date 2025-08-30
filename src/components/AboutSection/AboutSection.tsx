@@ -2,7 +2,7 @@
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import { AnimatedButton } from "@/components/AnimatedButton";
+//import { AnimatedButton } from "@/components/AnimatedButton";
 import Image from "next/image";
 import "./AboutSection.css"; // CSS für Brush-Effekt
 
@@ -259,10 +259,11 @@ export default function AboutSection() {
         ))}
       </div>
 
-      {/* CTA */}
+      {/* CTA
       <div className="mt-12 flex justify-center">
         <AnimatedButton href="#contact">{sections.ctaPrimary}</AnimatedButton>
-      </div>
+      </div>  */}
     </section>
+    
   );
 }

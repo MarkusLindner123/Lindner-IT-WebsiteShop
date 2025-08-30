@@ -1,9 +1,9 @@
-// ServicesSection.tsx
 "use client";
 
 import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import { motion, Variants } from "framer-motion";
+import { motion, Variants, useAnimation } from "framer-motion";
+import { AnimatedButton } from "@/components/AnimatedButton";
 import {
   Code,
   Globe,
@@ -17,6 +17,7 @@ import {
   ChevronDown,
 } from "lucide-react";
 import ReactDOMServer from "react-dom/server";
+import { useInView } from "react-intersection-observer";
 
 interface FloatingElement {
   el: HTMLDivElement;
@@ -69,6 +70,18 @@ export default function ServicesSection() {
       transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
     },
   };
+
+  // Button Animation Controls
+  const buttonControls = useAnimation();
+  const [buttonRef, inView] = useInView({ threshold: 0.1 });
+
+  useEffect(() => {
+    if (inView) {
+      buttonControls.start({ opacity: 1, scale: 1, transition: { duration: 0.5, ease: "easeOut" } });
+    } else {
+      buttonControls.start({ opacity: 0, scale: 0.8, transition: { duration: 0.5, ease: "easeIn" } });
+    }
+  }, [inView, buttonControls]);
 
   // Floating tags initialisieren (nur einmal)
   useEffect(() => {
@@ -136,7 +149,6 @@ export default function ServicesSection() {
       let tries = 0;
       let newEl: FloatingElement;
 
-      // Spawn ohne Überschneidung
       do {
         x = getRandom(padding, container.offsetWidth - width - padding);
         y = getRandom(padding, container.offsetHeight - height - padding);
@@ -150,7 +162,7 @@ export default function ServicesSection() {
           height,
         };
         tries++;
-        if (tries > 100) break; // Abbruch, falls kein Platz gefunden
+        if (tries > 100) break;
       } while (floatingElements.some((other) => isOverlapping(newEl, other)));
 
       floatingElements.push(newEl);
@@ -160,13 +172,11 @@ export default function ServicesSection() {
       const w = container?.offsetWidth ?? 0;
       const h = container?.offsetHeight ?? 0;
 
-
       for (let i = 0; i < floatingElements.length; i++) {
         const el = floatingElements[i];
         el.x += el.vx;
         el.y += el.vy;
 
-        // Randkollision
         if (el.x < 0 || el.x + el.width > w) {
           el.vx *= -1;
           el.x = Math.max(0, Math.min(el.x, w - el.width));
@@ -176,7 +186,6 @@ export default function ServicesSection() {
           el.y = Math.max(0, Math.min(el.y, h - el.height));
         }
 
-        // Kollisionsvermeidung mit anderen Tags
         for (let j = i + 1; j < floatingElements.length; j++) {
           const other = floatingElements[j];
           if (isOverlapping(el, other, 4)) {
@@ -275,6 +284,13 @@ export default function ServicesSection() {
                   </motion.div>
                 );
               })}
+            </div>
+
+            {/* CTA Button */}
+            <div ref={buttonRef} className="mt-12 flex justify-center">
+              <motion.div animate={buttonControls}>
+                <AnimatedButton href="#contact">{t("ctaPrimary")}</AnimatedButton>
+              </motion.div>
             </div>
           </motion.div>
         </motion.div>

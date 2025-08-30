@@ -13,13 +13,14 @@
     "flag-icons": "^7.5.0",
     "framer-motion": "^12.23.12",
     "gsap": "^3.13.0",
-    "lucide-react": "^0.539.0",
+    "lucide-react": "^0.542.0",
     "next": "15.2.0",
     "next-intl": "^4.3.4",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-feather": "^2.0.10",
-    "react-icons": "^5.5.0"
+    "react-icons": "^5.5.0",
+    "react-intersection-observer": "^9.16.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

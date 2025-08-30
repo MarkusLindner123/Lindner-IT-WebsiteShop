@@ -15,6 +15,7 @@
   },
   "about": { "kicker": "We build that shit for you", "title": "How we build", "analyze": { "title": "Analyze", "text": "We begin by taking a deep dive into your organization’s unique needs, challenges, and objectives. This involves examining your current systems, workflows, and technologies in detail, as well as engaging with all key stakeholders early in the process. By gaining a comprehensive understanding of your operational landscape, we uncover opportunities for improvement, identify potential risks before they become issues, and lay the groundwork for solutions that are not only practical but also strategically aligned with your long-term vision." }, "plan": { "title": "Plan", "text": "Building on the insights gathered during the analysis phase, we develop a detailed, actionable roadmap designed to bring your vision to life. This includes defining the technical architecture, mapping out user experiences, setting clear milestones, and establishing success criteria. Every step is carefully structured to ensure alignment with your business goals, adaptability to changing needs, and scalability for future expansion, so your investment continues to deliver value over time." }, "build": { "title": "Build", "text": "With a clear plan in place, our team of experienced developers and designers transform concepts into fully functional, high-quality digital products. From robust backend systems to intuitive, user-friendly interfaces, every element is crafted with precision and purpose. Whether we’re building a responsive website, a feature-rich mobile app, or a complex digital platform, we ensure a perfect balance of solid technical architecture, engaging design, and optimal performance to deliver solutions that inspire and endure." }, "support": { "title": "Support", "text": "Our work doesn’t end at launch. We provide proactive, ongoing support to keep your digital solution secure, up-to-date, and performing at its best. This includes regular maintenance, feature enhancements, security monitoring, and performance optimization. As your business grows and your needs evolve, we remain a trusted partner, ensuring your digital presence adapts seamlessly and continues to deliver measurable results over the long term." }, "ctaPrimary": "Request a quote" },
   "services": {
+    "ctaPrimary": "Contact Us",
     "kicker": "We build that shit for you",
     "title": "Digital solutions that work for you",
     "webDesign": {
@@ -33,6 +34,7 @@
         "question": "Do you offer website maintenance?",
         "answer": "Yes, we provide ongoing support and updates to keep your site running smoothly."
       }
+      
     },
     "softwareDevelopment": {
       "title": "Software Development",
