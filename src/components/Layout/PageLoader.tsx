@@ -51,8 +51,8 @@ export default function PageLoader({ children }: { children: React.ReactNode }) 
             />
           </motion.div>
 
-          {/* Ladebalken komplett weiß */}
-          <div className="w-2/3 h-8 bg-white/20 rounded-full overflow-hidden">
+          {/* Ladebalken in der gleichen Breite wie das SVG */}
+          <div className="w-[40vw] h-8 bg-white/20 rounded-full overflow-hidden">
             <div
               className="h-full bg-white transition-all duration-300"
               style={{ width: `${progress}%` }}
