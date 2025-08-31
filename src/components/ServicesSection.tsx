@@ -49,9 +49,7 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
       >
         {question}
         <ChevronDown
-          className={`transition-transform duration-300 ${
-            open ? "rotate-180" : ""
-          }`}
+          className={`transition-transform duration-300 ${open ? "rotate-180" : ""}`}
           size={18}
         />
       </button>
@@ -63,6 +61,8 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
 export default function ServicesSection() {
   const t = useTranslations("services");
   const animationContainerRef = useRef<HTMLDivElement>(null);
+  const animationFrameRef = useRef<number | null>(null);
+  const [animationRunning, setAnimationRunning] = useState(true); // Animation default on
 
   const containerVariants: Variants = {
     hidden: {},
@@ -84,16 +84,8 @@ export default function ServicesSection() {
   useEffect(() => {
     buttonControls.start(
       inView
-        ? {
-            opacity: 1,
-            scale: 1,
-            transition: { duration: 0.5, ease: "easeOut" },
-          }
-        : {
-            opacity: 0,
-            scale: 0.8,
-            transition: { duration: 0.5, ease: "easeIn" },
-          }
+        ? { opacity: 1, scale: 1, transition: { duration: 0.5, ease: "easeOut" } }
+        : { opacity: 0, scale: 0.8, transition: { duration: 0.5, ease: "easeIn" } }
     );
   }, [inView, buttonControls]);
 
@@ -132,8 +124,7 @@ export default function ServicesSection() {
 
     const numShapes = 25;
     const floatingElements: FloatingElement[] = [];
-    const getRandom = (min: number, max: number) =>
-      Math.random() * (max - min) + min;
+    const getRandom = (min: number, max: number) => Math.random() * (max - min) + min;
     const padding = 20;
 
     function isOverlapping(a: FloatingElement, b: FloatingElement, gap = 10) {
@@ -160,6 +151,7 @@ export default function ServicesSection() {
         "floating-tag",
         "absolute"
       );
+      shape.style.opacity = animationRunning ? "1" : "0"; // invisible if not running
 
       const iconWrapper = document.createElement("span");
       iconWrapper.innerHTML = ReactDOMServer.renderToString(<Icon size={16} />);
@@ -199,23 +191,35 @@ export default function ServicesSection() {
     }
 
     function animate() {
-      const w = container?.offsetWidth ?? 0;
-      const h = container?.offsetHeight ?? 0;
+      if (!animationRunning) {
+        // hide tags when paused
+        floatingElements.forEach((el) => (el.el.style.opacity = "0"));
+        return;
+      }
 
-      for (let i = 0; i < floatingElements.length; i++) {
-        const el = floatingElements[i];
+      const container = animationContainerRef.current;
+      if (!container) return;
+
+      floatingElements.forEach((el, i) => {
+        el.el.style.opacity = "1"; // visible if running
+
         el.x += el.vx;
         el.y += el.vy;
+
+        const w = container.offsetWidth;
+        const h = container.offsetHeight;
 
         if (el.x < 0 || el.x + el.width > w) el.vx *= -1;
         if (el.y < 0 || el.y + el.height > h) el.vy *= -1;
 
-        el.x = Math.max(0, Math.min(el.x, w - el.width));
-        el.y = Math.max(0, Math.min(el.y, h - el.height));
-
         for (let j = i + 1; j < floatingElements.length; j++) {
           const other = floatingElements[j];
-          if (isOverlapping(el, other, 4)) {
+          if (
+            el.x + el.width + 4 > other.x &&
+            el.x < other.x + other.width + 4 &&
+            el.y + el.height + 4 > other.y &&
+            el.y < other.y + other.height + 4
+          ) {
             const tmpVx = el.vx;
             const tmpVy = el.vy;
             el.vx = other.vx;
@@ -226,37 +230,49 @@ export default function ServicesSection() {
         }
 
         el.el.style.transform = `translate(${el.x}px, ${el.y}px)`;
-      }
+      });
 
-      requestAnimationFrame(animate);
+      animationFrameRef.current = requestAnimationFrame(animate);
     }
 
     animate();
-    return () =>
-      container.querySelectorAll(".floating-tag").forEach((el) => el.remove());
-  }, []);
+
+    return () => {
+      floatingElements.forEach((el) => el.el.remove());
+      if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
+    };
+  }, [animationRunning]);
 
   return (
     <div className="relative">
-      {/* Floating tags container */}
       <div
         ref={animationContainerRef}
         className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 rounded-2xl"
       />
 
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="show"
-        className="relative z-10"
-      >
+      <motion.div variants={containerVariants} initial="hidden" animate="show" className="relative z-10">
         <motion.div variants={fadeUp}>
           <div className="inline-flex items-center px-4 py-1 rounded-full text-sm font-medium text-black bg-black/10 mb-4">
             {t("kicker")}
           </div>
-          <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold leading-tight tracking-tight text-black font-headline mb-8">
+          <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold leading-tight tracking-tight text-black font-headline mb-4">
             <span className="block">{t("title")}</span>
           </h1>
+
+          {/* Animation Toggle */}
+          <div className="flex justify-center items-center mb-8 gap-3">
+            <span className="text-black font-medium">{t("startAnimation")}</span>
+            <label className="relative inline-flex items-center cursor-pointer">
+              <input
+                type="checkbox"
+                className="sr-only peer"
+                checked={animationRunning}
+                onChange={() => setAnimationRunning(!animationRunning)}
+              />
+              <div className="w-11 h-6 rounded-full bg-gray-500 peer-checked:bg-blue-600 transition-colors" />
+              <div className="absolute left-1 top-1 w-4 h-4 bg-white rounded-full shadow-md peer-checked:translate-x-5 transition-transform" />
+            </label>
+          </div>
 
           {/* Service Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
@@ -282,10 +298,7 @@ export default function ServicesSection() {
                   className="bg-services-card p-6 rounded-xl shadow-lg relative z-20"
                   aria-labelledby={`${key}-title`}
                 >
-                  <h2
-                    id={`${key}-title`}
-                    className="text-2xl font-semibold mb-2 text-services-card-title"
-                  >
+                  <h2 id={`${key}-title`} className="text-2xl font-semibold mb-2 text-services-card-title">
                     {t(`${key}.title`)}
                   </h2>
                   <p className="text-services-card-description mb-4">
@@ -295,9 +308,7 @@ export default function ServicesSection() {
                     {features.map((item, idx) => (
                       <li key={idx} className="flex items-center gap-2">
                         <span className="w-2 h-2 rounded-full services-bullet flex-shrink-0" />
-                        <span className="text-services-card-description">
-                          {item}
-                        </span>
+                        <span className="text-services-card-description">{item}</span>
                       </li>
                     ))}
                   </ul>
