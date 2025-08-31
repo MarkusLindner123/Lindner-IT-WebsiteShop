@@ -86,7 +86,7 @@ export default function AboutSection() {
   }, [allWords, highlightWordsSet]);
 
   useEffect(() => {
-    const handleResize = () => setSpeedFactor(window.innerWidth < 768 ? 1.13 : 1.22);
+    const handleResize = () => setSpeedFactor(window.innerWidth < 768 ? 1.12 : 1.21);
     handleResize();
     window.addEventListener("resize", handleResize);
 
