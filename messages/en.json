@@ -257,6 +257,11 @@
     "rightRestriction": "Right to restrict processing",
     "rightDataPortability": "Right to data portability",
     "rightObjection": "Right to object to processing"
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "subtitle": "Sorry, the page you are looking for does not exist.",
+    "backHome": "Back to Home"
   }
 
 

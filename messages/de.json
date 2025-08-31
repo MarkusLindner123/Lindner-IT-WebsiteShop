@@ -256,7 +256,11 @@
     "rightRestriction": "Recht auf Einschränkung der Verarbeitung",
     "rightDataPortability": "Recht auf Datenübertragbarkeit",
     "rightObjection": "Recht auf Widerspruch gegen die Verarbeitung"
+  },
+  "notFound": {
+    "title": "Seite nicht gefunden",
+    "subtitle": "Sorry, die Seite die suchst, existiert nicht.",
+    "backHome": "Zurück zur Startseite"
   }
-
 
 }

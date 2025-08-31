@@ -1,5 +1,4 @@
-// app/[locale]/page.tsx
-
+// src/app/[locale]/page.tsx
 import { setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 
@@ -7,7 +6,7 @@ import Hero from "@/components/Hero";
 import AboutSection from "@/components/AboutSection/AboutSection";
 import ServicesSection from "@/components/ServicesSection";
 import ContactSection from "@/components/ContactSection";
-import TestimonialsSection from "@/components/TestimonialsSection"; // neue Komponente
+import TestimonialsSection from "@/components/TestimonialsSection";
 import { Card } from "@/components/Layout/Card";
 
 export default async function HomePage({

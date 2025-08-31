@@ -16,11 +16,15 @@ export async function GET({ params }: { params: Params }) {
     return new NextResponse("Locale not found", { status: 404 });
   }
 
-  // Build sitemap entries
+  // Current date in ISO format
+  const buildDate = new Date().toISOString();
+
+  // Build sitemap entries with lastmod
   const urls = PAGES.map(
     (path) =>
       `<url>
   <loc>${process.env.NEXT_PUBLIC_SITE_URL}/${locale}${path}</loc>
+  <lastmod>${buildDate}</lastmod>
   <changefreq>weekly</changefreq>
   <priority>${path === "/" ? "1.0" : "0.8"}</priority>
 </url>`
