@@ -120,11 +120,16 @@ ul.list-disc li::marker { color: var(--color-accent-two); }
 .floating-tag { will-change: transform; background-color: var(--color-services-tag-bg); color: var(--color-services-tag-text); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.875rem; font-weight: 500; }
 
 /* Header */
+/* Header */
 .header-glass {
+  background-color: var(--header-bg); /* aus :root */
   border-color: var(--header-border);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   transition: transform 0.3s ease, top 0.3s ease;
   will-change: transform, opacity;
 }
+
 
 .nav-icon { color: var(--nav-icon-color); }
 .nav-icon:hover { color: var(--nav-icon-hover); }

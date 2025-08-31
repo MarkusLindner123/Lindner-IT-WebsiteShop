@@ -2,13 +2,13 @@
 import { useState, useRef, useLayoutEffect, useEffect, useCallback } from "react";
 import clsx from "clsx";
 import gsap from "gsap";
-import { Home, User, Briefcase, Mail, Film, Menu, X, type LucideIcon } from "lucide-react";
+import Link from "next/link";
+import { Home, User, Cpu, Mail, Menu, X, type LucideIcon } from "lucide-react";
 
 type NavItem = { name: string; href: string; icon: LucideIcon };
 const navItems: NavItem[] = [
-  { name: "Hero Video", href: "#tja", icon: Film },
   { name: "Home", href: "#home", icon: Home },
-  { name: "Services", href: "#services", icon: Briefcase },
+  { name: "Services", href: "#services", icon: Cpu },
   { name: "About", href: "#about", icon: User },
   { name: "Contact", href: "#contact", icon: Mail },
 ];
@@ -16,10 +16,9 @@ const navItems: NavItem[] = [
 const ICON_WIDTH = 63;
 const ICON_MARGIN = 27;
 const ICON_TOTAL_WIDTH = ICON_WIDTH + ICON_MARGIN;
-const SVG_WIDTH = navItems.length * ICON_TOTAL_WIDTH - ICON_MARGIN + 20;
 const SVG_HEIGHT = 90;
 const JUMPER_SIZE = 72;
-const iconCentersX = navItems.map((_, i) => 10 + i * ICON_TOTAL_WIDTH + JUMPER_SIZE / 2);
+const iconCentersX = navItems.map((_, i) => 120 + i * ICON_TOTAL_WIDTH + JUMPER_SIZE / 2); // 120px Abstand für Logo
 const yCenter = SVG_HEIGHT / 2;
 
 const useMediaQuery = (query: string) => {
@@ -71,7 +70,6 @@ export default function Header() {
 
   // ---- Initial Setup ----
   useLayoutEffect(() => {
-    // Set Jumper direkt auf das erste Icon, kein Jojo
     positionJumpersAt(iconCentersX[0]);
   }, [positionJumpersAt]);
 
@@ -86,7 +84,7 @@ export default function Header() {
   // ---- Header Positioning ----
   useLayoutEffect(() => {
     if (!headerRef.current) return;
-    const topPosition = isMobile ? 35 : 10; // mobile Header ca. 0,5cm tiefer
+    const topPosition = isMobile ? 35 : 10;
     gsap.set(headerRef.current, {
       xPercent: isMobile ? 150 : -50,
       scale: isMobile ? 0.8 : 1,
@@ -99,7 +97,7 @@ export default function Header() {
 
   useEffect(() => {
     if (!headerRef.current || !isMobile) return;
-    const topPosition = 35; // mobile Header ca. 0,5cm tiefer
+    const topPosition = 35;
     gsap.to(headerRef.current, {
       xPercent: isMobileMenuOpen ? -50 : 150,
       scale: 0.8,
@@ -141,13 +139,14 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [activeIndex, animateJumperTo]);
 
+  const SVG_WIDTH = iconCentersX[iconCentersX.length - 1] + ICON_WIDTH / 2 + 10;
+
   return (
     <>
       {/* Hamburger Button */}
       <button
         ref={menuButtonRef}
-        className="fixed top-[2.5%] right-[2.5%] z-[60] md:hidden p-2 rounded-full backdrop-blur-sm"
-        style={{ backgroundColor: "rgba(10, 17, 40, 0.6)" }}
+        className="fixed top-[2.5%] right-[2.5%] z-[60] p-2 rounded-full backdrop-blur-sm md:hidden"
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         aria-label="Toggle menu"
       >
@@ -158,7 +157,6 @@ export default function Header() {
       <div
         ref={headerRef}
         className="fixed z-50 flex justify-center px-2.5 py-1.25 rounded-xl shadow-md border header-glass"
-        style={{ backgroundColor: "rgba(10,17,40,0.75)" }}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -178,6 +176,13 @@ export default function Header() {
             <rect className="jumper" width={JUMPER_SIZE} height={JUMPER_SIZE} rx="26" ry="26" />
             <rect className="jumper" width={JUMPER_SIZE} height={JUMPER_SIZE} rx="26" ry="26" />
           </g>
+
+          {/* Logo */}
+          <Link href="/">
+            <image href="/logo-white.svg" width="90" height="70" x="10" y={yCenter - 35} />
+          </Link>
+
+          {/* Icons */}
           <g id="icons">
             {navItems.map((item, index) => (
               <g
@@ -189,8 +194,7 @@ export default function Header() {
                 <rect width={ICON_WIDTH} height={ICON_WIDTH} fill="transparent" />
                 <item.icon
                   className={clsx(
-                    "transition-transform duration-300 will-change-transform",
-                    "nav-icon",
+                    "transition-transform duration-300 will-change-transform nav-icon",
                     activeIndex === index ? "scale-110" : "scale-100"
                   )}
                   x={ICON_WIDTH / 2 - 16}
