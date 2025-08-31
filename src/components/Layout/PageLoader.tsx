@@ -37,7 +37,7 @@ export default function PageLoader({ children }: { children: React.ReactNode }) 
         <div className="fixed inset-0 flex flex-col items-center justify-center bg-primary-dark z-[9999]">
           {/* Logo zeichnen leicht schneller */}
           <motion.div
-            className="w-[40vw] h-auto mb-12 relative overflow-hidden"
+            className="w-1/2 md:w-[40vw] h-auto mb-12 relative overflow-hidden"
             initial={{ clipPath: "inset(100% 0% 0% 0%)" }}
             animate={{ clipPath: `inset(${clipValue}% 0% 0% 0%)` }}
             transition={{ duration: updateInterval / 1000, ease: "linear" }}
@@ -52,7 +52,7 @@ export default function PageLoader({ children }: { children: React.ReactNode }) 
           </motion.div>
 
           {/* Ladebalken in der gleichen Breite wie das SVG */}
-          <div className="w-[40vw] h-8 bg-white/20 rounded-full overflow-hidden">
+          <div className="w-1/2 md:w-[40vw] h-8 bg-white/20 rounded-full overflow-hidden">
             <div
               className="h-full bg-white transition-all duration-300"
               style={{ width: `${progress}%` }}

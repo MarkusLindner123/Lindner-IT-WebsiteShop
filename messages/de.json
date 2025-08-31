@@ -38,6 +38,7 @@
   "services": {
     "ctaPrimary": "Kontaktieren Sie mich",
     "kicker": "Meine Leistungen",
+    "startAnimation" : "Animation",
     "title": "IT-Lösungen, die Ihr Unternehmen am Laufen halten",
     "webDesign": {
       "title": "Webdesign & Hosting",

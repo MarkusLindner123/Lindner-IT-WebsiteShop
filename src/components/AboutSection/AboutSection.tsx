@@ -5,7 +5,18 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import "./AboutSection.css"; // Brush-Effekt
 
-const brushColors = ["red", "blue", "green", "purple", "orange", "teal", "magenta", "pink", "indigo", "lime"];
+const brushColors = [
+  "yellow",   // accent-one
+  "blue",     // accent-two
+  "green",    // success
+  "red",      // kräftiges Rot statt "dark"
+  "orange",   // Orange
+  "purple",   // kräftiges Violett
+  "teal",     // Türkis/Teal
+  "indigo",   // Indigo
+  "lime"      // frisches Limegrün
+];
+
 
 const aboutImages = [
   "/about-images/about1.jpg",

@@ -53,13 +53,16 @@ export default function ContactSection() {
         {/* Formular */}
         <motion.form
           variants={fadeUp}
-          action="https://formspree.io/f/yourFormId"
+          action="https://formspree.io/f/mqadbwyk"
           method="POST"
           className="space-y-6"
         >
           {/* Name */}
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-contact-label mb-1">
+            <label
+              htmlFor="name"
+              className="block text-sm font-medium text-contact-label mb-1"
+            >
               {t("form.name")}
             </label>
             <input
@@ -73,7 +76,10 @@ export default function ContactSection() {
 
           {/* Email */}
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-contact-label mb-1">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-contact-label mb-1"
+            >
               {t("form.email")}
             </label>
             <input
@@ -87,7 +93,10 @@ export default function ContactSection() {
 
           {/* Telefon */}
           <div>
-            <label htmlFor="phone" className="block text-sm font-medium text-contact-label mb-1">
+            <label
+              htmlFor="phone"
+              className="block text-sm font-medium text-contact-label mb-1"
+            >
               {t("form.phone")}
             </label>
             <input
@@ -100,7 +109,10 @@ export default function ContactSection() {
 
           {/* Grund */}
           <div>
-            <label htmlFor="reason" className="block text-sm font-medium text-contact-label mb-1">
+            <label
+              htmlFor="reason"
+              className="block text-sm font-medium text-contact-label mb-1"
+            >
               {t("form.reason")}
             </label>
             <select
@@ -118,7 +130,10 @@ export default function ContactSection() {
 
           {/* Nachricht */}
           <div>
-            <label htmlFor="message" className="block text-sm font-medium text-contact-label mb-1">
+            <label
+              htmlFor="message"
+              className="block text-sm font-medium text-contact-label mb-1"
+            >
               {t("form.message")}
             </label>
             <textarea

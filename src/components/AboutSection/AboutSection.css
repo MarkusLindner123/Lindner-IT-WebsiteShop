@@ -26,7 +26,7 @@
   backface-visibility: hidden;
 }
 
-/* --- Pinsel-Effekt (original) --- */
+/* --- Pinsel-Effekt --- */
 .brush-effect {
   background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3);
   background-size: 100% 100%;
@@ -36,34 +36,33 @@
   filter: brightness(1.1);
 }
 
-/* Pinsel-Farben */
-.brush-effect.brush-red {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=E573A0);
+/* 🎨 Pinsel-Farben (kräftig, keine Grautöne/Weiß) */
+
+/* Pinsel-Farben – angepasst an globals.css (ohne Pink) */
+.brush-effect.brush-yellow {
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=FACC15); /* accent-one */
 }
 .brush-effect.brush-blue {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=4AB8E6);
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=60A5FA); /* accent-two */
 }
 .brush-effect.brush-green {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=4ADE80);
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=10B981); /* success */
 }
 .brush-effect.brush-purple {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=B266F5);
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=8B5CF6); /* kräftiges Violett */
 }
 .brush-effect.brush-orange {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=E69B5C);
-}
-.brush-effect.brush-teal {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=4DB8B8);
-}
-.brush-effect.brush-magenta {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=E666A3);
-}
-.brush-effect.brush-pink {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=E68AB2);
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=F97316); /* Orange */
 }
 .brush-effect.brush-indigo {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=7A66CC);
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=6366F1); /* Indigo */
 }
 .brush-effect.brush-lime {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=B2E64D);
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=84CC16); /* Limegrün */
+}
+.brush-effect.brush-teal {
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=14B8A6); /* Türkis/Teal */
+}
+.brush-effect.brush-red {
+  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=EF4444); /* Rot als Ersatz für Pink */
 }
