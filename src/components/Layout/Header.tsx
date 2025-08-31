@@ -2,7 +2,7 @@
 import { useState, useRef, useLayoutEffect, useEffect, useCallback } from "react";
 import clsx from "clsx";
 import gsap from "gsap";
-import Link from "next/link";
+//import Link from "next/link";
 import { Home, User, Cpu, Mail, Menu, X, type LucideIcon } from "lucide-react";
 
 type NavItem = { name: string; href: string; icon: LucideIcon };
@@ -18,7 +18,8 @@ const ICON_MARGIN = 27;
 const ICON_TOTAL_WIDTH = ICON_WIDTH + ICON_MARGIN;
 const SVG_HEIGHT = 90;
 const JUMPER_SIZE = 72;
-const iconCentersX = navItems.map((_, i) => 120 + i * ICON_TOTAL_WIDTH + JUMPER_SIZE / 2); // 120px Abstand für Logo
+const iconCentersX = navItems.map((_, i) => 120 + i * ICON_TOTAL_WIDTH + JUMPER_SIZE / 2); // nav icons only
+const logoX = 120 - ICON_TOTAL_WIDTH; // position logo left of first nav icon
 const yCenter = SVG_HEIGHT / 2;
 
 const useMediaQuery = (query: string) => {
@@ -144,14 +145,14 @@ export default function Header() {
   return (
     <>
       {/* Hamburger Button */}
-      <button
-        ref={menuButtonRef}
-        className="fixed top-[2.5%] right-[2.5%] z-[60] p-2 rounded-full backdrop-blur-sm md:hidden"
-        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        aria-label="Toggle menu"
-      >
-        {isMobileMenuOpen ? <X className="text-white h-8 w-8" /> : <Menu className="text-white h-8 w-8" />}
-      </button>
+<button
+  ref={menuButtonRef}
+  className="fixed top-[2.5%] right-[2.5%] z-[60] p-2 w-14 h-14 rounded-full bg-[rgba(10,17,40,0.6)] flex items-center justify-center shadow-lg backdrop-blur-sm md:hidden"
+  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+  aria-label="Toggle menu"
+>
+  {isMobileMenuOpen ? <X className="text-white h-8 w-8" /> : <Menu className="text-white h-8 w-8" />}
+</button>
 
       {/* Header */}
       <div
@@ -172,15 +173,27 @@ export default function Header() {
               <feBlend in="SourceGraphic" in2="goo" operator="atop" />
             </filter>
           </defs>
+
           <g filter="url(#gooey-filter)">
             <rect className="jumper" width={JUMPER_SIZE} height={JUMPER_SIZE} rx="26" ry="26" />
             <rect className="jumper" width={JUMPER_SIZE} height={JUMPER_SIZE} rx="26" ry="26" />
           </g>
 
           {/* Logo */}
-          <Link href="/">
-            <image href="/logo-white.png" width="55" height="55" y={yCenter-25} />
-          </Link>
+          <g
+            className="cursor-pointer"
+            onClick={() => (window.location.href = "/")}
+            transform={`translate(${logoX}, ${yCenter - ICON_WIDTH / 2})`}
+          >
+            <rect width={ICON_WIDTH} height={ICON_WIDTH} fill="transparent" />
+            <image
+            href="/logo-white.svg"
+            width={38}   // <-- change this to your desired logo width
+            height={40}  // <-- change this to your desired logo height
+            x={(ICON_WIDTH - 32) / 2}  // <-- center inside the box
+            y={(ICON_WIDTH - 32) / 2}  // <-- center inside the box
+          />
+          </g>
 
           {/* Icons */}
           <g id="icons">
