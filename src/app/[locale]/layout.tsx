@@ -6,9 +6,9 @@ import { setRequestLocale, getMessages } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import "@/app/globals.css";
 import Header from "@/components/Layout/Header";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
-import Phone from "@/components/PhoneButton";
-import PageLoader from "@/components/PageLoader"; // <-- neu
+import LanguageSwitcher from "@/components/Layout/LanguageSwitcher";
+import Phone from "@/components/Layout/PhoneButton";
+import PageLoader from "@/components/Layout/PageLoader"; // <-- neu
 import Footer from "@/components/Layout/Footer";
 
 export function generateStaticParams() {
