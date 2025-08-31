@@ -3,12 +3,12 @@
 import { setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 
-//import HeroVideo from "@/components/HeroVideo";
 import Hero from "@/components/Hero";
 import AboutSection from "@/components/AboutSection/AboutSection";
 import ServicesSection from "@/components/ServicesSection";
 import ContactSection from "@/components/ContactSection";
-import TestimonialsSection from "@/components/TestimonialsSection"; // <-- neue Komponente
+import TestimonialsSection from "@/components/TestimonialsSection"; // neue Komponente
+import { Card } from "@/components/Card";
 
 export default async function HomePage({
   params,
@@ -20,37 +20,30 @@ export default async function HomePage({
 
   return (
     <main className="relative p-6 space-y-6 md:p-12 md:space-y-12">
-      <div className="space-y-6 md:space-y-12">
-        {/*
-        <section className="bg-heroVideo-bg rounded-2xl overflow-hidden shadow-xl">
-          <HeroVideo />
-        </section>
-        */}
-        <section id="home" className="bg-hero-bg rounded-2xl overflow-hidden shadow-xl">
-          <Hero />
-        </section>
-      </div>
+      {/* Hero Section */}
+      <Card id="home" className="bg-card-hero">
+        <Hero />
+      </Card>
 
-  
-
-      <section id="services" className="bg-services-section-bg rounded-2xl overflow-hidden shadow-xl">
+      {/* Services Section */}
+      <Card id="services" className="bg-card-services">
         <ServicesSection />
-      </section>
+      </Card>
 
-      <section id="about" className="bg-about-bg rounded-2xl overflow-hidden shadow-xl">
+      {/* About Section */}
+      <Card id="about" className="bg-card-about">
         <AboutSection />
-      </section>
+      </Card>
 
- 
-     <section id="contact" className="bg-contact-bg rounded-2xl overflow-hidden shadow-xl">
+      {/* Contact Section */}
+      <Card id="contact" className="bg-card-contact">
         <ContactSection />
-      </section>
+      </Card>
 
-      {/* Testimonials Section ganz unten */}
-      <section id="testimonials" className="bg-location-bg rounded-2xl overflow-hidden shadow-xl">
+      {/* Testimonials Section */}
+      <Card id="testimonials" className="bg-card-testimonials">
         <TestimonialsSection />
-      </section>
-
+      </Card>
     </main>
   );
 }

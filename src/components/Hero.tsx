@@ -40,7 +40,6 @@ export default function Hero() {
     show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
   };
 
-  // Neue Gallery-Bilder aus public/hero-images
   const galleryImages = [
     "/hero-images/hero-img.jpg",
     "/hero-images/hero-img1.jpg",
@@ -64,115 +63,114 @@ export default function Hero() {
   };
 
   return (
-    
-    <section aria-label="Hero" className="relative overflow-hidden">
-    
-      <div className="max-w-7xl mx-auto px-4 lg:px-8 py-12 md:py-16 lg:py-20 relative z-10 p-8 rounded-2xl md:p-12">
-        <motion.div variants={container} initial="hidden" animate="show" className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          {/* Text Content */}
-          <motion.div variants={fadeUp} className="lg:col-span-7 xl:col-span-6 space-y-6">
-            <div className="inline-flex items-center px-4 py-1 rounded-full text-sm font-medium text-black bg-black/10">
-              {t("kicker")}
+    <motion.div
+      variants={container}
+      initial="hidden"
+      animate="show"
+      className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
+    >
+      {/* Text Content */}
+      <motion.div variants={fadeUp} className="lg:col-span-7 xl:col-span-6 space-y-6">
+        <div className="inline-flex items-center px-4 py-1 rounded-full text-sm font-medium text-black bg-black/10">
+          {t("kicker")}
+        </div>
+
+        <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold leading-tight tracking-tight text-black font-headline">
+          <span className="block">{t("titleLine1")}</span>
+          <span className="block underline decoration-4 decoration-accent">{t("titleLine2")}</span>
+          <span className="block">{t("titleLine3")}</span>
+        </h1>
+
+        <p className="text-xl md:text-2xl text-black max-w-2xl">{t("subtitle")}</p>
+
+        {/* Desktop Buttons */}
+        <div className="hidden lg:flex flex-col sm:flex-row sm:items-center gap-4 mt-6">
+          <AnimatedButton>{t("ctaPrimary")}</AnimatedButton>
+          <button
+            onClick={scrollToServices}
+            className="inline-flex items-center justify-center px-6 py-4 border border-black/30 rounded-full text-black hover:bg-black/10 hover:-translate-y-1 transition-transform duration-300"
+          >
+            {t("ctaSecondary")}
+          </button>
+        </div>
+      </motion.div>
+
+      {/* Gallery Desktop & Tablet */}
+      <motion.div variants={fadeUp} className="hidden md:flex lg:col-span-5 xl:col-span-6 relative justify-center lg:justify-end">
+        <div className="relative mx-auto w-full">
+          <div className="relative w-full h-[60vh] sm:h-auto sm:aspect-[4/3] overflow-hidden rounded-2xl bg-black px-1">
+            <div className="grid grid-cols-3 gap-2 h-full">
+              {allColumns.map((columnImages, colIndex) => {
+                const direction = colIndex === 1 ? ["-100%", "0%"] : ["0%", "-100%"];
+                return (
+                  <motion.div
+                    key={colIndex}
+                    animate={{ y: direction }}
+                    transition={{ repeat: Infinity, duration: animationSpeed, ease: "linear" }}
+                    className="flex flex-col gap-2"
+                  >
+                    {[...columnImages, ...columnImages].map((src, i) => (
+                      <div key={i} className="flex-shrink-0" style={{ height: "calc(100% / 2)" }}>
+                        <Image
+                          src={src}
+                          alt={`Hero image ${i + 1} showcasing our services`}
+                          width={300}
+                          height={200}
+                          className="w-full h-full object-cover rounded-lg aspect-[3/2]"
+                          loading="lazy"
+                        />
+                      </div>
+                    ))}
+                  </motion.div>
+                );
+              })}
             </div>
+          </div>
+        </div>
+      </motion.div>
 
-            <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold leading-tight tracking-tight text-black font-headline">
-              <span className="block">{t("titleLine1")}</span>
-              <span className="block underline decoration-4 decoration-accent">{t("titleLine2")}</span>
-              <span className="block">{t("titleLine3")}</span>
-            </h1>
+      {/* Mobile Gallery */}
+      <motion.div variants={fadeUp} className="flex md:hidden mt-8">
+        <div className="relative w-full h-[60vh] overflow-hidden rounded-2xl bg-black px-1">
+          <div className="grid grid-cols-3 gap-2 h-full">
+            {allColumns.map((columnImages, colIndex) => {
+              const direction = colIndex === 1 ? ["-100%", "0%"] : ["0%", "-100%"];
+              return (
+                <motion.div
+                  key={colIndex}
+                  animate={{ y: direction }}
+                  transition={{ repeat: Infinity, duration: animationSpeed, ease: "linear" }}
+                  className="flex flex-col gap-2"
+                >
+                  {[...columnImages, ...columnImages].map((src, i) => (
+                    <div key={i} className="flex-shrink-0" style={{ height: "calc(100% / 2)" }}>
+                      <Image
+                        src={src}
+                        alt={`Hero image ${i + 1} showcasing our services`}
+                        width={300}
+                        height={200}
+                        className="w-full h-full object-cover rounded-lg aspect-[3/2]"
+                        loading="lazy"
+                      />
+                    </div>
+                  ))}
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </motion.div>
 
-            <p className="text-xl md:text-2xl text-black max-w-2xl">{t("subtitle")}</p>
-
-            {/* Desktop Buttons */}
-            <div className="hidden lg:flex flex-col sm:flex-row sm:items-center gap-4 mt-6">
-              <AnimatedButton>{t("ctaPrimary")}</AnimatedButton>
-              <button
-                onClick={scrollToServices}
-                className="inline-flex items-center justify-center px-6 py-4 border border-black/30 rounded-full text-black hover:bg-black/10 hover:-translate-y-1 transition-transform duration-300"
-              >
-                {t("ctaSecondary")}
-              </button>
-            </div>
-          </motion.div>
-
-          {/* Gallery Desktop & Tablet */}
-          <motion.div variants={fadeUp} className="hidden md:flex lg:col-span-5 xl:col-span-6 relative justify-center lg:justify-end">
-            <div className="relative mx-auto w-full">
-              <div className="relative w-full h-[60vh] sm:h-auto sm:aspect-[4/3] overflow-hidden rounded-2xl bg-black px-1">
-                <div className="grid grid-cols-3 gap-2 h-full">
-                  {allColumns.map((columnImages, colIndex) => {
-                    const direction = colIndex === 1 ? ["-100%", "0%"] : ["0%", "-100%"];
-                    return (
-                      <motion.div
-                        key={colIndex}
-                        animate={{ y: direction }}
-                        transition={{ repeat: Infinity, duration: animationSpeed, ease: "linear" }}
-                        className="flex flex-col gap-2"
-                      >
-                        {[...columnImages, ...columnImages].map((src, i) => (
-                          <div key={i} className="flex-shrink-0" style={{ height: "calc(100% / 2)" }}>
-                            <Image
-                              src={src}
-                              alt={`Hero image ${i + 1} showcasing our services`} 
-                              width={300}
-                              height={200}
-                              className="w-full h-full object-cover rounded-lg aspect-[3/2]"
-                              loading="lazy"
-                            />
-                          </div>
-                        ))}
-                      </motion.div>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Mobile Gallery */}
-          <motion.div variants={fadeUp} className="flex md:hidden mt-8">
-            <div className="relative w-full h-[60vh] overflow-hidden rounded-2xl bg-black px-1">
-              <div className="grid grid-cols-3 gap-2 h-full">
-                {allColumns.map((columnImages, colIndex) => {
-                  const direction = colIndex === 1 ? ["-100%", "0%"] : ["0%", "-100%"];
-                  return (
-                    <motion.div
-                      key={colIndex}
-                      animate={{ y: direction }}
-                      transition={{ repeat: Infinity, duration: animationSpeed, ease: "linear" }}
-                      className="flex flex-col gap-2"
-                    >
-                      {[...columnImages, ...columnImages].map((src, i) => (
-                        <div key={i} className="flex-shrink-0" style={{ height: "calc(100% / 2)" }}>
-                          <Image
-                            src={src}
-                            alt={`Hero image ${i + 1} showcasing our services`}
-                            width={300}
-                            height={200}
-                            className="w-full h-full object-cover rounded-lg aspect-[3/2]"
-                            loading="lazy"
-                          />
-                        </div>
-                      ))}
-                    </motion.div>
-                  );
-                })}
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Mobile Buttons AFTER Gallery */}
-          <motion.div variants={fadeUp} className="w-full lg:hidden flex flex-col sm:flex-row sm:items-center gap-4 mt-6">
-            <AnimatedButton>{t("ctaPrimary")}</AnimatedButton>
-            <button
-              onClick={scrollToServices}
-              className="inline-flex items-center justify-center px-6 py-4 border border-black/30 rounded-full text-black hover:bg-black/10 hover:-translate-y-1 transition-transform duration-300"
-            >
-              {t("ctaSecondary")}
-            </button>
-          </motion.div>
-        </motion.div>
-      </div>
-    </section>
+      {/* Mobile Buttons AFTER Gallery */}
+      <motion.div variants={fadeUp} className="w-full lg:hidden flex flex-col sm:flex-row sm:items-center gap-4 mt-6">
+        <AnimatedButton>{t("ctaPrimary")}</AnimatedButton>
+        <button
+          onClick={scrollToServices}
+          className="inline-flex items-center justify-center px-6 py-4 border border-black/30 rounded-full text-black hover:bg-black/10 hover:-translate-y-1 transition-transform duration-300"
+        >
+          {t("ctaSecondary")}
+        </button>
+      </motion.div>
+    </motion.div>
   );
 }

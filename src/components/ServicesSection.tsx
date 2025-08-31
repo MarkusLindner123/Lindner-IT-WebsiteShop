@@ -233,10 +233,13 @@ export default function ServicesSection() {
           animate="show"
           className="relative"
         >
+          {/* Floating tags */}
           <div
             ref={animationContainerRef}
             className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 rounded-2xl"
           />
+
+          {/* Nur Service Cards */}
           <motion.div variants={fadeUp} className="relative z-20">
             <div className="inline-flex items-center px-4 py-1 rounded-full text-sm font-medium text-black bg-black/10 mb-4">
               {t("kicker")}
