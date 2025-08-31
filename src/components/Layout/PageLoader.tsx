@@ -1,12 +1,16 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, Variants, Transition } from "framer-motion";
+import { motion } from "framer-motion";
+import Image from "next/image";
 import "@/app/globals.css";
 
 export default function PageLoader({ children }: { children: React.ReactNode }) {
   const [progress, setProgress] = useState(0);
   const [loading, setLoading] = useState(true);
+
+  // Dauer der Simulation
+  const updateInterval = 200; // ms
 
   useEffect(() => {
     const interval: number = window.setInterval(() => {
@@ -16,54 +20,47 @@ export default function PageLoader({ children }: { children: React.ReactNode }) 
           setLoading(false);
           return 100;
         }
-        return prev + Math.floor(Math.random() * 10);
+        return prev + Math.floor(Math.random() * 5);
       });
-    }, 200);
+    }, updateInterval);
 
     return () => clearInterval(interval);
   }, []);
 
-  // Variants für die Rakete (draw/un-draw)
-  const drawAnimation: Variants = {
-    hidden: { pathLength: 0, opacity: 0 },
-    visible: {
-      pathLength: 1,
-      opacity: 1,
-      transition: { duration: 3, ease: "easeInOut" } as Transition,
-    },
-  };
+  // Logo-Fortschritt leicht schneller als Ladebalken
+  const logoProgress = Math.min(progress * 1.2, 100); // 20% schneller
+  const clipValue = 100 - logoProgress; // invertiert für clipPath
 
   return (
     <>
       {loading ? (
         <div className="fixed inset-0 flex flex-col items-center justify-center bg-primary-dark z-[9999]">
-          {/* 🚀 Raketen-Icon */}
-          <motion.svg
-            className="w-32 h-32 mb-6"
-            viewBox="0 0 64 64"
-            fill="none"
-            stroke="white"
-            strokeWidth={2}
-            strokeLinecap="round"
-            strokeLinejoin="round"
+          {/* Logo zeichnen leicht schneller */}
+          <motion.div
+            className="w-[40vw] h-auto mb-12 relative overflow-hidden"
+            initial={{ clipPath: "inset(100% 0% 0% 0%)" }}
+            animate={{ clipPath: `inset(${clipValue}% 0% 0% 0%)` }}
+            transition={{ duration: updateInterval / 1000, ease: "linear" }}
           >
-            {/* Raketenform */}
-            <motion.path
-              d="M32 2 L42 22 L32 42 L22 22 Z M32 42 L32 62"
-              variants={drawAnimation}
-              initial="hidden"
-              animate="visible"
+            <Image
+              src="/logo-white.svg"
+              alt="Logo"
+              width={500}
+              height={200}
+              priority
             />
-          </motion.svg>
+          </motion.div>
 
-          {/* Ladebalken */}
-          <div className="w-64 h-2 bg-white/20 rounded-full overflow-hidden">
+          {/* Ladebalken komplett weiß */}
+          <div className="w-2/3 h-8 bg-white/20 rounded-full overflow-hidden">
             <div
-              className="h-full bg-accent-one transition-all duration-300"
+              className="h-full bg-white transition-all duration-300"
               style={{ width: `${progress}%` }}
             />
           </div>
-          <div className="mt-2 text-white font-medium">{Math.min(progress, 100)}%</div>
+          <div className="mt-4 text-white font-medium text-2xl">
+            {Math.min(progress, 100)}%
+          </div>
         </div>
       ) : (
         <>{children}</>
