@@ -149,7 +149,7 @@ export default function AboutSection() {
         {allWords.map((paragraphWords, paraIdx) => (
           <div
             key={paraIdx}
-            ref={(el) => (itemRefs.current[paraIdx] = el)}
+            ref={el => { itemRefs.current[paraIdx] = el; }}
             className="flex flex-col md:flex-row md:space-x-12 space-y-6 md:space-y-0 items-start"
           >
             {/* Bild */}

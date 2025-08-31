@@ -24,7 +24,6 @@ export default function TestimonialsSection() {
   const isInView = useInView(sectionRef, { once: false, margin: "-100px" });
   const [scrollIndex, setScrollIndex] = useState(0);
 
-  // Automatisches Scrollen nur, wenn im Viewport
   useEffect(() => {
     if (!isInView) return;
     const interval = setInterval(() => {
@@ -76,13 +75,14 @@ export default function TestimonialsSection() {
   };
 
   return (
-    <section ref={sectionRef} aria-label="Testimonials Section" className="relative bg-services-section-bg py-16">
+    <section ref={sectionRef} aria-label="Testimonials Section" className="relative py-16">
+      {/* Breitere Fläche: kein max-w */}
       <motion.div
         variants={containerVariants}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true }}
-        className="max-w-7xl mx-auto px-4 md:px-8"
+        className="w-full"
       >
         {/* Kicker */}
         <motion.div variants={fadeUp} className="mb-6">
@@ -98,7 +98,10 @@ export default function TestimonialsSection() {
         <div className="relative">
           <div ref={containerRef} className="flex overflow-x-auto scroll-smooth snap-x snap-mandatory gap-6 no-scrollbar">
             {reviews.map((review, idx) => (
-              <div key={idx} className="flex-none w-full md:w-[calc(50%-12px)] snap-center bg-white rounded-2xl p-6 shadow-lg">
+              <div
+                key={idx}
+                className="flex-none w-full md:w-[calc(50%-12px)] snap-center rounded-2xl shadow-xl p-6 md:p-8 bg-white transition-transform duration-500 hover:-translate-y-1"
+              >
                 <p className="text-neutral mb-4">&quot;{review.text}&quot;</p>
                 <div className="flex items-center justify-between text-sm text-gray-500">
                   <span>{review.name}</span>
