@@ -5,7 +5,11 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-export default function NotFoundPage() {
+interface NotFoundPageProps {
+  locale: string;
+}
+
+export default function NotFoundPage({ locale }: NotFoundPageProps) {
   const t = useTranslations("notFound");
 
   return (
@@ -23,7 +27,7 @@ export default function NotFoundPage() {
       <p className="text-lg text-gray-600">{t("subtitle")}</p>
 
       <Link
-        href="/"
+        href={`/${locale}`} // ensures the "Back Home" link respects the current locale
         className="inline-block px-6 py-3 text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition"
       >
         {t("backHome")}

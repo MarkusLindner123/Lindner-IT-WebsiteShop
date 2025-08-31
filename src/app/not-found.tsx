@@ -8,7 +8,7 @@ export default async function RootNotFound() {
 
   return (
     <LocaleLayout params={Promise.resolve({ locale })}>
-      <NotFoundPage />
+      <NotFoundPage locale={locale} />
     </LocaleLayout>
   );
 }
