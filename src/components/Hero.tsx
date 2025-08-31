@@ -64,7 +64,9 @@ export default function Hero() {
   };
 
   return (
+    
     <section aria-label="Hero" className="relative overflow-hidden">
+    
       <div className="max-w-7xl mx-auto px-4 lg:px-8 py-12 md:py-16 lg:py-20 relative z-10 p-8 rounded-2xl md:p-12">
         <motion.div variants={container} initial="hidden" animate="show" className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           {/* Text Content */}

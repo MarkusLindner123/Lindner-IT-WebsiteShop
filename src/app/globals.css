@@ -31,7 +31,7 @@
   --nav-icon-hover: #e5f0ff;
   --jumper-1: var(--color-accent-one);
   --jumper-2: var(--color-accent-two);
-  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   --font-headline: "Plus Jakarta Sans", sans-serif;
   --gradient-angle: 0deg; /* für AnimatedButton */
 }

@@ -179,7 +179,7 @@ export default function Header() {
 
           {/* Logo */}
           <Link href="/">
-            <image href="/logo-white.svg" width="90" height="70" x="10" y={yCenter - 35} />
+            <image href="/logo-white.png" width="55" height="55" y={yCenter-25} />
           </Link>
 
           {/* Icons */}
