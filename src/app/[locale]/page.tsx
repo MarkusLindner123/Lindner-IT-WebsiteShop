@@ -8,7 +8,7 @@ import AboutSection from "@/components/AboutSection/AboutSection";
 import ServicesSection from "@/components/ServicesSection";
 import ContactSection from "@/components/ContactSection";
 import TestimonialsSection from "@/components/TestimonialsSection"; // neue Komponente
-import { Card } from "@/components/Card";
+import { Card } from "@/components/Layout/Card";
 
 export default async function HomePage({
   params,
