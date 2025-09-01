@@ -1,37 +1,52 @@
+// src/components/Header.tsx
+
 "use client";
-import { useState, useRef, useLayoutEffect, useEffect, useCallback } from "react";
+
+import { useState, useRef, useLayoutEffect, useEffect, useMemo } from "react";
 import gsap from "gsap";
 import { Home, User, Cpu, Mail, Menu, X, type LucideIcon } from "lucide-react";
+import clsx from "clsx"; // Hilfsbibliothek für Klassen, `npm install clsx`
 
+// --- Typen und Konfiguration ---
 type NavItem = { name: string; href: string; icon: LucideIcon };
-const navItems: NavItem[] = [
+
+const NAV_ITEMS: NavItem[] = [
   { name: "Home", href: "#home", icon: Home },
   { name: "Services", href: "#services", icon: Cpu },
   { name: "About", href: "#about", icon: User },
   { name: "Contact", href: "#contact", icon: Mail },
 ];
 
-// Feste Werte für Desktop
-const DESKTOP_ICON_WIDTH = 63;
-const DESKTOP_ICON_MARGIN = 27;
-const DESKTOP_JUMPER_SIZE = 72;
-const SVG_HEIGHT = 90;
-const yCenter = SVG_HEIGHT / 2;
-const DESKTOP_HEADER_PADDING = 30;
+const HEADER_CONFIG = {
+  desktop: {
+    iconWidth: 63,
+    iconMargin: 27,
+    jumperSize: 72,
+    svgIconSize: 32,
+    iconOffsetX: 120,
+    headerPadding: 30,
+    topPosition: 10,
+  },
+  mobile: {
+    iconWidth: 54,
+    iconMargin: 18,
+    jumperSize: 64,
+    svgIconSize: 28,
+    iconOffsetX: 90,
+    headerPadding: 15,
+    topPosition: 20, // <<< KORREKTUR: Position auf Mobile höher gesetzt
+  },
+  svgHeight: 90,
+};
 
-// Feste Werte für Mobile
-const MOBILE_ICON_WIDTH = 54;
-const MOBILE_ICON_MARGIN = 18;
-const MOBILE_JUMPER_SIZE = 64;
-const MOBILE_SVG_ICON_SIZE = 28;
-const MOBILE_ICON_OFFSET_X = 90;
-const MOBILE_HEADER_PADDING = 15;
-
-const useMediaQuery = (query: string) => {
+// --- Custom Hook für Media Queries ---
+const useMediaQuery = (query: string): boolean => {
   const [matches, setMatches] = useState(false);
   useEffect(() => {
     const media = window.matchMedia(query);
-    if (media.matches !== matches) setMatches(media.matches);
+    if (media.matches !== matches) {
+      setMatches(media.matches);
+    }
     const listener = () => setMatches(media.matches);
     window.addEventListener("resize", listener);
     return () => window.removeEventListener("resize", listener);
@@ -39,184 +54,205 @@ const useMediaQuery = (query: string) => {
   return matches;
 };
 
-// Debounce-Funktion zur Verzögerung von Aktionen
-const debounce = (func: (...args: unknown[]) => void, delay: number) => {
-  let timeout: NodeJS.Timeout;
-  return (...args: unknown[]) => {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => func(...args), delay);
-  };
-};
-
+// --- Die Header Komponente ---
 export default function Header() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const menuButtonRef = useRef<HTMLButtonElement>(null);
-  const headerRef = useRef<HTMLDivElement>(null);
   const isMobile = useMediaQuery("(max-width: 768px)");
 
-  // Dynamische Werte basierend auf isMobile
-  const iconWidth = isMobile ? MOBILE_ICON_WIDTH : DESKTOP_ICON_WIDTH;
-  const iconMargin = isMobile ? MOBILE_ICON_MARGIN : DESKTOP_ICON_MARGIN;
-  const jumperSize = isMobile ? MOBILE_JUMPER_SIZE : DESKTOP_JUMPER_SIZE;
-  const iconOffsetX = isMobile ? MOBILE_ICON_OFFSET_X : 120;
-  const headerPadding = isMobile ? MOBILE_HEADER_PADDING : DESKTOP_HEADER_PADDING;
-  const iconCentersX = navItems.map((_, i) => iconOffsetX + i * (iconWidth + iconMargin) + jumperSize / 2);
-  const logoX = iconOffsetX - iconWidth - iconMargin;
+  const headerRef = useRef<HTMLDivElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const jumper1Ref = useRef<SVGRectElement>(null);
+  const jumper2Ref = useRef<SVGRectElement>(null);
+  
+  // <<< NEU: Ref und Timeout zur Steuerung der Klick-vs-Scroll-Logik
+  const isClickScrollingRef = useRef(false);
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const getSvgWidth = useCallback(() => {
-    const lastIconPosition = iconCentersX[iconCentersX.length - 1];
-    return lastIconPosition + iconWidth / 2 + headerPadding;
-  }, [iconWidth, iconCentersX, headerPadding]);
+  const config = useMemo(() => (isMobile ? HEADER_CONFIG.mobile : HEADER_CONFIG.desktop), [isMobile]);
+  const yCenter = HEADER_CONFIG.svgHeight / 2;
 
-  // ---- Jumper Animation ----
-  const animateJumperTo = useCallback((targetIndex: number, duration = 0.7) => {
-    const toX = iconCentersX[targetIndex] - jumperSize / 2;
-    // Der erste Jumper (im Vordergrund) zieht sanft nach
-    gsap.to(".jumper:nth-child(1)", {
-      x: toX,
-      y: yCenter - jumperSize / 2,
-      duration: duration,
-      ease: "power3.out",
+  const iconCentersX = useMemo(() =>
+    NAV_ITEMS.map((_, i) => config.iconOffsetX + i * (config.iconWidth + config.iconMargin) + config.jumperSize / 2),
+  [config]);
+  
+  const svgWidth = useMemo(() =>
+    iconCentersX[iconCentersX.length - 1] + config.iconWidth / 2 + config.headerPadding,
+  [iconCentersX, config]);
+
+  const logoX = config.iconOffsetX - config.iconWidth - config.iconMargin;
+
+  // --- Effekt 1: Jumper Animation (Reagiert auf activeIndex) ---
+  useEffect(() => {
+    if (!jumper1Ref.current || !jumper2Ref.current) return;
+
+    const targetX = iconCentersX[activeIndex] - config.jumperSize / 2;
+    const targetY = yCenter - config.jumperSize / 2;
+
+    gsap.to(jumper1Ref.current, {
+      x: targetX,
+      y: targetY,
+      duration: 0.8,
+      ease: "power4.out",
       overwrite: "auto",
     });
-    // Der zweite Jumper (im Hintergrund) springt sofort
-    gsap.set(".jumper:nth-child(2)", { x: toX, y: yCenter - jumperSize / 2 });
-  }, [iconCentersX, jumperSize]);
 
-  const positionJumpersAt = useCallback((x: number) => {
-    gsap.set(".jumper:nth-child(1)", { x: x - jumperSize / 2, y: yCenter - jumperSize / 2 });
-    gsap.set(".jumper:nth-child(2)", { x: x - jumperSize / 2, y: yCenter - jumperSize / 2 });
-  }, [jumperSize]);
+    gsap.to(jumper2Ref.current, {
+      x: targetX,
+      y: targetY,
+      duration: 0.4,
+      ease: "expo.out",
+      delay: 0.05,
+    });
+  }, [activeIndex, config, iconCentersX, yCenter]);
 
-  const handleIconClick = (targetIndex: number) => {
-    const el = document.querySelector(navItems[targetIndex].href);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-      // Direkt den Jumper zur geklickten Position animieren
-      animateJumperTo(targetIndex);
+
+  // --- Effekt 2: Scroll-Beobachtung mit IntersectionObserver ---
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // <<< KORREKTUR: Ignoriere Observer-Events während des Klick-Scrolls
+        if (isClickScrollingRef.current) return;
+
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute("id");
+            const newIndex = NAV_ITEMS.findIndex((item) => item.href === `#${id}`);
+            if (newIndex !== -1) {
+              setActiveIndex(newIndex);
+            }
+          }
+        });
+      },
+      { rootMargin: "-50% 0px -50% 0px", threshold: 0 }
+    );
+
+    NAV_ITEMS.forEach((item) => {
+      const element = document.querySelector(item.href);
+      if (element) observer.observe(element);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+
+  // --- Effekt 3: Positionierung und Sichtbarkeit des Headers ---
+  useLayoutEffect(() => {
+    if (!headerRef.current) return;
+    const targetY = isMobile && !isMobileMenuOpen ? -150 : config.topPosition;
+    gsap.to(headerRef.current, {
+      width: svgWidth,
+      y: targetY,
+      opacity: isMobile && !isMobileMenuOpen ? 0 : 1,
+      duration: 0.5,
+      ease: "power3.out",
+    });
+    gsap.set(headerRef.current, {
+      left: "50%",
+      xPercent: -50,
+      pointerEvents: isMobile && !isMobileMenuOpen ? "none" : "auto",
+    });
+  }, [isMobile, isMobileMenuOpen, svgWidth, config.topPosition]);
+
+
+  // --- Effekt 4: Rotation des Hamburger-Icons ---
+  useEffect(() => {
+    if (!menuButtonRef.current) return;
+    gsap.to(menuButtonRef.current.querySelector("svg"), {
+      rotate: isMobileMenuOpen ? 180 : 0,
+      duration: 0.4,
+      ease: "back.inOut(1.7)",
+    });
+  }, [isMobileMenuOpen]);
+
+
+  // --- Handler-Funktion für Klicks ---
+  const handleIconClick = (index: number) => {
+    const targetElement = document.querySelector(NAV_ITEMS[index].href);
+    if (targetElement) {
+      // <<< KORREKTUR: Scroll-Sperre aktivieren
+      isClickScrollingRef.current = true;
+      setActiveIndex(index);
+
+      targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
+
+      // <<< KORREKTUR: Menü bleibt auf Mobile offen
+      // if (isMobile) {
+      //   setIsMobileMenuOpen(false); // DIESE ZEILE WURDE ENTFERNT
+      // }
+
+      // Hebe die Sperre nach 1 Sekunde wieder auf
+      if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+      scrollTimeoutRef.current = setTimeout(() => {
+        isClickScrollingRef.current = false;
+      }, 1000); // 1000ms ist eine sichere Dauer für die meisten "smooth" Scrolls
     }
   };
 
-  // ---- Initial Setup ----
-  useLayoutEffect(() => {
-    positionJumpersAt(iconCentersX[activeIndex]);
-  }, [positionJumpersAt, iconCentersX, activeIndex]);
-
-  // ---- Mobile Menu Rotation ----
-  useEffect(() => {
-    if (!menuButtonRef.current) return;
-    const icon = menuButtonRef.current.querySelector("svg");
-    if (!icon) return;
-    gsap.to(icon, { rotate: isMobileMenuOpen ? 90 : 0, duration: 0.4, ease: "power2.inOut" });
-  }, [isMobileMenuOpen]);
-
-  // ---- Header Positioning & Animation ----
-  useLayoutEffect(() => {
-    if (!headerRef.current) return;
-    const topPosition = isMobile ? 42 : 10;
-    gsap.set(headerRef.current, {
-      top: `${topPosition}px`,
-      left: "50%",
-      xPercent: -50,
-      width: getSvgWidth(),
-      opacity: 1,
-      pointerEvents: "auto",
-    });
-  }, [isMobile, getSvgWidth]);
-
-  // Überarbeitete Mobile-Animation: Sanftes Ein- und Ausblenden
-  useEffect(() => {
-    if (!headerRef.current || !isMobile) return;
-    gsap.to(headerRef.current, {
-      y: isMobileMenuOpen ? 0 : -100, // Sanft von oben nach unten einblenden
-      opacity: isMobileMenuOpen ? 1 : 0,
-      pointerEvents: isMobileMenuOpen ? "auto" : "none",
-      duration: 0.4,
-      ease: "power2.inOut",
-    });
-  }, [isMobileMenuOpen, isMobile]);
-
-  // ---- Scroll Listener: Jumper automatisch animieren ----
-  useEffect(() => {
-    const handleScroll = debounce(() => {
-      const scrollY = window.scrollY;
-      const viewportHeight = window.innerHeight;
-      let newIndex = activeIndex;
-
-      let found = false;
-      navItems.forEach((item, index) => {
-        const el = document.querySelector(item.href);
-        if (!el || found) return;
-        const rect = el.getBoundingClientRect();
-        const top = scrollY + rect.top;
-        const bottom = top + rect.height;
-
-        // Bessere Logik: Jumper zur Mitte des Viewports
-        if (scrollY + viewportHeight * 0.5 >= top && scrollY + viewportHeight * 0.5 < bottom) {
-          newIndex = index;
-          found = true;
-        }
-      });
-
-      if (newIndex !== activeIndex) {
-        animateJumperTo(newIndex, 0.7); // Angepasste Dauer
-        setActiveIndex(newIndex);
-      }
-    }, 200); // Debounce-Zeit von 200ms
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [activeIndex, animateJumperTo]);
-
   return (
     <>
-      {/* Hamburger Button */}
       <button
         ref={menuButtonRef}
-        className="fixed top-[2.5%] right-[2.5%] z-[60] p-2 w-14 h-14 rounded-full bg-[rgba(10,17,40,0.6)] flex items-center justify-center shadow-lg backdrop-blur-sm md:hidden"
+        className="fixed top-4 right-4 z-[60] p-2 w-14 h-14 rounded-full bg-[rgba(10,17,40,0.6)] flex items-center justify-center shadow-lg backdrop-blur-sm md:hidden"
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         aria-label="Toggle menu"
       >
         {isMobileMenuOpen ? <X className="text-white h-8 w-8" /> : <Menu className="text-white h-8 w-8" />}
       </button>
-      {/* Header */}
-      <div ref={headerRef} className="fixed z-50 flex justify-center px-2.5 py-1.25 rounded-xl shadow-md border header-glass">
-        <svg xmlns="http://www.w3.org/2000/svg" width={getSvgWidth()} height={SVG_HEIGHT} viewBox={`0 0 ${getSvgWidth()} ${SVG_HEIGHT}`} className="overflow-visible">
+
+      <div
+        ref={headerRef}
+        className="fixed z-50 flex justify-center px-2.5 py-1.25 rounded-xl shadow-md border header-glass opacity-0"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width={svgWidth}
+          height={HEADER_CONFIG.svgHeight}
+          viewBox={`0 0 ${svgWidth} ${HEADER_CONFIG.svgHeight}`}
+          className="overflow-visible"
+        >
           <defs>
             <filter id="gooey-filter">
               <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur" />
-              <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 16 -7" result="goo" />
-              <feBlend in="SourceGraphic" in2="goo" operator="atop" />
+              <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8" result="goo" />
+              <feBlend in="SourceGraphic" in2="goo" />
             </filter>
           </defs>
+
           <g filter="url(#gooey-filter)">
-            <rect className="jumper" width={jumperSize} height={jumperSize} rx="26" ry="26" />
-            <rect className="jumper" width={jumperSize} height={jumperSize} rx="26" ry="26" />
+            {/* <<< KORREKTUR: `fill` entfernt, Styling via CSS-Klasse .jumper */}
+            <rect ref={jumper1Ref} width={config.jumperSize} height={config.jumperSize} rx="26" ry="26" className="jumper" />
+            <rect ref={jumper2Ref} width={config.jumperSize} height={config.jumperSize} rx="26" ry="26" className="jumper" />
           </g>
-          {/* Logo */}
-          <g className="cursor-pointer" onClick={() => (window.location.href = "/")} transform={`translate(${logoX}, ${yCenter - iconWidth / 2})`}>
-            <rect width={iconWidth} height={iconWidth} fill="transparent" />
+
+          <g className="cursor-pointer" onClick={() => (window.location.href = "/")} transform={`translate(${logoX}, ${yCenter - config.iconWidth / 2})`}>
+            <rect width={config.iconWidth} height={config.iconWidth} fill="transparent" />
             <image
               href="/logo-white.svg"
-              width={isMobile ? MOBILE_SVG_ICON_SIZE : 32}
-              height={isMobile ? MOBILE_SVG_ICON_SIZE : 32}
-              x={(iconWidth - (isMobile ? MOBILE_SVG_ICON_SIZE : 32)) / 2}
-              y={(iconWidth - (isMobile ? MOBILE_SVG_ICON_SIZE : 32)) / 2}
+              width={config.svgIconSize}
+              height={config.svgIconSize}
+              x={(config.iconWidth - config.svgIconSize) / 2}
+              y={(config.iconWidth - config.svgIconSize) / 2}
             />
           </g>
-          {/* Icons */}
+
           <g id="icons">
-            {navItems.map((item, index) => (
-              <g key={item.name} className="cursor-pointer" onClick={() => handleIconClick(index)} transform={`translate(${iconCentersX[index] - iconWidth / 2}, ${yCenter - iconWidth / 2})`}>
-                <rect width={iconWidth} height={iconWidth} fill="transparent" />
+            {NAV_ITEMS.map((item, index) => (
+              <g
+                key={item.name}
+                // <<< KORREKTUR: Dynamische Klassen für CSS-Styling
+                className={clsx("cursor-pointer nav-icon-group", { "active": activeIndex === index })}
+                onClick={() => handleIconClick(index)}
+                transform={`translate(${iconCentersX[index] - config.iconWidth / 2}, ${yCenter - config.iconWidth / 2})`}
+              >
+                <rect width={config.iconWidth} height={config.iconWidth} fill="transparent" />
                 <item.icon
-                  className="transition-transform duration-300 will-change-transform nav-icon"
-                  x={iconWidth / 2 - (isMobile ? MOBILE_SVG_ICON_SIZE / 2 : 16)}
-                  y={iconWidth / 2 - (isMobile ? MOBILE_SVG_ICON_SIZE / 2 : 16)}
-                  width={isMobile ? MOBILE_SVG_ICON_SIZE : 32}
-                  height={isMobile ? MOBILE_SVG_ICON_SIZE : 32}
+                  // <<< KORREKTUR: `color` prop entfernt, Styling via CSS
+                  className="nav-icon"
+                  x={config.iconWidth / 2 - config.svgIconSize / 2}
+                  y={config.iconWidth / 2 - config.svgIconSize / 2}
+                  width={config.svgIconSize}
+                  height={config.svgIconSize}
                   strokeWidth={1.5}
                 />
               </g>
