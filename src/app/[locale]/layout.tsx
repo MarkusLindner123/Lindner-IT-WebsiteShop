@@ -62,8 +62,8 @@ export async function generateMetadata({
     description: 'Professional IT Services',
     alternates: {
       languages: {
-        'en': '/',
-        'de': '/de',
+        'de': '/',
+        'en': '/en',
         'pl': '/pl',
       }
     }

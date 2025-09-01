@@ -1,0 +1,263 @@
+{
+  "heroVideo": {
+    "title": "Niezawodne rozwiązania IT dla MŚP",
+    "subtitle": "Profesjonalne wsparcie IT, instalacja sieci, cyberbezpieczeństwo i strony internetowe specjalnie dla małych i średnich firm"
+  },
+  "hero": {
+    "kicker": "Rozwiązania IT, którym możesz zaufać",
+    "kickerTag": "Twój partner IT dla MŚP",
+    "titleLine1": "Niezawodne",
+    "titleLine2": "rozwiązania IT",
+    "titleLine3": "dla Twojej firmy",
+    "subtitle": "Oferuję profesjonalne wsparcie IT, bezpieczną instalację sieci, cyberbezpieczeństwo i wysokiej jakości strony internetowe dla małych i średnich firm.",
+    "ctaPrimary": "Poproś o ofertę",
+    "ctaSecondary": "Zobacz usługi IT"
+  },
+  "about": {
+    "kicker": "Poznaj mnie",
+    "title": "O Markusie Lindnerze",
+    "background": {
+      "title": "Moje doświadczenie",
+      "text": "Jestem Markus Lindner, mam 27 lat, jestem zaangażowanym freelancerem IT z siedzibą w Berlinie. Obecnie studiuję B.Sc. Engineering Embedded Systems na BHT Berlin ze specjalizacją w informatyce technicznej i praktycznym tworzeniu oprogramowania. Wychowałem się dwujęzycznie w języku niemieckim i polskim, posiadam bardzo dobrą znajomość angielskiego i codziennie pracuję w międzynarodowym środowisku z różnymi klientami."
+    },
+    "experience": {
+      "title": "Moje doświadczenie",
+      "text": "Od maja 2019 do marca 2024 pracowałem jako student w Siemens AG, zdobywając cenne doświadczenie praktyczne w zakresie infrastruktury IT, cyberbezpieczeństwa i tworzenia oprogramowania. Od 2020 roku działam również jako freelancer, tworzę nowoczesne i przyjazne użytkownikowi strony internetowe w WordPress, TypeScript i React, oferuję indywidualne szkolenia IT oraz zajmuję się incydentami związanymi z bezpieczeństwem. Ponadto konfigurowałem infrastruktury IT dla kancelarii i agencji nieruchomości, wdrażałem systemy chmurowe, przeprowadzałem odzyskiwanie danych oraz realizowałem instalacje sieciowe dla MŚP, takie jak Bullet Shop Berlin."
+    },
+    "approach": {
+      "title": "Moje podejście",
+      "text": "Każdy projekt zaczynam od dokładnej analizy Twoich potrzeb IT, aby systematycznie identyfikować ryzyka i szanse, a następnie rozwijam skalowalne rozwiązania, takie jak bezpieczne sieci, profesjonalne strony internetowe i nowoczesne środki bezpieczeństwa. Następnie wdrażam je efektywnie, z naciskiem na niezawodność, oferując jednocześnie ciągłe wsparcie, doradztwo i optymalizację. Połączenie moich doświadczeń w Siemens i licznych projektach freelancerskich gwarantuje, że Twoje systemy IT będą profesjonalne, praktyczne i stabilne na dłuższą metę."
+    },
+    "whyMe": {
+      "title": "Dlaczego ja",
+      "text": "W każdym projekcie stosuję praktyczne i ukierunkowane na rozwiązania podejście. Dzięki uznanym certyfikatom z zakresu cyberbezpieczeństwa, ochrony danych i zarządzania IT oferuję bezpieczne, niezawodne i ukierunkowane na rozwój rozwiązania IT, dostosowane specjalnie do potrzeb małych i średnich firm. Łączę solidną wiedzę techniczną z jasnym nastawieniem na klienta, dzięki czemu Twoje systemy IT działają sprawnie, bezpiecznie i efektywnie."
+    },
+    "ctaPrimary": "Poproś o ofertę"
+  },
+  "services": {
+    "ctaPrimary": "Skontaktuj się ze mną",
+    "kicker": "Moje usługi",
+    "startAnimation": "Animacja",
+    "title": "Rozwiązania IT, które utrzymują Twoją firmę w działaniu",
+    "webDesign": {
+      "title": "Projektowanie stron & hosting",
+      "description": "Tworzę responsywne, bezpieczne i wydajne strony internetowe, które odzwierciedlają Twoją markę i przyciągają klientów.",
+      "feature1": "Responsywny design na wszystkie urządzenia",
+      "feature2": "Strony zoptymalizowane pod SEO",
+      "feature3": "Bezpieczny hosting & SSL",
+      "feature4": "CMS do łatwej aktualizacji treści",
+      "feature5": "Integracja z narzędziami biznesowymi",
+      "faq1": {
+        "question": "Jak długo trwa stworzenie strony?",
+        "answer": "Większość stron biznesowych powstaje w ciągu 4–6 tygodni, w zależności od stopnia skomplikowania."
+      },
+      "faq2": {
+        "question": "Czy oferujesz utrzymanie strony?",
+        "answer": "Tak, zapewniam bieżące aktualizacje, kopie zapasowe i monitorowanie bezpieczeństwa."
+      },
+      "faq3": {
+        "question": "Czy możesz zmodernizować istniejącą stronę?",
+        "answer": "Tak, aktualizuję design, poprawiam bezpieczeństwo i optymalizuję wydajność."
+      },
+      "faq4": {
+        "question": "Czy oferujesz rozwiązania e-commerce?",
+        "answer": "Tak, integruję sklepy online i systemy płatności."
+      },
+      "faq5": {
+        "question": "Czy moja strona będzie przyjazna dla urządzeń mobilnych?",
+        "answer": "Tak, wszystkie strony są w pełni responsywne i zoptymalizowane pod mobilne."
+      },
+      "faq6": {
+        "question": "Czy pomagasz przy SEO?",
+        "answer": "Tak, optymalizuję SEO on-page i wydajność strony."
+      }
+    },
+    "itSupport": {
+      "title": "Wsparcie IT dla MŚP",
+      "description": "Niezawodne wsparcie IT dla Twojej firmy, rozwiązywanie problemów, zarządzanie sprzętem i oprogramowaniem oraz pomoc użytkownikom.",
+      "feature1": "Wsparcie zdalne i lokalne",
+      "feature2": "Instalacja oprogramowania & aktualizacje",
+      "feature3": "Konfiguracja i naprawa sprzętu",
+      "feature4": "Proaktywne monitorowanie",
+      "feature5": "Helpdesk dla pracowników",
+      "faq1": {
+        "question": "Czy oferujesz wsparcie na miejscu?",
+        "answer": "Tak, oferuję wsparcie na miejscu i zdalnie."
+      },
+      "faq2": {
+        "question": "Czy możesz zarządzać naszymi komputerami biurowymi?",
+        "answer": "Tak, obsługuję wszystkie stacje robocze, instalacje oprogramowania i aktualizacje."
+      },
+      "faq3": {
+        "question": "Czy oferujesz wsparcie awaryjne?",
+        "answer": "Tak, szybko reaguję na pilne problemy IT."
+      },
+      "faq4": {
+        "question": "Czy prowadzisz szkolenia dla pracowników?",
+        "answer": "Tak, szkolę pracowników w zakresie kompetencji cyfrowych i bezpieczeństwa."
+      },
+      "faq5": {
+        "question": "Czy zarządzasz licencjami oprogramowania?",
+        "answer": "Tak, zarządzam licencjami, aktualizacjami i zgodnością."
+      },
+      "faq6": {
+        "question": "Czy monitorujesz systemy IT 24/7?",
+        "answer": "Tak, oferuję ciągłe monitorowanie i powiadomienia."
+      }
+    },
+    "networkSetup": {
+      "title": "Sieci & infrastruktura",
+      "description": "Projektuję i wdrażam bezpieczne i skalowalne sieci, w tym instalacje przewodowe i bezprzewodowe, VPN i architekturę serwerów.",
+      "feature1": "Planowanie i wdrożenie sieci",
+      "feature2": "Bezpieczne Wi-Fi & LAN",
+      "feature3": "VPN & rozwiązania dostępu zdalnego",
+      "feature4": "Konfiguracja serwerów i pamięci masowej",
+      "feature5": "Monitoring & optymalizacja wydajności",
+      "faq1": {
+        "question": "Czy tworzysz sieci od podstaw?",
+        "answer": "Tak, opracowuję i wdrażam nowe sieci, dopasowane do potrzeb Twojej firmy."
+      },
+      "faq2": {
+        "question": "Czy możesz zoptymalizować istniejące sieci?",
+        "answer": "Tak, poprawiam wydajność, bezpieczeństwo i niezawodność."
+      },
+      "faq3": {
+        "question": "Czy zarządzasz bezpieczeństwem sieci?",
+        "answer": "Tak, implementuję firewalle, kontrolę dostępu i monitoring."
+      },
+      "faq4": {
+        "question": "Czy możesz skonfigurować VPN dla pracowników zdalnych?",
+        "answer": "Tak, tworzę bezpieczne połączenia VPN."
+      },
+      "faq5": {
+        "question": "Czy oferujesz monitoring sieci?",
+        "answer": "Tak, monitoruję wydajność, dostępność i usuwanie problemów."
+      },
+      "faq6": {
+        "question": "Czy doradzasz w zakresie sprzętu?",
+        "answer": "Tak, doradzam i instaluję routery, przełączniki i serwery."
+      }
+    },
+    "cyberSecurity": {
+      "title": "Cyberbezpieczeństwo",
+      "description": "Chroń swoją firmę kompleksowymi środkami bezpieczeństwa, analizą ryzyka, prewencją i zgodnością.",
+      "feature1": "Audyt bezpieczeństwa & analiza ryzyka",
+      "feature2": "Konfiguracja firewall & antywirus",
+      "feature3": "Szkolenia dla pracowników",
+      "feature4": "Backup & Disaster Recovery",
+      "feature5": "Ciągłe monitorowanie",
+      "faq1": {
+        "question": "Jak chronisz przed cyberatakami?",
+        "answer": "Firewalle, antywirus, regularne aktualizacje i monitoring zmniejszają ryzyko."
+      },
+      "faq2": {
+        "question": "Czy oferujesz szkolenia dla pracowników?",
+        "answer": "Tak, szkolenia świadomościowe w celu unikania błędów ludzkich."
+      },
+      "faq3": {
+        "question": "Czy możesz zabezpieczyć usługi w chmurze?",
+        "answer": "Tak, zabezpieczam platformy chmurowe i dbam o zgodność."
+      },
+      "faq4": {
+        "question": "Czy przeprowadzasz testy penetracyjne?",
+        "answer": "Tak, etyczne hackowanie w celu identyfikacji słabych punktów."
+      },
+      "faq5": {
+        "question": "Czy wspierasz zgodność z GDPR/RODO?",
+        "answer": "Tak, Twoje systemy IT są zgodne z przepisami o ochronie danych."
+      },
+      "faq6": {
+        "question": "Czy oferujesz ciągłe monitorowanie?",
+        "answer": "Tak, całodobowy monitoring potencjalnych zagrożeń cybernetycznych."
+      }
+    }
+  },
+  "contact": {
+    "kicker": "Bezpieczne i wydajne IT",
+    "title": "Skontaktuj się",
+    "subtitle": "Skontaktuj się ze mną, aby omówić potrzeby IT, poprosić o ofertę lub uzyskać wsparcie dla swojej firmy.",
+    "form": {
+      "name": "Imię i nazwisko",
+      "email": "E-mail",
+      "phone": "Telefon",
+      "message": "Wiadomość",
+      "reason": "Powód kontaktu",
+      "reasonPlaceholder": "Proszę wybrać",
+      "options": {
+        "quote": "Poproś o ofertę",
+        "support": "Wsparcie IT",
+        "general": "Ogólne zapytanie"
+      },
+      "submit": "Wyślij wiadomość"
+    }
+  },
+  "testimonials": {
+    "title": "Opinie klientów",
+    "kicker": "Zaufanie MŚP",
+    "googleProfile": "https://maps.app.goo.gl/qW5Ns8LAGoEUs3yn8",
+    "googleButtonText": "Profil Google Business",
+    "reviews": [
+      { "name": "Amin Karim", "rating": 5, "text": "Zleciłem stworzenie strony internetowej, w tym instalację sprzętu i oprogramowania w moim biurze. Wszystko przebiegło bezproblemowo i jestem w pełni zadowolony. Gorąco polecam 👍" },
+      { "name": "Clyde Blei", "rating": 5, "text": "Bardzo zadowolony! Efekt był perfekcyjny, a on poświęcił mi czas. Wszystko bardzo profesjonalnie. Spróbuj – nie masz nic do stracenia! Czekam na kolejną współpracę!" },
+      { "name": "Siako Kaify Saber", "rating": 5, "text": "Pan Lindner to doskonały specjalista IT, który zna się na swoim fachu. Dzięki jego pomocy i wskazówkom zdałem egzamin IT." },
+      { "name": "Daniel Korff", "rating": 5, "text": "Pan Lindner zbudował i skonfigurował komputer dokładnie według moich wytycznych. Jestem bardzo zadowolony." },
+      { "name": "David Westendorf", "rating": 5, "text": "Mój komputer nie działał poprawnie. Tutaj został szybko i solidnie naprawiony. Świetna usługa w rozsądnej cenie." },
+      { "name": "Vivien Szmid", "rating": 5, "text": "Super! Natychmiastowa pomoc. Bardzo przyjazny i kompetentny." },
+      { "name": "Ben Schmidt", "rating": 5, "text": "Bardzo profesjonalne podejście i szybka realizacja." },
+      { "name": "Luis Meyer", "rating": 5, "text": "Bardzo profesjonalny ekspert IT! Mogę go tylko polecić!" },
+      { "name": "Hassan", "rating": 5, "text": "Usługa jest wyjątkowa i znakomita. Rzadko spotyka się tak przyjazne wsparcie dla klienta. Całkowicie zachwycony! Bardzo polecam!" },
+      { "name": "Rolf Kühner", "rating": 5, "text": "Jeśli szukasz specjalisty od PC, nie szukaj długo online – po prostu zadzwoń do Pana Lindnera z Lindner IT. Znalazłem go przypadkiem i naprawił moje dwa uszkodzone komputery." }
+    ]
+  },
+  "Meta": {
+    "title": "Wsparcie IT & rozwiązania webowe dla MŚP"
+  },
+  "Switcher": {
+    "label": "Język",
+    "en": "English",
+    "de": "Niemiecki"
+  },
+  "footer": {
+    "privacy": "Prywatność",
+    "imprint": "Impressum",
+    "company": "Freelancer"
+  },
+  "impressum": {
+    "title": "Impressum",
+    "company": "Dane zgodnie z § 5 TMG",
+    "name": "Markus Lindner",
+    "address": "Frankfurter Allee 216",
+    "city": "10365 Berlin, Niemcy",
+    "contact": "Kontakt",
+    "phone": "Telefon",
+    "email": "E-mail",
+    "legal": "Informacje prawne",
+    "legalForm": "Jednoosobowa działalność gospodarcza",
+    "taxNumber": "Numer podatkowy: zostanie dodany",
+    "disclaimer": "Wyłączenie odpowiedzialności",
+    "disclaimerText": "Pomimo starannej kontroli treści nie ponosimy odpowiedzialności za zawartość linków zewnętrznych. Za treść powiązanych stron odpowiedzialni są wyłącznie ich operatorzy. Wszystkie informacje na tej stronie są podawane bez gwarancji."
+  },
+  "datenschutz": {
+    "title": "Ochrona danych",
+    "company": "Firma",
+    "contact": "Kontakt",
+    "phone": "Telefon",
+    "email": "E-mail",
+    "dataCollection": "Zbieranie danych",
+    "dataCollectionText": "Tutaj opisujesz, jakie dane są zbierane na Twojej stronie, np. przez formularze, analitykę lub pliki cookies.",
+    "purpose": "Cel przetwarzania",
+    "purposeText": "Wyjaśnienie, w jakim celu dane są przetwarzane, np. do obsługi zapytań lub ulepszania strony.",
+    "rights": "Twoje prawa",
+    "rightAccess": "Prawo do uzyskania informacji o przetwarzanych danych osobowych",
+    "rightCorrection": "Prawo do poprawiania nieprawidłowych danych",
+    "rightDeletion": "Prawo do usunięcia danych osobowych",
+    "rightRestriction": "Prawo do ograniczenia przetwarzania",
+    "rightDataPortability": "Prawo do przenoszenia danych",
+    "rightObjection": "Prawo do sprzeciwu wobec przetwarzania"
+  },
+  "notFound": {
+    "title": "Strona nie znaleziona",
+    "subtitle": "Przepraszamy, strona, której szukasz, nie istnieje.",
+    "backHome": "Powrót do strony głównej"
+  }
+}

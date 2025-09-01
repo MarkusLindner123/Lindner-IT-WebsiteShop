@@ -14,7 +14,7 @@ type Language = {
 const languages: Language[] = [
   { code: "de", label: "Deutsch" },
   { code: "gb", label: "English" }, // flag-icons verwendet 'gb' für UK/English
-  { code: "fr", label: "Français" },
+  { code: "pl", label: "Polski" },
 ];
 
 export default function LanguageSwitcher() {
@@ -56,7 +56,7 @@ export default function LanguageSwitcher() {
   // aktuelle Sprache ermitteln
   let currentLang = pathname.split("/")[1];
   if (pathname === "/") {
-    currentLang = "en"; // Root zeigt Englisch
+    currentLang = "de"; // Root zeigt Englisch
   }
   return (
     <>
