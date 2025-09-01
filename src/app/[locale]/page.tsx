@@ -8,6 +8,7 @@ import ServicesSection from "@/components/ServicesSection";
 import ContactSection from "@/components/ContactSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import { Card } from "@/components/Layout/Card";
+import CardScrollLines from "@/components/CardScrollLines";
 
 export default async function HomePage({
   params,
@@ -19,11 +20,15 @@ export default async function HomePage({
 
   return (
     <main className="relative px-6 md:px-12">
+      {/* Scroll Lines Overlay */}
+      <CardScrollLines cardIds={["home", "services", "about", "contact", "testimonials"]} />
+
+      {/* Hero Card */}
       <Card id="home" className="bg-card-hero pt-0 sm:mt-0 mb-12 mt-6">
         <Hero />
       </Card>
 
-      <div className="space-y-12 pb-20">
+      <div className="space-y-20 pb-20"> {/* vergrößertes spacing zwischen Cards */}
         <Card id="services" className="bg-card-services">
           <ServicesSection />
         </Card>
@@ -36,11 +41,10 @@ export default async function HomePage({
           <ContactSection />
         </Card>
 
-        <Card id="testimonials" className="bg-card-testimonials ">
+        <Card id="testimonials" className="bg-card-testimonials">
           <TestimonialsSection />
         </Card>
       </div>
     </main>
-
   );
 }
