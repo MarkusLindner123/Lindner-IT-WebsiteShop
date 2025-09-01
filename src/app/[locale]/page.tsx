@@ -19,7 +19,7 @@ export default async function HomePage({
 
   return (
     <main className="relative px-6 md:px-12">
-      <Card id="home" className="bg-card-hero pt-0 mt-0 mb-12">
+      <Card id="home" className="bg-card-hero pt-0 sm:mt-0 mb-12 mt-6">
         <Hero />
       </Card>
 
