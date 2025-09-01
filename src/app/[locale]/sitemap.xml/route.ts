@@ -1,28 +1,20 @@
 import { NextResponse } from "next/server";
 import { routing, type AppLocale } from "@/i18n/routing";
 
-// Pages to include
 const PAGES = ["/", "/privacy", "/impressum"];
 
-interface Params {
-  locale: string;
-}
+export async function GET(request: Request) {
+  const url = new URL(request.url);
+  const locale = url.pathname.split("/")[1] as AppLocale;
 
-export async function GET({ params }: { params: Params }) {
-  const { locale } = params;
-
-  // Validate locale
-  if (!routing.locales.includes(locale as AppLocale)) {
+  if (!routing.locales.includes(locale)) {
     return new NextResponse("Locale not found", { status: 404 });
   }
 
-  // Current date in ISO format
   const buildDate = new Date().toISOString();
 
-  // Build sitemap entries with lastmod
   const urls = PAGES.map(
-    (path) =>
-      `<url>
+    (path) => `<url>
   <loc>${process.env.NEXT_PUBLIC_SITE_URL}/${locale}${path}</loc>
   <lastmod>${buildDate}</lastmod>
   <changefreq>weekly</changefreq>

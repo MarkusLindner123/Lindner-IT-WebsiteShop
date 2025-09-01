@@ -45,17 +45,18 @@ export default function AboutSection() {
     [sections]
   );
 
-  const highlightWords = [
-    "background", "hintergrund", "bilingual", "zweisprachig", "engineering", "technische Informatik",
-    "corporateexperience", "freelance", "freiberuflich", "lawyers", "Kanzleien", "realestate", "Immobilien",
-    "Siemens", "infrastructure", "websites", "networks", "cybersecurity", "reliable", "secure", "customized",
-    "growth", "ITsolutions", "IT-Lösungen",
-  ];
+  const highlightWords = useMemo(() => [
+  "background", "hintergrund", "bilingual", "zweisprachig", "engineering", "technische Informatik",
+  "corporateexperience", "freelance", "freiberuflich", "lawyers", "Kanzleien", "realestate", "Immobilien",
+  "Siemens", "infrastructure", "websites", "networks", "cybersecurity", "reliable", "secure", "customized",
+  "growth", "ITsolutions", "IT-Lösungen",
+], []);
 
-  const highlightWordsSet = useMemo(
-    () => new Set(highlightWords.flatMap((w) => w.split(/\s+/)).map((w) => w.toLowerCase())),
-    [highlightWords]
-  );
+const highlightWordsSet = useMemo(
+  () => new Set(highlightWords.flatMap((w) => w.split(/\s+/)).map((w) => w.toLowerCase())),
+  [highlightWords]
+);
+
 
   const allWords = useMemo(() => {
     let globalIndex = 0;

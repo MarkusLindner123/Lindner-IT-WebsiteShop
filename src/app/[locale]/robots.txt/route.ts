@@ -1,15 +1,12 @@
 import { NextResponse } from "next/server";
 import { routing, type AppLocale } from "@/i18n/routing";
 
-interface Params {
-  locale: string;
-}
+export async function GET(request: Request) {
+  const url = new URL(request.url);
+  // /de/robots.txt → erstes Segment ist "de"
+  const locale = url.pathname.split("/")[1] as AppLocale;
 
-export async function GET({ params }: { params: Params }) {
-  const { locale } = params;
-
-  // Type-safe check: cast params.locale to AppLocale only if included
-  if (!routing.locales.includes(locale as AppLocale)) {
+  if (!routing.locales.includes(locale)) {
     return new NextResponse("Locale not found", { status: 404 });
   }
 
