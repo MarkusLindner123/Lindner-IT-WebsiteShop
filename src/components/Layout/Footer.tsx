@@ -1,4 +1,3 @@
-// components/Footer.tsx
 "use client";
 
 import Link from "next/link";
@@ -10,21 +9,27 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-primary-darkpy-8 pt-10">
+    <footer className=" py-8 pt-10">
       <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-start md:items-center justify-center gap-8 text-left md:text-center">
 
         {/* Contact Info */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
           <a
             href="tel:+491628036905"
-            className="flex items-center gap-2 hover:text-white transition-colors"
+            className="flex items-center gap-2 transition-colors"
+            style={{ color: "var(--color-accent-one)" }}
+            onMouseEnter={e => (e.currentTarget.style.color = "var(--color-accent-two)")}
+            onMouseLeave={e => (e.currentTarget.style.color = "var(--color-accent-one)")}
           >
             <Phone className="w-5 h-5" />
             <span>+49 162 8036 905</span>
           </a>
           <a
             href="mailto:markuslindner1998@gmail.com"
-            className="flex items-center gap-2 hover:text-white transition-colors"
+            className="flex items-center gap-2 transition-colors"
+            style={{ color: "var(--color-accent-one)" }}
+            onMouseEnter={e => (e.currentTarget.style.color = "var(--color-accent-two)")}
+            onMouseLeave={e => (e.currentTarget.style.color = "var(--color-accent-one)")}
           >
             <Mail className="w-5 h-5" />
             <span>markuslindner1998@gmail.com</span>
@@ -33,10 +38,22 @@ export default function Footer() {
 
         {/* Footer Navigation */}
         <nav className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 text-sm">
-          <Link href="/privacy" className="hover:text-white transition-colors">
+          <Link
+            href="/privacy"
+            className="transition-colors"
+            style={{ color: "var(--color-accent-one)" }}
+            onMouseEnter={e => (e.currentTarget.style.color = "var(--color-accent-two)")}
+            onMouseLeave={e => (e.currentTarget.style.color = "var(--color-accent-one)")}
+          >
             {t("privacy")}
           </Link>
-          <Link href="/imprint" className="hover:text-white transition-colors">
+          <Link
+            href="/imprint"
+            className="transition-colors"
+            style={{ color: "var(--color-accent-one)" }}
+            onMouseEnter={e => (e.currentTarget.style.color = "var(--color-accent-two)")}
+            onMouseLeave={e => (e.currentTarget.style.color = "var(--color-accent-one)")}
+          >
             {t("imprint")}
           </Link>
         </nav>

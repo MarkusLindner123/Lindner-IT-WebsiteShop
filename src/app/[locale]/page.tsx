@@ -19,28 +19,28 @@ export default async function HomePage({
 
   return (
     <main className="relative px-6 md:px-12">
-  <Card id="home" className="bg-card-hero pt-0 mt-0">
-    <Hero />
-  </Card>
+      <Card id="home" className="bg-card-hero pt-0 mt-0">
+        <Hero />
+      </Card>
 
-  <div className="space-y-12">
-    <Card id="services" className="bg-card-services">
-      <ServicesSection />
-    </Card>
+      <div className="space-y-12 pb-20">
+        <Card id="services" className="bg-card-services">
+          <ServicesSection />
+        </Card>
 
-    <Card id="about" className="bg-card-about">
-      <AboutSection />
-    </Card>
+        <Card id="about" className="bg-card-about">
+          <AboutSection />
+        </Card>
 
-    <Card id="contact" className="bg-card-contact">
-      <ContactSection />
-    </Card>
+        <Card id="contact" className="bg-card-contact">
+          <ContactSection />
+        </Card>
 
-    <Card id="testimonials" className="bg-card-testimonials">
-      <TestimonialsSection />
-    </Card>
-  </div>
-</main>
+        <Card id="testimonials" className="bg-card-testimonials ">
+          <TestimonialsSection />
+        </Card>
+      </div>
+    </main>
 
   );
 }
