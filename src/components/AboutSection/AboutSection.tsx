@@ -17,7 +17,6 @@ const brushColors = [
   "lime"      // frisches Limegrün
 ];
 
-
 const aboutImages = [
   "/about-images/about1.jpg",
   "/about-images/about2.jpg",
@@ -170,10 +169,10 @@ export default function AboutSection() {
                 alt={`Image for about paragraph ${paraIdx + 1}`}
                 width={350}
                 height={250}
-                className="object-cover w-full h-full"
+                className="object-cover w-full h-full rounded-xl"
               />
               <div
-                className="image-overlay absolute inset-0 bg-white/70 backdrop-blur-sm"
+                className="image-overlay absolute inset-0 bg-white/70 backdrop-blur-sm rounded-xl"
                 style={{ transform: `scaleY(1)`, transformOrigin: "bottom" }}
               />
             </div>
