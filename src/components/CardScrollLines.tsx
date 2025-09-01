@@ -27,12 +27,12 @@ interface LinePoints {
 export default function CardScrollLines({ cardIds }: CardScrollLinesProps) {
   const [lines, setLines] = useState<LinePoints[]>([]);
   const svgRef = useRef<SVGSVGElement>(null);
+  const animatedLines = useRef<Set<number>>(new Set());
 
   useLayoutEffect(() => {
     const newPositions: CardPosition[] = cardIds.map((id) => {
       const el = document.getElementById(id);
       if (!el) return { top: 0, bottom: 0, width: 0, left: 0 };
-
       return {
         top: el.offsetTop,
         bottom: el.offsetTop + el.offsetHeight,
@@ -70,6 +70,44 @@ export default function CardScrollLines({ cardIds }: CardScrollLinesProps) {
       setLines(newLines);
     }
   }, [cardIds]);
+
+  useLayoutEffect(() => {
+    if (!lines.length) return;
+
+    const paths = svgRef.current?.querySelectorAll("path");
+    if (!paths) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const index = Number(entry.target.getAttribute("data-index"));
+          if (entry.isIntersecting && !animatedLines.current.has(index)) {
+            const path = entry.target as SVGPathElement;
+            const length = path.getTotalLength();
+            path.style.transition = "stroke-dashoffset 1s ease";
+            path.style.strokeDasharray = `${length}`;
+            path.style.strokeDashoffset = `${length}`;
+            requestAnimationFrame(() => {
+              path.style.strokeDashoffset = "0";
+            });
+            animatedLines.current.add(index);
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    paths.forEach((path, i) => {
+      path.setAttribute("data-index", String(i));
+      const length = (path as SVGPathElement).getTotalLength();
+      (path as SVGPathElement).style.strokeDasharray = `${length}`;
+      (path as SVGPathElement).style.strokeDashoffset = `${length}`;
+      observer.observe(path);
+    });
+
+    return () => observer.disconnect();
+  }, [lines]);
 
   if (!lines.length) return null;
 
