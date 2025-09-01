@@ -5,7 +5,7 @@
 import { useState, useRef, useLayoutEffect, useEffect, useMemo } from "react";
 import gsap from "gsap";
 import { Home, User, Cpu, Mail, Menu, X, type LucideIcon } from "lucide-react";
-import clsx from "clsx"; // Hilfsbibliothek für Klassen, `npm install clsx`
+import clsx from "clsx";
 
 // --- Typen und Konfiguration ---
 type NavItem = { name: string; href: string; icon: LucideIcon };
@@ -28,13 +28,15 @@ const HEADER_CONFIG = {
     topPosition: 10,
   },
   mobile: {
-    iconWidth: 54,
-    iconMargin: 18,
+    // <<< ANPASSUNG FÜR SCHMALEREN HEADER ---
+    iconWidth: 50,      // war 54
+    iconMargin: 16,     // war 18
     jumperSize: 64,
     svgIconSize: 28,
-    iconOffsetX: 90,
+    iconOffsetX: 75,      // war 90
     headerPadding: 15,
-    topPosition: 20, // <<< KORREKTUR: Position auf Mobile höher gesetzt
+    topPosition: 20,
+    // --- ENDE ANPASSUNG
   },
   svgHeight: 90,
 };
@@ -65,7 +67,6 @@ export default function Header() {
   const jumper1Ref = useRef<SVGRectElement>(null);
   const jumper2Ref = useRef<SVGRectElement>(null);
   
-  // <<< NEU: Ref und Timeout zur Steuerung der Klick-vs-Scroll-Logik
   const isClickScrollingRef = useRef(false);
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -82,7 +83,7 @@ export default function Header() {
 
   const logoX = config.iconOffsetX - config.iconWidth - config.iconMargin;
 
-  // --- Effekt 1: Jumper Animation (Reagiert auf activeIndex) ---
+  // Effekt 1: Jumper Animation
   useEffect(() => {
     if (!jumper1Ref.current || !jumper2Ref.current) return;
 
@@ -106,12 +107,10 @@ export default function Header() {
     });
   }, [activeIndex, config, iconCentersX, yCenter]);
 
-
-  // --- Effekt 2: Scroll-Beobachtung mit IntersectionObserver ---
+  // Effekt 2: Scroll-Beobachtung
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        // <<< KORREKTUR: Ignoriere Observer-Events während des Klick-Scrolls
         if (isClickScrollingRef.current) return;
 
         entries.forEach((entry) => {
@@ -135,8 +134,7 @@ export default function Header() {
     return () => observer.disconnect();
   }, []);
 
-
-  // --- Effekt 3: Positionierung und Sichtbarkeit des Headers ---
+  // Effekt 3: Positionierung des Headers
   useLayoutEffect(() => {
     if (!headerRef.current) return;
     const targetY = isMobile && !isMobileMenuOpen ? -150 : config.topPosition;
@@ -154,8 +152,7 @@ export default function Header() {
     });
   }, [isMobile, isMobileMenuOpen, svgWidth, config.topPosition]);
 
-
-  // --- Effekt 4: Rotation des Hamburger-Icons ---
+  // Effekt 4: Rotation des Hamburger-Icons
   useEffect(() => {
     if (!menuButtonRef.current) return;
     gsap.to(menuButtonRef.current.querySelector("svg"), {
@@ -165,27 +162,19 @@ export default function Header() {
     });
   }, [isMobileMenuOpen]);
 
-
-  // --- Handler-Funktion für Klicks ---
+  // Handler-Funktion für Klicks
   const handleIconClick = (index: number) => {
     const targetElement = document.querySelector(NAV_ITEMS[index].href);
     if (targetElement) {
-      // <<< KORREKTUR: Scroll-Sperre aktivieren
       isClickScrollingRef.current = true;
       setActiveIndex(index);
 
       targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
 
-      // <<< KORREKTUR: Menü bleibt auf Mobile offen
-      // if (isMobile) {
-      //   setIsMobileMenuOpen(false); // DIESE ZEILE WURDE ENTFERNT
-      // }
-
-      // Hebe die Sperre nach 1 Sekunde wieder auf
       if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
       scrollTimeoutRef.current = setTimeout(() => {
         isClickScrollingRef.current = false;
-      }, 1000); // 1000ms ist eine sichere Dauer für die meisten "smooth" Scrolls
+      }, 1000);
     }
   };
 
@@ -220,7 +209,6 @@ export default function Header() {
           </defs>
 
           <g filter="url(#gooey-filter)">
-            {/* <<< KORREKTUR: `fill` entfernt, Styling via CSS-Klasse .jumper */}
             <rect ref={jumper1Ref} width={config.jumperSize} height={config.jumperSize} rx="26" ry="26" className="jumper" />
             <rect ref={jumper2Ref} width={config.jumperSize} height={config.jumperSize} rx="26" ry="26" className="jumper" />
           </g>
@@ -240,14 +228,12 @@ export default function Header() {
             {NAV_ITEMS.map((item, index) => (
               <g
                 key={item.name}
-                // <<< KORREKTUR: Dynamische Klassen für CSS-Styling
                 className={clsx("cursor-pointer nav-icon-group", { "active": activeIndex === index })}
                 onClick={() => handleIconClick(index)}
                 transform={`translate(${iconCentersX[index] - config.iconWidth / 2}, ${yCenter - config.iconWidth / 2})`}
               >
                 <rect width={config.iconWidth} height={config.iconWidth} fill="transparent" />
                 <item.icon
-                  // <<< KORREKTUR: `color` prop entfernt, Styling via CSS
                   className="nav-icon"
                   x={config.iconWidth / 2 - config.svgIconSize / 2}
                   y={config.iconWidth / 2 - config.svgIconSize / 2}
