@@ -18,31 +18,29 @@ export default async function HomePage({
   setRequestLocale(locale);
 
   return (
-    <main className="relative p-6 space-y-6 md:p-12 md:space-y-12">
-      {/* Hero Section */}
-      <Card id="home" className="bg-card-hero">
-        <Hero />
-      </Card>
+    <main className="relative px-6 md:px-12">
+  <Card id="home" className="bg-card-hero pt-0 mt-0">
+    <Hero />
+  </Card>
 
-      {/* Services Section */}
-      <Card id="services" className="bg-card-services">
-        <ServicesSection />
-      </Card>
+  <div className="space-y-12">
+    <Card id="services" className="bg-card-services">
+      <ServicesSection />
+    </Card>
 
-      {/* About Section */}
-      <Card id="about" className="bg-card-about">
-        <AboutSection />
-      </Card>
+    <Card id="about" className="bg-card-about">
+      <AboutSection />
+    </Card>
 
-      {/* Contact Section */}
-      <Card id="contact" className="bg-card-contact">
-        <ContactSection />
-      </Card>
+    <Card id="contact" className="bg-card-contact">
+      <ContactSection />
+    </Card>
 
-      {/* Testimonials Section */}
-      <Card id="testimonials" className="bg-card-testimonials">
-        <TestimonialsSection />
-      </Card>
-    </main>
+    <Card id="testimonials" className="bg-card-testimonials">
+      <TestimonialsSection />
+    </Card>
+  </div>
+</main>
+
   );
 }

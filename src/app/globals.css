@@ -251,11 +251,6 @@ ul.list-disc li::marker { color: var(--color-accent-two); }
 
 
 
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 24px rgba(0,0,0,0.15);
-}
-
 /* Spezifische Sections */
 .bg-card-hero { background-color: var(--card-bg); border-radius: 2rem; }
 .bg-card-services { background-color: var(--card-bg); }
