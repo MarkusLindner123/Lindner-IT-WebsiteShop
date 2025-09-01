@@ -24,7 +24,7 @@ export default async function HomePage({
       <CardScrollLines cardIds={["home", "services", "about", "contact", "testimonials"]} />
 
       {/* Hero Card */}
-      <Card id="home" className="bg-card-hero pt-0 sm:mt-0 mb-12 mt-6">
+      <Card id="home" className="bg-card-hero pt-0 sm:mt-0 mb-20 mt-6">
         <Hero />
       </Card>
 
