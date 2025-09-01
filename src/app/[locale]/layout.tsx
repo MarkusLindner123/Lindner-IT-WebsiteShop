@@ -1,4 +1,4 @@
-// src/app/[locale]/layout.tsx
+// app/[locale]/layout.tsx (ERSETZEN)
 import type { ReactNode } from "react";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
@@ -30,13 +30,42 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
-      <PageLoader>
-        <Header />
-        {children}
-        <Phone />
-        <LanguageSwitcher />
-        <Footer />
-      </PageLoader>
+      <div lang={locale}> {/* Korrekte Sprach-Markierung */}
+        <PageLoader>
+          <Header />
+          {children}
+          <Phone />
+          <LanguageSwitcher />
+          <Footer />
+        </PageLoader>
+      </div>
     </NextIntlClientProvider>
   );
+}
+
+// Lokalisierte Metadaten
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  
+  const titles = {
+    en: 'Lindner IT - Professional IT Services',
+    de: 'Lindner IT - Professionelle IT-Dienstleistungen', 
+    pl: 'Lindner IT - Profesjonalne Usługi IT'
+  };
+  
+  return {
+    title: titles[locale as keyof typeof titles] || titles.en,
+    description: 'Professional IT Services',
+    alternates: {
+      languages: {
+        'en': '/',
+        'de': '/de',
+        'pl': '/pl',
+      }
+    }
+  };
 }

@@ -54,8 +54,10 @@ export default function LanguageSwitcher() {
   };
 
   // aktuelle Sprache ermitteln
-  const currentLang = pathname.split("/")[1];
-
+  let currentLang = pathname.split("/")[1];
+  if (pathname === "/") {
+    currentLang = "en"; // Root zeigt Englisch
+  }
   return (
     <>
       {/* Toggle Button */}
