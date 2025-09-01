@@ -235,9 +235,8 @@ ul.list-disc li::marker { color: var(--color-accent-two); }
 .card {
   border-radius: 1rem;       /* bleibt */
   overflow: hidden;           /* bleibt */
-  padding: 0.7rem;            /* bleibt */
-  margin-top: 0;              /* neu: kein Margin oben */
-  margin-bottom: 4rem;        /* Margin unten */
+
+  /* margin-bottom: 4rem;        Margin unten */
   background-color: var(--card-bg); /* bleibt */
   box-shadow: 0 6px 18px rgba(0,0,0,0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
