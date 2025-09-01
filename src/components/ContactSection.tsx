@@ -157,7 +157,7 @@ export default function ContactSection() {
               href="tel:+491628036905"
               className="inline-flex items-center justify-center px-6 py-4 border border-black/30 rounded-full text-black hover:bg-black/10 hover:-translate-y-1 transition-transform duration-300"
             >
-              Anrufen
+              {t("form.call")}
             </a>
           </div>
         </motion.form>

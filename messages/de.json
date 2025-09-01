@@ -189,7 +189,8 @@
         "support": "IT-Support",
         "general": "Allgemeine Anfrage"
       },
-      "submit": "Nachricht senden"
+      "submit": "Nachricht senden",
+      "call": "Anrufen"
     }
   },
   "testimonials": {

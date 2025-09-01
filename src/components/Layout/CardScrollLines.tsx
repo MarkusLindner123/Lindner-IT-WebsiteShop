@@ -29,48 +29,57 @@ export default function CardScrollLines({ cardIds }: CardScrollLinesProps) {
   const svgRef = useRef<SVGSVGElement>(null);
   const animatedLines = useRef<Set<number>>(new Set());
 
+  // Berechnung der Linienpositionen
   useLayoutEffect(() => {
-    const newPositions: CardPosition[] = cardIds.map((id) => {
-      const el = document.getElementById(id);
-      if (!el) return { top: 0, bottom: 0, width: 0, left: 0 };
-      return {
-        top: el.offsetTop,
-        bottom: el.offsetTop + el.offsetHeight,
-        width: el.offsetWidth,
-        left: el.offsetLeft,
-      };
-    });
+    if (!cardIds.length) return;
 
-    if (newPositions.length > 1) {
-      let toggleRight = Math.random() < 0.5;
-      const newLines: LinePoints[] = newPositions.slice(0, -1).map((pos, i) => {
-        const next = newPositions[i + 1];
-
-        const startX = toggleRight
-          ? pos.left + pos.width * 0.6 + Math.random() * pos.width * 0.3
-          : pos.left + pos.width * 0.1 + Math.random() * pos.width * 0.3;
-
-        const endX = toggleRight
-          ? next.left + next.width * 0.1 + Math.random() * next.width * 0.3
-          : next.left + next.width * 0.6 + Math.random() * next.width * 0.3;
-
-        const startY = pos.bottom;
-        const endY = next.top;
-
-        const mid1X = startX;
-        const mid1Y = (startY + endY) / 2;
-        const mid2X = endX;
-        const mid2Y = mid1Y;
-
-        toggleRight = !toggleRight;
-
-        return { startX, startY, mid1X, mid1Y, mid2X, mid2Y, endX, endY };
+    const calculateLines = () => {
+      const newPositions: CardPosition[] = cardIds.map((id) => {
+        const el = document.getElementById(id);
+        if (!el) return { top: 0, bottom: 0, width: 0, left: 0 };
+        return {
+          top: el.offsetTop,
+          bottom: el.offsetTop + el.offsetHeight,
+          width: el.offsetWidth,
+          left: el.offsetLeft,
+        };
       });
 
-      setLines(newLines);
-    }
+      if (newPositions.length > 1) {
+        let toggleRight = Math.random() < 0.5;
+        const newLines: LinePoints[] = newPositions.slice(0, -1).map((pos, i) => {
+          const next = newPositions[i + 1];
+
+          const startX = toggleRight
+            ? pos.left + pos.width * 0.6 + Math.random() * pos.width * 0.3
+            : pos.left + pos.width * 0.1 + Math.random() * pos.width * 0.3;
+
+          const endX = toggleRight
+            ? next.left + next.width * 0.1 + Math.random() * next.width * 0.3
+            : next.left + next.width * 0.6 + Math.random() * next.width * 0.3;
+
+          const startY = pos.bottom;
+          const endY = next.top;
+
+          const mid1X = startX;
+          const mid1Y = (startY + endY) / 2;
+          const mid2X = endX;
+          const mid2Y = mid1Y;
+
+          toggleRight = !toggleRight;
+
+          return { startX, startY, mid1X, mid1Y, mid2X, mid2Y, endX, endY };
+        });
+
+        setLines(newLines);
+      }
+    };
+
+    // requestAnimationFrame stellt sicher, dass DOM komplett gerendert ist
+    requestAnimationFrame(calculateLines);
   }, [cardIds]);
 
+  // Animation der Linien beim Sichtbarwerden
   useLayoutEffect(() => {
     if (!lines.length) return;
 

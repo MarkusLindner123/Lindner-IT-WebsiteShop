@@ -8,7 +8,7 @@ import ServicesSection from "@/components/ServicesSection";
 import ContactSection from "@/components/ContactSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import { Card } from "@/components/Layout/Card";
-import CardScrollLines from "@/components/CardScrollLines";
+import CardScrollLines from "@/components/Layout/CardScrollLines";
 
 export default async function HomePage({
   params,

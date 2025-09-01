@@ -189,7 +189,8 @@
         "support": "IT Support",
         "general": "General Inquiry"
       },
-      "submit": "Send Message"
+      "submit": "Send Message",
+      "call": "Call Me"
     }
   },
   "testimonials": {
