@@ -3,18 +3,11 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import "./AboutSection.css"; // Brush-Effekt
 
 const brushColors = [
-  "yellow",   // accent-one
-  "blue",     // accent-two
-  "green",    // success
-  "red",      // kräftiges Rot statt "dark"
-  "orange",   // Orange
-  "purple",   // kräftiges Violett
-  "teal",     // Türkis/Teal
-  "indigo",   // Indigo
-  "lime"      // frisches Limegrün
+  "yellow", "blue", "green", "red", "orange", "purple", "teal", "indigo", "lime"
 ];
 
 const aboutImages = [
@@ -24,11 +17,35 @@ const aboutImages = [
   "/about-images/about4.webp",
 ];
 
+// Highlight-Wörter pro Sprache, je 16 Wörter, 4 pro Sektion
+const highlightWordsEn = [
+  "bilingual", "engineering", "embedded", "software",
+  "Siemens", "infrastructure", "freelance", "websites",
+  "networks", "cybersecurity", "reliable", "scalable",
+  "secure", "growth-driven", "solutions", "SMEs"
+];
+
+const highlightWordsDe = [
+  "zweisprachig", "technische", "embedded", "Software",
+  "Softwareentwicklung", "Projekt","Cloud-Systeme","IT-Lösungen",
+  "Siemens", "Infrastruktur", "freiberuflich", "Websites",
+  "Netze", "Cybersicherheit", "zuverlässig", "skalierbar",
+  "sicher", "wachstumsorientiert", "Lösungen", "KMU", "Beratung"
+];
+
+const highlightWordsPl = [
+  "dwujęzycznie", "inżynieria", "embedded", "oprogramowanie",
+  "Siemens", "infrastruktura", "freelance", "strony",
+  "sieci", "bezpieczeństwo", "niezawodne", "skalowalne",
+  "bezpieczne", "rozwój", "rozwiązania", "MŚP"
+];
+
 export default function AboutSection() {
   const t = useTranslations("about");
   const sectionRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<Array<HTMLDivElement | null>>([]);
   const [speedFactor, setSpeedFactor] = useState(1.2);
+  const pathname = usePathname();
 
   const sections = useMemo(
     () => ({
@@ -45,19 +62,19 @@ export default function AboutSection() {
     [sections]
   );
 
-  const highlightWords = useMemo(() => [
-  "background", "hintergrund", "bilingual", "zweisprachig", "engineering", "technische Informatik",
-  "corporateexperience", "freelance", "freiberuflich", "lawyers", "Kanzleien", "realestate", "Immobilien",
-  "Siemens", "infrastructure", "websites", "networks", "cybersecurity", "reliable", "secure", "customized",
-  "growth", "ITsolutions", "IT-Lösungen",
-], []);
+  // Sprache wählen
+  const highlightWords = useMemo(() => {
+    if (pathname.startsWith("/en")) return highlightWordsEn;
+    if (pathname.startsWith("/pl")) return highlightWordsPl;
+    return highlightWordsDe;
+  }, [pathname]);
 
-const highlightWordsSet = useMemo(
-  () => new Set(highlightWords.flatMap((w) => w.split(/\s+/)).map((w) => w.toLowerCase())),
-  [highlightWords]
-);
+  const highlightWordsSet = useMemo(
+    () => new Set(highlightWords.map(w => w.toLowerCase())),
+    [highlightWords]
+  );
 
-
+  // Wörter für Animation vorbereiten
   const allWords = useMemo(() => {
     let globalIndex = 0;
     return paragraphs.map((paragraph) => {
@@ -72,6 +89,7 @@ const highlightWordsSet = useMemo(
     });
   }, [paragraphs]);
 
+  // Highlight-Farben zuordnen
   const highlightColorMap = useMemo(() => {
     const map: { [key: number]: string } = {};
     let ci = 0;
@@ -85,6 +103,7 @@ const highlightWordsSet = useMemo(
     return map;
   }, [allWords, highlightWordsSet]);
 
+  // Scroll-Animation
   useEffect(() => {
     const handleResize = () => setSpeedFactor(window.innerWidth < 768 ? 1.12 : 1.21);
     handleResize();

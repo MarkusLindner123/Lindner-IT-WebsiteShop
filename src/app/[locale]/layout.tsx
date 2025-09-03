@@ -7,7 +7,7 @@ import { routing } from "@/i18n/routing";
 import Header from "@/components/Layout/Header";
 import LanguageSwitcher from "@/components/Layout/LanguageSwitcher";
 import Phone from "@/components/Layout/PhoneButton";
-import PageLoader from "@/components/Layout/PageLoader";
+//import PageLoader from "@/components/Layout/PageLoader";
 import Footer from "@/components/Layout/Footer";
 
 export function generateStaticParams() {
@@ -31,13 +31,13 @@ export default async function LocaleLayout({
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
       <div lang={locale}> {/* Korrekte Sprach-Markierung */}
-        <PageLoader>
+        {/*<PageLoader>*/}
           <Header />
           {children}
           <Phone />
           <LanguageSwitcher />
           <Footer />
-        </PageLoader>
+        {/*</PageLoader>*/}
       </div>
     </NextIntlClientProvider>
   );

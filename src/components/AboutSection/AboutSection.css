@@ -40,29 +40,29 @@
 
 /* Pinsel-Farben – angepasst an globals.css (ohne Pink) */
 .brush-effect.brush-yellow {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=FACC15); /* accent-one */
+  background-image: url("/brushes-about/brush-yellow.svg"); /* accent-one */
 }
 .brush-effect.brush-blue {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=60A5FA); /* accent-two */
+  background-image: url("/brushes-about/brush-blue.svg"); /* accent-two */
 }
 .brush-effect.brush-green {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=10B981); /* success */
+  background-image: url("/brushes-about/brush-green.svg"); /* success */
 }
 .brush-effect.brush-purple {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=8B5CF6); /* kräftiges Violett */
+  background-image: url("/brushes-about/brush-purple.svg"); /* kräftiges Violett */
 }
 .brush-effect.brush-orange {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=F97316); /* Orange */
+  background-image: url("/brushes-about/brush-orange.svg"); /* Orange */
 }
 .brush-effect.brush-indigo {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=6366F1); /* Indigo */
+  background-image: url("/brushes-about/brush-indigo.svg"); /* Indigo */
 }
 .brush-effect.brush-lime {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=84CC16); /* Limegrün */
+  background-image: url("/brushes-about/brush-lime.svg"); /* Limegrün */
 }
 .brush-effect.brush-teal {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=14B8A6); /* Türkis/Teal */
+  background-image: url("/brushes-about/brush-teal.svg"); /* Türkis/Teal */
 }
 .brush-effect.brush-red {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3&color=EF4444); /* Rot als Ersatz für Pink */
+  background-image: url("/brushes-about/brush-red.svg"); /* Rot als Ersatz für Pink */
 }

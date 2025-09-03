@@ -5,42 +5,52 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import "@/app/globals.css";
 
-export default function PageLoader({ children }: { children: React.ReactNode }) {
+interface PageLoaderProps {
+  children: React.ReactNode;
+  imagePaths?: string[];
+}
+
+export default function PageLoader({ children, imagePaths = [] }: PageLoaderProps) {
   const [progress, setProgress] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  // Dauer der Simulation
-  const updateInterval = 200; // ms
-
   useEffect(() => {
-    const interval: number = window.setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          setLoading(false);
-          return 100;
-        }
-        return prev + Math.floor(Math.random() * 5);
-      });
-    }, updateInterval);
+    const trackedImages = ["/logo-white.svg", ...imagePaths];
+    let loadedCount = 0;
 
-    return () => clearInterval(interval);
-  }, []);
+    const updateProgress = () => {
+      loadedCount++;
+      const newProgress = Math.min(Math.round((loadedCount / trackedImages.length) * 100), 100);
+      setProgress(newProgress);
+      if (newProgress === 100) {
+        setTimeout(() => setLoading(false), 200);
+      }
+    };
 
-  // Logo-Fortschritt leicht schneller als Ladebalken
-  const logoProgress = Math.min(progress * 1.2, 100); // 20% schneller
-  const clipValue = 100 - logoProgress; // invertiert für clipPath
+    trackedImages.forEach((src) => {
+      const img: HTMLImageElement = new window.Image();
+      img.src = src;
+      if (img.complete) {
+        updateProgress();
+      } else {
+        img.onload = updateProgress;
+        img.onerror = updateProgress;
+      }
+    });
+  }, [imagePaths]); // useEffect jetzt sauber
+
+  const logoProgress = Math.min(progress * 1.2, 100);
+  const clipValue = 100 - logoProgress;
 
   return (
     <>
       {loading ? (
         <div className="fixed inset-0 flex flex-col items-center justify-center bg-primary-dark z-[9999]">
-          {/* Logo zeichnen leicht schneller */}
           <motion.div
             className="w-1/2 md:w-[40vw] h-auto mb-12 relative overflow-hidden"
             initial={{ clipPath: "inset(100% 0% 0% 0%)" }}
             animate={{ clipPath: `inset(${clipValue}% 0% 0% 0%)` }}
-            transition={{ duration: updateInterval / 1000, ease: "linear" }}
+            transition={{ duration: 0.15, ease: "linear" }}
           >
             <Image
               src="/logo-white.svg"
@@ -51,7 +61,6 @@ export default function PageLoader({ children }: { children: React.ReactNode }) 
             />
           </motion.div>
 
-          {/* Ladebalken in der gleichen Breite wie das SVG */}
           <div className="w-1/2 md:w-[40vw] h-8 bg-white/20 rounded-full overflow-hidden">
             <div
               className="h-full bg-white transition-all duration-300"
@@ -59,7 +68,7 @@ export default function PageLoader({ children }: { children: React.ReactNode }) 
             />
           </div>
           <div className="mt-4 text-white font-medium text-2xl">
-            {Math.min(progress, 100)}%
+            {progress}%
           </div>
         </div>
       ) : (
