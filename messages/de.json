@@ -9,7 +9,7 @@
     "titleLine1": "Zuverlässige",
     "titleLine2": "IT-Lösungen",
     "titleLine3": "für Ihre Firma",
-    "subtitle": "Ich biete professionellen IT-Support, sichere Netzwerkinstallation, Cybersicherheit und hochwertige Websites für kleine und mittlere Unternehmen.",
+    "subtitle": "Ich biete professionellen IT-Support, sichere Netzwerkinstallation, zuverlässige Cybersicherheit und individuell gestaltete Websites für kleine und mittlere Unternehmen.",
     "ctaPrimary": "Angebot anfordern",
     "ctaSecondary": "IT-Leistungen ansehen"
   },
@@ -262,6 +262,11 @@
     "title": "Seite nicht gefunden",
     "subtitle": "Sorry, die Seite die suchst, existiert nicht.",
     "backHome": "Zurück zur Startseite"
+  },
+  "cookieBanner": {
+    "message": "Wir verwenden Cookies, um Ihr Nutzererlebnis zu verbessern und die Website optimal zu gestalten.",
+    "accept": "Zustimmen",
+    "decline": "Ablehnen"
   }
 
 }

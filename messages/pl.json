@@ -9,7 +9,7 @@
     "titleLine1": "Niezawodne",
     "titleLine2": "rozwiązania IT",
     "titleLine3": "dla Twojej firmy",
-    "subtitle": "Oferuję profesjonalne wsparcie IT, bezpieczną instalację sieci, cyberbezpieczeństwo i wysokiej jakości strony internetowe dla małych i średnich firm.",
+    "subtitle": "Oferuję profesjonalne wsparcie IT, bezpieczną instalację sieci, cyberbezpieczeństwo i wysokiej jakości strony internetowe dla firm.",
     "ctaPrimary": "Poproś o ofertę",
     "ctaSecondary": "Zobacz usługi IT"
   },
@@ -260,5 +260,10 @@
     "title": "Strona nie znaleziona",
     "subtitle": "Przepraszamy, strona, której szukasz, nie istnieje.",
     "backHome": "Powrót do strony głównej"
-  }
+  },
+  "cookieBanner": {
+  "message": "Używamy plików cookie, aby poprawić Twoje doświadczenie i zapewnić optymalne działanie strony.",
+  "accept": "Akceptuję",
+  "decline": "Odrzuć"
+}
 }

@@ -9,6 +9,7 @@ import ContactSection from "@/components/ContactSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import { Card } from "@/components/Layout/Card";
 import CardScrollLines from "@/components/Layout/CardScrollLines";
+import CookieBanner from "@/components/Layout/CookieBanner"; // ✅ neu
 
 export default async function HomePage({
   params,
@@ -24,7 +25,7 @@ export default async function HomePage({
       <CardScrollLines cardIds={["home", "services", "about", "contact", "testimonials"]} />
 
       {/* Hero Card */}
-      <Card id="home" className="bg-card-hero pt-0 sm:mt-0 mb-20 mt-6">
+      <Card id="home" className="bg-card-hero pt-0 mt-3 sm:mt-0 mb-20 md:h-screen">
         <Hero />
       </Card>
 
@@ -45,6 +46,9 @@ export default async function HomePage({
           <TestimonialsSection />
         </Card>
       </div>
+
+      {/* Cookie Banner */}
+      <CookieBanner />
     </main>
   );
 }

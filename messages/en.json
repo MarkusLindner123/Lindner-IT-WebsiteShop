@@ -263,7 +263,12 @@
     "title": "Page Not Found",
     "subtitle": "Sorry, the page you are looking for does not exist.",
     "backHome": "Back to Home"
-  }
+  },
+  "cookieBanner": {
+  "message": "We use cookies to improve your experience and make the website work optimally.",
+  "accept": "Accept",
+  "decline": "Decline"
+}
 
 
 }
