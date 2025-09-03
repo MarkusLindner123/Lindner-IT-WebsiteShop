@@ -44,15 +44,15 @@ export default function Hero() {
   };
 
   const galleryImages = [
-    "/hero-images/hero-img.jpg",
-    "/hero-images/hero-img1.jpg",
-    "/hero-images/hero-img2.jpg",
-    "/hero-images/hero-img3.jpg",
-    "/hero-images/hero-img4.jpg",
-    "/hero-images/hero-img5.jpg",
-    "/hero-images/hero-img6.jpg",
-    "/hero-images/hero-img7.jpg",
-    "/hero-images/hero-img8.jpg",
+    "/hero-images/hero-img.webp",
+    "/hero-images/hero-img1.webp",
+    "/hero-images/hero-img2.webp",
+    "/hero-images/hero-img3.webp",
+    "/hero-images/hero-img4.webp",
+    "/hero-images/hero-img5.webp",
+    "/hero-images/hero-img6.webp",
+    "/hero-images/hero-img7.webp",
+    "/hero-images/hero-img8.webp",
   ];
 
   const column1Images = galleryImages.slice(0, 3);

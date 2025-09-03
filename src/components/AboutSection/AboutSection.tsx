@@ -18,10 +18,10 @@ const brushColors = [
 ];
 
 const aboutImages = [
-  "/about-images/about1.jpg",
-  "/about-images/about2.jpg",
-  "/about-images/about3.jpg",
-  "/about-images/about4.jpg",
+  "/about-images/about1.webp",
+  "/about-images/about2.webp",
+  "/about-images/about3.webp",
+  "/about-images/about4.webp",
 ];
 
 export default function AboutSection() {
