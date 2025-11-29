@@ -36,7 +36,7 @@ const HEADER_CONFIG = {
     svgIconSize: 28,
     iconOffsetX: 75,      // war 90
     headerPadding: 15,
-    topPosition: 20,
+    topPosition: 30,
     scrollOffset: 80,
     // --- ENDE ANPASSUNG
   },
@@ -191,7 +191,7 @@ export default function Header() {
     <>
       <button
         ref={menuButtonRef}
-        className="fixed top-4 right-4 z-[60] p-2 w-14 h-14 rounded-full bg-[rgba(10,17,40,0.6)] flex items-center justify-center shadow-lg backdrop-blur-sm md:hidden"
+        className="fixed top-4 right-4 z-[999] p-2 w-14 h-14 rounded-full bg-[rgba(10,17,40,0.6)] flex items-center justify-center shadow-lg backdrop-blur-sm md:hidden"
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         aria-label="Toggle menu"
       >
