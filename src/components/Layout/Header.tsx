@@ -25,7 +25,8 @@ const HEADER_CONFIG = {
     svgIconSize: 32,
     iconOffsetX: 120,
     headerPadding: 30,
-    topPosition: 10,
+    topPosition: -80,
+    scrollOffset: 100,
   },
   mobile: {
     // <<< ANPASSUNG FÜR SCHMALEREN HEADER ---
@@ -36,6 +37,7 @@ const HEADER_CONFIG = {
     iconOffsetX: 75,      // war 90
     headerPadding: 15,
     topPosition: 20,
+    scrollOffset: 80,
     // --- ENDE ANPASSUNG
   },
   svgHeight: 90,
@@ -66,7 +68,7 @@ export default function Header() {
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const jumper1Ref = useRef<SVGRectElement>(null);
   const jumper2Ref = useRef<SVGRectElement>(null);
-  
+
   const isClickScrollingRef = useRef(false);
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -75,11 +77,11 @@ export default function Header() {
 
   const iconCentersX = useMemo(() =>
     NAV_ITEMS.map((_, i) => config.iconOffsetX + i * (config.iconWidth + config.iconMargin) + config.jumperSize / 2),
-  [config]);
-  
+    [config]);
+
   const svgWidth = useMemo(() =>
     iconCentersX[iconCentersX.length - 1] + config.iconWidth / 2 + config.headerPadding,
-  [iconCentersX, config]);
+    [iconCentersX, config]);
 
   const logoX = config.iconOffsetX - config.iconWidth - config.iconMargin;
 
@@ -169,7 +171,14 @@ export default function Header() {
       isClickScrollingRef.current = true;
       setActiveIndex(index);
 
-      targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
+      // targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
+      const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = elementPosition - config.scrollOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
 
       if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
       scrollTimeoutRef.current = setTimeout(() => {
@@ -191,7 +200,7 @@ export default function Header() {
 
       <div
         ref={headerRef}
-        className="fixed z-50 flex justify-center px-2.5 py-1.25 rounded-xl shadow-md border header-glass opacity-0"
+        className="fixed z-[100] flex justify-center px-2.5 py-1.25 rounded-xl shadow-md border header-glass opacity-0"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
