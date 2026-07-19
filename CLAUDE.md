@@ -52,9 +52,10 @@ Three separate systems, all in `"use client"` components:
 
 ### Blog
 
-- Articles live as plain data in `src/content/posts.ts` — one `Post` entry with content for **all three locales** (no CMS, no MDX). Adding an article means adding it there; the sitemap picks it up automatically via the `POSTS` import.
-- Routes: `src/app/[locale]/blog/page.tsx` (list) and `src/app/[locale]/blog/[slug]/page.tsx` (article, `generateStaticParams` over slugs).
+- Articles live as plain data in `src/content/posts.ts` — one `Post` entry with content for **all three locales** (no CMS, no MDX). Adding an article means adding it there; the sitemap and the homepage blog section pick it up automatically via the `POSTS` import.
+- The blog overview is the `blog` section on the homepage (`BlogTeaser.tsx`, all posts). `/blog` only redirects to `/#blog`; articles render at `/blog/[slug]` (`generateStaticParams` over slugs).
 - On subpages the header's section anchors don't exist; `Header.tsx` falls back to navigating to `/{locale}#section`.
+- The fixed header nav REQUIRES its explicit `top-0` class: without it, its position depends on the homepage hero card's collapsing margin and shifts on subpages. `HEADER_CONFIG.topPosition` values are absolute viewport offsets.
 
 ### Misc
 

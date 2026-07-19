@@ -23,7 +23,7 @@ const NAV_ITEMS: NavItem[] = [
   { key: "services", href: "#services", icon: Cpu },
   { key: "about", href: "#about", icon: User },
   { key: "contact", href: "#contact", icon: Mail },
-  { key: "blog", href: "/blog", icon: BookOpen },
+  { key: "blog", href: "#blog", icon: BookOpen },
 ];
 
 const HEADER_CONFIG = {
@@ -34,7 +34,9 @@ const HEADER_CONFIG = {
     svgIconSize: 32,
     iconOffsetX: 120,
     headerPadding: 30,
-    topPosition: -80,
+    // Absoluter Viewport-Abstand (nav hat top-0): entspricht dem alten
+    // Look auf der Startseite (128px kollabierter Hero-Margin - 80px)
+    topPosition: 48,
     scrollOffset: 100,
   },
   mobile: {
@@ -45,7 +47,7 @@ const HEADER_CONFIG = {
     svgIconSize: 24,
     iconOffsetX: 58,
     headerPadding: 10,
-    topPosition: 30,
+    topPosition: 42,
     scrollOffset: 80,
   },
   svgHeight: 90,
@@ -246,11 +248,14 @@ export default function Header() {
         {isMobileMenuOpen ? <X className="text-white h-8 w-8" /> : <Menu className="text-white h-8 w-8" />}
       </button>
 
+      {/* top-0 ist Pflicht: ohne explizites top hängt die Position der
+          fixed-Nav vom kollabierenden Margin der ersten Homepage-Card ab
+          und verrutscht auf Unterseiten (Blog, Impressum …) */}
       <nav
         ref={headerRef}
         id="main-nav"
         aria-label={t("ariaLabel")}
-        className="fixed z-[100] flex justify-center px-2.5 py-1.25 rounded-xl shadow-md border header-glass opacity-0"
+        className="fixed top-0 z-[100] flex justify-center px-2.5 py-1.25 rounded-xl shadow-md border header-glass opacity-0"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

@@ -52,7 +52,7 @@ export default async function BlogPostPage({
   return (
     <main className="max-w-3xl mx-auto px-6 md:px-12 pt-32 md:pt-40 pb-20">
       <Link
-        href="/blog"
+        href="/#blog"
         className="inline-flex items-center gap-2 text-neutral hover:text-link transition-colors mb-8"
       >
         <ArrowLeft size={18} aria-hidden="true" />

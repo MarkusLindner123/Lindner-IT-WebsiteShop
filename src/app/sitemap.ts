@@ -4,11 +4,11 @@ import { POSTS } from "@/content/posts";
 
 // Deutsch läuft ohne URL-Präfix (localePrefix: "as-needed"),
 // daher ist die de-Variante die kanonische URL.
+// /blog selbst ist nur ein Redirect auf /#blog und gehört nicht in die Sitemap
 const PAGES = [
   "/",
   "/imprint",
   "/privacy",
-  "/blog",
   ...POSTS.map((post) => `/blog/${post.slug}`),
 ];
 

@@ -5,7 +5,7 @@ export default function ImprintPage() {
   const t = useTranslations("impressum");
 
   return (
-    <main className="max-w-3xl mx-auto px-4 pt-32 pb-16 text-gray-900">
+    <main className="max-w-3xl mx-auto px-4 pt-32 md:pt-40 pb-16 text-gray-900">
       <h1 className="text-3xl font-bold mb-8">{t("title")}</h1>
 
       {/* Company Info */}
