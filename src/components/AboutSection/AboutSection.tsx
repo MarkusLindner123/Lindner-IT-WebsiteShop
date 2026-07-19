@@ -56,11 +56,11 @@ const highlightWordsPl = [
 // Satzzeichen, die vor dem Wortvergleich entfernt werden
 const PUNCTUATION_RE = /[.,!?:;()„“”–—]/g;
 
-// Bei 90 % der Scroll-Strecke ist alles zu 100 % aufgedeckt. Die Strecke läuft
+// Bei 85 % der Scroll-Strecke ist alles zu 100 % aufgedeckt. Die Strecke läuft
 // von "Absatz-Container betritt den Viewport unten" (0) bis "Container hat den
 // Viewport oben komplett verlassen" (1) — langsam genug, um den Effekt beim
 // Scrollen zu erleben, und früh genug, dass das Ende sichtbar fertig wird.
-const REVEAL_COMPLETE_AT = 0.9;
+const REVEAL_COMPLETE_AT = 0.85;
 
 const CERT_BADGES: { key: "ihk" | "python" | "cpp" | "siemens" | "elastic" | "azure"; icon: LucideIcon }[] = [
   { key: "ihk", icon: GraduationCap },
