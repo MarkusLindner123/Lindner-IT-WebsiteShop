@@ -1,12 +1,13 @@
 {
   "metadata": {
-    "title": "Lindner IT – Usługi IT i strony internetowe dla MŚP w Berlinie",
-    "description": "Wsparcie IT, instalacja sieci, cyberbezpieczeństwo i profesjonalne strony internetowe dla małych i średnich firm w Berlinie. Osobiście, niezawodnie, z certyfikatami."
+    "title": "Lindner IT – Usługi IT B2B i strony internetowe dla firm w Berlinie",
+    "description": "Tworzenie stron internetowych, wsparcie IT, sieci i cyberbezpieczeństwo: usługi IT B2B dla małych i średnich firm w Berlinie — kancelarie, biura nieruchomości, rzemiosło. Poproś o bezpłatną ofertę."
   },
   "nav": {
     "ariaLabel": "Nawigacja główna",
     "home": "Strona główna",
     "services": "Usługi",
+    "references": "Referencje",
     "about": "O mnie",
     "contact": "Kontakt",
     "blog": "Blog",
@@ -60,6 +61,53 @@
       "certificates": "Świadectwa i certyfikaty (PDF)"
     },
     "ctaPrimary": "Poproś o ofertę"
+  },
+  "references": {
+    "kicker": "Referencje",
+    "title": "Projekty, które mówią same za siebie.",
+    "intro": "Prawdziwi klienci, prawdziwe efekty — od kancelarii po firmę rzemieślniczą.",
+    "visit": "Zobacz stronę",
+    "scrollHint": "Najedź: strona się przewija",
+    "shotAlt": "Zrzut ekranu strony {domain}",
+    "elektro": {
+      "category": "Strona www · Rzemiosło",
+      "title": "Lindner Elektrotechnik",
+      "text": "Kompletna strona internetowa berlińskiej firmy elektrotechnicznej: usługi, branże i oferta jasno zaprezentowane — zapytania przychodzą prosto z telefonu.",
+      "tag1": "Koncepcja i realizacja",
+      "tag2": "Responsywny design",
+      "tag3": "SEO"
+    },
+    "korff": {
+      "category": "Strona www · Kancelaria",
+      "title": "Anwaltskanzlei Korff",
+      "text": "Profesjonalna strona kancelarii prawa karnego w Berlinie: przejrzysta struktura, wyeksponowany kontakt alarmowy i zaufanie od pierwszego kliknięcia.",
+      "tag1": "Koncepcja i realizacja",
+      "tag2": "Local SEO",
+      "tag3": "RODO"
+    },
+    "phoenix": {
+      "category": "Aplikacja web · Projekt społeczny",
+      "title": "Narzędzie ankietowe dla Haus Phönix",
+      "text": "Cyfrowe narzędzie ankietowe dla profilaktyki uzależnień organizacji non-profit: anonimowe, niskoprogowe i analizowane jednym kliknięciem.",
+      "tag1": "Własny projekt",
+      "tag2": "Anonimowy udział",
+      "tag3": "Analiza i eksport",
+      "term1": "Moduł ankiety załadowany · udział anonimowy",
+      "term2": "Odpowiedzi zapisywane w formie anonimowej",
+      "term3": "Analiza gotowa → report.pdf"
+    },
+    "siemens": {
+      "category": "Doświadczenie · Enterprise",
+      "title": "5 lat doświadczenia enterprise: Siemens",
+      "text": "Jako student pracujący w Siemens AG w Berlinie: infrastruktura IT, monitoring z ELK-Stack i automatyzacja w PowerShell i Pythonie — korporacyjna jakość, która trafia dziś do każdego projektu dla MŚP.",
+      "yearsSuffix": "lat",
+      "stat1Label": "Siemens Berlin · 2019–2024",
+      "stat2Label": "CodinGame Python (globalnie)",
+      "stat3Label": "CodinGame C++ (globalnie)",
+      "tag1": "Python",
+      "tag2": "C++",
+      "tag3": "Informatyk z dyplomem IHK"
+    }
   },
   "services": {
     "ctaPrimary": "Skontaktuj się ze mną",
@@ -203,10 +251,15 @@
     "kicker": "Bezpieczne i wydajne IT",
     "title": "Skontaktuj się",
     "subtitle": "Skontaktuj się ze mną, aby omówić potrzeby IT, poprosić o ofertę lub uzyskać wsparcie dla swojej firmy.",
+    "b2bBadge": "Tylko dla firm (B2B)",
+    "b2bNote": "Ważne: Lindner IT pracuje wyłącznie dla klientów biznesowych — firm, osób samozatrudnionych i organizacji (B2B). Nie zajmuję się prywatnymi naprawami komputerów (B2C).",
+    "infoTitle": "Bezpośredni kontakt",
+    "infoResponse": "Zwykle odpowiadam w ciągu 24 godzin",
     "form": {
       "name": "Imię i nazwisko",
       "email": "E-mail",
       "phone": "Telefon",
+      "company": "Firma / organizacja",
       "message": "Wiadomość",
       "reason": "Powód kontaktu",
       "reasonPlaceholder": "Proszę wybrać",
@@ -216,6 +269,11 @@
         "general": "Ogólne zapytanie"
       },
       "submit": "Wyślij wiadomość",
+      "sending": "Wysyłanie…",
+      "successTitle": "Zapytanie wysłane!",
+      "successText": "Dziękuję! Zwykle odpowiadam w ciągu 24 godzin.",
+      "errorTitle": "Wysyłanie nie powiodło się",
+      "errorText": "Spróbuj ponownie lub napisz bezpośrednio na markuslindner1998@gmail.com.",
       "call": "Zadzwoń teraz"
     }
   },
@@ -275,9 +333,9 @@
     "phone": "Telefon",
     "email": "E-mail",
     "dataCollection": "Zbieranie danych",
-    "dataCollectionText": "Tutaj opisujesz, jakie dane są zbierane na Twojej stronie, np. przez formularze, analitykę lub pliki cookies.",
+    "dataCollectionText": "Podczas odwiedzin tej strony dane przetwarzane są wyłącznie w następującym zakresie: (1) techniczne dane dostępowe (np. adres IP, czas, wywołana strona) przez naszego dostawcę hostingu Vercel w celu udostępnienia i zabezpieczenia strony; (2) Google Analytics do pomiaru oglądalności — wyłącznie po wyrażeniu zgody w banerze cookie; adres IP jest przy tym skracany; (3) formularz kontaktowy: wprowadzone dane (imię i nazwisko, e-mail, telefon, firma, wiadomość) są przesyłane do nas bezpośrednio e-mailem i wykorzystywane wyłącznie do obsługi zapytania.",
     "purpose": "Cel przetwarzania",
-    "purposeText": "Wyjaśnienie, w jakim celu dane są przetwarzane, np. do obsługi zapytań lub ulepszania strony.",
+    "purposeText": "Przetwarzanie służy udostępnianiu i zabezpieczaniu strony, anonimowej statystyce (tylko za zgodą) oraz obsłudze zapytań. Zgodę na Google Analytics można w każdej chwili odwołać ze skutkiem na przyszłość, usuwając zapisane pliki cookie/dane tej witryny w przeglądarce i ponownie odrzucając baner.",
     "rights": "Twoje prawa",
     "rightAccess": "Prawo do uzyskania informacji o przetwarzanych danych osobowych",
     "rightCorrection": "Prawo do poprawiania nieprawidłowych danych",
@@ -306,6 +364,11 @@
     "back": "Powrót do przeglądu",
     "ctaTitle": "Masz pytania o swoje IT?",
     "ctaText": "Porozmawiajmy niezobowiązująco o Twoim projekcie.",
-    "ctaButton": "Skontaktuj się"
+    "ctaButton": "Skontaktuj się",
+    "featuredTag": "Nowość",
+    "suggestKicker": "Twój temat",
+    "suggestTitle": "Brakuje Twojego tematu?",
+    "suggestText": "Napisz, o czym chcesz przeczytać — to może być następny artykuł.",
+    "suggestCta": "Zaproponuj temat"
   }
 }

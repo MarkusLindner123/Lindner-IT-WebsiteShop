@@ -1,12 +1,13 @@
 {
   "metadata": {
-    "title": "Lindner IT – IT Services & Web Design for SMEs in Berlin",
-    "description": "IT support, network setup, cybersecurity and professional websites for small and medium-sized businesses in Berlin. Personal, reliable, certified."
+    "title": "Lindner IT – B2B IT Services & Web Design for Businesses in Berlin",
+    "description": "Professional website development, IT support, networking and cybersecurity: B2B IT services for small and medium-sized businesses in Berlin — law firms, agencies, trades. Request a free quote today."
   },
   "nav": {
     "ariaLabel": "Main navigation",
     "home": "Home",
     "services": "Services",
+    "references": "References",
     "about": "About",
     "contact": "Contact",
     "blog": "Blog",
@@ -62,6 +63,53 @@
   "ctaPrimary": "Request a Quote"
 }
 ,
+  "references": {
+    "kicker": "References",
+    "title": "Projects that speak for themselves.",
+    "intro": "Real clients, real results — from law firms to skilled trades.",
+    "visit": "View website",
+    "scrollHint": "Hover: page scrolls",
+    "shotAlt": "Screenshot of the {domain} website",
+    "elektro": {
+      "category": "Website · Trades",
+      "title": "Lindner Elektrotechnik",
+      "text": "Complete web presence for the Berlin electrical contractor: services, industries and offers clearly presented — enquiries come straight from the phone.",
+      "tag1": "Concept & build",
+      "tag2": "Responsive design",
+      "tag3": "SEO"
+    },
+    "korff": {
+      "category": "Website · Law firm",
+      "title": "Anwaltskanzlei Korff",
+      "text": "A trustworthy presence for criminal law and defence in Berlin: clear structure, a prominent emergency contact and confidence from the very first click.",
+      "tag1": "Concept & build",
+      "tag2": "Local SEO",
+      "tag3": "GDPR"
+    },
+    "phoenix": {
+      "category": "Web app · Social sector",
+      "title": "Survey tool for Haus Phönix",
+      "text": "Digital survey tool for the non-profit housing project's drug prevention work: anonymous, low-threshold and evaluated at the push of a button.",
+      "tag1": "Custom build",
+      "tag2": "Anonymous participation",
+      "tag3": "Evaluation & export",
+      "term1": "Survey module loaded · anonymous participation",
+      "term2": "Responses stored in anonymised form",
+      "term3": "Evaluation ready → report.pdf"
+    },
+    "siemens": {
+      "category": "Background · Enterprise",
+      "title": "5 years of enterprise experience: Siemens",
+      "text": "As a working student at Siemens AG in Berlin: IT infrastructure, ELK-stack monitoring and automation with PowerShell and Python — enterprise quality that goes into every SME project today.",
+      "yearsSuffix": "years",
+      "stat1Label": "Siemens Berlin · 2019–2024",
+      "stat2Label": "CodinGame Python (worldwide)",
+      "stat3Label": "CodinGame C++ (worldwide)",
+      "tag1": "Python",
+      "tag2": "C++",
+      "tag3": "IHK-certified IT specialist"
+    }
+  },
   "services": {
     "ctaPrimary": "Contact Me",
     "kicker": "My services",
@@ -204,10 +252,15 @@
     "kicker": "Secure and Efficient IT",
     "title": "Get in Touch",
     "subtitle": "Reach out today to discuss your IT needs, request a quote, or arrange support tailored for your business.",
+    "b2bBadge": "B2B only — business clients",
+    "b2bNote": "Please note: Lindner IT works exclusively with business clients — companies, self-employed professionals and organisations (B2B). I'm not the right contact for private computer repairs (B2C).",
+    "infoTitle": "Direct line",
+    "infoResponse": "I usually reply within 24 hours",
     "form": {
       "name": "Name",
       "email": "Email",
       "phone": "Phone",
+      "company": "Company / organisation",
       "message": "Message",
       "reason": "Reason for Contact",
       "reasonPlaceholder": "Please select",
@@ -217,6 +270,11 @@
         "general": "General Inquiry"
       },
       "submit": "Send Message",
+      "sending": "Sending…",
+      "successTitle": "Request sent!",
+      "successText": "Thank you! I usually reply within 24 hours.",
+      "errorTitle": "Sending failed",
+      "errorText": "Please try again or email me directly at markuslindner1998@gmail.com.",
       "call": "Call Me"
     }
   },
@@ -278,9 +336,9 @@
     "phone": "Phone",
     "email": "Email",
     "dataCollection": "Data Collection",
-    "dataCollectionText": "Here you describe which data is collected on your website, e.g., via forms, analytics, or cookies.",
+    "dataCollectionText": "When you visit this website, data is processed only to the following extent: (1) technical access data (e.g. IP address, time, page requested) by our hosting provider Vercel to deliver and secure the website; (2) Google Analytics for audience measurement — only if you have given consent via the cookie banner; IP addresses are anonymised; (3) contact form: the data you enter (name, email, phone, company, message) is sent to us directly by email and used solely to process your enquiry.",
     "purpose": "Purpose of Processing",
-    "purposeText": "Explanation of the purposes for which the data is processed, e.g., to handle inquiries or improve the website.",
+    "purposeText": "Processing serves to provide and secure the website, to compile anonymised statistics (only with your consent) and to handle your enquiries. You can revoke your consent to Google Analytics at any time with future effect by deleting this site's cookies/site data in your browser and declining the banner again.",
     "rights": "Your Rights",
     "rightAccess": "Right to access the personal data being processed",
     "rightCorrection": "Right to correct inaccurate data",
@@ -309,6 +367,11 @@
     "back": "Back to overview",
     "ctaTitle": "Questions about your IT?",
     "ctaText": "Let's talk about your project — no strings attached.",
-    "ctaButton": "Get in touch"
+    "ctaButton": "Get in touch",
+    "featuredTag": "New",
+    "suggestKicker": "Your topic",
+    "suggestTitle": "Missing a topic?",
+    "suggestText": "Tell me what you'd like to read about — it may become the next article.",
+    "suggestCta": "Suggest a topic"
   }
 }

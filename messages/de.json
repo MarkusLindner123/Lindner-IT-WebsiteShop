@@ -1,12 +1,13 @@
 {
   "metadata": {
-    "title": "Lindner IT – IT-Service & Webdesign für KMU in Berlin",
-    "description": "IT-Support, Netzwerkinstallation, Cybersicherheit und professionelle Websites für kleine und mittlere Unternehmen in Berlin. Persönlich, zuverlässig, zertifiziert."
+    "title": "Lindner IT – B2B IT-Service & Webdesign für Unternehmen in Berlin",
+    "description": "Website erstellen lassen, IT-Support, Netzwerk & Cybersicherheit: B2B-IT-Service für kleine und mittlere Unternehmen in Berlin — Kanzleien, Makler, Handwerk. Jetzt unverbindlich Angebot anfordern."
   },
   "nav": {
     "ariaLabel": "Hauptnavigation",
     "home": "Startseite",
     "services": "Leistungen",
+    "references": "Referenzen",
     "about": "Über mich",
     "contact": "Kontakt",
     "blog": "Blog",
@@ -62,6 +63,53 @@
   "ctaPrimary": "Angebot anfordern"
 }
 ,
+  "references": {
+    "kicker": "Referenzen",
+    "title": "Projekte, die für sich sprechen.",
+    "intro": "Echte Kunden, echte Ergebnisse — von der Kanzlei bis zum Handwerksbetrieb.",
+    "visit": "Website ansehen",
+    "scrollHint": "Hover: Seite scrollt",
+    "shotAlt": "Screenshot der Website {domain}",
+    "elektro": {
+      "category": "Website · Handwerk",
+      "title": "Lindner Elektrotechnik",
+      "text": "Kompletter Web-Auftritt für den Berliner Elektro-Meisterbetrieb: Leistungen, Branchen und Angebote klar präsentiert — Anfragen kommen direkt vom Handy.",
+      "tag1": "Konzept & Umsetzung",
+      "tag2": "Responsive Design",
+      "tag3": "SEO"
+    },
+    "korff": {
+      "category": "Website · Kanzlei",
+      "title": "Anwaltskanzlei Korff",
+      "text": "Seriöser Auftritt für Strafrecht und Strafverteidigung in Berlin: klare Struktur, prominenter Notruf-Kontakt, Vertrauen ab dem ersten Klick.",
+      "tag1": "Konzept & Umsetzung",
+      "tag2": "Local SEO",
+      "tag3": "DSGVO"
+    },
+    "phoenix": {
+      "category": "Web-App · Soziales",
+      "title": "Umfrage-Tool für Haus Phönix",
+      "text": "Digitales Umfrage-Tool für die Drogenprävention des gemeinnützigen Wohnprojekts: anonym, niedrigschwellig und auf Knopfdruck auswertbar.",
+      "tag1": "Eigenentwicklung",
+      "tag2": "Anonyme Teilnahme",
+      "tag3": "Auswertung & Export",
+      "term1": "Umfrage-Modul geladen · anonyme Teilnahme",
+      "term2": "Antworten werden anonymisiert gespeichert",
+      "term3": "Auswertung bereit → report.pdf"
+    },
+    "siemens": {
+      "category": "Station · Enterprise",
+      "title": "5 Jahre Enterprise-Erfahrung: Siemens",
+      "text": "Als Werkstudent bei der Siemens AG in Berlin: IT-Infrastruktur, Monitoring mit dem ELK-Stack und Automatisierung mit PowerShell und Python — Konzern-Qualität, die heute in jedem KMU-Projekt steckt.",
+      "yearsSuffix": "Jahre",
+      "stat1Label": "Siemens Berlin · 2019–2024",
+      "stat2Label": "CodinGame Python (weltweit)",
+      "stat3Label": "CodinGame C++ (weltweit)",
+      "tag1": "Python",
+      "tag2": "C++",
+      "tag3": "IHK-Fachinformatiker"
+    }
+  },
   "services": {
     "ctaPrimary": "Kontaktieren Sie mich",
     "kicker": "Meine Leistungen",
@@ -204,10 +252,15 @@
     "kicker": "Sichere und effiziente IT",
     "title": "Kontakt aufnehmen",
     "subtitle": "Kontaktieren Sie mich, um Ihre IT-Bedürfnisse zu besprechen, ein Angebot anzufordern oder Support für Ihr Unternehmen zu vereinbaren.",
+    "b2bBadge": "Nur für Firmenkunden (B2B)",
+    "b2bNote": "Wichtig: Lindner IT arbeitet ausschließlich für Firmenkunden — also für Unternehmen, Selbstständige und Organisationen (B2B). Für private Computer-Reparaturen (B2C) bin ich nicht der richtige Ansprechpartner.",
+    "infoTitle": "Direkter Draht",
+    "infoResponse": "Antwort in der Regel innerhalb von 24 Stunden",
     "form": {
       "name": "Name",
       "email": "E-Mail",
       "phone": "Telefon",
+      "company": "Firma / Organisation",
       "message": "Nachricht",
       "reason": "Grund der Kontaktaufnahme",
       "reasonPlaceholder": "Bitte auswählen",
@@ -217,6 +270,11 @@
         "general": "Allgemeine Anfrage"
       },
       "submit": "Nachricht senden",
+      "sending": "Wird gesendet…",
+      "successTitle": "Anfrage versendet!",
+      "successText": "Danke! Ich melde mich in der Regel innerhalb von 24 Stunden bei Ihnen.",
+      "errorTitle": "Senden fehlgeschlagen",
+      "errorText": "Bitte versuchen Sie es erneut oder schreiben Sie direkt an markuslindner1998@gmail.com.",
       "call": "Anrufen"
     }
   },
@@ -277,9 +335,9 @@
     "phone": "Telefon",
     "email": "E-Mail",
     "dataCollection": "Erhebung von Daten",
-    "dataCollectionText": "Hier beschreiben Sie, welche Daten auf Ihrer Website gesammelt werden, z.B. durch Formulare, Analytics oder Cookies.",
+    "dataCollectionText": "Beim Besuch dieser Website werden Daten nur in folgendem Umfang verarbeitet: (1) Technische Zugriffsdaten (z. B. IP-Adresse, Zeitpunkt, aufgerufene Seite) durch unseren Hosting-Anbieter Vercel, um die Website bereitzustellen und abzusichern. (2) Google Analytics zur Reichweitenmessung — ausschließlich, wenn Sie im Cookie-Banner zugestimmt haben; die IP-Adresse wird dabei gekürzt. (3) Kontaktformular: Die eingegebenen Daten (Name, E-Mail, Telefon, Firma, Nachricht) werden per E-Mail direkt an uns übermittelt und nur zur Bearbeitung Ihrer Anfrage verwendet.",
     "purpose": "Zweck der Verarbeitung",
-    "purposeText": "Erklärung, zu welchen Zwecken die Daten verarbeitet werden, z.B. zur Bearbeitung von Anfragen oder zur Verbesserung der Website.",
+    "purposeText": "Die Verarbeitung dient der Bereitstellung und Absicherung der Website, der anonymisierten Statistik (nur nach Einwilligung) und der Bearbeitung Ihrer Anfragen. Ihre Einwilligung zu Google Analytics können Sie jederzeit für die Zukunft widerrufen, indem Sie die gespeicherten Cookies bzw. Website-Daten dieser Seite in Ihrem Browser löschen und den Banner erneut ablehnen.",
     "rights": "Ihre Rechte",
     "rightAccess": "Recht auf Auskunft über die verarbeiteten personenbezogenen Daten",
     "rightCorrection": "Recht auf Berichtigung unrichtiger Daten",
@@ -308,6 +366,11 @@
     "back": "Zurück zur Übersicht",
     "ctaTitle": "Fragen zu Ihrer IT?",
     "ctaText": "Lassen Sie uns unverbindlich über Ihr Projekt sprechen.",
-    "ctaButton": "Kontakt aufnehmen"
+    "ctaButton": "Kontakt aufnehmen",
+    "featuredTag": "Neu",
+    "suggestKicker": "Wunschthema",
+    "suggestTitle": "Ihr Thema fehlt?",
+    "suggestText": "Schreiben Sie mir, worüber Sie mehr wissen wollen — daraus wird der nächste Artikel.",
+    "suggestCta": "Thema vorschlagen"
   }
 }

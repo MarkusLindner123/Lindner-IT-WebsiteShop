@@ -6,14 +6,14 @@ import { useState, useRef, useLayoutEffect, useEffect, useMemo } from "react";
 import gsap from "gsap";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter, usePathname } from "@/i18n/navigation";
-import { Home, User, Cpu, Mail, Menu, X, BookOpen, type LucideIcon } from "lucide-react";
+import { Home, User, Cpu, Mail, Menu, X, BookOpen, Briefcase, type LucideIcon } from "lucide-react";
 import clsx from "clsx";
 
 // --- Typen und Konfiguration ---
 // Anker-Links (#...) scrollen zu Sektionen der Startseite,
 // Seiten-Links (/...) navigieren über den next-intl-Router.
 type NavItem = {
-  key: "home" | "services" | "about" | "contact" | "blog";
+  key: "home" | "services" | "references" | "about" | "contact" | "blog";
   href: string;
   icon: LucideIcon;
 };
@@ -21,6 +21,7 @@ type NavItem = {
 const NAV_ITEMS: NavItem[] = [
   { key: "home", href: "#home", icon: Home },
   { key: "services", href: "#services", icon: Cpu },
+  { key: "references", href: "#references", icon: Briefcase },
   { key: "about", href: "#about", icon: User },
   { key: "contact", href: "#contact", icon: Mail },
   { key: "blog", href: "#blog", icon: BookOpen },
@@ -40,13 +41,14 @@ const HEADER_CONFIG = {
     scrollOffset: 100,
   },
   mobile: {
-    // Kompakter als Desktop: 5 Icons müssen auch auf 360px-Displays passen
-    iconWidth: 44,
-    iconMargin: 11,
-    jumperSize: 56,
-    svgIconSize: 24,
-    iconOffsetX: 58,
-    headerPadding: 10,
+    // Kompakter als Desktop: 6 Icons müssen auch auf 360px-Displays passen
+    // (SVG-Breite ≈ 331px + Nav-Padding ≈ 351px)
+    iconWidth: 38,
+    iconMargin: 8,
+    jumperSize: 48,
+    svgIconSize: 21,
+    iconOffsetX: 50,
+    headerPadding: 8,
     topPosition: 42,
     scrollOffset: 80,
   },
