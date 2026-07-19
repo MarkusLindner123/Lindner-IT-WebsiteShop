@@ -129,7 +129,10 @@ export default function Header() {
     });
   }, [activeIndex, config, iconCentersX, yCenter]);
 
-  // Effekt 2: Scroll-Beobachtung
+  // Effekt 2: Scroll-Beobachtung.
+  // WICHTIG: hängt am pathname — bei Navigation (z. B. Artikel → zurück
+  // zur Startseite) erstellt Next.js die Sektionen neu, und der Observer
+  // muss die neuen DOM-Knoten beobachten, sonst ist der Jumper danach taub.
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -155,7 +158,7 @@ export default function Header() {
     });
 
     return () => observer.disconnect();
-  }, []);
+  }, [pathname]);
 
   // Auf Blog-Seiten das Blog-Icon als aktiv markieren
   useEffect(() => {
