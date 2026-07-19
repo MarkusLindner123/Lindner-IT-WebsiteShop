@@ -89,7 +89,9 @@ export default async function LocaleLayout({
   params,
 }: {
   children: ReactNode;
-  params: Promise<{ locale: (typeof routing.locales)[number] }>;
+  // Bewusst string statt Locale-Union: Next 15.5+ validiert Layout-Props
+  // gegen LayoutProps<"/[locale]"> — die Laufzeitprüfung macht hasLocale.
+  params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
 

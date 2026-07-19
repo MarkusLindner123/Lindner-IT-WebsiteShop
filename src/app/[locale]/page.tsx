@@ -1,6 +1,5 @@
 // src/app/[locale]/page.tsx
 import { setRequestLocale } from "next-intl/server";
-import { routing } from "@/i18n/routing";
 
 import Hero from "@/components/Hero";
 import AboutSection from "@/components/AboutSection/AboutSection";
@@ -14,7 +13,7 @@ import CookieBanner from "@/components/Layout/CookieBanner"; // ✅ neu
 export default async function HomePage({
   params,
 }: {
-  params: Promise<{ locale: (typeof routing.locales)[number] }>;
+  params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
