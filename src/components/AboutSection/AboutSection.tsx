@@ -4,6 +4,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { FileText, Award } from "lucide-react";
 import "./AboutSection.css"; // Brush-Effekt
 
 const brushColors = [
@@ -221,6 +222,28 @@ export default function AboutSection() {
             </div>
           </div>
         ))}
+      </div>
+
+      {/* Downloads: Lebenslauf & Zeugnisse (PDFs in /public/docs) */}
+      <div className="mt-16 flex flex-col sm:flex-row gap-4">
+        <a
+          href="/docs/Lebenslauf_Markus_Lindner.pdf"
+          target="_blank"
+          rel="noopener"
+          className="inline-flex items-center justify-center gap-2 px-6 py-4 border border-black/30 rounded-full text-black hover:bg-black/10 hover:-translate-y-1 transition-transform duration-300"
+        >
+          <FileText size={20} aria-hidden="true" />
+          {t("downloads.cv")}
+        </a>
+        <a
+          href="/docs/Zeugnisse_Markus_Lindner.pdf"
+          target="_blank"
+          rel="noopener"
+          className="inline-flex items-center justify-center gap-2 px-6 py-4 border border-black/30 rounded-full text-black hover:bg-black/10 hover:-translate-y-1 transition-transform duration-300"
+        >
+          <Award size={20} aria-hidden="true" />
+          {t("downloads.certificates")}
+        </a>
       </div>
     </div>
   );

@@ -45,6 +45,10 @@
     "title": "Why Choose Me",
     "text": "For every project I bring a practical, solution-oriented mindset. With industry-recognized certifications in cybersecurity, data privacy, and IT management, I deliver secure, reliable, and growth-driven IT solutions tailored to the needs of SMEs. I combine deep technical expertise with strong client orientation, ensuring that your business IT runs not only smoothly but also securely, sustainably, and efficiently over the long term."
   },
+  "downloads": {
+    "cv": "CV / Résumé (PDF)",
+    "certificates": "References & certificates (PDF)"
+  },
   "ctaPrimary": "Request a Quote"
 }
 ,
