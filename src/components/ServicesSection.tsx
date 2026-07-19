@@ -273,25 +273,22 @@ export default function ServicesSection() {
             <span className="block">{t("title")}</span>
           </h2>
 
-          {/* Animation Toggle */}
+          {/* Animation Toggle — das label MUSS die sr-only-Checkbox umschließen,
+              sonst erreichen Klicks auf den sichtbaren Schalter sie nicht */}
           <div className="flex justify-center items-center mb-8 gap-3">
-            <label
-              htmlFor="tag-animation-toggle"
-              className="text-black font-medium cursor-pointer"
-            >
-              {t("startAnimation")}
+            <label className="inline-flex items-center gap-3 cursor-pointer">
+              <span className="text-black font-medium">{t("startAnimation")}</span>
+              <span className="relative inline-flex items-center">
+                <input
+                  type="checkbox"
+                  className="sr-only peer"
+                  checked={animationRunning}
+                  onChange={() => setAnimationRunning(!animationRunning)}
+                />
+                <span className="w-11 h-6 rounded-full bg-gray-500 peer-checked:bg-blue-600 peer-focus-visible:ring-2 peer-focus-visible:ring-accent-two transition-colors block" />
+                <span className="absolute left-1 top-1 w-4 h-4 bg-white rounded-full shadow-md peer-checked:translate-x-5 transition-transform block" />
+              </span>
             </label>
-            <span className="relative inline-flex items-center cursor-pointer">
-              <input
-                type="checkbox"
-                id="tag-animation-toggle"
-                className="sr-only peer"
-                checked={animationRunning}
-                onChange={() => setAnimationRunning(!animationRunning)}
-              />
-              <span className="w-11 h-6 rounded-full bg-gray-500 peer-checked:bg-blue-600 peer-focus-visible:ring-2 peer-focus-visible:ring-accent-two transition-colors block" />
-              <span className="absolute left-1 top-1 w-4 h-4 bg-white rounded-full shadow-md peer-checked:translate-x-5 transition-transform block" />
-            </span>
           </div>
 
           {/* Service Cards */}
