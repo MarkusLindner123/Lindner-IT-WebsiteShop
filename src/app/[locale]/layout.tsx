@@ -76,11 +76,14 @@ export async function generateMetadata({
       description: t("description"),
       url: path,
       locale: OG_LOCALES[locale] ?? OG_LOCALES.de,
+      // Vorschaubild für WhatsApp/LinkedIn/Slack etc. (1200×630)
+      images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Lindner IT — B2B IT-Service & Webdesign in Berlin" }],
     },
     twitter: {
-      card: "summary",
+      card: "summary_large_image",
       title: t("title"),
       description: t("description"),
+      images: ["/og-image.jpg"],
     },
   };
 }
