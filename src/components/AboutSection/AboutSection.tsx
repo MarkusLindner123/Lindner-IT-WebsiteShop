@@ -68,8 +68,9 @@ const CERT_BADGES: { key: "ihk" | "python" | "cpp" | "siemens" | "elastic" | "az
 export default function AboutSection() {
   const t = useTranslations("about");
   const sectionRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<Array<HTMLDivElement | null>>([]);
-  const [speedFactor, setSpeedFactor] = useState(1.2);
+  const [speedFactor, setSpeedFactor] = useState(1.1);
   const pathname = usePathname();
 
   const sections = useMemo(
@@ -130,7 +131,7 @@ export default function AboutSection() {
 
   // Scroll-Animation
   useEffect(() => {
-    const handleResize = () => setSpeedFactor(window.innerWidth < 768 ? 1.12 : 1.21);
+    const handleResize = () => setSpeedFactor(window.innerWidth < 768 ? 1.05 : 1.1);
     handleResize();
     window.addEventListener("resize", handleResize);
 
@@ -138,10 +139,16 @@ export default function AboutSection() {
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          if (!sectionRef.current) return;
-          const { top, height } = sectionRef.current.getBoundingClientRect();
+          const target = contentRef.current ?? sectionRef.current;
+          if (!target) return;
+          // Fortschritt NUR über den Absatz-Container messen (nicht die ganze
+          // Section): Badges/Downloads darunter würden die Distanz strecken und
+          // der letzte Absatz wäre nie voll aufgedeckt, solange er sichtbar ist.
+          // 0 = Container-Oberkante am unteren Viewport-Rand, 1 = Unterkante
+          // dort → der Reveal ist garantiert fertig, während man den Text sieht.
+          const { top, height } = target.getBoundingClientRect();
           const wh = window.innerHeight;
-          const scrollProgress = (wh - top) / (height + wh);
+          const scrollProgress = (wh - top) / Math.max(height, 1);
           const progress = Math.min(Math.max(0, scrollProgress * speedFactor), 1);
           const totalPhases = allWords.length * 2;
 
@@ -200,7 +207,7 @@ export default function AboutSection() {
       </h2>
 
       {/* Content-Items */}
-      <div className="space-y-12">
+      <div ref={contentRef} className="space-y-12">
         {allWords.map((paragraphWords, paraIdx) => (
           <div
             key={paraIdx}
