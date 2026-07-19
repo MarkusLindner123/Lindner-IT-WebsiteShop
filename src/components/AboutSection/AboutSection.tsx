@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -56,6 +56,12 @@ const highlightWordsPl = [
 // Satzzeichen, die vor dem Wortvergleich entfernt werden
 const PUNCTUATION_RE = /[.,!?:;()„“”–—]/g;
 
+// Bei 90 % der Scroll-Strecke ist alles zu 100 % aufgedeckt. Die Strecke läuft
+// von "Absatz-Container betritt den Viewport unten" (0) bis "Container hat den
+// Viewport oben komplett verlassen" (1) — langsam genug, um den Effekt beim
+// Scrollen zu erleben, und früh genug, dass das Ende sichtbar fertig wird.
+const REVEAL_COMPLETE_AT = 0.9;
+
 const CERT_BADGES: { key: "ihk" | "python" | "cpp" | "siemens" | "elastic" | "azure"; icon: LucideIcon }[] = [
   { key: "ihk", icon: GraduationCap },
   { key: "python", icon: Trophy },
@@ -70,7 +76,6 @@ export default function AboutSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<Array<HTMLDivElement | null>>([]);
-  const [speedFactor, setSpeedFactor] = useState(1.1);
   const pathname = usePathname();
 
   const sections = useMemo(
@@ -131,25 +136,19 @@ export default function AboutSection() {
 
   // Scroll-Animation
   useEffect(() => {
-    const handleResize = () => setSpeedFactor(window.innerWidth < 768 ? 1.05 : 1.1);
-    handleResize();
-    window.addEventListener("resize", handleResize);
-
     let ticking = false;
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
           const target = contentRef.current ?? sectionRef.current;
           if (!target) return;
-          // Fortschritt NUR über den Absatz-Container messen (nicht die ganze
-          // Section): Badges/Downloads darunter würden die Distanz strecken und
-          // der letzte Absatz wäre nie voll aufgedeckt, solange er sichtbar ist.
-          // 0 = Container-Oberkante am unteren Viewport-Rand, 1 = Unterkante
-          // dort → der Reveal ist garantiert fertig, während man den Text sieht.
+          // Nur der Absatz-Container zählt — die Badges/Downloads darunter
+          // würden die Strecke künstlich verlängern und das Reveal-Ende läge
+          // außerhalb des Sichtfelds (der letzte Absatz bliebe gedimmt).
           const { top, height } = target.getBoundingClientRect();
           const wh = window.innerHeight;
-          const scrollProgress = (wh - top) / Math.max(height, 1);
-          const progress = Math.min(Math.max(0, scrollProgress * speedFactor), 1);
+          const scrollProgress = (wh - top) / (height + wh);
+          const progress = Math.min(Math.max(0, scrollProgress / REVEAL_COMPLETE_AT), 1);
           const totalPhases = allWords.length * 2;
 
           itemRefs.current.forEach((item, paraIdx) => {
@@ -186,9 +185,8 @@ export default function AboutSection() {
     handleScroll();
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleResize);
     };
-  }, [speedFactor, allWords]);
+  }, [allWords]);
 
   const titles = [sections.background.title, sections.experience.title, sections.approach.title, sections.whyMe.title];
 
