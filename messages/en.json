@@ -9,6 +9,7 @@
     "services": "Services",
     "about": "About",
     "contact": "Contact",
+    "blog": "Blog",
     "openMenu": "Open menu",
     "closeMenu": "Close menu"
   },
@@ -302,6 +303,8 @@
     "title": "Blog & Insights",
     "kicker": "Practical knowledge for SMEs",
     "description": "Hands-on IT advice for small and medium-sized businesses: security, backups, websites and more.",
+    "homeTitle": "Latest from the blog",
+    "homeAll": "View all articles",
     "readMore": "Read more",
     "minutes": "min read",
     "back": "Back to overview",

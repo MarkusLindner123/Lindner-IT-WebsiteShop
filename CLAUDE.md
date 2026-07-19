@@ -27,13 +27,13 @@ Single-page marketing site for "Lindner IT" (IT freelancer, Berlin): Next.js 15 
 
 ### Page composition & section IDs (load-bearing)
 
-The homepage (`src/app/[locale]/page.tsx`) stacks section components inside `Card` wrappers with the IDs `home`, `services`, `about`, `contact`, `testimonials`. These IDs are shared contracts referenced by:
+The homepage (`src/app/[locale]/page.tsx`) stacks section components inside `Card` wrappers with the IDs `home`, `services`, `about`, `contact`, `testimonials`, `blog`. These IDs are shared contracts referenced by:
 
-- `Header.tsx` — `NAV_ITEMS` hrefs, IntersectionObserver scroll-spy, and click-to-scroll
+- `Header.tsx` — `NAV_ITEMS` hrefs, IntersectionObserver scroll-spy, and click-to-scroll. Anchor entries (`#...`) scroll to sections; page entries (e.g. `/blog`) navigate via the next-intl router and are marked active from the pathname.
 - `CardScrollLines.tsx` — draws the animated SVG connector lines between the cards
 - `Hero.tsx` / `AnimatedButton.tsx` — scroll-to-section buttons (`#services`, `#contact`)
 
-Renaming, adding, or reordering a section requires updating `cardIds` in `page.tsx` and `NAV_ITEMS` in `Header.tsx` together.
+Renaming, adding, or reordering a section requires updating `cardIds` in `page.tsx` and `NAV_ITEMS` in `Header.tsx` together. The header's `HEADER_CONFIG` mobile values are sized for five icons on 360px screens — adding a sixth icon requires shrinking them.
 
 ### Styling
 

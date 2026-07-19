@@ -9,6 +9,7 @@
     "services": "Usługi",
     "about": "O mnie",
     "contact": "Kontakt",
+    "blog": "Blog",
     "openMenu": "Otwórz menu",
     "closeMenu": "Zamknij menu"
   },
@@ -299,6 +300,8 @@
     "title": "Blog i wiedza",
     "kicker": "Praktyczna wiedza dla MŚP",
     "description": "Praktyczne porady IT dla małych i średnich firm: bezpieczeństwo, kopie zapasowe, strony internetowe i więcej.",
+    "homeTitle": "Nowości na blogu",
+    "homeAll": "Zobacz wszystkie artykuły",
     "readMore": "Czytaj dalej",
     "minutes": "min czytania",
     "back": "Powrót do przeglądu",

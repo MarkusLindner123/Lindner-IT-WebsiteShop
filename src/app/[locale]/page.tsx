@@ -2,6 +2,7 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
 
 import StructuredData from "@/components/StructuredData";
+import BlogTeaser from "@/components/BlogTeaser";
 import Hero from "@/components/Hero";
 import AboutSection from "@/components/AboutSection/AboutSection";
 import ServicesSection from "@/components/ServicesSection";
@@ -26,7 +27,7 @@ export default async function HomePage({
       <StructuredData description={tMeta("description")} />
 
       {/* Scroll Lines Overlay */}
-      <CardScrollLines cardIds={["home", "services", "about", "contact", "testimonials"]} />
+      <CardScrollLines cardIds={["home", "services", "about", "contact", "testimonials", "blog"]} />
 
       {/* Hero Card */}
       <Card id="home" className="bg-card-hero pt-0 mt-3 md:mt-32 mb-20">
@@ -48,6 +49,10 @@ export default async function HomePage({
 
         <Card id="testimonials">
           <TestimonialsSection />
+        </Card>
+
+        <Card id="blog">
+          <BlogTeaser locale={locale} />
         </Card>
       </div>
 

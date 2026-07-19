@@ -5,17 +5,25 @@
 import { useState, useRef, useLayoutEffect, useEffect, useMemo } from "react";
 import gsap from "gsap";
 import { useLocale, useTranslations } from "next-intl";
-import { Home, User, Cpu, Mail, Menu, X, type LucideIcon } from "lucide-react";
+import { useRouter, usePathname } from "@/i18n/navigation";
+import { Home, User, Cpu, Mail, Menu, X, BookOpen, type LucideIcon } from "lucide-react";
 import clsx from "clsx";
 
 // --- Typen und Konfiguration ---
-type NavItem = { key: "home" | "services" | "about" | "contact"; href: string; icon: LucideIcon };
+// Anker-Links (#...) scrollen zu Sektionen der Startseite,
+// Seiten-Links (/...) navigieren über den next-intl-Router.
+type NavItem = {
+  key: "home" | "services" | "about" | "contact" | "blog";
+  href: string;
+  icon: LucideIcon;
+};
 
 const NAV_ITEMS: NavItem[] = [
   { key: "home", href: "#home", icon: Home },
   { key: "services", href: "#services", icon: Cpu },
   { key: "about", href: "#about", icon: User },
   { key: "contact", href: "#contact", icon: Mail },
+  { key: "blog", href: "/blog", icon: BookOpen },
 ];
 
 const HEADER_CONFIG = {
@@ -30,12 +38,13 @@ const HEADER_CONFIG = {
     scrollOffset: 100,
   },
   mobile: {
-    iconWidth: 50,
-    iconMargin: 16,
-    jumperSize: 64,
-    svgIconSize: 28,
-    iconOffsetX: 75,
-    headerPadding: 15,
+    // Kompakter als Desktop: 5 Icons müssen auch auf 360px-Displays passen
+    iconWidth: 44,
+    iconMargin: 11,
+    jumperSize: 56,
+    svgIconSize: 24,
+    iconOffsetX: 58,
+    headerPadding: 10,
     topPosition: 30,
     scrollOffset: 80,
   },
@@ -65,6 +74,8 @@ const useMediaQuery = (query: string): boolean => {
 export default function Header() {
   const t = useTranslations("nav");
   const locale = useLocale();
+  const router = useRouter();
+  const pathname = usePathname();
   const [activeIndex, setActiveIndex] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const isMobile = useMediaQuery("(max-width: 768px)");
@@ -136,12 +147,21 @@ export default function Header() {
     );
 
     NAV_ITEMS.forEach((item) => {
+      if (!item.href.startsWith("#")) return; // Seiten-Links haben keine Sektion
       const element = document.querySelector(item.href);
       if (element) observer.observe(element);
     });
 
     return () => observer.disconnect();
   }, []);
+
+  // Auf Blog-Seiten das Blog-Icon als aktiv markieren
+  useEffect(() => {
+    if (pathname.startsWith("/blog")) {
+      const blogIndex = NAV_ITEMS.findIndex((item) => item.key === "blog");
+      if (blogIndex !== -1) setActiveIndex(blogIndex);
+    }
+  }, [pathname]);
 
   // Effekt 3: Positionierung des Headers
   useLayoutEffect(() => {
@@ -174,13 +194,23 @@ export default function Header() {
 
   // Handler-Funktion für Klicks
   const handleIconClick = (index: number) => {
-    const targetElement = document.querySelector(NAV_ITEMS[index].href);
+    const item = NAV_ITEMS[index];
+
+    // Seiten-Links (z. B. /blog): locale-bewusst navigieren statt scrollen
+    if (!item.href.startsWith("#")) {
+      setActiveIndex(index);
+      setIsMobileMenuOpen(false);
+      router.push(item.href);
+      return;
+    }
+
+    const targetElement = document.querySelector(item.href);
 
     // Auf Unterseiten (z. B. /blog) existieren die Sektionen nicht —
     // dann zurück zur Startseite mit Anker navigieren
     if (!targetElement) {
       const base = locale === "de" ? "/" : `/${locale}`;
-      window.location.href = `${base}${NAV_ITEMS[index].href}`;
+      window.location.href = `${base}${item.href}`;
       return;
     }
 
@@ -264,7 +294,11 @@ export default function Header() {
             {NAV_ITEMS.map((item, index) => (
               <a
                 key={item.key}
-                href={item.href}
+                href={
+                  item.href.startsWith("#") || locale === "de"
+                    ? item.href
+                    : `/${locale}${item.href}`
+                }
                 aria-label={t(item.key)}
                 aria-current={activeIndex === index ? "true" : undefined}
                 className={clsx("cursor-pointer nav-icon-group", { active: activeIndex === index })}
