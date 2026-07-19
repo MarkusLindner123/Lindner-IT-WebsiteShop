@@ -4,17 +4,18 @@
 
 import { useState, useRef, useLayoutEffect, useEffect, useMemo } from "react";
 import gsap from "gsap";
+import { useLocale, useTranslations } from "next-intl";
 import { Home, User, Cpu, Mail, Menu, X, type LucideIcon } from "lucide-react";
 import clsx from "clsx";
 
 // --- Typen und Konfiguration ---
-type NavItem = { name: string; href: string; icon: LucideIcon };
+type NavItem = { key: "home" | "services" | "about" | "contact"; href: string; icon: LucideIcon };
 
 const NAV_ITEMS: NavItem[] = [
-  { name: "Home", href: "#home", icon: Home },
-  { name: "Services", href: "#services", icon: Cpu },
-  { name: "About", href: "#about", icon: User },
-  { name: "Contact", href: "#contact", icon: Mail },
+  { key: "home", href: "#home", icon: Home },
+  { key: "services", href: "#services", icon: Cpu },
+  { key: "about", href: "#about", icon: User },
+  { key: "contact", href: "#contact", icon: Mail },
 ];
 
 const HEADER_CONFIG = {
@@ -29,19 +30,21 @@ const HEADER_CONFIG = {
     scrollOffset: 100,
   },
   mobile: {
-    // <<< ANPASSUNG FÜR SCHMALEREN HEADER ---
-    iconWidth: 50,      // war 54
-    iconMargin: 16,     // war 18
+    iconWidth: 50,
+    iconMargin: 16,
     jumperSize: 64,
     svgIconSize: 28,
-    iconOffsetX: 75,      // war 90
+    iconOffsetX: 75,
     headerPadding: 15,
     topPosition: 30,
     scrollOffset: 80,
-    // --- ENDE ANPASSUNG
   },
   svgHeight: 90,
 };
+
+const prefersReducedMotion = () =>
+  typeof window !== "undefined" &&
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 // --- Custom Hook für Media Queries ---
 const useMediaQuery = (query: string): boolean => {
@@ -60,11 +63,13 @@ const useMediaQuery = (query: string): boolean => {
 
 // --- Die Header Komponente ---
 export default function Header() {
+  const t = useTranslations("nav");
+  const locale = useLocale();
   const [activeIndex, setActiveIndex] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const isMobile = useMediaQuery("(max-width: 768px)");
 
-  const headerRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const jumper1Ref = useRef<SVGRectElement>(null);
   const jumper2Ref = useRef<SVGRectElement>(null);
@@ -84,18 +89,20 @@ export default function Header() {
     [iconCentersX, config]);
 
   const logoX = config.iconOffsetX - config.iconWidth - config.iconMargin;
+  const homeHref = locale === "de" ? "/" : `/${locale}`;
 
   // Effekt 1: Jumper Animation
   useEffect(() => {
     if (!jumper1Ref.current || !jumper2Ref.current) return;
 
+    const reduce = prefersReducedMotion();
     const targetX = iconCentersX[activeIndex] - config.jumperSize / 2;
     const targetY = yCenter - config.jumperSize / 2;
 
     gsap.to(jumper1Ref.current, {
       x: targetX,
       y: targetY,
-      duration: 0.8,
+      duration: reduce ? 0 : 0.8,
       ease: "power4.out",
       overwrite: "auto",
     });
@@ -103,9 +110,9 @@ export default function Header() {
     gsap.to(jumper2Ref.current, {
       x: targetX,
       y: targetY,
-      duration: 0.4,
+      duration: reduce ? 0 : 0.4,
       ease: "expo.out",
-      delay: 0.05,
+      delay: reduce ? 0 : 0.05,
     });
   }, [activeIndex, config, iconCentersX, yCenter]);
 
@@ -139,12 +146,13 @@ export default function Header() {
   // Effekt 3: Positionierung des Headers
   useLayoutEffect(() => {
     if (!headerRef.current) return;
+    const reduce = prefersReducedMotion();
     const targetY = isMobile && !isMobileMenuOpen ? -150 : config.topPosition;
     gsap.to(headerRef.current, {
       width: svgWidth,
       y: targetY,
       opacity: isMobile && !isMobileMenuOpen ? 0 : 1,
-      duration: 0.5,
+      duration: reduce ? 0 : 0.5,
       ease: "power3.out",
     });
     gsap.set(headerRef.current, {
@@ -159,7 +167,7 @@ export default function Header() {
     if (!menuButtonRef.current) return;
     gsap.to(menuButtonRef.current.querySelector("svg"), {
       rotate: isMobileMenuOpen ? 180 : 0,
-      duration: 0.4,
+      duration: prefersReducedMotion() ? 0 : 0.4,
       ease: "back.inOut(1.7)",
     });
   }, [isMobileMenuOpen]);
@@ -171,13 +179,12 @@ export default function Header() {
       isClickScrollingRef.current = true;
       setActiveIndex(index);
 
-      // targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
       const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
       const offsetPosition = elementPosition - config.scrollOffset;
 
       window.scrollTo({
         top: offsetPosition,
-        behavior: "smooth",
+        behavior: prefersReducedMotion() ? "auto" : "smooth",
       });
 
       if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
@@ -193,13 +200,17 @@ export default function Header() {
         ref={menuButtonRef}
         className="fixed top-4 right-4 z-[999] p-2 w-14 h-14 rounded-full bg-[rgba(10,17,40,0.6)] flex items-center justify-center shadow-lg backdrop-blur-sm md:hidden"
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        aria-label="Toggle menu"
+        aria-label={isMobileMenuOpen ? t("closeMenu") : t("openMenu")}
+        aria-expanded={isMobileMenuOpen}
+        aria-controls="main-nav"
       >
         {isMobileMenuOpen ? <X className="text-white h-8 w-8" /> : <Menu className="text-white h-8 w-8" />}
       </button>
 
-      <div
+      <nav
         ref={headerRef}
+        id="main-nav"
+        aria-label={t("ariaLabel")}
         className="fixed z-[100] flex justify-center px-2.5 py-1.25 rounded-xl shadow-md border header-glass opacity-0"
       >
         <svg
@@ -222,39 +233,53 @@ export default function Header() {
             <rect ref={jumper2Ref} width={config.jumperSize} height={config.jumperSize} rx="26" ry="26" className="jumper" />
           </g>
 
-          <g className="cursor-pointer" onClick={() => (window.location.href = "/")} transform={`translate(${logoX}, ${yCenter - config.iconWidth / 2})`}>
-            <rect width={config.iconWidth} height={config.iconWidth} fill="transparent" />
-            <image
-              href="/logo-white.svg"
-              width={config.svgIconSize}
-              height={config.svgIconSize}
-              x={(config.iconWidth - config.svgIconSize) / 2}
-              y={(config.iconWidth - config.svgIconSize) / 2}
-            />
-          </g>
+          {/* Logo als echter Link (fokussierbar, behält die Sprache bei).
+              transform liegt auf der inneren <g>, da Reacts Anker-Typen
+              kein transform-Attribut kennen. */}
+          <a href={homeHref} aria-label="Lindner IT">
+            <g transform={`translate(${logoX}, ${yCenter - config.iconWidth / 2})`}>
+              <rect width={config.iconWidth} height={config.iconWidth} fill="transparent" />
+              <image
+                href="/logo-white.svg"
+                width={config.svgIconSize}
+                height={config.svgIconSize}
+                x={(config.iconWidth - config.svgIconSize) / 2}
+                y={(config.iconWidth - config.svgIconSize) / 2}
+              />
+            </g>
+          </a>
 
+          {/* Navigation: echte Anker-Links statt klickbarer <g>-Gruppen,
+              damit Tastatur & Screenreader sie erreichen */}
           <g id="icons">
             {NAV_ITEMS.map((item, index) => (
-              <g
-                key={item.name}
-                className={clsx("cursor-pointer nav-icon-group", { "active": activeIndex === index })}
-                onClick={() => handleIconClick(index)}
-                transform={`translate(${iconCentersX[index] - config.iconWidth / 2}, ${yCenter - config.iconWidth / 2})`}
+              <a
+                key={item.key}
+                href={item.href}
+                aria-label={t(item.key)}
+                aria-current={activeIndex === index ? "true" : undefined}
+                className={clsx("cursor-pointer nav-icon-group", { active: activeIndex === index })}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleIconClick(index);
+                }}
               >
-                <rect width={config.iconWidth} height={config.iconWidth} fill="transparent" />
-                <item.icon
-                  className="nav-icon"
-                  x={config.iconWidth / 2 - config.svgIconSize / 2}
-                  y={config.iconWidth / 2 - config.svgIconSize / 2}
-                  width={config.svgIconSize}
-                  height={config.svgIconSize}
-                  strokeWidth={1.5}
-                />
-              </g>
+                <g transform={`translate(${iconCentersX[index] - config.iconWidth / 2}, ${yCenter - config.iconWidth / 2})`}>
+                  <rect width={config.iconWidth} height={config.iconWidth} fill="transparent" />
+                  <item.icon
+                    className="nav-icon"
+                    x={config.iconWidth / 2 - config.svgIconSize / 2}
+                    y={config.iconWidth / 2 - config.svgIconSize / 2}
+                    width={config.svgIconSize}
+                    height={config.svgIconSize}
+                    strokeWidth={1.5}
+                  />
+                </g>
+              </a>
             ))}
           </g>
         </svg>
-      </div>
+      </nav>
     </>
   );
 }

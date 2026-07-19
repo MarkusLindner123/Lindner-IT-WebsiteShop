@@ -57,6 +57,16 @@ export default function ContactSection() {
           method="POST"
           className="space-y-6"
         >
+          {/* Honeypot gegen Spam-Bots (Formspree ignoriert Einsendungen mit _gotcha) */}
+          <input
+            type="text"
+            name="_gotcha"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            className="hidden"
+          />
+
           {/* Name */}
           <div>
             <label

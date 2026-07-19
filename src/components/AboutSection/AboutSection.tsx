@@ -169,10 +169,10 @@ export default function AboutSection() {
         </div>
       </div>
 
-      {/* Headline */}
-      <h1 className="mb-16 text-5xl sm:text-6xl md:text-7xl font-extrabold leading-tight tracking-tight text-black font-headline">
+      {/* Headline (h2: die Seite hat genau eine h1 im Hero) */}
+      <h2 className="mb-16 text-5xl sm:text-6xl md:text-7xl font-extrabold leading-tight tracking-tight text-black font-headline">
         {t("title")}
-      </h1>
+      </h2>
 
       {/* Content-Items */}
       <div className="space-y-12">
@@ -186,9 +186,10 @@ export default function AboutSection() {
             <div className="relative w-full h-[250px] md:w-[350px] md:h-[250px] rounded-xl overflow-hidden flex-shrink-0">
               <Image
                 src={aboutImages[paraIdx]}
-                alt={`Image for about paragraph ${paraIdx + 1}`}
+                alt={titles[paraIdx]}
                 width={350}
                 height={250}
+                sizes="(min-width: 768px) 350px, 100vw"
                 className="object-cover w-full h-full rounded-xl"
               />
               <div
@@ -199,9 +200,9 @@ export default function AboutSection() {
 
             {/* Text */}
             <div className="w-full md:w-[calc(100%-350px-3rem)] text-xl md:text-2xl text-gray-900 leading-loose">
-              <h2 className="animated-title text-4xl md:text-5xl font-bold mb-4" style={{ opacity: 0.15 }}>
+              <h3 className="animated-title text-4xl md:text-5xl font-bold mb-4" style={{ opacity: 0.15 }}>
                 {titles[paraIdx]}
-              </h2>
+              </h3>
               {paragraphWords.map(({ word, index }) => {
                 if (word === "\n") return null;
                 const clean = word.replace(/[.,!?–]/g, "").toLowerCase();

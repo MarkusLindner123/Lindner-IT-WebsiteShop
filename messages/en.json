@@ -1,4 +1,17 @@
 {
+  "metadata": {
+    "title": "Lindner IT – IT Services & Web Design for SMEs in Berlin",
+    "description": "IT support, network setup, cybersecurity and professional websites for small and medium-sized businesses in Berlin. Personal, reliable, certified."
+  },
+  "nav": {
+    "ariaLabel": "Main navigation",
+    "home": "Home",
+    "services": "Services",
+    "about": "About",
+    "contact": "Contact",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
   "heroVideo": {
     "title": "Reliable IT Solutions for SMEs",
     "subtitle": "Professional IT support, network setup, cybersecurity, and websites tailored for small and medium businesses"
@@ -196,6 +209,8 @@
   "testimonials": {
   "title": "What my clients say",
   "kicker": "Trusted by SMEs",
+  "ariaPrev": "Previous review",
+  "ariaNext": "Next review",
   "googleProfile": "https://maps.app.goo.gl/qW5Ns8LAGoEUs3yn8",
   "googleButtonText": "Google Business Profile",
   "reviews": [

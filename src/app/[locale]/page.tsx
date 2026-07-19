@@ -30,19 +30,19 @@ export default async function HomePage({
       </Card>
 
       <div className="space-y-20 pb-20"> {/* vergrößertes spacing zwischen Cards */}
-        <Card id="services" className="bg-card-services">
+        <Card id="services">
           <ServicesSection />
         </Card>
 
-        <Card id="about" className="bg-card-about">
+        <Card id="about">
           <AboutSection />
         </Card>
 
-        <Card id="contact" className="bg-card-contact">
+        <Card id="contact">
           <ContactSection />
         </Card>
 
-        <Card id="testimonials" className="bg-card-testimonials">
+        <Card id="testimonials">
           <TestimonialsSection />
         </Card>
       </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { motion, Variants, useAnimation } from "framer-motion";
 import { AnimatedButton } from "@/components/AnimatedButton";
@@ -23,12 +23,39 @@ import {
   LayoutDashboard,
   Box,
   Package,
+  type LucideIcon,
 } from "lucide-react";
-import ReactDOMServer from "react-dom/server";
 import { useInView } from "react-intersection-observer";
 
-interface FloatingElement {
-  el: HTMLDivElement;
+const TAGS: { text: string; icon: LucideIcon }[] = [
+  { text: "Websites", icon: Globe },
+  { text: "IT Support", icon: Terminal },
+  { text: "Network", icon: Wifi },
+  { text: "Cybersecurity", icon: Shield },
+  { text: "Servers", icon: Server },
+  { text: "Database", icon: Database },
+  { text: "Cloud", icon: Cloud },
+  { text: "Monitoring", icon: Monitor },
+  { text: "Hardware", icon: HardDrive },
+  { text: "Firewall", icon: Lock },
+  { text: "Router", icon: Router },
+  { text: "Configuration", icon: Settings },
+  { text: "Development", icon: Code },
+  { text: "UI/UX Design", icon: LayoutDashboard },
+  { text: "Automation", icon: Cpu },
+  { text: "Backup", icon: Database },
+  { text: "Optimization", icon: Cpu },
+  { text: "Integration", icon: Code },
+  { text: "Security Audit", icon: Shield },
+  { text: "Deployment", icon: Box },
+  { text: "Package Management", icon: Package },
+  { text: "Performance", icon: Monitor },
+  { text: "Maintenance", icon: Terminal },
+  { text: "Support Tools", icon: Cpu },
+  { text: "Analytics", icon: LayoutDashboard },
+];
+
+interface TagPhysics {
   x: number;
   y: number;
   vx: number;
@@ -61,8 +88,9 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
 export default function ServicesSection() {
   const t = useTranslations("services");
   const animationContainerRef = useRef<HTMLDivElement>(null);
-  const animationFrameRef = useRef<number | null>(null);
-  const [animationRunning, setAnimationRunning] = useState(true); // Animation default on
+  const tagRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const physicsRef = useRef<TagPhysics[] | null>(null);
+  const [animationRunning, setAnimationRunning] = useState(true);
 
   const containerVariants: Variants = {
     hidden: {},
@@ -89,189 +117,181 @@ export default function ServicesSection() {
     );
   }, [inView, buttonControls]);
 
-  // Floating Tags Logik
+  // Bewegung standardmäßig aus, wenn das System reduzierte Bewegung wünscht
   useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setAnimationRunning(false);
+    }
+  }, []);
+
+  // Floating-Tags-Physik: Positionen/Transforms laufen imperativ über Refs,
+  // damit React nicht 60× pro Sekunde neu rendert. Pausiert außerhalb des
+  // Viewports (IntersectionObserver).
+  useLayoutEffect(() => {
     const container = animationContainerRef.current;
-    if (!container) return;
+    if (!container || !animationRunning) return;
 
-    const tags = [
-      { text: "Websites", icon: Globe },
-      { text: "IT Support", icon: Terminal },
-      { text: "Network", icon: Wifi },
-      { text: "Cybersecurity", icon: Shield },
-      { text: "Servers", icon: Server },
-      { text: "Database", icon: Database },
-      { text: "Cloud", icon: Cloud },
-      { text: "Monitoring", icon: Monitor },
-      { text: "Hardware", icon: HardDrive },
-      { text: "Firewall", icon: Lock },
-      { text: "Router", icon: Router },
-      { text: "Configuration", icon: Settings },
-      { text: "Development", icon: Code },
-      { text: "UI/UX Design", icon: LayoutDashboard },
-      { text: "Automation", icon: Cpu },
-      { text: "Backup", icon: Database },
-      { text: "Optimization", icon: Cpu },
-      { text: "Integration", icon: Code },
-      { text: "Security Audit", icon: Shield },
-      { text: "Deployment", icon: Box },
-      { text: "Package Management", icon: Package },
-      { text: "Performance", icon: Monitor },
-      { text: "Maintenance", icon: Terminal },
-      { text: "Support Tools", icon: Cpu },
-      { text: "Analytics", icon: LayoutDashboard },
-    ];
+    const els = tagRefs.current.filter((el): el is HTMLDivElement => el !== null);
+    if (!els.length) return;
 
-    const numShapes = 25;
-    const floatingElements: FloatingElement[] = [];
-    const getRandom = (min: number, max: number) => Math.random() * (max - min) + min;
-    const padding = 20;
+    const getRandom = (min: number, max: number) =>
+      Math.random() * (max - min) + min;
 
-    function isOverlapping(a: FloatingElement, b: FloatingElement, gap = 10) {
-      return !(
+    const overlaps = (a: TagPhysics, b: TagPhysics, gap = 10) =>
+      !(
         a.x + a.width + gap < b.x ||
         a.x > b.x + b.width + gap ||
         a.y + a.height + gap < b.y ||
         a.y > b.y + b.height + gap
       );
+
+    // Startpositionen nur einmal berechnen (bleiben beim Toggle erhalten)
+    if (!physicsRef.current) {
+      const padding = 20;
+      const placed: TagPhysics[] = [];
+      els.forEach((el) => {
+        const width = el.offsetWidth;
+        const height = el.offsetHeight;
+        let candidate: TagPhysics;
+        let tries = 0;
+        do {
+          candidate = {
+            x: getRandom(padding, Math.max(padding + 1, container.offsetWidth - width - padding)),
+            y: getRandom(padding, Math.max(padding + 1, container.offsetHeight - height - padding)),
+            vx: getRandom(0.5, 1) * (Math.random() < 0.5 ? 1 : -1),
+            vy: getRandom(0.5, 1) * (Math.random() < 0.5 ? 1 : -1),
+            width,
+            height,
+          };
+          tries++;
+        } while (tries <= 100 && placed.some((other) => overlaps(candidate, other)));
+        placed.push(candidate);
+      });
+      physicsRef.current = placed;
     }
 
-    for (let i = 0; i < numShapes; i++) {
-      const { text, icon: Icon } = tags[i % tags.length];
-      const shape = document.createElement("div");
-      shape.classList.add(
-        "inline-flex",
-        "items-center",
-        "gap-2",
-        "px-4",
-        "py-1",
-        "rounded-full",
-        "text-sm",
-        "font-medium",
-        "floating-tag",
-        "absolute"
-      );
-      shape.style.opacity = animationRunning ? "1" : "0"; // invisible if not running
+    const physics = physicsRef.current;
+    els.forEach((el, i) => {
+      const p = physics[i];
+      if (p) el.style.transform = `translate(${p.x}px, ${p.y}px)`;
+    });
 
-      const iconWrapper = document.createElement("span");
-      iconWrapper.innerHTML = ReactDOMServer.renderToString(<Icon size={16} />);
-      iconWrapper.classList.add("inline-flex", "items-center");
-      shape.appendChild(iconWrapper);
+    let rafId: number | null = null;
 
-      const textSpan = document.createElement("span");
-      textSpan.textContent = text;
-      shape.appendChild(textSpan);
+    const step = () => {
+      const w = container.offsetWidth;
+      const h = container.offsetHeight;
 
-      container.appendChild(shape);
+      physics.forEach((p, i) => {
+        p.x += p.vx;
+        p.y += p.vy;
 
-      const width = shape.offsetWidth;
-      const height = shape.offsetHeight;
+        if (p.x < 0 || p.x + p.width > w) p.vx *= -1;
+        if (p.y < 0 || p.y + p.height > h) p.vy *= -1;
 
-      let x, y;
-      let tries = 0;
-      let newEl: FloatingElement;
-
-      do {
-        x = getRandom(padding, container.offsetWidth - width - padding);
-        y = getRandom(padding, container.offsetHeight - height - padding);
-        newEl = {
-          el: shape,
-          x,
-          y,
-          vx: getRandom(0.5, 1) * (Math.random() < 0.5 ? 1 : -1),
-          vy: getRandom(0.5, 1) * (Math.random() < 0.5 ? 1 : -1),
-          width,
-          height,
-        };
-        tries++;
-        if (tries > 100) break;
-      } while (floatingElements.some((other) => isOverlapping(newEl, other)));
-
-      floatingElements.push(newEl);
-    }
-
-    function animate() {
-      if (!animationRunning) {
-        // hide tags when paused
-        floatingElements.forEach((el) => (el.el.style.opacity = "0"));
-        return;
-      }
-
-      const container = animationContainerRef.current;
-      if (!container) return;
-
-      floatingElements.forEach((el, i) => {
-        el.el.style.opacity = "1"; // visible if running
-
-        el.x += el.vx;
-        el.y += el.vy;
-
-        const w = container.offsetWidth;
-        const h = container.offsetHeight;
-
-        if (el.x < 0 || el.x + el.width > w) el.vx *= -1;
-        if (el.y < 0 || el.y + el.height > h) el.vy *= -1;
-
-        for (let j = i + 1; j < floatingElements.length; j++) {
-          const other = floatingElements[j];
+        for (let j = i + 1; j < physics.length; j++) {
+          const other = physics[j];
           if (
-            el.x + el.width + 4 > other.x &&
-            el.x < other.x + other.width + 4 &&
-            el.y + el.height + 4 > other.y &&
-            el.y < other.y + other.height + 4
+            p.x + p.width + 4 > other.x &&
+            p.x < other.x + other.width + 4 &&
+            p.y + p.height + 4 > other.y &&
+            p.y < other.y + other.height + 4
           ) {
-            const tmpVx = el.vx;
-            const tmpVy = el.vy;
-            el.vx = other.vx;
-            el.vy = other.vy;
+            const tmpVx = p.vx;
+            const tmpVy = p.vy;
+            p.vx = other.vx;
+            p.vy = other.vy;
             other.vx = tmpVx;
             other.vy = tmpVy;
           }
         }
 
-        el.el.style.transform = `translate(${el.x}px, ${el.y}px)`;
+        const el = els[i];
+        if (el) el.style.transform = `translate(${p.x}px, ${p.y}px)`;
       });
 
-      animationFrameRef.current = requestAnimationFrame(animate);
-    }
+      rafId = requestAnimationFrame(step);
+    };
 
-    animate();
+    const start = () => {
+      if (rafId === null) rafId = requestAnimationFrame(step);
+    };
+    const stop = () => {
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => (entry.isIntersecting ? start() : stop()),
+      { threshold: 0 }
+    );
+    observer.observe(container);
 
     return () => {
-      floatingElements.forEach((el) => el.el.remove());
-      if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
+      stop();
+      observer.disconnect();
     };
+  }, [animationRunning]);
+
+  // Sichtbarkeit der Tags folgt dem Toggle
+  useEffect(() => {
+    tagRefs.current.forEach((el) => {
+      if (el) el.style.opacity = animationRunning ? "1" : "0";
+    });
   }, [animationRunning]);
 
   return (
     <div className="relative">
       <div
         ref={animationContainerRef}
+        aria-hidden="true"
         className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 rounded-2xl"
-      />
+      >
+        {TAGS.map((tag, i) => (
+          <div
+            key={i}
+            ref={(el) => {
+              tagRefs.current[i] = el;
+            }}
+            className="floating-tag absolute inline-flex items-center gap-2"
+            style={{ opacity: 0, transition: "opacity 0.3s ease" }}
+          >
+            <tag.icon size={16} aria-hidden="true" />
+            <span>{tag.text}</span>
+          </div>
+        ))}
+      </div>
 
       <motion.div variants={containerVariants} initial="hidden" animate="show" className="relative z-10">
         <motion.div variants={fadeUp}>
           <div className="inline-flex items-center px-4 py-1 rounded-full text-sm font-medium text-black bg-black/10 mb-4">
             {t("kicker")}
           </div>
-          <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold leading-tight tracking-tight text-black font-headline mb-4">
+          <h2 className="text-5xl sm:text-6xl md:text-7xl font-extrabold leading-tight tracking-tight text-black font-headline mb-4">
             <span className="block">{t("title")}</span>
-          </h1>
+          </h2>
 
           {/* Animation Toggle */}
           <div className="flex justify-center items-center mb-8 gap-3">
-            <span className="text-black font-medium">{t("startAnimation")}</span>
-            <label className="relative inline-flex items-center cursor-pointer">
+            <label
+              htmlFor="tag-animation-toggle"
+              className="text-black font-medium cursor-pointer"
+            >
+              {t("startAnimation")}
+            </label>
+            <span className="relative inline-flex items-center cursor-pointer">
               <input
                 type="checkbox"
+                id="tag-animation-toggle"
                 className="sr-only peer"
                 checked={animationRunning}
                 onChange={() => setAnimationRunning(!animationRunning)}
               />
-              <div className="w-11 h-6 rounded-full bg-gray-500 peer-checked:bg-blue-600 transition-colors" />
-              <div className="absolute left-1 top-1 w-4 h-4 bg-white rounded-full shadow-md peer-checked:translate-x-5 transition-transform" />
-            </label>
+              <span className="w-11 h-6 rounded-full bg-gray-500 peer-checked:bg-blue-600 peer-focus-visible:ring-2 peer-focus-visible:ring-accent-two transition-colors block" />
+              <span className="absolute left-1 top-1 w-4 h-4 bg-white rounded-full shadow-md peer-checked:translate-x-5 transition-transform block" />
+            </span>
           </div>
 
           {/* Service Cards */}
@@ -298,9 +318,9 @@ export default function ServicesSection() {
                   className="bg-services-card p-6 rounded-xl shadow-lg relative z-20"
                   aria-labelledby={`${key}-title`}
                 >
-                  <h2 id={`${key}-title`} className="text-2xl font-semibold mb-2 text-services-card-title">
+                  <h3 id={`${key}-title`} className="text-2xl font-semibold mb-2 text-services-card-title">
                     {t(`${key}.title`)}
-                  </h2>
+                  </h3>
                   <p className="text-services-card-description mb-4">
                     {t(`${key}.description`)}
                   </p>

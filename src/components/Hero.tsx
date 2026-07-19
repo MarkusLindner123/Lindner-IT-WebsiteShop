@@ -3,31 +3,73 @@
 import Image from "next/image";
 import { motion, Variants } from "framer-motion";
 import { useTranslations } from "next-intl";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatedButton } from "./AnimatedButton";
+
+const GALLERY_IMAGES = [
+  "/hero-images/hero-img.webp",
+  "/hero-images/hero-img1.webp",
+  "/hero-images/hero-img2.webp",
+  "/hero-images/hero-img3.webp",
+  "/hero-images/hero-img4.webp",
+  "/hero-images/hero-img5.webp",
+  "/hero-images/hero-img6.webp",
+  "/hero-images/hero-img7.webp",
+  "/hero-images/hero-img8.webp",
+];
+
+const GALLERY_COLUMNS = [
+  GALLERY_IMAGES.slice(0, 3),
+  GALLERY_IMAGES.slice(3, 6),
+  GALLERY_IMAGES.slice(6, 9),
+];
+
+function GalleryColumn({
+  images,
+  reverse,
+  duration,
+}: {
+  images: string[];
+  reverse: boolean;
+  duration: number;
+}) {
+  return (
+    <motion.div
+      animate={{ y: reverse ? ["-100%", "0%"] : ["0%", "-100%"] }}
+      transition={{ repeat: Infinity, duration, ease: "linear" }}
+      className="flex flex-col gap-2"
+    >
+      {[...images, ...images].map((src, i) => (
+        <div key={i} className="flex-shrink-0" style={{ height: "calc(100% / 2)" }}>
+          <Image
+            src={src}
+            alt=""
+            width={300}
+            height={200}
+            sizes="(min-width: 768px) 16vw, 30vw"
+            className="w-full h-full object-cover rounded-lg aspect-[3/2]"
+            loading="lazy"
+          />
+        </div>
+      ))}
+    </motion.div>
+  );
+}
 
 export default function Hero() {
   const t = useTranslations("hero");
-  const [windowWidth, setWindowWidth] = useState(0);
 
+  // Nur bei Breakpoint-Wechsel neu rendern, nicht bei jedem Resize-Pixel
+  const [animationSpeed, setAnimationSpeed] = useState(20);
   useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    if (typeof window !== "undefined") {
-      setWindowWidth(window.innerWidth);
-      window.addEventListener("resize", handleResize);
-    }
-    return () => {
-      if (typeof window !== "undefined") {
-        window.removeEventListener("resize", handleResize);
-      }
-    };
+    const update = () =>
+      setAnimationSpeed(
+        window.innerWidth < 768 ? 30 : window.innerWidth < 1024 ? 25 : 20
+      );
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
   }, []);
-
-  const animationSpeed = useMemo(() => {
-    if (windowWidth < 768) return 30;
-    if (windowWidth < 1024) return 25;
-    return 20;
-  }, [windowWidth]);
 
   const container: Variants = {
     hidden: {},
@@ -43,27 +85,22 @@ export default function Hero() {
     },
   };
 
-  const galleryImages = [
-    "/hero-images/hero-img.webp",
-    "/hero-images/hero-img1.webp",
-    "/hero-images/hero-img2.webp",
-    "/hero-images/hero-img3.webp",
-    "/hero-images/hero-img4.webp",
-    "/hero-images/hero-img5.webp",
-    "/hero-images/hero-img6.webp",
-    "/hero-images/hero-img7.webp",
-    "/hero-images/hero-img8.webp",
-  ];
-
-  const column1Images = galleryImages.slice(0, 3);
-  const column2Images = galleryImages.slice(3, 6);
-  const column3Images = galleryImages.slice(6, 9);
-  const allColumns = [column1Images, column2Images, column3Images];
-
   const scrollToServices = () => {
     const section = document.querySelector("#services");
     if (section) section.scrollIntoView({ behavior: "smooth" });
   };
+
+  const ctaButtons = (
+    <>
+      <AnimatedButton>{t("ctaPrimary")}</AnimatedButton>
+      <button
+        onClick={scrollToServices}
+        className="inline-flex items-center justify-center px-6 py-4 border border-black/30 rounded-full text-black hover:bg-black/10 hover:-translate-y-1 transition-transform duration-300"
+      >
+        {t("ctaSecondary")}
+      </button>
+    </>
+  );
 
   return (
     <motion.div
@@ -95,115 +132,36 @@ export default function Hero() {
 
         {/* Desktop Buttons */}
         <div className="hidden lg:flex flex-col sm:flex-row sm:items-center gap-4 mt-6">
-          <AnimatedButton>{t("ctaPrimary")}</AnimatedButton>
-          <button
-            onClick={scrollToServices}
-            className="inline-flex items-center justify-center px-6 py-4 border border-black/30 rounded-full text-black hover:bg-black/10 hover:-translate-y-1 transition-transform duration-300"
-          >
-            {t("ctaSecondary")}
-          </button>
+          {ctaButtons}
         </div>
       </motion.div>
 
-      {/* Gallery Desktop & Tablet */}
+      {/* Galerie — eine Instanz für alle Breakpoints, rein dekorativ */}
       <motion.div
         variants={fadeUp}
-        className="hidden md:flex lg:col-span-5 xl:col-span-6 relative justify-center lg:justify-end"
+        aria-hidden="true"
+        className="lg:col-span-5 xl:col-span-6 flex justify-center lg:justify-end"
       >
-        <div className="relative mx-auto w-full">
-          <div className="relative w-full h-[60vh] sm:h-auto sm:aspect-[4/3] overflow-hidden rounded-2xl bg-black px-1">
-            <div className="grid grid-cols-3 gap-2 h-full">
-              {allColumns.map((columnImages, colIndex) => {
-                const direction =
-                  colIndex === 1 ? ["-100%", "0%"] : ["0%", "-100%"];
-                return (
-                  <motion.div
-                    key={colIndex}
-                    animate={{ y: direction }}
-                    transition={{
-                      repeat: Infinity,
-                      duration: animationSpeed,
-                      ease: "linear",
-                    }}
-                    className="flex flex-col gap-2"
-                  >
-                    {[...columnImages, ...columnImages].map((src, i) => (
-                      <div
-                        key={i}
-                        className="flex-shrink-0"
-                        style={{ height: "calc(100% / 2)" }}
-                      >
-                        <Image
-                          src={src}
-                          alt={`Hero image ${i + 1} showcasing our services`}
-                          width={300}
-                          height={200}
-                          className="w-full h-full object-cover rounded-lg aspect-[3/2]"
-                          loading="lazy"
-                        />
-                      </div>
-                    ))}
-                  </motion.div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      </motion.div>
-
-      {/* Mobile Gallery */}
-      <motion.div variants={fadeUp} className="flex md:hidden mt-8">
-        <div className="relative w-full h-[60vh] overflow-hidden rounded-2xl bg-black px-1">
+        <div className="relative w-full h-[60vh] md:h-auto md:aspect-[4/3] overflow-hidden rounded-2xl bg-black px-1">
           <div className="grid grid-cols-3 gap-2 h-full">
-            {allColumns.map((columnImages, colIndex) => {
-              const direction =
-                colIndex === 1 ? ["-100%", "0%"] : ["0%", "-100%"];
-              return (
-                <motion.div
-                  key={colIndex}
-                  animate={{ y: direction }}
-                  transition={{
-                    repeat: Infinity,
-                    duration: animationSpeed,
-                    ease: "linear",
-                  }}
-                  className="flex flex-col gap-2"
-                >
-                  {[...columnImages, ...columnImages].map((src, i) => (
-                    <div
-                      key={i}
-                      className="flex-shrink-0"
-                      style={{ height: "calc(100% / 2)" }}
-                    >
-                      <Image
-                        src={src}
-                        alt={`Hero image ${i + 1} showcasing our services`}
-                        width={300}
-                        height={200}
-                        className="w-full h-full object-cover rounded-lg aspect-[3/2]"
-                        loading="lazy"
-                      />
-                    </div>
-                  ))}
-                </motion.div>
-              );
-            })}
+            {GALLERY_COLUMNS.map((images, colIndex) => (
+              <GalleryColumn
+                key={colIndex}
+                images={images}
+                reverse={colIndex === 1}
+                duration={animationSpeed}
+              />
+            ))}
           </div>
         </div>
       </motion.div>
 
-      {/* Mobile Buttons AFTER Gallery */}
+      {/* Mobile Buttons nach der Galerie */}
       <motion.div
         variants={fadeUp}
-        className="w-full lg:hidden flex flex-col sm:flex-row sm:items-center gap-4 mt-6"
+        className="w-full lg:hidden flex flex-col sm:flex-row sm:items-center gap-4"
       >
-        <AnimatedButton>{t("ctaPrimary")}</AnimatedButton>
-        <button
-          onClick={scrollToServices}
-          className="inline-flex items-center justify-center px-6 py-4 border border-black/30 rounded-full text-black hover:bg-black/10 hover:-translate-y-1 transition-transform duration-300"
-        >
-          {t("ctaSecondary")}
-        </button>
+        {ctaButtons}
       </motion.div>
     </motion.div>
   );

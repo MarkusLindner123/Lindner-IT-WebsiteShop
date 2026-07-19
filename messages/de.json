@@ -1,4 +1,17 @@
 {
+  "metadata": {
+    "title": "Lindner IT – IT-Service & Webdesign für KMU in Berlin",
+    "description": "IT-Support, Netzwerkinstallation, Cybersicherheit und professionelle Websites für kleine und mittlere Unternehmen in Berlin. Persönlich, zuverlässig, zertifiziert."
+  },
+  "nav": {
+    "ariaLabel": "Hauptnavigation",
+    "home": "Startseite",
+    "services": "Leistungen",
+    "about": "Über mich",
+    "contact": "Kontakt",
+    "openMenu": "Menü öffnen",
+    "closeMenu": "Menü schließen"
+  },
   "heroVideo": {
     "title": "Zuverlässige IT-Lösungen für KMU",
     "subtitle": "Professioneller IT-Support, Netzwerkinstallation, Cybersicherheit und Websites speziell für kleine und mittlere Unternehmen"
@@ -196,6 +209,8 @@
   "testimonials": {
     "title": "Das sagen meine Kunden",
     "kicker": "Vertrauen von KMU",
+    "ariaPrev": "Vorherige Bewertung",
+    "ariaNext": "Nächste Bewertung",
     "googleProfile": "https://maps.app.goo.gl/qW5Ns8LAGoEUs3yn8",
     "googleButtonText": "Google Business Profil",
     "reviews": [

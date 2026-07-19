@@ -3,18 +3,21 @@
 import { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { Settings, X } from "lucide-react";
-import { usePathname, useRouter } from "next/navigation";
-import 'flag-icons/css/flag-icons.min.css';
+import { useLocale } from "next-intl";
+import { usePathname, useRouter } from "@/i18n/navigation";
+import type { AppLocale } from "@/i18n/routing";
+import "flag-icons/css/flag-icons.min.css";
 
 type Language = {
-  code: string; // ISO-Code für flag-icons ('de', 'gb', 'fr')
+  locale: AppLocale;
+  flag: string; // ISO-Code für flag-icons ('gb' für Englisch)
   label: string;
 };
 
 const languages: Language[] = [
-  { code: "de", label: "Deutsch" },
-  { code: "gb", label: "English" }, // flag-icons verwendet 'gb' für UK/English
-  { code: "pl", label: "Polski" },
+  { locale: "de", flag: "de", label: "Deutsch" },
+  { locale: "en", flag: "gb", label: "English" },
+  { locale: "pl", flag: "pl", label: "Polski" },
 ];
 
 export default function LanguageSwitcher() {
@@ -22,16 +25,19 @@ export default function LanguageSwitcher() {
   const menuRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const pathname = usePathname();
+  const currentLocale = useLocale();
 
   // Slide Animation
   useEffect(() => {
     if (!menuRef.current) return;
 
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
     if (isOpen) {
       gsap.to(menuRef.current, {
         y: 0,
         opacity: 1,
-        duration: 0.4,
+        duration: reduce ? 0 : 0.4,
         ease: "power2.out",
         pointerEvents: "auto",
       });
@@ -39,32 +45,28 @@ export default function LanguageSwitcher() {
       gsap.to(menuRef.current, {
         y: 50,
         opacity: 0,
-        duration: 0.3,
+        duration: reduce ? 0 : 0.3,
         ease: "power2.in",
         pointerEvents: "none",
       });
     }
   }, [isOpen]);
 
+  // next-intl-Router: ersetzt die Locale im aktuellen Pfad korrekt
+  // (inkl. präfix-freiem Deutsch durch localePrefix "as-needed")
   const handleChangeLanguage = (lang: Language) => {
-    const segments = pathname.split("/");
-    segments[1] = lang.code === "gb" ? "en" : lang.code; // Locale setzen
-    router.push(segments.join("/"));
+    router.replace(pathname, { locale: lang.locale });
     setIsOpen(false);
   };
 
-  // aktuelle Sprache ermitteln
-  let currentLang = pathname.split("/")[1];
-  if (pathname === "/") {
-    currentLang = "de"; // Root zeigt Englisch
-  }
   return (
     <>
       {/* Toggle Button */}
       <button
         className="fixed bottom-6 right-[2.5%] z-50 w-14 h-14 rounded-full bg-[rgba(10,17,40,0.6)] flex items-center justify-center shadow-lg backdrop-blur-sm"
         onClick={() => setIsOpen(!isOpen)}
-        aria-label="Toggle language menu"
+        aria-label="Sprache wählen / Choose language"
+        aria-expanded={isOpen}
       >
         {isOpen ? <X className="text-white w-7 h-7" /> : <Settings className="text-white w-7 h-7" />}
       </button>
@@ -75,18 +77,20 @@ export default function LanguageSwitcher() {
         className="fixed bottom-20 right-[2.5%] flex flex-col gap-3 bg-[rgba(10,17,40,0.6)] backdrop-blur-md p-3 rounded-2xl shadow-lg z-[70] pointer-events-none opacity-0 translate-y-12"
       >
         {languages.map((lang) => {
-          const isActive = currentLang === (lang.code === "gb" ? "en" : lang.code);
+          const isActive = currentLocale === lang.locale;
           return (
             <button
-              key={lang.code}
+              key={lang.locale}
+              lang={lang.locale}
               className={`flex items-center gap-2 p-2 rounded-lg transition-colors ${
                 isActive
-                  ? "bg-accent-one text-white" // Highlight aus globals.css
-                  : "hover:bg-primary-light/20 text-white"
+                  ? "bg-accent-two text-primary-dark"
+                  : "hover:bg-white/10 text-white"
               }`}
+              aria-current={isActive ? "true" : undefined}
               onClick={() => handleChangeLanguage(lang)}
             >
-              <span className={`fi fi-${lang.code} w-6 h-4 rounded-sm`} />
+              <span className={`fi fi-${lang.flag} w-6 h-4 rounded-sm`} aria-hidden="true" />
               <span className="font-medium">{lang.label}</span>
             </button>
           );

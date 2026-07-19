@@ -26,6 +26,8 @@ export default function TestimonialsSection() {
 
   useEffect(() => {
     if (!isInView) return;
+    // Kein Autoplay, wenn das System reduzierte Bewegung wünscht
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const interval = setInterval(() => {
       if (!containerRef.current) return;
 
@@ -100,12 +102,12 @@ export default function TestimonialsSection() {
             {reviews.map((review, idx) => (
               <div
                 key={idx}
-                className="flex-none w-full md:w-[calc(50%-12px)] snap-center rounded-2xl shadow-xl p-6 md:p-8 bg-white transition-transform duration-500 hover:-translate-y-1"
+                className="flex-none w-full md:w-[calc(50%-12px)] snap-center rounded-2xl shadow-sm border border-gray-200 p-6 md:p-8 bg-gray-50 transition-transform duration-500 hover:-translate-y-1"
               >
                 <p className="text-neutral mb-4">&quot;{review.text}&quot;</p>
                 <div className="flex items-center justify-between text-sm text-gray-500">
                   <span>{review.name}</span>
-                  <span>{'★'.repeat(review.rating)}</span>
+                  <span aria-label={`${review.rating}/5`}>{'★'.repeat(review.rating)}</span>
                 </div>
               </div>
             ))}
@@ -114,11 +116,19 @@ export default function TestimonialsSection() {
 
         {/* Left/Right Buttons */}
         <div className="flex justify-center gap-4 mt-8">
-          <button onClick={() => scroll("left")} className="bg-white rounded-full p-2 shadow-md">
-            <ChevronLeftIcon className="w-5 h-5" />
+          <button
+            onClick={() => scroll("left")}
+            aria-label={t("ariaPrev")}
+            className="bg-white border border-gray-200 rounded-full p-2 shadow-md"
+          >
+            <ChevronLeftIcon className="w-5 h-5" aria-hidden="true" />
           </button>
-          <button onClick={() => scroll("right")} className="bg-white rounded-full p-2 shadow-md">
-            <ChevronRightIcon className="w-5 h-5" />
+          <button
+            onClick={() => scroll("right")}
+            aria-label={t("ariaNext")}
+            className="bg-white border border-gray-200 rounded-full p-2 shadow-md"
+          >
+            <ChevronRightIcon className="w-5 h-5" aria-hidden="true" />
           </button>
         </div>
 

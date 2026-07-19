@@ -1,4 +1,4 @@
-// src/app/[locale]/imprint/page.tsx
+﻿// src/app/[locale]/imprint/page.tsx
 import { useTranslations } from "next-intl";
 
 export default function ImprintPage() {
@@ -21,13 +21,13 @@ export default function ImprintPage() {
         <h2 className="text-xl font-semibold mb-2">{t("contact")}</h2>
         <p>
           {t("phone")}:{" "}
-          <a href="tel:+491628036905" className="text-accent-one hover:underline">
+          <a href="tel:+491628036905" className="text-link hover:underline">
             +49 162 8036 905
           </a>
         </p>
         <p>
           {t("email")}:{" "}
-          <a href="mailto:markuslindner1998@gmail.com" className="text-accent-one hover:underline">
+          <a href="mailto:markuslindner1998@gmail.com" className="text-link hover:underline">
             markuslindner1998@gmail.com
           </a>
         </p>

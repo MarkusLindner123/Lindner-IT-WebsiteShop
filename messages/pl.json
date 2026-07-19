@@ -1,4 +1,17 @@
 {
+  "metadata": {
+    "title": "Lindner IT – Usługi IT i strony internetowe dla MŚP w Berlinie",
+    "description": "Wsparcie IT, instalacja sieci, cyberbezpieczeństwo i profesjonalne strony internetowe dla małych i średnich firm w Berlinie. Osobiście, niezawodnie, z certyfikatami."
+  },
+  "nav": {
+    "ariaLabel": "Nawigacja główna",
+    "home": "Strona główna",
+    "services": "Usługi",
+    "about": "O mnie",
+    "contact": "Kontakt",
+    "openMenu": "Otwórz menu",
+    "closeMenu": "Zamknij menu"
+  },
   "heroVideo": {
     "title": "Niezawodne rozwiązania IT dla MŚP",
     "subtitle": "Profesjonalne wsparcie IT, instalacja sieci, cyberbezpieczeństwo i strony internetowe specjalnie dla małych i średnich firm"
@@ -195,6 +208,8 @@
   "testimonials": {
     "title": "Opinie klientów",
     "kicker": "Zaufanie MŚP",
+    "ariaPrev": "Poprzednia opinia",
+    "ariaNext": "Następna opinia",
     "googleProfile": "https://maps.app.goo.gl/qW5Ns8LAGoEUs3yn8",
     "googleButtonText": "Profil Google Business",
     "reviews": [

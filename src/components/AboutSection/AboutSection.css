@@ -26,9 +26,10 @@
   backface-visibility: hidden;
 }
 
-/* --- Pinsel-Effekt --- */
+/* --- Pinsel-Effekt ---
+   Kein externes Fallback-SVG (svgbox.net): alle Brushes liegen lokal
+   in /public/brushes-about, jede Highlight-Klasse setzt ihr eigenes Bild. */
 .brush-effect {
-  background-image: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-3);
   background-size: 100% 100%;
   margin: -2px -6px;
   padding: 2px 6px;

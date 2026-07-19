@@ -25,7 +25,11 @@ export default function CookieBanner() {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-4 left-4 right-4 md:left-1/4 md:right-1/4 z-50 bg-card-hero border border-gray-300 rounded-xl p-4 shadow-lg flex flex-col md:flex-row items-center justify-between gap-4">
+    <div
+      role="region"
+      aria-label="Cookie-Hinweis"
+      className="fixed bottom-4 left-4 right-4 md:left-1/4 md:right-1/4 z-50 bg-white border border-gray-300 rounded-xl p-4 shadow-lg flex flex-col md:flex-row items-center justify-between gap-4"
+    >
       <p className="text-black text-sm md:text-base">
         {t("message")}
       </p>
