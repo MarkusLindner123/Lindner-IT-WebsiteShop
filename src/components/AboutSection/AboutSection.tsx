@@ -4,7 +4,16 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { FileText, Award } from "lucide-react";
+import {
+  FileText,
+  Award,
+  GraduationCap,
+  Trophy,
+  ShieldCheck,
+  Database,
+  Cloud,
+  type LucideIcon,
+} from "lucide-react";
 import "./AboutSection.css"; // Brush-Effekt
 
 const brushColors = [
@@ -18,27 +27,42 @@ const aboutImages = [
   "/about-images/about4.webp",
 ];
 
-// Highlight-Wörter pro Sprache, je 16 Wörter, 4 pro Sektion
+// Highlight-Wörter pro Sprache — müssen wörtlich in den about-Texten
+// (messages/*.json) vorkommen, sonst wird nichts markiert
 const highlightWordsEn = [
-  "bilingual", "engineering", "embedded", "software",
-  "Siemens", "infrastructure", "freelance", "websites",
-  "networks", "cybersecurity", "reliable", "scalable",
-  "secure", "growth-driven", "solutions", "SMEs"
+  "specialist", "bilingual", "administration", "development",
+  "websites", "Siemens", "infrastructure", "ELK-stack",
+  "automation", "freelance", "firms", "cloud",
+  "analysis", "scalable", "secure", "cybersecurity",
+  "reliability", "reliable", "growth-driven", "SMEs"
 ];
 
 const highlightWordsDe = [
-  "zweisprachig", "technische", "embedded", "Software",
-  "Softwareentwicklung", "Projekt","Cloud-Systeme","IT-Lösungen",
-  "Siemens", "Infrastruktur", "freiberuflich", "Websites",
-  "Netze", "Cybersicherheit", "zuverlässig", "skalierbar",
-  "sicher", "wachstumsorientiert", "Lösungen", "KMU", "Beratung"
+  "Fachinformatiker", "IHK-Abschluss", "Systemadministration", "Softwareentwicklung",
+  "zweisprachig", "Websites", "Siemens", "IT-Infrastruktur",
+  "ELK-Stack", "Automatisierung", "Freelancer", "Kanzleien",
+  "Cloud-Systeme", "Netzwerkinstallationen", "Analyse", "skalierbare",
+  "Cybersicherheit", "Datenschutz", "zuverlässige", "wachstumsorientierte"
 ];
 
 const highlightWordsPl = [
-  "dwujęzycznie", "inżynieria", "embedded", "oprogramowanie",
-  "Siemens", "infrastruktura", "freelance", "strony",
-  "sieci", "bezpieczeństwo", "niezawodne", "skalowalne",
-  "bezpieczne", "rozwój", "rozwiązania", "MŚP"
+  "specjalistą", "dwujęzycznie", "administrację", "programowaniem",
+  "Siemens", "infrastrukturze", "ELK-Stack", "automatyzacji",
+  "freelancer", "kancelarii", "chmurowe", "analizy",
+  "skalowalne", "bezpieczne", "cyberbezpieczeństwa", "niezawodne",
+  "MŚP", "strony"
+];
+
+// Satzzeichen, die vor dem Wortvergleich entfernt werden
+const PUNCTUATION_RE = /[.,!?:;()„“”–—]/g;
+
+const CERT_BADGES: { key: "ihk" | "python" | "cpp" | "siemens" | "elastic" | "azure"; icon: LucideIcon }[] = [
+  { key: "ihk", icon: GraduationCap },
+  { key: "python", icon: Trophy },
+  { key: "cpp", icon: Trophy },
+  { key: "siemens", icon: ShieldCheck },
+  { key: "elastic", icon: Database },
+  { key: "azure", icon: Cloud },
 ];
 
 export default function AboutSection() {
@@ -95,7 +119,7 @@ export default function AboutSection() {
     const map: { [key: number]: string } = {};
     let ci = 0;
     allWords.flat().forEach(({ word, index }) => {
-      const clean = word.replace(/[.,!?–]/g, "").toLowerCase();
+      const clean = word.replace(PUNCTUATION_RE, "").toLowerCase();
       if (highlightWordsSet.has(clean)) {
         map[index] = brushColors[ci % brushColors.length];
         ci++;
@@ -206,7 +230,7 @@ export default function AboutSection() {
               </h3>
               {paragraphWords.map(({ word, index }) => {
                 if (word === "\n") return null;
-                const clean = word.replace(/[.,!?–]/g, "").toLowerCase();
+                const clean = word.replace(PUNCTUATION_RE, "").toLowerCase();
                 const highlighted = highlightWordsSet.has(clean);
                 const color = highlighted ? highlightColorMap[index] || "red" : "";
                 return (
@@ -222,6 +246,31 @@ export default function AboutSection() {
             </div>
           </div>
         ))}
+      </div>
+
+      {/* Abschlüsse & Zertifikate als Badges */}
+      <div className="mt-20">
+        <h3 className="text-3xl md:text-4xl font-bold mb-8">{t("certs.title")}</h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {CERT_BADGES.map(({ key, icon: Icon }) => (
+            <div
+              key={key}
+              className="flex items-start gap-4 p-5 rounded-xl bg-gray-50 border border-gray-200"
+            >
+              <span className="flex-shrink-0 w-11 h-11 rounded-full bg-accent-two/15 text-primary-dark flex items-center justify-center">
+                <Icon size={22} aria-hidden="true" />
+              </span>
+              <span>
+                <span className="block font-semibold text-primary-dark">
+                  {t(`certs.${key}.title`)}
+                </span>
+                <span className="block text-sm text-neutral mt-1">
+                  {t(`certs.${key}.sub`)}
+                </span>
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Downloads: Lebenslauf & Zeugnisse (PDFs in /public/docs) */}

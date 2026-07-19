@@ -29,6 +29,9 @@ export default function Footer() {
 
         {/* Footer Navigation — Link aus i18n/navigation behält die Sprache bei */}
         <nav className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 text-sm">
+          <Link href="/blog" className="text-neutral hover:text-link transition-colors">
+            {t("blog")}
+          </Link>
           <Link href="/privacy" className="text-neutral hover:text-link transition-colors">
             {t("privacy")}
           </Link>

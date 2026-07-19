@@ -175,6 +175,15 @@ export default function Header() {
   // Handler-Funktion für Klicks
   const handleIconClick = (index: number) => {
     const targetElement = document.querySelector(NAV_ITEMS[index].href);
+
+    // Auf Unterseiten (z. B. /blog) existieren die Sektionen nicht —
+    // dann zurück zur Startseite mit Anker navigieren
+    if (!targetElement) {
+      const base = locale === "de" ? "/" : `/${locale}`;
+      window.location.href = `${base}${NAV_ITEMS[index].href}`;
+      return;
+    }
+
     if (targetElement) {
       isClickScrollingRef.current = true;
       setActiveIndex(index);

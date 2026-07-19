@@ -30,20 +30,29 @@
     "kicker": "Poznaj mnie",
     "title": "O Markusie Lindnerze",
     "background": {
-      "title": "Moje doświadczenie",
-      "text": "Jestem Markus Lindner, mam 27 lat, jestem zaangażowanym freelancerem IT z siedzibą w Berlinie. Obecnie studiuję B.Sc. Engineering Embedded Systems na BHT Berlin ze specjalizacją w informatyce technicznej i praktycznym tworzeniu oprogramowania. Wychowałem się dwujęzycznie w języku niemieckim i polskim, posiadam bardzo dobrą znajomość angielskiego i codziennie pracuję w międzynarodowym środowisku z różnymi klientami."
+      "title": "Kim jestem",
+      "text": "Nazywam się Markus Lindner, jestem specjalistą IT z Berlina z dyplomem informatyka w zakresie tworzenia aplikacji (IHK Berlin). Łączę administrację systemami z programowaniem: serwery Windows, sieci i Microsoft Azure z jednej strony, nowoczesne strony internetowe w TypeScript i React z drugiej. Wychowałem się dwujęzycznie — po niemiecku i po polsku — mówię płynnie po angielsku i na co dzień pracuję z klientami z różnych branż."
     },
     "experience": {
       "title": "Moje doświadczenie",
-      "text": "Od maja 2019 do marca 2024 pracowałem jako student w Siemens AG, zdobywając cenne doświadczenie praktyczne w zakresie infrastruktury IT, cyberbezpieczeństwa i tworzenia oprogramowania. Od 2020 roku działam również jako freelancer, tworzę nowoczesne i przyjazne użytkownikowi strony internetowe w WordPress, TypeScript i React, oferuję indywidualne szkolenia IT oraz zajmuję się incydentami związanymi z bezpieczeństwem. Ponadto konfigurowałem infrastruktury IT dla kancelarii i agencji nieruchomości, wdrażałem systemy chmurowe, przeprowadzałem odzyskiwanie danych oraz realizowałem instalacje sieciowe dla MŚP, takie jak Bullet Shop Berlin."
+      "text": "Przez pięć lat w Siemens AG w Berlinie zdobywałem praktyczne doświadczenie w infrastrukturze IT, monitoringu (ELK-Stack) i automatyzacji z użyciem PowerShell i Pythona. Dziś zawodowo administruję sieciami, serwerami i Microsoft 365, a jako freelancer realizuję projekty dla małych i średnich firm: kompletne platformy webowe w Next.js i React, infrastruktury IT dla kancelarii i biur nieruchomości, systemy chmurowe, odzyskiwanie danych i instalacje sieciowe — na przykład dla Bullet Shop Berlin."
     },
     "approach": {
       "title": "Moje podejście",
-      "text": "Każdy projekt zaczynam od dokładnej analizy Twoich potrzeb IT, aby systematycznie identyfikować ryzyka i szanse, a następnie rozwijam skalowalne rozwiązania, takie jak bezpieczne sieci, profesjonalne strony internetowe i nowoczesne środki bezpieczeństwa. Następnie wdrażam je efektywnie, z naciskiem na niezawodność, oferując jednocześnie ciągłe wsparcie, doradztwo i optymalizację. Połączenie moich doświadczeń w Siemens i licznych projektach freelancerskich gwarantuje, że Twoje systemy IT będą profesjonalne, praktyczne i stabilne na dłuższą metę."
+      "text": "Każdy projekt zaczynam od dokładnej analizy potrzeb IT, aby systematycznie zidentyfikować ryzyka i szanse. Na tej podstawie tworzę skalowalne rozwiązania: bezpieczne sieci, profesjonalne strony internetowe i nowoczesne środki bezpieczeństwa — wdrażane sprawnie, z naciskiem na niezawodność i długoterminową stabilność. Po wdrożeniu pozostaję do dyspozycji: ze stałym wsparciem, doradztwem i optymalizacją."
     },
     "whyMe": {
       "title": "Dlaczego ja",
-      "text": "W każdym projekcie stosuję praktyczne i ukierunkowane na rozwiązania podejście. Dzięki uznanym certyfikatom z zakresu cyberbezpieczeństwa, ochrony danych i zarządzania IT oferuję bezpieczne, niezawodne i ukierunkowane na rozwój rozwiązania IT, dostosowane specjalnie do potrzeb małych i średnich firm. Łączę solidną wiedzę techniczną z jasnym nastawieniem na klienta, dzięki czemu Twoje systemy IT działają sprawnie, bezpiecznie i efektywnie."
+      "text": "Pracuję praktycznie i z nastawieniem na rozwiązania. Dzięki uznanym certyfikatom z cyberbezpieczeństwa i ochrony danych, doświadczeniu z korporacji i sektora MŚP oraz ukończonemu egzaminowi zawodowemu IHK oferuję bezpieczne, niezawodne i nastawione na rozwój rozwiązania IT dla małych i średnich firm. Wiedza techniczna spotyka się z jasnym nastawieniem na klienta — aby Twoje IT działało nie tylko sprawnie, ale też trwale, bezpiecznie i wydajnie."
+    },
+    "certs": {
+      "title": "Dyplomy i certyfikaty",
+      "ihk": { "title": "Informatyk (IHK Berlin)", "sub": "Tworzenie aplikacji, dyplom 2026" },
+      "python": { "title": "Python 3 — Top 1%", "sub": "CodinGame Certification" },
+      "cpp": { "title": "C++ — Top 2%", "sub": "CodinGame Certification" },
+      "siemens": { "title": "Siemens Cybersecurity", "sub": "Data Privacy, Network Hardening, IT Regulation" },
+      "elastic": { "title": "Elasticsearch i ELK-Stack", "sub": "Praktyka monitoringu z 5 lat w Siemens AG" },
+      "azure": { "title": "Microsoft Azure i 365", "sub": "VNety, Active Directory, codzienna administracja" }
     },
     "downloads": {
       "cv": "CV (PDF)",
@@ -240,6 +249,7 @@
   "footer": {
     "privacy": "Prywatność",
     "imprint": "Impressum",
+    "blog": "Blog i wiedza",
     "company": "Freelancer"
   },
   "impressum": {
@@ -284,5 +294,16 @@
   "message": "Używamy plików cookie, aby poprawić Twoje doświadczenie i zapewnić optymalne działanie strony.",
   "accept": "Akceptuję",
   "decline": "Odrzuć"
-}
+},
+  "blog": {
+    "title": "Blog i wiedza",
+    "kicker": "Praktyczna wiedza dla MŚP",
+    "description": "Praktyczne porady IT dla małych i średnich firm: bezpieczeństwo, kopie zapasowe, strony internetowe i więcej.",
+    "readMore": "Czytaj dalej",
+    "minutes": "min czytania",
+    "back": "Powrót do przeglądu",
+    "ctaTitle": "Masz pytania o swoje IT?",
+    "ctaText": "Porozmawiajmy niezobowiązująco o Twoim projekcie.",
+    "ctaButton": "Skontaktuj się"
+  }
 }

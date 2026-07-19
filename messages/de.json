@@ -31,19 +31,28 @@
   "title": "Über Markus Lindner",
   "background": {
     "title": "Mein Hintergrund",
-    "text": "Ich bin Markus Lindner, 27 Jahre alt, ein engagierter IT-Freelancer mit Sitz in Berlin. Zurzeit studiere ich B.Sc. Engineering Embedded Systems an der BHT Berlin mit Schwerpunkt technische Informatik und praxisnaher Softwareentwicklung. Ich bin zweisprachig in Deutsch und Polnisch aufgewachsen, verfüge über sehr gute Englischkenntnisse und arbeite täglich in einem internationalen Umfeld mit verschiedenen Kunden."
+    "text": "Ich bin Markus Lindner, IT-Spezialist aus Berlin und Fachinformatiker für Anwendungsentwicklung mit IHK-Abschluss. Ich verbinde Systemadministration mit Softwareentwicklung: Windows-Server, Netzwerke und Microsoft Azure auf der einen Seite, moderne Websites mit TypeScript und React auf der anderen. Ich bin zweisprachig mit Deutsch und Polnisch aufgewachsen, spreche fließend Englisch und arbeite täglich mit Kunden aus unterschiedlichen Branchen."
   },
   "experience": {
     "title": "Meine Erfahrung",
-    "text": "Von Mai 2019 bis März 2024 war ich als studentischer Mitarbeiter bei Siemens AG tätig und sammelte dort wertvolle praktische Erfahrungen in IT-Infrastruktur, Cybersicherheit sowie Softwareentwicklung. Seit 2020 arbeite ich zusätzlich freiberuflich, entwickle moderne und benutzerfreundliche Websites mit WordPress, TypeScript und React, biete individuelles IT-Coaching und betreue sicherheitsrelevante Vorfälle. Darüber hinaus habe ich IT-Infrastrukturen für Kanzleien und Immobilienmakler eingerichtet, Cloud-Systeme implementiert, Datenrettungen durchgeführt und Netzwerkinstallationen für KMU wie Bullet Shop Berlin zuverlässig umgesetzt."
+    "text": "Fünf Jahre habe ich bei der Siemens AG in Berlin praktische Erfahrung in IT-Infrastruktur, Monitoring mit dem ELK-Stack und Automatisierung mit PowerShell und Python gesammelt. Heute administriere ich beruflich Netzwerke, Server und Microsoft 365 und setze als Freelancer Projekte für kleine und mittlere Unternehmen um: komplette Web-Plattformen mit Next.js und React, IT-Infrastrukturen für Kanzleien und Immobilienmakler, Cloud-Systeme, Datenrettungen und Netzwerkinstallationen — zum Beispiel für Bullet Shop Berlin."
   },
   "approach": {
     "title": "Mein Ansatz",
-    "text": "Ich beginne jedes Projekt mit einer gründlichen Analyse Ihrer IT-Bedürfnisse, um Risiken und Chancen systematisch zu identifizieren, und entwickle darauf basierend skalierbare Lösungen wie sichere Netzwerke, professionelle Websites und moderne Sicherheitsmaßnahmen. Anschließend implementiere ich diese effizient und mit Fokus auf Zuverlässigkeit, während ich kontinuierliche Unterstützung, Beratung und Optimierung biete. Die Kombination meiner Erfahrungen bei Siemens und zahlreichen Freelance-Projekten stellt sicher, dass Ihre IT-Systeme sowohl professionell als auch praxisnah und langfristig stabil sind."
+    "text": "Jedes Projekt beginnt bei mir mit einer gründlichen Analyse Ihrer IT-Bedürfnisse, um Risiken und Chancen systematisch zu identifizieren. Darauf aufbauend entwickle ich skalierbare Lösungen wie sichere Netzwerke, professionelle Websites und moderne Sicherheitsmaßnahmen — und implementiere sie effizient, mit Fokus auf Zuverlässigkeit und langfristige Stabilität. Auch nach dem Go-live bleibe ich an Bord: mit kontinuierlicher Unterstützung, Beratung und Optimierung."
   },
   "whyMe": {
     "title": "Warum ich",
-    "text": "Ich verfolge bei jedem Projekt einen praxisnahen und lösungsorientierten Ansatz. Mit anerkannten Zertifikaten in Cybersicherheit, Datenschutz und IT-Management biete ich sichere, zuverlässige und wachstumsorientierte IT-Lösungen, die speziell auf die Anforderungen kleiner und mittlerer Unternehmen zugeschnitten sind. Dabei verbinde ich fundiertes technisches Fachwissen mit einer klaren Kundenorientierung, sodass Ihre Unternehmens-IT nicht nur reibungslos, sondern auch nachhaltig, sicher und effizient funktioniert."
+    "text": "Ich arbeite praxisnah und lösungsorientiert. Mit anerkannten Zertifikaten in Cybersicherheit und Datenschutz, Erfahrung aus Konzern und Mittelstand sowie einem abgeschlossenen IHK-Berufsabschluss biete ich sichere, zuverlässige und wachstumsorientierte IT-Lösungen, die auf kleine und mittlere Unternehmen zugeschnitten sind. Technisches Fachwissen trifft klare Kundenorientierung — damit Ihre IT nicht nur läuft, sondern nachhaltig, sicher und effizient funktioniert."
+  },
+  "certs": {
+    "title": "Abschlüsse & Zertifikate",
+    "ihk": { "title": "Fachinformatiker (IHK Berlin)", "sub": "Anwendungsentwicklung, Abschluss 2026" },
+    "python": { "title": "Python 3 — Top 1 %", "sub": "CodinGame Certification" },
+    "cpp": { "title": "C++ — Top 2 %", "sub": "CodinGame Certification" },
+    "siemens": { "title": "Siemens Cybersecurity", "sub": "Data Privacy, Network Hardening, IT Regulation" },
+    "elastic": { "title": "Elasticsearch & ELK-Stack", "sub": "Monitoring-Praxis aus 5 Jahren Siemens AG" },
+    "azure": { "title": "Microsoft Azure & 365", "sub": "VNets, Active Directory, tägliche Administration" }
   },
   "downloads": {
     "cv": "Lebenslauf (PDF)",
@@ -241,6 +250,7 @@
     "footer": {
     "privacy": "Privatsphäre",
     "imprint": "Impressum",
+    "blog": "Blog & Wissen",
     "company": "Freelancer"
   },
   "impressum": {
@@ -286,6 +296,16 @@
     "message": "Wir verwenden Cookies, um Ihr Nutzererlebnis zu verbessern und die Website optimal zu gestalten.",
     "accept": "Zustimmen",
     "decline": "Ablehnen"
+  },
+  "blog": {
+    "title": "Blog & Wissen",
+    "kicker": "Praxiswissen für KMU",
+    "description": "Praktische IT-Tipps für kleine und mittlere Unternehmen: Sicherheit, Datensicherung, Websites und mehr.",
+    "readMore": "Weiterlesen",
+    "minutes": "Min. Lesezeit",
+    "back": "Zurück zur Übersicht",
+    "ctaTitle": "Fragen zu Ihrer IT?",
+    "ctaText": "Lassen Sie uns unverbindlich über Ihr Projekt sprechen.",
+    "ctaButton": "Kontakt aufnehmen"
   }
-
 }

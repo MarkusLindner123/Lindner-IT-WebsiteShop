@@ -50,7 +50,16 @@ Three separate systems, all in `"use client"` components:
 - **GSAP** — the "gooey" header nav in `Header.tsx`: two SVG rects animated behind a `feGaussianBlur` filter, positioned from the `HEADER_CONFIG` pixel constants (separate desktop/mobile values).
 - **Hand-rolled requestAnimationFrame** — floating tag physics in `ServicesSection.tsx` (DOM nodes created imperatively with collision detection), the rotating gradient border in `AnimatedButton.tsx`, and the scroll-progress word/brush highlight in `AboutSection/`.
 
+### Blog
+
+- Articles live as plain data in `src/content/posts.ts` — one `Post` entry with content for **all three locales** (no CMS, no MDX). Adding an article means adding it there; the sitemap picks it up automatically via the `POSTS` import.
+- Routes: `src/app/[locale]/blog/page.tsx` (list) and `src/app/[locale]/blog/[slug]/page.tsx` (article, `generateStaticParams` over slugs).
+- On subpages the header's section anchors don't exist; `Header.tsx` falls back to navigating to `/{locale}#section`.
+
 ### Misc
 
 - The contact form posts directly to Formspree (`https://formspree.io/f/mqadbwyk`) — there is no API route.
 - Legal pages (`imprint`, `privacy`) live under `src/app/[locale]/`.
+- `src/components/StructuredData.tsx` renders JSON-LD (ProfessionalService + AggregateRating) on the homepage for Google rich results.
+- The AboutSection brush-highlight effect only marks words listed in the `highlightWords{De,En,Pl}` arrays in `AboutSection.tsx` — **changing the about texts in `messages/*.json` requires updating those arrays** (words must literally appear in the text).
+- CV and certificate PDFs are served from `public/docs/` and linked from the About section.
