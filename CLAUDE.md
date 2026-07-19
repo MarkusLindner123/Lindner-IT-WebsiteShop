@@ -10,6 +10,7 @@ pnpm is the package manager.
 - `pnpm build` — production build
 - `pnpm start` — serve the production build
 - `pnpm lint` — ESLint via `next lint`
+- `pnpm seo:audit` — SEO audit (`scripts/seo-audit.mjs`, no deps): on-page checks, robots/sitemap, GSC + GA4 data, PageSpeed Insights. Needs `GOOGLE_APPLICATION_CREDENTIALS` (service-account JSON, lives outside the repo) and `GA_PROPERTY_ID` in `.env.local`; report lands in `seo-reports/` (gitignored). `-- --site http://localhost:3000` audits a local build.
 
 There is no test suite.
 

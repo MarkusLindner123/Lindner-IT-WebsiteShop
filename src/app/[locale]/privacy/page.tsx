@@ -1,5 +1,31 @@
 ﻿// src/app/[locale]/privacy/page.tsx
+import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
+
+// Eigene Metadata: ohne sie erben die Rechtsseiten Canonical + Title der
+// Startseite und gelten für Google als deren Duplikat (SEO-Audit-Fund).
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "datenschutz" });
+  const path = locale === "de" ? "/privacy" : `/${locale}/privacy`;
+  return {
+    title: t("title"),
+    alternates: {
+      canonical: path,
+      languages: {
+        de: "/privacy",
+        en: "/en/privacy",
+        pl: "/pl/privacy",
+        "x-default": "/privacy",
+      },
+    },
+  };
+}
 
 export default function PrivacyPage() {
   const t = useTranslations("datenschutz");

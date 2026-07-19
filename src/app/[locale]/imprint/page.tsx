@@ -1,5 +1,31 @@
 ﻿// src/app/[locale]/imprint/page.tsx
+import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
+
+// Eigene Metadata: ohne sie erben die Rechtsseiten Canonical + Title der
+// Startseite und gelten für Google als deren Duplikat (SEO-Audit-Fund).
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "impressum" });
+  const path = locale === "de" ? "/imprint" : `/${locale}/imprint`;
+  return {
+    title: t("title"),
+    alternates: {
+      canonical: path,
+      languages: {
+        de: "/imprint",
+        en: "/en/imprint",
+        pl: "/pl/imprint",
+        "x-default": "/imprint",
+      },
+    },
+  };
+}
 
 export default function ImprintPage() {
   const t = useTranslations("impressum");
