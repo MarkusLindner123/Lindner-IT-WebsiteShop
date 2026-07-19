@@ -11,6 +11,7 @@ import LanguageSwitcher from "@/components/Layout/LanguageSwitcher";
 import Phone from "@/components/Layout/PhoneButton";
 import Footer from "@/components/Layout/Footer";
 import MotionProvider from "@/components/MotionProvider";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 import "../globals.css";
 
 // Selbst gehostete Fonts via next/font: kein Request an Google-Server (DSGVO),
@@ -107,6 +108,8 @@ export default async function LocaleLayout({
       suppressHydrationWarning
     >
       <body className="antialiased" suppressHydrationWarning>
+        {/* Lädt erst nach Cookie-Einwilligung (DSGVO) */}
+        <GoogleAnalytics />
         <NextIntlClientProvider locale={locale} messages={messages}>
           <MotionProvider>
             <Header />

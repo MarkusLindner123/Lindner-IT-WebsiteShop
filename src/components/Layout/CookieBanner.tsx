@@ -12,13 +12,16 @@ export default function CookieBanner() {
     if (!consent) setIsVisible(true);
   }, []);
 
+  // Event für GoogleAnalytics.tsx: GA startet/bleibt aus, ohne Reload
   const handleAccept = () => {
     localStorage.setItem("cookie-consent", "true");
+    window.dispatchEvent(new Event("cookie-consent-changed"));
     setIsVisible(false);
   };
 
   const handleDecline = () => {
     localStorage.setItem("cookie-consent", "false");
+    window.dispatchEvent(new Event("cookie-consent-changed"));
     setIsVisible(false);
   };
 
