@@ -66,7 +66,7 @@
   "references": {
     "kicker": "Referenzen",
     "title": "Projekte, die für sich sprechen.",
-    "intro": "Echte Kunden, echte Ergebnisse — von der Kanzlei bis zum Handwerksbetrieb.",
+    "intro": "Echte Kunden, echte Ergebnisse — von der Kanzlei über den Handwerksbetrieb bis zum digitalen Kunst-Atelier.",
     "visit": "Website ansehen",
     "scrollHint": "Hover: Seite scrollt",
     "shotAlt": "Screenshot der Website {domain}",
@@ -108,6 +108,15 @@
       "tag1": "Python",
       "tag2": "C++",
       "tag3": "IHK-Fachinformatiker"
+    },
+    "jahdara": {
+      "category": "Web-Atelier · Kunst",
+      "claim": "Kunst. Bewusstsein. Transformation.",
+      "text": "Digitales Atelier für Graphic Novels, Zeichnungen und philosophische Bildwelten: Werke, Journal und Begriffsarchiv unter einem Dach — konsequent auf Schwarz und Weiß reduziert, damit jede Arbeit ihren eigenen Erfahrungsraum bekommt.",
+      "tag1": "Konzept & Umsetzung",
+      "tag2": "Schwarz-Weiß-Design",
+      "tag3": "Werke & Journal",
+      "meta": "Hinter jahdara steht Philipp Alexander Madara Wango — Architekt, Illustrator und Autor. Aktuelles Hauptwerk: die Graphic Novel eL¡jaH Revelation."
     }
   },
   "services": {

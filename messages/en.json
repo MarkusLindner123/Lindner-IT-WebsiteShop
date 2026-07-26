@@ -66,7 +66,7 @@
   "references": {
     "kicker": "References",
     "title": "Projects that speak for themselves.",
-    "intro": "Real clients, real results — from law firms to skilled trades.",
+    "intro": "Real clients, real results — from law firms and skilled trades to a digital art studio.",
     "visit": "View website",
     "scrollHint": "Hover: page scrolls",
     "shotAlt": "Screenshot of the {domain} website",
@@ -108,6 +108,15 @@
       "tag1": "Python",
       "tag2": "C++",
       "tag3": "IHK-certified IT specialist"
+    },
+    "jahdara": {
+      "category": "Web studio · Art",
+      "claim": "Art. Consciousness. Transformation.",
+      "text": "Digital studio for graphic novels, drawings and philosophical imagery: works, journal and glossary under one roof — consistently reduced to black and white so every piece gets a space of its own.",
+      "tag1": "Concept & build",
+      "tag2": "Black-and-white design",
+      "tag3": "Works & journal",
+      "meta": "Behind jahdara is Philipp Alexander Madara Wango — architect, illustrator and author. Current main work: the graphic novel eL¡jaH Revelation."
     }
   },
   "services": {

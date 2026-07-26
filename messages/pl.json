@@ -65,7 +65,7 @@
   "references": {
     "kicker": "Referencje",
     "title": "Projekty, które mówią same za siebie.",
-    "intro": "Prawdziwi klienci, prawdziwe efekty — od kancelarii po firmę rzemieślniczą.",
+    "intro": "Prawdziwi klienci, prawdziwe efekty — od kancelarii przez firmę rzemieślniczą po cyfrowe atelier artystyczne.",
     "visit": "Zobacz stronę",
     "scrollHint": "Najedź: strona się przewija",
     "shotAlt": "Zrzut ekranu strony {domain}",
@@ -107,6 +107,15 @@
       "tag1": "Python",
       "tag2": "C++",
       "tag3": "Informatyk z dyplomem IHK"
+    },
+    "jahdara": {
+      "category": "Atelier web · Sztuka",
+      "claim": "Sztuka. Świadomość. Transformacja.",
+      "text": "Cyfrowe atelier powieści graficznych, rysunków i filozoficznych światów obrazu: prace, dziennik i archiwum pojęć w jednym miejscu — konsekwentnie ograniczone do czerni i bieli, by każde dzieło zyskało własną przestrzeń.",
+      "tag1": "Koncepcja i realizacja",
+      "tag2": "Design czarno-biały",
+      "tag3": "Prace i dziennik",
+      "meta": "Za jahdarą stoi Philipp Alexander Madara Wango — architekt, ilustrator i autor. Aktualne główne dzieło: powieść graficzna eL¡jaH Revelation."
     }
   },
   "services": {

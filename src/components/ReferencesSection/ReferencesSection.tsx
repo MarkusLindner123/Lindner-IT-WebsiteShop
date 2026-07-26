@@ -11,6 +11,11 @@ import "./ReferencesSection.css";
 const SHOT_W = 800;
 const SHOT_H = 1297;
 
+// jahdara.com sperrt Crawler per robots.txt — der Screenshot ist manuell
+// aufgenommen und hat deshalb ein eigenes Seitenverhältnis.
+const JAHDARA_W = 1070;
+const JAHDARA_H = 1297;
+
 const WEBSITES = [
   {
     key: "elektro" as const,
@@ -34,6 +39,7 @@ const MARQUEE_ITEMS = [
   "Lindner Elektrotechnik",
   "Anwaltskanzlei Korff",
   "Haus Phönix",
+  "jahdara",
   "Siemens",
   "CodinGame Top 1 %",
   "IHK Berlin",
@@ -109,15 +115,21 @@ function BrowserWindow({
   alt,
   hint,
   priority = false,
+  width = SHOT_W,
+  height = SHOT_H,
+  dark = false,
 }: {
   domain: string;
   img: string;
   alt: string;
   hint: string;
   priority?: boolean;
+  width?: number;
+  height?: number;
+  dark?: boolean;
 }) {
   return (
-    <div className="ref-browser">
+    <div className={`ref-browser${dark ? " ref-browser--dark" : ""}`}>
       <div className="ref-chrome">
         <div className="ref-dots" aria-hidden="true">
           <i />
@@ -133,8 +145,8 @@ function BrowserWindow({
         <Image
           src={img}
           alt={alt}
-          width={SHOT_W}
-          height={SHOT_H}
+          width={width}
+          height={height}
           sizes="(min-width: 900px) 520px, 100vw"
           priority={priority}
           className="ref-shot-img"
@@ -455,6 +467,51 @@ export default function ReferencesSection() {
             </span>
           ))}
         </div>
+      </div>
+
+      {/* jahdara — digitales Kunst-Atelier: eigene Schwarz-Weiß-Bildsprache,
+          deshalb als dunkle Karte statt im hellen Zweispalter */}
+      <div className="ref-atelier mt-14 md:mt-20">
+        <div className="ref-atelier-grid">
+          <div>
+            <span className="ref-cat ref-cat--atelier">
+              {t("jahdara.category")}
+            </span>
+            <h3 className="ref-atelier-title">jahdara</h3>
+            <p className="ref-atelier-claim">{t("jahdara.claim")}</p>
+            <p className="ref-atelier-text">{t("jahdara.text")}</p>
+            <div className="flex flex-wrap gap-2 mb-7">
+              {([1, 2, 3] as const).map((i) => (
+                <span key={i} className="ref-chip ref-chip--atelier">
+                  {t(`jahdara.tag${i}`)}
+                </span>
+              ))}
+            </div>
+            <a
+              href="https://jahdara.com"
+              target="_blank"
+              rel="noopener"
+              className="ref-atelier-link"
+            >
+              {t("visit")}
+              <ArrowUpRight size={16} aria-hidden="true" />
+            </a>
+          </div>
+          <div>
+            <TiltCard>
+              <BrowserWindow
+                domain="jahdara.com"
+                img="/references/jahdara.png"
+                alt={t("shotAlt", { domain: "jahdara.com" })}
+                hint={t("scrollHint")}
+                width={JAHDARA_W}
+                height={JAHDARA_H}
+                dark
+              />
+            </TiltCard>
+          </div>
+        </div>
+        <p className="ref-atelier-meta">{t("jahdara.meta")}</p>
       </div>
     </div>
   );
