@@ -16,9 +16,20 @@ const SHOT_H = 1297;
 const JAHDARA_W = 1070;
 const JAHDARA_H = 1297;
 
-const WEBSITES = [
+type Website = {
+  key: string;
+  domain: string;
+  url: string;
+  img: string;
+  warm: boolean;
+  flip: boolean;
+  width?: number;
+  height?: number;
+};
+
+const WEBSITES: Website[] = [
   {
-    key: "elektro" as const,
+    key: "elektro",
     domain: "lindner-elektrotechnik.com",
     url: "https://lindner-elektrotechnik.com",
     img: "/references/elektro.jpg",
@@ -26,7 +37,7 @@ const WEBSITES = [
     flip: false,
   },
   {
-    key: "korff" as const,
+    key: "korff",
     domain: "anwaltskanzlei-korff.de",
     url: "https://anwaltskanzlei-korff.de",
     img: "/references/korff.jpg",
@@ -34,6 +45,18 @@ const WEBSITES = [
     flip: true,
   },
 ];
+
+// Steht nach Haus Phönix, damit Siemens die Sektion abschließt
+const JAHDARA: Website = {
+  key: "jahdara",
+  domain: "jahdara.com",
+  url: "https://jahdara.com",
+  img: "/references/jahdara.png",
+  warm: false,
+  flip: true,
+  width: JAHDARA_W,
+  height: JAHDARA_H,
+};
 
 const MARQUEE_ITEMS = [
   "Lindner Elektrotechnik",
@@ -117,7 +140,6 @@ function BrowserWindow({
   priority = false,
   width = SHOT_W,
   height = SHOT_H,
-  dark = false,
 }: {
   domain: string;
   img: string;
@@ -126,10 +148,9 @@ function BrowserWindow({
   priority?: boolean;
   width?: number;
   height?: number;
-  dark?: boolean;
 }) {
   return (
-    <div className={`ref-browser${dark ? " ref-browser--dark" : ""}`}>
+    <div className="ref-browser">
       <div className="ref-chrome">
         <div className="ref-dots" aria-hidden="true">
           <i />
@@ -154,6 +175,61 @@ function BrowserWindow({
         <div className="ref-hint" aria-hidden="true">
           <b>↕</b> {hint}
         </div>
+      </div>
+    </div>
+  );
+}
+
+/* Standard-Referenzblock: Text + Browser-Fenster im Zweispalter */
+function WebsiteProject({
+  site,
+  priority = false,
+}: {
+  site: Website;
+  priority?: boolean;
+}) {
+  const t = useTranslations("references");
+  const { key, domain, url, img, warm, flip, width, height } = site;
+
+  return (
+    <div className="grid grid-cols-1 gap-10 md:gap-12 md:grid-cols-2 items-center mt-14 md:mt-20">
+      <div className={flip ? "md:order-2" : ""}>
+        <span className={`ref-cat ${warm ? "ref-cat--warm" : ""}`}>
+          {t(`${key}.category`)}
+        </span>
+        <h3 className="text-2xl md:text-3xl font-extrabold text-primary-dark mt-4 mb-3">
+          {t(`${key}.title`)}
+        </h3>
+        <p className="text-neutral mb-5">{t(`${key}.text`)}</p>
+        <div className="flex flex-wrap gap-2 mb-6">
+          {([1, 2, 3] as const).map((i) => (
+            <span key={i} className="ref-chip">
+              {t(`${key}.tag${i}`)}
+            </span>
+          ))}
+        </div>
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener"
+          className="inline-flex items-center gap-1.5 font-bold text-link"
+        >
+          {t("visit")}
+          <ArrowUpRight size={16} aria-hidden="true" />
+        </a>
+      </div>
+      <div className={flip ? "md:order-1" : ""}>
+        <TiltCard>
+          <BrowserWindow
+            domain={domain}
+            img={img}
+            alt={t("shotAlt", { domain })}
+            hint={t("scrollHint")}
+            priority={priority}
+            width={width}
+            height={height}
+          />
+        </TiltCard>
       </div>
     </div>
   );
@@ -337,48 +413,8 @@ export default function ReferencesSection() {
       </div>
 
       {/* Website-Projekte: Browser-Fenster mit Tilt + Auto-Scroll */}
-      {WEBSITES.map(({ key, domain, url, img, warm, flip }, idx) => (
-        <div
-          key={key}
-          className="grid grid-cols-1 gap-10 md:gap-12 md:grid-cols-2 items-center mt-14 md:mt-20"
-        >
-          <div className={flip ? "md:order-2" : ""}>
-            <span className={`ref-cat ${warm ? "ref-cat--warm" : ""}`}>
-              {t(`${key}.category`)}
-            </span>
-            <h3 className="text-2xl md:text-3xl font-extrabold text-primary-dark mt-4 mb-3">
-              {t(`${key}.title`)}
-            </h3>
-            <p className="text-neutral mb-5">{t(`${key}.text`)}</p>
-            <div className="flex flex-wrap gap-2 mb-6">
-              {([1, 2, 3] as const).map((i) => (
-                <span key={i} className="ref-chip">
-                  {t(`${key}.tag${i}`)}
-                </span>
-              ))}
-            </div>
-            <a
-              href={url}
-              target="_blank"
-              rel="noopener"
-              className="inline-flex items-center gap-1.5 font-bold text-link"
-            >
-              {t("visit")}
-              <ArrowUpRight size={16} aria-hidden="true" />
-            </a>
-          </div>
-          <div className={flip ? "md:order-1" : ""}>
-            <TiltCard>
-              <BrowserWindow
-                domain={domain}
-                img={img}
-                alt={t("shotAlt", { domain })}
-                hint={t("scrollHint")}
-                priority={idx === 0}
-              />
-            </TiltCard>
-          </div>
-        </div>
+      {WEBSITES.map((site, idx) => (
+        <WebsiteProject key={site.key} site={site} priority={idx === 0} />
       ))}
 
       {/* Haus Phönix: Terminal + Website-Fenster im Stapel */}
@@ -429,6 +465,8 @@ export default function ReferencesSection() {
         </div>
       </div>
 
+      <WebsiteProject site={JAHDARA} />
+
       {/* Siemens / Enterprise */}
       <div className="ref-enterprise mt-14 md:mt-20">
         <span className="ref-cat ref-cat--dark">{t("siemens.category")}</span>
@@ -469,50 +507,6 @@ export default function ReferencesSection() {
         </div>
       </div>
 
-      {/* jahdara — digitales Kunst-Atelier: eigene Schwarz-Weiß-Bildsprache,
-          deshalb als dunkle Karte statt im hellen Zweispalter */}
-      <div className="ref-atelier mt-14 md:mt-20">
-        <div className="ref-atelier-grid">
-          <div>
-            <span className="ref-cat ref-cat--atelier">
-              {t("jahdara.category")}
-            </span>
-            <h3 className="ref-atelier-title">jahdara</h3>
-            <p className="ref-atelier-claim">{t("jahdara.claim")}</p>
-            <p className="ref-atelier-text">{t("jahdara.text")}</p>
-            <div className="flex flex-wrap gap-2 mb-7">
-              {([1, 2, 3] as const).map((i) => (
-                <span key={i} className="ref-chip ref-chip--atelier">
-                  {t(`jahdara.tag${i}`)}
-                </span>
-              ))}
-            </div>
-            <a
-              href="https://jahdara.com"
-              target="_blank"
-              rel="noopener"
-              className="ref-atelier-link"
-            >
-              {t("visit")}
-              <ArrowUpRight size={16} aria-hidden="true" />
-            </a>
-          </div>
-          <div>
-            <TiltCard>
-              <BrowserWindow
-                domain="jahdara.com"
-                img="/references/jahdara.png"
-                alt={t("shotAlt", { domain: "jahdara.com" })}
-                hint={t("scrollHint")}
-                width={JAHDARA_W}
-                height={JAHDARA_H}
-                dark
-              />
-            </TiltCard>
-          </div>
-        </div>
-        <p className="ref-atelier-meta">{t("jahdara.meta")}</p>
-      </div>
     </div>
   );
 }

@@ -109,13 +109,12 @@
       "tag3": "Informatyk z dyplomem IHK"
     },
     "jahdara": {
-      "category": "Atelier web · Sztuka",
-      "claim": "Sztuka. Świadomość. Transformacja.",
-      "text": "Cyfrowe atelier powieści graficznych, rysunków i filozoficznych światów obrazu: prace, dziennik i archiwum pojęć w jednym miejscu — konsekwentnie ograniczone do czerni i bieli, by każde dzieło zyskało własną przestrzeń.",
+      "category": "Strona www · Sztuka",
+      "title": "jahdara",
+      "text": "Cyfrowe atelier powieści graficznych, rysunków i filozoficznych światów obrazu: prace, dziennik i archiwum pojęć w jednym miejscu — konsekwentnie w czerni i bieli.",
       "tag1": "Koncepcja i realizacja",
       "tag2": "Design czarno-biały",
-      "tag3": "Prace i dziennik",
-      "meta": "Za jahdarą stoi Philipp Alexander Madara Wango — architekt, ilustrator i autor. Aktualne główne dzieło: powieść graficzna eL¡jaH Revelation."
+      "tag3": "Prace i dziennik"
     }
   },
   "services": {

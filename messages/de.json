@@ -110,13 +110,12 @@
       "tag3": "IHK-Fachinformatiker"
     },
     "jahdara": {
-      "category": "Web-Atelier · Kunst",
-      "claim": "Kunst. Bewusstsein. Transformation.",
-      "text": "Digitales Atelier für Graphic Novels, Zeichnungen und philosophische Bildwelten: Werke, Journal und Begriffsarchiv unter einem Dach — konsequent auf Schwarz und Weiß reduziert, damit jede Arbeit ihren eigenen Erfahrungsraum bekommt.",
+      "category": "Website · Kunst",
+      "title": "jahdara",
+      "text": "Digitales Atelier für Graphic Novels, Zeichnungen und philosophische Bildwelten: Werke, Journal und Begriffsarchiv unter einem Dach — konsequent in Schwarz und Weiß gestaltet.",
       "tag1": "Konzept & Umsetzung",
       "tag2": "Schwarz-Weiß-Design",
-      "tag3": "Werke & Journal",
-      "meta": "Hinter jahdara steht Philipp Alexander Madara Wango — Architekt, Illustrator und Autor. Aktuelles Hauptwerk: die Graphic Novel eL¡jaH Revelation."
+      "tag3": "Werke & Journal"
     }
   },
   "services": {
