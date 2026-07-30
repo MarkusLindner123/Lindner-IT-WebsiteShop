@@ -23,7 +23,15 @@ export default async function HomePage({
   const tMeta = await getTranslations("metadata");
   const tNav = await getTranslations("nav");
   const tServices = await getTranslations("services");
-  const serviceKeys = ["webDesign", "itSupport", "networkSetup", "cyberSecurity"] as const;
+  // Reihenfolge wie die Karten in ServicesSection.tsx
+  const serviceKeys = [
+    "webDesign",
+    "webApps",
+    "aiIntegration",
+    "itSupport",
+    "networkSetup",
+    "cyberSecurity",
+  ] as const;
   const services = serviceKeys.map((key) => ({
     name: tServices(`${key}.title`),
     description: tServices(`${key}.description`),

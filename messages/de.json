@@ -254,6 +254,72 @@
         "question": "Bieten Sie kontinuierliches Monitoring?",
         "answer": "Ja, 24/7 Überwachung potenzieller Cyberbedrohungen."
       }
+    },
+    "aiIntegration": {
+      "title": "KI-Integration & Automatisierung",
+      "description": "Ich bringe künstliche Intelligenz dorthin, wo sie im Alltag wirklich Zeit spart: Anfragen, Dokumente und Firmenwissen — automatisiert, nachvollziehbar und DSGVO-konform.",
+      "feature1": "Potenzialanalyse: wo KI bei Ihnen wirklich lohnt",
+      "feature2": "Chatbots & Assistenten auf Ihren eigenen Daten",
+      "feature3": "Dokumente, E-Mails & Angebote automatisiert verarbeiten",
+      "feature4": "Anbindung an Microsoft 365, CRM und bestehende Tools",
+      "feature5": "DSGVO-konformer Betrieb, auf Wunsch mit EU-Hosting",
+      "faq1": {
+        "question": "Lohnt sich KI für ein kleines Unternehmen überhaupt?",
+        "answer": "Überall dort, wo täglich dieselben Texte, Dokumente oder Anfragen bearbeitet werden. Ich starte mit einem klar messbaren Anwendungsfall statt mit einem Großprojekt."
+      },
+      "faq2": {
+        "question": "Landen unsere Firmendaten beim KI-Anbieter?",
+        "answer": "Nein. Ich nutze Geschäfts-Schnittstellen ohne Training auf Ihren Daten oder betreibe Modelle auf europäischen Servern — je nach Schutzbedarf."
+      },
+      "faq3": {
+        "question": "Wie lange dauert die Einführung?",
+        "answer": "Ein erster produktiver Anwendungsfall steht meist in wenigen Wochen. Sie sehen den Nutzen also, bevor größer investiert wird."
+      },
+      "faq4": {
+        "question": "Brauchen wir dafür ein eigenes KI-Modell?",
+        "answer": "In den meisten Fällen nicht. Bewährte Modelle plus Ihre eigenen Daten und klare Regeln liefern schneller Ergebnisse als ein eigenes Training."
+      },
+      "faq5": {
+        "question": "Was passiert, wenn die KI Fehler macht?",
+        "answer": "Kritische Schritte behalten eine menschliche Freigabe. Ich baue Prüf- und Protokollschritte ein, damit jedes Ergebnis nachvollziehbar bleibt."
+      },
+      "faq6": {
+        "question": "Schulen Sie unsere Mitarbeiter im Umgang mit KI?",
+        "answer": "Ja, praxisnah: wo KI hilft, wo nicht — inklusive klarer Regeln für den sicheren Umgang mit Firmendaten."
+      }
+    },
+    "webApps": {
+      "title": "Web-Apps & Prozessoptimierung",
+      "description": "Wenn Excel-Listen, E-Mail-Ketten und Zettelwirtschaft an ihre Grenzen stoßen, entwickle ich eine Web-App, die genau Ihren Ablauf abbildet — im Browser, auf jedem Gerät, ohne Installation.",
+      "feature1": "Analyse und Digitalisierung Ihrer Abläufe",
+      "feature2": "Individuelle Web-Apps statt Software von der Stange",
+      "feature3": "Formulare, Dashboards & Auswertungen auf Knopfdruck",
+      "feature4": "Schnittstellen zu Ihren bestehenden Systemen",
+      "feature5": "Benutzerverwaltung mit Rollen und Rechten",
+      "faq1": {
+        "question": "Was ist der Unterschied zu einer Website?",
+        "answer": "Eine Website informiert, eine Web-App arbeitet: Nutzer melden sich an, erfassen Daten, lösen Abläufe aus und werten sie aus. Beides lässt sich verbinden."
+      },
+      "faq2": {
+        "question": "Ab wann lohnt sich eine eigene Lösung?",
+        "answer": "Sobald ein Ablauf regelmäßig wiederkehrt, mehrere Personen betrifft und heute über Excel oder E-Mail läuft, ist die gesparte Zeit meist schnell größer als der Entwicklungsaufwand."
+      },
+      "faq3": {
+        "question": "Funktioniert das auch auf dem Handy?",
+        "answer": "Ja. Alles läuft im Browser und ist für Smartphone und Tablet optimiert — auf Wunsch als installierbare App (PWA)."
+      },
+      "faq4": {
+        "question": "Können Sie bestehende Systeme anbinden?",
+        "answer": "Ja, über Schnittstellen zu Microsoft 365, CRM-, Warenwirtschafts- oder Buchhaltungssystemen sowie zu Ihren Datenbanken."
+      },
+      "faq5": {
+        "question": "Wem gehört die fertige Anwendung?",
+        "answer": "Ihnen. Sie erhalten den vollständigen Quellcode und bleiben unabhängig von einem einzelnen Anbieter."
+      },
+      "faq6": {
+        "question": "Wer betreibt die Anwendung nach dem Start?",
+        "answer": "Auf Wunsch ich: Hosting, Updates, Backups und Weiterentwicklung aus einer Hand — oder Sie betreiben sie in Ihrer eigenen Umgebung."
+      }
     }
   },
   "contact": {

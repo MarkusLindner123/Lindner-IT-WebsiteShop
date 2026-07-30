@@ -254,6 +254,72 @@
         "question": "Do you offer continuous monitoring?",
         "answer": "Yes, I provide 24/7 monitoring for potential cyber threats."
       }
+    },
+    "aiIntegration": {
+      "title": "AI Integration & Automation",
+      "description": "I bring artificial intelligence to the places where it actually saves time day to day: enquiries, documents and company knowledge — automated, traceable and GDPR-compliant.",
+      "feature1": "Assessment of where AI genuinely pays off for you",
+      "feature2": "Chatbots and assistants trained on your own data",
+      "feature3": "Automated processing of documents, emails and quotes",
+      "feature4": "Integration with Microsoft 365, CRM and existing tools",
+      "feature5": "GDPR-compliant operation, with EU hosting on request",
+      "faq1": {
+        "question": "Is AI worth it for a small business at all?",
+        "answer": "Wherever the same texts, documents or enquiries are handled every day. I start with one clearly measurable use case instead of a large-scale project."
+      },
+      "faq2": {
+        "question": "Does our company data end up with the AI provider?",
+        "answer": "No. I use business APIs that don't train on your data, or run models on European servers — depending on how sensitive the data is."
+      },
+      "faq3": {
+        "question": "How long does implementation take?",
+        "answer": "A first productive use case is usually live within a few weeks, so you see the benefit before investing further."
+      },
+      "faq4": {
+        "question": "Do we need our own AI model for this?",
+        "answer": "In most cases, no. Proven models combined with your own data and clear rules deliver results faster than training your own."
+      },
+      "faq5": {
+        "question": "What happens when the AI gets something wrong?",
+        "answer": "Critical steps keep a human approval. I build in review and logging steps so every result stays traceable."
+      },
+      "faq6": {
+        "question": "Do you train our staff to work with AI?",
+        "answer": "Yes, hands-on: where AI helps and where it doesn't — including clear rules for handling company data safely."
+      }
+    },
+    "webApps": {
+      "title": "Web Apps & Process Optimisation",
+      "description": "When spreadsheets, email chains and paper notes reach their limits, I build a web app that mirrors your actual workflow — in the browser, on any device, with nothing to install.",
+      "feature1": "Analysis and digitalisation of your workflows",
+      "feature2": "Custom web apps instead of off-the-shelf software",
+      "feature3": "Forms, dashboards and reports at the push of a button",
+      "feature4": "Interfaces to your existing systems",
+      "feature5": "User management with roles and permissions",
+      "faq1": {
+        "question": "How is this different from a website?",
+        "answer": "A website informs, a web app works: users log in, enter data, trigger processes and evaluate them. The two can be combined."
+      },
+      "faq2": {
+        "question": "When is a custom solution worth it?",
+        "answer": "As soon as a process recurs regularly, involves several people and currently runs on spreadsheets or email, the time saved usually outweighs the development effort quickly."
+      },
+      "faq3": {
+        "question": "Does it work on mobile too?",
+        "answer": "Yes. Everything runs in the browser and is optimised for phones and tablets — as an installable app (PWA) if you want."
+      },
+      "faq4": {
+        "question": "Can you connect existing systems?",
+        "answer": "Yes, via interfaces to Microsoft 365, CRM, inventory or accounting systems as well as your databases."
+      },
+      "faq5": {
+        "question": "Who owns the finished application?",
+        "answer": "You do. You receive the full source code and stay independent of any single provider."
+      },
+      "faq6": {
+        "question": "Who runs the application after launch?",
+        "answer": "I do, if you like: hosting, updates, backups and further development from a single source — or you run it in your own environment."
+      }
     }
   },
   "contact": {

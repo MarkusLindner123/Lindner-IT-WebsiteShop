@@ -253,6 +253,72 @@
         "question": "Czy oferujesz ciągłe monitorowanie?",
         "answer": "Tak, całodobowy monitoring potencjalnych zagrożeń cybernetycznych."
       }
+    },
+    "aiIntegration": {
+      "title": "Integracja AI i automatyzacja",
+      "description": "Wdrażam sztuczną inteligencję tam, gdzie naprawdę oszczędza czas na co dzień: zapytania, dokumenty i wiedza firmowa — automatycznie, w sposób weryfikowalny i zgodny z RODO.",
+      "feature1": "Analiza, gdzie AI faktycznie się u Państwa opłaca",
+      "feature2": "Chatboty i asystenci oparci na Państwa własnych danych",
+      "feature3": "Automatyczne przetwarzanie dokumentów, e-maili i ofert",
+      "feature4": "Integracja z Microsoft 365, CRM i obecnymi narzędziami",
+      "feature5": "Praca zgodna z RODO, na życzenie hosting w UE",
+      "faq1": {
+        "question": "Czy AI opłaca się w małej firmie?",
+        "answer": "Wszędzie tam, gdzie codziennie powtarzają się te same teksty, dokumenty czy zapytania. Zaczynam od jednego, mierzalnego zastosowania, a nie od dużego projektu."
+      },
+      "faq2": {
+        "question": "Czy nasze dane firmowe trafiają do dostawcy AI?",
+        "answer": "Nie. Korzystam z biznesowych interfejsów, które nie uczą się na Państwa danych, albo uruchamiam modele na serwerach w Europie — zależnie od wrażliwości danych."
+      },
+      "faq3": {
+        "question": "Jak długo trwa wdrożenie?",
+        "answer": "Pierwsze produkcyjne zastosowanie działa zwykle w ciągu kilku tygodni. Efekt widać więc, zanim zainwestują Państwo więcej."
+      },
+      "faq4": {
+        "question": "Czy potrzebujemy własnego modelu AI?",
+        "answer": "W większości przypadków nie. Sprawdzone modele w połączeniu z Państwa danymi i jasnymi regułami dają efekty szybciej niż własny trening."
+      },
+      "faq5": {
+        "question": "Co, jeśli AI popełni błąd?",
+        "answer": "Krytyczne kroki nadal wymagają akceptacji człowieka. Wbudowuję kontrolę i logowanie, aby każdy wynik dało się prześledzić."
+      },
+      "faq6": {
+        "question": "Czy szkolą Państwo pracowników z obsługi AI?",
+        "answer": "Tak, praktycznie: gdzie AI pomaga, a gdzie nie — wraz z jasnymi zasadami bezpiecznego obchodzenia się z danymi firmy."
+      }
+    },
+    "webApps": {
+      "title": "Aplikacje webowe i optymalizacja procesów",
+      "description": "Gdy arkusze Excela, łańcuchy e-maili i papierowe notatki przestają wystarczać, tworzę aplikację webową odwzorowującą dokładnie Państwa proces — w przeglądarce, na każdym urządzeniu, bez instalacji.",
+      "feature1": "Analiza i cyfryzacja Państwa procesów",
+      "feature2": "Indywidualne aplikacje zamiast gotowego oprogramowania",
+      "feature3": "Formularze, pulpity i raporty na jedno kliknięcie",
+      "feature4": "Integracje z istniejącymi systemami",
+      "feature5": "Zarządzanie użytkownikami, rolami i uprawnieniami",
+      "faq1": {
+        "question": "Czym to się różni od strony internetowej?",
+        "answer": "Strona informuje, aplikacja pracuje: użytkownicy logują się, wprowadzają dane, uruchamiają procesy i je analizują. Jedno da się połączyć z drugim."
+      },
+      "faq2": {
+        "question": "Kiedy własne rozwiązanie się opłaca?",
+        "answer": "Gdy proces powtarza się regularnie, dotyczy kilku osób i dziś opiera się na Excelu lub e-mailu, zaoszczędzony czas zwykle szybko przewyższa koszt wdrożenia."
+      },
+      "faq3": {
+        "question": "Czy działa to również na telefonie?",
+        "answer": "Tak. Wszystko działa w przeglądarce i jest zoptymalizowane pod smartfony i tablety — na życzenie jako instalowalna aplikacja (PWA)."
+      },
+      "faq4": {
+        "question": "Czy można podłączyć istniejące systemy?",
+        "answer": "Tak, przez interfejsy do Microsoft 365, systemów CRM, magazynowych i księgowych oraz do Państwa baz danych."
+      },
+      "faq5": {
+        "question": "Do kogo należy gotowa aplikacja?",
+        "answer": "Do Państwa. Otrzymują Państwo pełny kod źródłowy i pozostają niezależni od jednego dostawcy."
+      },
+      "faq6": {
+        "question": "Kto prowadzi aplikację po uruchomieniu?",
+        "answer": "Na życzenie ja: hosting, aktualizacje, kopie zapasowe i rozwój z jednej ręki — albo prowadzą ją Państwo we własnym środowisku."
+      }
     }
   },
   "contact": {

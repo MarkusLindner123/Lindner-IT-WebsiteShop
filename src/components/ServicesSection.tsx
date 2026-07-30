@@ -23,6 +23,10 @@ import {
   LayoutDashboard,
   Box,
   Package,
+  Sparkles,
+  Bot,
+  AppWindow,
+  Workflow,
   type LucideIcon,
 } from "lucide-react";
 import { useInView } from "react-intersection-observer";
@@ -53,6 +57,10 @@ const TAGS: { text: string; icon: LucideIcon }[] = [
   { text: "Maintenance", icon: Terminal },
   { text: "Support Tools", icon: Cpu },
   { text: "Analytics", icon: LayoutDashboard },
+  { text: "AI Integration", icon: Sparkles },
+  { text: "Chatbots", icon: Bot },
+  { text: "Web Apps", icon: AppWindow },
+  { text: "Process Automation", icon: Workflow },
 ];
 
 interface TagPhysics {
@@ -291,10 +299,19 @@ export default function ServicesSection() {
             </label>
           </div>
 
-          {/* Service Cards */}
+          {/* Service Cards — Reihenfolge: erst "bauen" (Web, Apps, KI), dann
+              "betreiben & absichern" (Support, Netzwerk, Security).
+              Muss mit serviceKeys in app/[locale]/page.tsx (JSON-LD) übereinstimmen. */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
             {(
-              ["webDesign", "itSupport", "networkSetup", "cyberSecurity"] as const
+              [
+                "webDesign",
+                "webApps",
+                "aiIntegration",
+                "itSupport",
+                "networkSetup",
+                "cyberSecurity",
+              ] as const
             ).map((key) => {
               const features: string[] = [];
               for (let i = 1; i <= 5; i++) {
