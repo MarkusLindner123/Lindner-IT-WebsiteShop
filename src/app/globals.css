@@ -16,10 +16,16 @@
 
   --color-services-tag-bg: rgba(75, 85, 99, 0.4);
   --color-services-tag-text: #FFFFFF;
-  --color-services-card-bg: #F9FAFB;
+  /* Tonwert-Treppe: Seite #F3F4F6 (95 %) -> Sektions-Card #FFFFFF (100 %)
+     -> Service-Card #EFF2F6 (93 %). Die Lesefläche ist bewusst die dunkelste
+     Ebene — großflächiges Fast-Weiß blendet beim Lesen. Der Rand muss dabei
+     sichtbar bleiben, sonst verschwimmen Karte und Sektion ineinander. */
+  --color-services-card-bg: #EFF2F6;
+  --color-services-card-border: rgba(31, 41, 55, 0.10);
+  --color-services-hairline: rgba(31, 41, 55, 0.10);
   --color-services-card-title: #1F2937;
-  --color-services-card-description: #4B5563;
-  --color-services-bullet: #1F2937;
+  --color-services-card-description: #3F4957;
+  --color-services-bullet: var(--color-accent-two);
 
   --color-contact-subtitle: #4B5563;
   --color-contact-label: #4B5563;
@@ -102,11 +108,14 @@ ul.list-disc li::marker { color: var(--color-accent-two); }
 /* Services */
 .bg-services-card {
   background-color: var(--color-services-card-bg);
-  border: 1px solid rgba(31, 41, 55, 0.08);
+  border: 1px solid var(--color-services-card-border);
 }
 .text-services-card-title { color: var(--color-services-card-title); }
 .text-services-card-description { color: var(--color-services-card-description); }
 .services-bullet { background-color: var(--color-services-bullet); }
+/* Trennlinien der FAQ-Zeilen: bewusst schwächer als border-gray-300 — bei
+   6 Fragen pro Karte wird daraus sonst ein Linienraster wie kariertes Papier. */
+.services-hairline { border-color: var(--color-services-hairline); }
 
 /* Contact */
 .text-contact-subtitle { color: var(--color-contact-subtitle); }

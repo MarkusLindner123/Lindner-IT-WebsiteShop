@@ -76,19 +76,25 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="border-t border-gray-300 pt-3">
+    <div className="border-t services-hairline">
       <button
-        className="w-full flex justify-between items-center text-left font-medium text-services-card-title"
+        className="w-full flex justify-between items-start gap-3 text-left py-3 text-[15px] font-medium text-services-card-title"
         onClick={() => setOpen(!open)}
         aria-expanded={open}
       >
         {question}
+        {/* flex-shrink-0 + mt: in der 3-Spalten-Ansicht brechen Fragen um,
+            das Icon soll dabei weder gequetscht noch mittig verschoben werden */}
         <ChevronDown
-          className={`transition-transform duration-300 ${open ? "rotate-180" : ""}`}
+          className={`flex-shrink-0 mt-0.5 transition-transform duration-300 ${open ? "rotate-180" : ""}`}
           size={18}
         />
       </button>
-      {open && <p className="mt-2 text-services-card-description">{answer}</p>}
+      {open && (
+        <p className="pb-3 -mt-1 leading-relaxed text-services-card-description">
+          {answer}
+        </p>
+      )}
     </div>
   );
 }
@@ -301,8 +307,10 @@ export default function ServicesSection() {
 
           {/* Service Cards — Reihenfolge: erst "bauen" (Web, Apps, KI), dann
               "betreiben & absichern" (Support, Netzwerk, Security).
-              Muss mit serviceKeys in app/[locale]/page.tsx (JSON-LD) übereinstimmen. */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+              Muss mit serviceKeys in app/[locale]/page.tsx (JSON-LD) übereinstimmen.
+              3 Spalten ab 2xl: bei 2 Spalten läuft der Fließtext auf 1920px über
+              ~99 Zeichen pro Zeile (lesbar sind 60–75). */}
+          <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-8 text-left">
             {(
               [
                 "webDesign",
@@ -329,19 +337,21 @@ export default function ServicesSection() {
                 <motion.article
                   key={key}
                   variants={fadeUp}
-                  className="bg-services-card p-6 rounded-xl shadow-lg relative z-20"
+                  className="bg-services-card p-6 rounded-xl relative z-20"
                   aria-labelledby={`${key}-title`}
                 >
                   <h3 id={`${key}-title`} className="text-2xl font-semibold mb-2 text-services-card-title">
                     {t(`${key}.title`)}
                   </h3>
-                  <p className="text-services-card-description mb-4">
+                  <p className="text-services-card-description leading-relaxed mb-5">
                     {t(`${key}.description`)}
                   </p>
-                  <ul className="space-y-2 mb-4">
+                  <ul className="space-y-2 mb-5">
                     {features.map((item, idx) => (
-                      <li key={idx} className="flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full services-bullet flex-shrink-0" />
+                      <li key={idx} className="flex items-start gap-2.5">
+                        {/* items-start + mt: mehrzeilige Features sollen den Punkt
+                            an der ersten Zeile behalten, nicht mittig schweben */}
+                        <span className="w-1.5 h-1.5 mt-[0.55em] rounded-full services-bullet flex-shrink-0" />
                         <span className="text-services-card-description">{item}</span>
                       </li>
                     ))}
