@@ -22,7 +22,8 @@ Single-page marketing site for "Lindner IT" (IT freelancer, Berlin): Next.js 15 
 
 - Locales `de` (default), `en`, `pl` are defined in `src/i18n/routing.ts` with `localePrefix: 'as-needed'` (German has no URL prefix).
 - All UI text lives in `messages/{de,en,pl}.json`; components read it via `useTranslations`. New user-facing strings must be added to all three files.
-- `src/middleware.ts` wraps the next-intl middleware and forces redirects to `/de` when the first path segment is not a valid locale.
+- `src/middleware.ts` is the plain next-intl middleware. `localeDetection` is **off** in `routing.ts`: `/` always serves German, language changes happen only via the `LanguageSwitcher`. Do not re-add header-based locale redirects — with `localePrefix: 'as-needed'` an `Accept-Language`-driven redirect to `/de` bounces straight back to `/` and produces an infinite 307 loop that blocks Google from indexing the site.
+- `next.config.ts` consolidates domains: `markuslindner.vercel.app` 308-redirects to `lindner-tech.com`, and any other `*.vercel.app` host (preview deployments) gets an `X-Robots-Tag: noindex, nofollow` header. Only `lindner-tech.com` may be indexed.
 - There is no root `src/app/layout.tsx` — `src/app/[locale]/layout.tsx` is the root layout (renders `<html lang>`, loads fonts, metadata, providers). It calls `setRequestLocale` + `generateStaticParams` so pages render statically. `src/app/[locale]/[...rest]/page.tsx` catches unknown paths and triggers `not-found.tsx`.
 - `robots.ts` and `sitemap.ts` are Next metadata routes at the `src/app/` root (crawlers expect them at `/robots.txt`, not `/de/robots.txt`). Both build URLs from `SITE_URL` in `src/lib/site.ts`, which reads `NEXT_PUBLIC_SITE_URL` (must be set in production).
 
